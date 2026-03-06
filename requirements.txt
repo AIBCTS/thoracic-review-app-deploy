@@ -3,4 +3,4 @@ pandas
 bibtexparser
 gspread
 google-auth
-pathlib
+google-auth-oauthlib

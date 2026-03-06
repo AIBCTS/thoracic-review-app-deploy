@@ -20,6 +20,12 @@ BIB_FILE = DATA_DIR / "library.bib"
 # Ensure results directory exists
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
+# Debug prints for Docker logs
+print(f"App starting...")
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"DATA_DIR: {DATA_DIR} (exists: {DATA_DIR.exists()})")
+print(f"RESULTS_DIR: {RESULTS_DIR} (exists: {RESULTS_DIR.exists()})")
+
 # --- Helper Functions ---
 @st.cache_data
 def load_bibtex():
@@ -76,34 +82,52 @@ def display_pdf(file_path):
 
 @st.cache_resource
 def get_gspread_client():
-    """Initializes and returns the gspread client if secrets exist, else None."""
+    """Initializes and returns the gspread client if secrets or env vars exist, else None."""
     try:
+        scopes = [
+            'https://www.googleapis.com/auth/spreadsheets',
+            'https://www.googleapis.com/auth/drive'
+        ]
+        
+        # 1. Try Streamlit Secrets (secrets.toml)
         if "gcp_service_account" in st.secrets:
-            scopes = [
-                'https://www.googleapis.com/auth/spreadsheets',
-                'https://www.googleapis.com/auth/drive'
-            ]
-            # Convert AttrDict to dict if necessary, though from_service_account_info usually handles dicts
             secrets_dict = dict(st.secrets["gcp_service_account"])
             creds = Credentials.from_service_account_info(secrets_dict, scopes=scopes)
-            client = gspread.authorize(creds)
-            return client
+            return gspread.authorize(creds)
+            
+        # 2. Try Environment Variables (for SciLifeLab / Docker)
+        # We look for a JSON string in GCP_SERVICE_ACCOUNT_JSON
+        env_json = os.environ.get("GCP_SERVICE_ACCOUNT_JSON")
+        if env_json:
+            import json
+            secrets_dict = json.loads(env_json)
+            creds = Credentials.from_service_account_info(secrets_dict, scopes=scopes)
+            return gspread.authorize(creds)
+            
     except Exception as e:
-        # Don't show warning constantly, just fail silently to CSV fallback
-        pass
+        # Log to console for debugging in Docker logs
+        print(f"GSpread Client Init Error: {e}")
     return None
 
 def get_worksheet():
     """Gets the active worksheet if the client is available."""
     client = get_gspread_client()
-    if client and "gcp_service_account" in st.secrets and "spreadsheet_url" in st.secrets["gcp_service_account"]:
-        try:
+    if not client:
+        return None
+        
+    try:
+        # Try finding URL in secrets or env
+        sheet_url = None
+        if "gcp_service_account" in st.secrets and "spreadsheet_url" in st.secrets["gcp_service_account"]:
             sheet_url = st.secrets["gcp_service_account"]["spreadsheet_url"]
+        else:
+            sheet_url = os.environ.get("GCP_SPREADSHEET_URL")
+            
+        if sheet_url:
             sheet = client.open_by_url(sheet_url)
             return sheet.sheet1
-        except Exception as e:
-            # Fail silently to CSV fallback
-            pass
+    except Exception as e:
+        print(f"Get Worksheet Error: {e}")
     return None
 
 def load_pdf_list(reviewer_name=None):

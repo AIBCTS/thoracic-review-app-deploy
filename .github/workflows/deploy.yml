@@ -27,5 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          # Docker tags MUST be lowercase. Hardcoding 'aibcts' to avoid case issues.
-          tags: ghcr.io/aibcts/thoracic-review-app-deploy:latest
+          # Providing both 'latest' and a unique tag (run number)
+          tags: |
+            ghcr.io/aibcts/thoracic-review-app-deploy:latest
+            ghcr.io/aibcts/thoracic-review-app-deploy:v${{ github.run_number }}
