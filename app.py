@@ -13,18 +13,35 @@ st.set_page_config(layout="wide", page_title="Artificial Intelligence in Thoraci
 # Define paths
 BASE_DIR = Path(__file__).parent.resolve()
 DATA_DIR = BASE_DIR / "data"
-RESULTS_DIR = BASE_DIR / "results"
-CSV_FILE = RESULTS_DIR / "manual_review_results.csv"
 BIB_FILE = DATA_DIR / "library.bib"
 
-# Ensure results directory exists
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+# Define a writable results directory
+def get_writable_csv_path():
+    """Finds a writable path for the fallback CSV file."""
+    potential_paths = [
+        BASE_DIR / "results" / "manual_review_results.csv",
+        Path("/home/results/manual_review_results.csv"),
+        Path("/srv/results/manual_review_results.csv"),
+        Path("/tmp/manual_review_results.csv")
+    ]
+    for p in potential_paths:
+        try:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            # Try to create/append to test writability
+            with open(p, "a"):
+                pass
+            return p
+        except Exception:
+            continue
+    return BASE_DIR / "manual_review_results.csv" # Absolute fallback
+
+CSV_FILE = get_writable_csv_path()
 
 # Debug prints for Docker logs
 print(f"App starting...")
 print(f"BASE_DIR: {BASE_DIR}")
 print(f"DATA_DIR: {DATA_DIR} (exists: {DATA_DIR.exists()})")
-print(f"RESULTS_DIR: {RESULTS_DIR} (exists: {RESULTS_DIR.exists()})")
+print(f"CSV_FILE Path: {CSV_FILE}")
 
 # --- Helper Functions ---
 @st.cache_data
@@ -309,8 +326,35 @@ bib_db = load_bibtex()
 col_top1, col_top2 = st.columns([1, 1])
 
 with col_top1:
-    # Use session state to trigger re-renders properly
     reviewer_name = st.text_input("Reviewer Name (Required)", placeholder="e.g. Johan")
+    
+    # --- Diagnostics ---
+    with st.sidebar.expander("🛠️ Deployment Diagnostics"):
+        st.write(f"**CSV Fallback Path:** `{CSV_FILE}`")
+        
+        # Check for secrets
+        found_path = None
+        mount_paths = [
+            Path("/app/secrets/secrets.toml"), 
+            Path("/srv/secrets/secrets.toml"),
+            Path("/home/secrets/secrets.toml")
+        ]
+        for p in mount_paths:
+            if p.exists():
+                found_path = p
+                break
+        
+        if found_path:
+            st.success(f"✅ Found secrets at: `{found_path}`")
+        else:
+            st.error("❌ No `secrets.toml` found in standard mount paths.")
+            st.info("Ensure Mount Path is `/home` and file is in `project-vol/secrets/secrets.toml`")
+            
+        # Check GS Client
+        if get_gspread_client():
+            st.success("✅ Google Sheets Client initialized.")
+        else:
+            st.error("❌ Google Sheets Client failed (check JSON format).")
 
 with col_top2:
     pdf_files_info = load_pdf_list(reviewer_name)
