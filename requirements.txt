@@ -1,0 +1,6 @@
+streamlit
+pandas
+bibtexparser
+gspread
+google-auth
+pathlib
