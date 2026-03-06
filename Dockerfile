@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8501
 
 # Start command - Using JSON array format (exec form) for better signal handling
-CMD ["streamlit", "run", "review_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
