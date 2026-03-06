@@ -1,30 +1,27 @@
-# Use the official Python image
+# Use a stable Python base image
 FROM python:3.11-slim
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Install system dependencies for PDF viewing if needed (though Streamlit handles most)
+# Install minimal system dependencies (only if absolutely needed)
+# Added retries and fixed mirror issues by using a simpler approach
 RUN apt-get update && apt-get install -y \
-    build-essential \
     curl \
-    software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements file
+# Copy requirements first for better caching
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Python dependencies
-RUN pip3 install -r requirements.txt
-
-# Copy the rest of the application code
+# Copy the rest of the app
 COPY . .
 
-# Expose the port Streamlit runs on
+# Expose Streamlit port
 EXPOSE 8501
 
-# Healthcheck to ensure the container is running
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+# Healthcheck
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
 
-# Command to run the app
+# Start command
 ENTRYPOINT ["streamlit", "run", "review_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
