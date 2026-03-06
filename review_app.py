@@ -80,32 +80,69 @@ def display_pdf(file_path):
     except Exception as e:
         st.error(f"Error displaying PDF: {e}")
 
+# --- Helper Functions ---
+def get_secret_val(key, subkey=None):
+    """Helper to get a secret from st.secrets, os.environ, or a mounted file."""
+    # 1. Try Streamlit Secrets
+    try:
+        if subkey:
+            if key in st.secrets and subkey in st.secrets[key]:
+                return st.secrets[key][subkey]
+        elif key in st.secrets:
+            return st.secrets[key]
+    except Exception:
+        pass
+
+    # 2. Try Environment Variables
+    env_key = f"{key.upper()}_{subkey.upper()}" if subkey else key.upper()
+    if env_key in os.environ:
+        return os.environ[env_key]
+    
+    # 3. Try Mounted File (e.g. at /app/secrets/secrets.toml or /home/secrets/secrets.toml)
+    # This is for SciLifeLab Serve persistent storage
+    mount_paths = [
+        Path("/app/secrets/secrets.toml"), 
+        Path("/srv/secrets/secrets.toml"),
+        Path("/home/secrets/secrets.toml")
+    ]
+    for mount_path in mount_paths:
+        if mount_path.exists():
+            try:
+                import tomllib # Python 3.11+
+                with open(mount_path, "rb") as f:
+                    mounted_secrets = tomllib.load(f)
+                    if subkey:
+                        if key in mounted_secrets and subkey in mounted_secrets[key]:
+                            return mounted_secrets[key][subkey]
+                    elif key in mounted_secrets:
+                        return mounted_secrets[key]
+            except Exception as e:
+                print(f"Error reading mounted secrets at {mount_path}: {e}")
+
+    return None
+
 @st.cache_resource
 def get_gspread_client():
-    """Initializes and returns the gspread client if secrets or env vars exist, else None."""
+    """Initializes and returns the gspread client if credentials exist."""
     try:
         scopes = [
             'https://www.googleapis.com/auth/spreadsheets',
             'https://www.googleapis.com/auth/drive'
         ]
         
-        # 1. Try Streamlit Secrets (secrets.toml)
-        if "gcp_service_account" in st.secrets:
-            secrets_dict = dict(st.secrets["gcp_service_account"])
-            creds = Credentials.from_service_account_info(secrets_dict, scopes=scopes)
-            return gspread.authorize(creds)
+        # Get the service account info (JSON string or dict)
+        sa_info = get_secret_val("gcp_service_account")
+        
+        if sa_info:
+            if isinstance(sa_info, str):
+                import json
+                sa_info = json.loads(sa_info)
             
-        # 2. Try Environment Variables (for SciLifeLab / Docker)
-        # We look for a JSON string in GCP_SERVICE_ACCOUNT_JSON
-        env_json = os.environ.get("GCP_SERVICE_ACCOUNT_JSON")
-        if env_json:
-            import json
-            secrets_dict = json.loads(env_json)
-            creds = Credentials.from_service_account_info(secrets_dict, scopes=scopes)
+            # Ensure it's a dict for from_service_account_info
+            creds = Credentials.from_service_account_info(dict(sa_info), scopes=scopes)
             return gspread.authorize(creds)
             
     except Exception as e:
-        # Log to console for debugging in Docker logs
         print(f"GSpread Client Init Error: {e}")
     return None
 
@@ -116,13 +153,10 @@ def get_worksheet():
         return None
         
     try:
-        # Try finding URL in secrets or env
-        sheet_url = None
-        if "gcp_service_account" in st.secrets and "spreadsheet_url" in st.secrets["gcp_service_account"]:
-            sheet_url = st.secrets["gcp_service_account"]["spreadsheet_url"]
-        else:
-            sheet_url = os.environ.get("GCP_SPREADSHEET_URL")
-            
+        sheet_url = get_secret_val("gcp_service_account", "spreadsheet_url")
+        if not sheet_url:
+            sheet_url = get_secret_val("GCP_SPREADSHEET_URL") # Try alternative env var name
+
         if sheet_url:
             sheet = client.open_by_url(sheet_url)
             return sheet.sheet1
