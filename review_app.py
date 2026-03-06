@@ -11,7 +11,7 @@ from google.oauth2.service_account import Credentials
 st.set_page_config(layout="wide", page_title="Artificial Intelligence in Thoracic Transplantation: Current State and Future Directions")
 
 # Define paths
-BASE_DIR = Path(__file__).parent.parent.parent.resolve()
+BASE_DIR = Path(__file__).parent.resolve()
 DATA_DIR = BASE_DIR / "data"
 RESULTS_DIR = BASE_DIR / "results"
 CSV_FILE = RESULTS_DIR / "manual_review_results.csv"
