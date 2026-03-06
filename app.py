@@ -264,7 +264,10 @@ def save_data(data_dict):
             row_values = [str(data_dict.get(h, "")) for h in headers]
             
             if row_index:
-                worksheet.update(f"A{row_index}:{chr(64+len(headers))}{row_index}", [row_values])
+                from gspread.utils import rowcol_to_a1
+                start_cell = rowcol_to_a1(row_index, 1)
+                end_cell = rowcol_to_a1(row_index, len(headers))
+                worksheet.update(range_name=f"{start_cell}:{end_cell}", values=[row_values])
                 return "Updated existing entry (Google Sheets)."
             else:
                 worksheet.append_row(row_values)
