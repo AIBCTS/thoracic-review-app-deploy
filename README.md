@@ -35,11 +35,29 @@ universe_domain = "googleapis.com"
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/your-id/edit"
 ```
 
-### 3. Local Setup
+### 3. Local Setup (Docker Compose - Recommended)
+The fastest way to run locally with persistent storage:
+1. Clone this repository.
+2. Add your `secrets.toml` to `.streamlit/` if using Google Sheets.
+3. Run: `docker compose up --build -d`
+4. Access at `http://localhost:8501`.
+
+### 4. Local Setup (Manual)
 1. Clone this repository.
 2. Install dependencies: `pip install -r requirements.txt`.
 3. Add your `secrets.toml` to `.streamlit/`.
-4. Run: `streamlit run review_app.py`.
+4. Run: `streamlit run app.py`.
+
+## Deployment to SciLifeLab Serve
+
+When deploying to [SciLifeLab Serve](https://serve.scilifelab.se):
+
+1. **Build**: Point it to this GitHub repository. It will use the `Dockerfile` automatically.
+2. **Persistent Storage**: 
+   - Create a Volume in the SciLifeLab dashboard.
+   - Set the **Mount Path** to `/app/results`. 
+   - This ensures the `manual_review_results.csv` fallback is preserved across restarts.
+3. **Secrets**: Use the "Secrets" tab to provide the `gcp_service_account` configuration as shown in the example above.
 
 ## License
 Copyright © 2026 Artificial Intelligence and Bioinformatics in Cardiothoracic Sciences (AIBCTS), Lund University.
