@@ -4,9 +4,8 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# No system dependencies needed for this app.
-# Create results directory
-RUN mkdir -p results
+# Create results directory and set broad permissions for non-root users
+RUN mkdir -p results && chmod 777 results
 
 # Copy requirements first for better caching
 COPY requirements.txt .
