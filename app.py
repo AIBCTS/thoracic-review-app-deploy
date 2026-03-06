@@ -26,16 +26,26 @@ def get_writable_csv_path():
     ]
     for p in potential_paths:
         try:
+            # Check if directory is writable
             p.parent.mkdir(parents=True, exist_ok=True)
-            # Try to create/append to test writability
-            with open(p, "a"):
-                pass
+            test_file = p.parent / ".write_test"
+            test_file.touch()
+            test_file.unlink()
             return p
         except Exception:
             continue
     return BASE_DIR / "manual_review_results.csv" # Absolute fallback
 
 CSV_FILE = get_writable_csv_path()
+
+def read_csv_safe(file_path):
+    """Reads a CSV file into a DataFrame, handling EmptyDataError."""
+    if not file_path.exists():
+        return pd.DataFrame()
+    try:
+        return pd.read_csv(file_path)
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame()
 
 # Debug prints for Docker logs
 print(f"App starting...")
@@ -204,9 +214,10 @@ def load_pdf_list(reviewer_name=None):
             except Exception:
                 pass
         elif CSV_FILE.exists():
-            df = pd.read_csv(CSV_FILE)
-            reviewed_df = df[df['reviewer'] == reviewer_name]
-            reviewed_set = set(reviewed_df['study_id'].tolist())
+            df = read_csv_safe(CSV_FILE)
+            if not df.empty and 'reviewer' in df.columns and 'study_id' in df.columns:
+                reviewed_df = df[df['reviewer'] == reviewer_name]
+                reviewed_set = set(reviewed_df['study_id'].tolist())
             
     # Return a list of tuples (actual_filename, display_name)
     display_list = []
@@ -234,12 +245,14 @@ def get_existing_review(study_id, reviewer):
             
     # CSV Fallback
     if CSV_FILE.exists():
-        df = pd.read_csv(CSV_FILE)
-        mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
-        if mask.any():
-            # Convert the matched row to a dictionary, replacing NaN with None
-            record = df[mask].iloc[0].where(pd.notna(df[mask].iloc[0]), None).to_dict()
-            return record
+        df = read_csv_safe(CSV_FILE)
+        if not df.empty and 'study_id' in df.columns and 'reviewer' in df.columns:
+            mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
+            if mask.any():
+                # Convert the matched row to a dictionary, replacing NaN with None
+                row = df[mask].iloc[0]
+                record = row.where(pd.notna(row), None).to_dict()
+                return record
             
     return None
 
@@ -279,18 +292,23 @@ def save_data(data_dict):
     # CSV Fallback
     df_new = pd.DataFrame([data_dict])
     if CSV_FILE.exists():
-        df_existing = pd.read_csv(CSV_FILE)
-        mask = (df_existing['study_id'] == data_dict['study_id']) & (df_existing['reviewer'] == data_dict['reviewer'])
-        if mask.any():
-            index = df_existing[mask].index[0]
-            for key, value in data_dict.items():
-                df_existing.loc[index, key] = value
-            df_existing.to_csv(CSV_FILE, index=False)
-            return "Updated existing entry (Local CSV Fallback)."
+        df_existing = read_csv_safe(CSV_FILE)
+        if not df_existing.empty and 'study_id' in df_existing.columns and 'reviewer' in df_existing.columns:
+            mask = (df_existing['study_id'] == data_dict['study_id']) & (df_existing['reviewer'] == data_dict['reviewer'])
+            if mask.any():
+                index = df_existing[mask].index[0]
+                for key, value in data_dict.items():
+                    df_existing.loc[index, key] = value
+                df_existing.to_csv(CSV_FILE, index=False)
+                return "Updated existing entry (Local CSV Fallback)."
+            else:
+                df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+                df_combined.to_csv(CSV_FILE, index=False)
+                return "Saved new entry (Local CSV Fallback)."
         else:
-            df_combined = pd.concat([df_existing, df_new], ignore_index=True)
-            df_combined.to_csv(CSV_FILE, index=False)
-            return "Saved new entry (Local CSV Fallback)."
+            # File exists but is empty or missing columns
+            df_new.to_csv(CSV_FILE, index=False)
+            return "Created/Overwrote file and saved entry (Local CSV Fallback)."
     else:
         df_new.to_csv(CSV_FILE, index=False)
         return "Created new file and saved entry (Local CSV Fallback)."
@@ -311,12 +329,13 @@ def delete_data(study_id, reviewer):
             
     # CSV Fallback
     if CSV_FILE.exists():
-        df = pd.read_csv(CSV_FILE)
-        mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
-        if mask.any():
-            df = df[~mask]
-            df.to_csv(CSV_FILE, index=False)
-            return True
+        df = read_csv_safe(CSV_FILE)
+        if not df.empty and 'study_id' in df.columns and 'reviewer' in df.columns:
+            mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
+            if mask.any():
+                df = df[~mask]
+                df.to_csv(CSV_FILE, index=False)
+                return True
     return False
 
 # --- Main App Execution ---
