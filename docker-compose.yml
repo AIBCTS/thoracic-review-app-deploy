@@ -3,7 +3,7 @@ services:
     build: .
     container_name: thoracic-app
     ports:
-      - "8501:8501"
+      - "0.0.0.0:8501:8501"
     volumes:
       - ./results:/app/results
       # If you have a local secrets.toml, uncomment the next line to mount it
