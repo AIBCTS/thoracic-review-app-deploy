@@ -543,7 +543,7 @@ if reviewer_name and selected_pdf:
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
                 outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
-                target_outcome = st.multiselect("Target Clinical Outcome", outcome_opts, default=get_multiselect('target_outcome', outcome_opts), help="What the AI is predicting or classifying.")
+                target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index('target_outcome', outcome_opts), help="What the primary outcome the AI is predicting or classifying.")
                 
                 col5_1, col5_2 = st.columns(2)
                 with col5_1:
@@ -587,7 +587,7 @@ if reviewer_name and selected_pdf:
                     "code_availability": code_avail,
                     "training_size": train_size if train_size > 0 else "NR",
                     "test_size": test_size if test_size > 0 else "NR",
-                    "target_outcome": ", ".join(target_outcome) if target_outcome else "NR",
+                    "target_outcome": target_outcome,
                     "model_auc": model_auc if model_auc > 0 else "NR",
                     "model_accuracy": model_acc if model_acc > 0 else "NR",
                     "model_sensitivity": model_sens if model_sens > 0 else "NR",
