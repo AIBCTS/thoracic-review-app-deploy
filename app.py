@@ -470,8 +470,15 @@ if reviewer_name and selected_pdf:
                     organ_focus = st.selectbox("Organ Focus", organ_opts, index=get_index('organ_focus', organ_opts), help="The primary organ system the AI classifier targets.")
                 with col1_2:
                     dataset_opts = ["Single Center", "Multi-center", "National Registry", "International Registry"]
-                    dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="The nature of the data registry (e.g., UNOS, ISHLT).")
+                    dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="The nature of the data registry (e.g., national, international, specific hospital).")
                     
+                    dataset_name_opts = ["ISHLT Registry", "SRTR (Scientific Registry of Transplant Recipients)", "Eurotransplant Registry", "Scandiatransplant Registry", "UK Transplant Registry (NHSBT)", "Other Registry", "Not Applicable / Not Reported"]
+                    dataset_name = st.selectbox("Dataset Name", dataset_name_opts, index=get_index('DatasetName', dataset_name_opts), help="The specific name of the registry or database used.")
+                    
+                    dataset_other = ""
+                    if dataset_name == "Other Registry":
+                        dataset_other = st.text_input("Other Dataset/Registry Name", value=get_val('DatasetOther', ""), placeholder="Enter specific registry name...")
+                        
                 col1_3, col1_4 = st.columns(2)
                 with col1_3:
                     study_start = st.number_input("Study Period Start (Year)", min_value=1950, max_value=2050, value=int(get_val('study_start_year', 2010)), step=1, help="The year during which patient data collection began.")
@@ -556,6 +563,8 @@ if reviewer_name and selected_pdf:
                     "country_origin": country_origin,
                     "organ_focus": organ_focus,
                     "dataset_source": dataset_source,
+                    "DatasetName": dataset_name,
+                    "DatasetOther": dataset_other if dataset_name == "Other Registry" else "",
                     "study_start_year": study_start,
                     "study_end_year": study_end,
                     "target_population": target_pop,
