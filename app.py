@@ -427,6 +427,21 @@ if reviewer_name and selected_pdf:
         saved_list = [v.strip() for v in val.split(', ')]
         return [opt for opt in options if opt in saved_list]
 
+    def get_index_with_migration(key, options):
+        val = get_val(key, None)
+        if not val:
+            return 0
+            
+        # Migrate old multi-select values to single-select options (take first one if string)
+        if isinstance(val, str):
+            val = val.replace("Chronic Rejection/CLAD", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)")
+            val = val.replace("Chronic Lung Allograft Dysfunction (CLAD, incl. BOS)", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)")
+            val = val.split(',')[0].strip() # If multiple were saved, just grab the primary one
+
+        if val in options:
+            return options.index(val)
+        return 0
+
     # Split screen layout
     col_pdf, col_form = st.columns([6, 4]) # 60% PDF, 40% Form
     
@@ -543,7 +558,7 @@ if reviewer_name and selected_pdf:
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
                 outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
-                target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index('target_outcome', outcome_opts), help="What the primary outcome the AI is predicting or classifying.")
+                target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index_with_migration('target_outcome', outcome_opts), help="What the primary outcome the AI is predicting or classifying.")
                 
                 col5_1, col5_2 = st.columns(2)
                 with col5_1:
