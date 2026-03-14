@@ -438,7 +438,7 @@ if reviewer_name and selected_pdf:
         if existing_data:
             st.info("ℹ️ You have previously reviewed this article. Form is pre-filled with your saved data.")
         
-        with st.form(key="extraction_form"):
+        with st.form(key=f"extraction_form_{study_id}"):
             st.markdown("Please fill out the following sections based on the PRISMA, PICO, and CONVINCE guidelines.")
             
             # --- Section 1: Study Identification & Metadata ---
@@ -496,10 +496,10 @@ if reviewer_name and selected_pdf:
                 ml_opts = ["Yes", "No"]
                 primary_ml = st.radio("Primary ML Component", ml_opts, index=get_index('primary_ml_component', ml_opts), horizontal=True, help="Is Machine Learning/AI the primary analysis component of the paper?")
                 
-                design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)"]
+                design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)", "Other"]
                 study_design = st.selectbox("Study Design", design_opts, index=get_index('study_design', design_opts), help="The methodological design of the study.")
                 
-                arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other"]
+                arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other"]
                 ai_architecture = st.selectbox("AI Model Architecture (Intervention 1)", arch_opts, index=get_index('ai_architecture', arch_opts), help="The specific non-linear algorithm used.")
                 
                 algo_name = st.text_input("Algorithm Name", value=get_val('algorithm_name', ""), placeholder="e.g., DeepSurv", help="The specific name of the algorithm if provided.")
@@ -508,15 +508,15 @@ if reviewer_name and selected_pdf:
                 modality_opts = ["Tabular (EMR/Clinical data)", "Waveforms/Signals (ECG)", "Imaging (CT/CXR/Echo)", "Pathology slides", "Donor metrics", "Multi-omics/Genetics"]
                 input_modalities = st.multiselect("Input Variables (Data Modality)", modality_opts, default=get_multiselect('input_modalities', modality_opts), help="The types of data fed into the AI model.")
                 
-                comp_opts = ["Human expert/Clinician", "Standard Clinical Guidelines", "Linear Risk Score (e.g., LAS, EuroSCORE)", "None"]
+                comp_opts = ["Human expert/Clinician", "Standard Clinical Guidelines", "Linear Risk Score (e.g., LAS, EuroSCORE)", "None", "Other"]
                 comparator = st.selectbox("Comparator / Standard of Care (Intervention 2)", comp_opts, index=get_index('comparator', comp_opts), help="What the AI is being compared against.")
                 
-                val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)"]
+                val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)", "Other"]
                 validation_method = st.selectbox("Validation Method", val_opts, index=get_index('validation_method', val_opts), help="How the model's performance was evaluated to prevent overfitting.")
 
             # --- Section 4: AI Quality & Reproducibility (CONVINCE Standards) ---
             with st.expander("Section 4: AI Quality & Reproducibility", expanded=False):
-                missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Not Reported"]
+                missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Not Reported", "Other"]
                 missing_data = st.selectbox("Missing Data Handling", missing_opts, index=get_index('missing_data_handling', missing_opts), help="How the study dealt with missing variables.")
                 
                 code_opts = ["Yes", "No", "Not Reported"]
@@ -530,7 +530,7 @@ if reviewer_name and selected_pdf:
 
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
-                outcome_opts = ["1-year survival", "5-year survival", "Waitlist mortality", "Acute Rejection", "Chronic Rejection/CLAD", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
+                outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Rejection/CLAD", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
                 target_outcome = st.multiselect("Target Clinical Outcome", outcome_opts, default=get_multiselect('target_outcome', outcome_opts), help="What the AI is predicting or classifying.")
                 
                 col5_1, col5_2 = st.columns(2)
