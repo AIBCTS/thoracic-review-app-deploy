@@ -419,6 +419,11 @@ if reviewer_name and selected_pdf:
         val = get_val(key, "")
         if not val or val == "NR":
             return []
+            
+        # Migrate old labels or commas that break the split logic
+        val = val.replace("Chronic Rejection/CLAD", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)")
+        val = val.replace("Chronic Lung Allograft Dysfunction (CLAD, incl. BOS)", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)")
+        
         saved_list = [v.strip() for v in val.split(', ')]
         return [opt for opt in options if opt in saved_list]
 
@@ -537,7 +542,7 @@ if reviewer_name and selected_pdf:
 
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
-                outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD, incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
+                outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay"]
                 target_outcome = st.multiselect("Target Clinical Outcome", outcome_opts, default=get_multiselect('target_outcome', outcome_opts), help="What the AI is predicting or classifying.")
                 
                 col5_1, col5_2 = st.columns(2)
