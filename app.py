@@ -102,7 +102,7 @@ def display_pdf(file_path):
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
         
         # Displaying the PDF via HTML iframe
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="1200" type="application/pdf"></iframe>'
         st.markdown(pdf_display, unsafe_allow_html=True)
     except Exception as e:
         st.error(f"Error displaying PDF: {e}")
@@ -483,13 +483,13 @@ if reviewer_name and selected_pdf:
                 
                 col1_1, col1_2 = st.columns(2)
                 with col1_1:
-                    country_opts = ["USA", "Europe", "Asia", "Australia", "Africa", "South America", "Multi-national", "Other"]
+                    country_opts = ["USA", "Europe", "Asia", "Australia", "Africa", "South America", "Multi-national", "Other", "Not Reported"]
                     country_origin = st.selectbox("Country of Data Origin", country_opts, index=get_index('country_origin', country_opts), help="Geographic origin of the training data.")
                     
-                    organ_opts = ["Heart", "Lung", "Combined (Heart-Lung)"]
+                    organ_opts = ["Heart", "Lung", "Combined (Heart-Lung)", "Other", "Not Reported"]
                     organ_focus = st.selectbox("Organ Focus", organ_opts, index=get_index('organ_focus', organ_opts), help="The primary organ system the AI classifier targets.")
                 with col1_2:
-                    dataset_opts = ["Single Center", "Multi-center", "National Registry", "International Registry"]
+                    dataset_opts = ["Single Center", "Multi-center", "National Registry", "International Registry", "Other", "Not Reported"]
                     dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="The nature of the data registry (e.g., national, international, specific hospital).")
                     
                     dataset_name_opts = ["ISHLT Registry", "SRTR (Scientific Registry of Transplant Recipients)", "Eurotransplant Registry", "Scandiatransplant Registry", "UK Transplant Registry (NHSBT)", "Other Registry", "Not Applicable / Not Reported"]
@@ -505,9 +505,11 @@ if reviewer_name and selected_pdf:
                 with col1_4:
                     study_end = st.number_input("Study Period End (Year)", min_value=1950, max_value=2050, value=int(get_val('study_end_year', 2024)), step=1, help="The year during which patient data collection ended.")
 
+                section1_comments = st.text_area("Section 1 Comments", value=get_val('section1_comments', ""), help="Add any comments or quotes related to Study Identification & Metadata.")
+
             # --- Section 2: Population (PICO - P) ---
             with st.expander("Section 2: Population (PICO - P)", expanded=False):
-                target_opts = ["Transplant Candidates (Waitlist)", "Transplant Recipients (Post-op)", "Donors", "Organ (ex-vivo perfusion)"]
+                target_opts = ["Transplant Candidates (Waitlist)", "Transplant Recipients (Post-op)", "Donors", "Organ (ex-vivo perfusion)", "Other", "Not Reported"]
                 target_pop = st.selectbox("Target Population", target_opts, index=get_index('target_population', target_opts), help="The clinical stage of the patients included.")
                 
                 col2_1, col2_2, col2_3 = st.columns(3)
@@ -517,36 +519,40 @@ if reviewer_name and selected_pdf:
                     mean_age = st.number_input("Overall Mean Age", min_value=0.0, value=float(get_val('mean_age', 0.0)), step=0.1, help="The mean or median age of the total cohort.")
                 with col2_3:
                     female_sex_pct = st.number_input("Female Sex (%)", min_value=0.0, max_value=100.0, value=float(get_val('female_sex_pct', 0.0)), step=0.1, help="Percentage of female subjects in the total cohort.")
+                    
+                section2_comments = st.text_area("Section 2 Comments", value=get_val('section2_comments', ""), help="Add any comments or quotes related to Population.")
 
             # --- Section 3: Intervention & AI Methods (PICO - I & C / CONVINCE) ---
             with st.expander("Section 3: Intervention & AI Methods", expanded=False):
-                ml_opts = ["Yes", "No"]
+                ml_opts = ["Yes", "No", "Other", "Not Reported"]
                 primary_ml = st.radio("Primary ML Component", ml_opts, index=get_index('primary_ml_component', ml_opts), horizontal=True, help="Is Machine Learning/AI the primary analysis component of the paper?")
                 
-                design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)", "Other"]
+                design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)", "Case-Control", "Case Report", "Other", "Not Reported"]
                 study_design = st.selectbox("Study Design", design_opts, index=get_index('study_design', design_opts), help="The methodological design of the study.")
                 
-                arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other"]
+                arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other", "Not Reported"]
                 ai_architecture = st.selectbox("AI Model Architecture (Intervention 1)", arch_opts, index=get_index('ai_architecture', arch_opts), help="The specific non-linear algorithm used.")
                 
                 algo_name = st.text_input("Algorithm Name", value=get_val('algorithm_name', ""), placeholder="e.g., DeepSurv", help="The specific name of the algorithm if provided.")
                 if algo_name == "NR": algo_name = ""
                 
-                modality_opts = ["Tabular (EMR/Clinical data)", "Waveforms/Signals (ECG)", "Imaging (CT/CXR/Echo)", "Pathology slides", "Donor metrics", "Multi-omics/Genetics"]
+                modality_opts = ["Tabular (EMR/Clinical data)", "Waveforms/Signals (ECG)", "Imaging (CT/CXR/Echo)", "Pathology slides", "Donor metrics", "Multi-omics/Genetics", "Text / Clinical Notes (NLP)", "Other", "Not Reported"]
                 input_modalities = st.multiselect("Input Variables (Data Modality)", modality_opts, default=get_multiselect('input_modalities', modality_opts), help="The types of data fed into the AI model.")
                 
-                comp_opts = ["Human expert/Clinician", "Standard Clinical Guidelines", "Linear Risk Score (e.g., LAS, EuroSCORE)", "None", "Other"]
+                comp_opts = ["Human expert/Clinician", "Standard Clinical Guidelines", "Linear Risk Score (e.g., LAS, EuroSCORE)", "None", "Other", "Not Reported"]
                 comparator = st.selectbox("Comparator / Standard of Care (Intervention 2)", comp_opts, index=get_index('comparator', comp_opts), help="What the AI is being compared against.")
                 
-                val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)", "Other"]
+                val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)", "Other", "Not Reported"]
                 validation_method = st.selectbox("Validation Method", val_opts, index=get_index('validation_method', val_opts), help="How the model's performance was evaluated to prevent overfitting.")
+
+                section3_comments = st.text_area("Section 3 Comments", value=get_val('section3_comments', ""), help="Add any comments or quotes related to Intervention & AI Methods.")
 
             # --- Section 4: AI Quality & Reproducibility (CONVINCE Standards) ---
             with st.expander("Section 4: AI Quality & Reproducibility", expanded=False):
-                missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Not Reported", "Other"]
+                missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Other", "Not Reported"]
                 missing_data = st.selectbox("Missing Data Handling", missing_opts, index=get_index('missing_data_handling', missing_opts), help="How the study dealt with missing variables.")
                 
-                code_opts = ["Yes", "No", "Not Reported"]
+                code_opts = ["Yes", "No", "Other", "Not Reported"]
                 code_avail = st.radio("Code Availability", code_opts, index=get_index('code_availability', code_opts), horizontal=True, help="Is the AI training code open source or available upon request?")
                 
                 col4_1, col4_2 = st.columns(2)
@@ -555,9 +561,11 @@ if reviewer_name and selected_pdf:
                 with col4_2:
                     test_size = st.number_input("Test Size (N)", min_value=0, value=int(get_val('test_size', 0)), step=1, help="Number of patients/samples in the completely held-out test set.")
 
+                section4_comments = st.text_area("Section 4 Comments", value=get_val('section4_comments', ""), help="Add any comments or quotes related to AI Quality & Reproducibility.")
+
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
-                outcome_opts = ["1-year survival", "5-year survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay", "Donor acceptance for transplantation", "Other", "Not reported"]
+                outcome_opts = ["1-year survival", "5-year survival", "30-day survival", "6-month survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay", "Hospital/ICU Readmission", "Adverse Events/Complications", "Donor acceptance for transplantation", "Other", "Not Reported"]
                 target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index_with_migration('target_outcome', outcome_opts), help="What the primary outcome the AI is predicting or classifying.")
                 
                 col5_1, col5_2 = st.columns(2)
@@ -568,8 +576,40 @@ if reviewer_name and selected_pdf:
                     model_sens = st.number_input("Sensitivity / Recall (%)", min_value=0.0, max_value=100.0, value=float(get_val('model_sensitivity', 0.0)), step=0.1, format="%.1f", help="True positive rate on the TEST set.")
                     model_spec = st.number_input("Specificity (%)", min_value=0.0, max_value=100.0, value=float(get_val('model_specificity', 0.0)), step=0.1, format="%.1f", help="True negative rate on the TEST set.")
                 
-                calib_opts = ["Yes", "No"]
+                calib_opts = ["Yes", "No", "Other", "Not Reported"]
                 calib_reported = st.radio("Calibration Reported", calib_opts, index=get_index('calibration_reported', calib_opts), horizontal=True, help="Did the study report calibration plots or use the Hosmer-Lemeshow test?")
+
+                section5_comments = st.text_area("Section 5 Comments", value=get_val('section5_comments', ""), help="Add any comments or quotes related to Outcomes & Performance.")
+
+            # --- Section 6: Quality Assessment (Risk of Bias) ---
+            with st.expander("Section 6: Quality Assessment (Risk of Bias)", expanded=False):
+                bias_opts = ["Low Risk", "High Risk", "Unclear-Judgement", "Not Reported"]
+                
+                st.markdown("#### 1. Participants (Selection Bias)")
+                qa_participants_bias = st.selectbox("Participants Risk of Bias", bias_opts, index=get_index('qa_participants_bias', bias_opts))
+                qa_participants_quotes = st.text_area("Participants Quotes", value=get_val('qa_participants_quotes', ""))
+                qa_participants_comments = st.text_area("Participants Comments", value=get_val('qa_participants_comments', ""))
+                
+                st.markdown("#### 2. Predictors (Input Variable Bias)")
+                qa_predictors_bias = st.selectbox("Predictors Risk of Bias", bias_opts, index=get_index('qa_predictors_bias', bias_opts))
+                qa_predictors_quotes = st.text_area("Predictors Quotes", value=get_val('qa_predictors_quotes', ""))
+                qa_predictors_comments = st.text_area("Predictors Comments", value=get_val('qa_predictors_comments', ""))
+
+                st.markdown("#### 3. Outcome (Definition Bias)")
+                qa_outcome_bias = st.selectbox("Outcome Risk of Bias", bias_opts, index=get_index('qa_outcome_bias', bias_opts))
+                qa_outcome_quotes = st.text_area("Outcome Quotes", value=get_val('qa_outcome_quotes', ""))
+                qa_outcome_comments = st.text_area("Outcome Comments", value=get_val('qa_outcome_comments', ""))
+
+                st.markdown("#### 4. Analysis (Modeling Bias)")
+                qa_analysis_bias = st.selectbox("Analysis Risk of Bias", bias_opts, index=get_index('qa_analysis_bias', bias_opts))
+                qa_analysis_quotes = st.text_area("Analysis Quotes", value=get_val('qa_analysis_quotes', ""))
+                qa_analysis_comments = st.text_area("Analysis Comments", value=get_val('qa_analysis_comments', ""))
+
+                st.markdown("#### 5. Applicability to Review Question")
+                applicability_opts = ["High Concern", "Low Concern", "Unclear-Judgement", "Not Reported"]
+                qa_applicability = st.selectbox("Applicability", applicability_opts, index=get_index('qa_applicability', applicability_opts))
+                qa_applicability_quotes = st.text_area("Applicability Quotes", value=get_val('qa_applicability_quotes', ""))
+                qa_applicability_comments = st.text_area("Applicability Comments", value=get_val('qa_applicability_comments', ""))
 
             # Form submission
             submit_button = st.form_submit_button(label="Save PRISMA/CONVINCE Review Data")
@@ -607,7 +647,27 @@ if reviewer_name and selected_pdf:
                     "model_accuracy": model_acc if model_acc > 0 else "NR",
                     "model_sensitivity": model_sens if model_sens > 0 else "NR",
                     "model_specificity": model_spec if model_spec > 0 else "NR",
-                    "calibration_reported": calib_reported
+                    "calibration_reported": calib_reported,
+                    "section1_comments": section1_comments,
+                    "section2_comments": section2_comments,
+                    "section3_comments": section3_comments,
+                    "section4_comments": section4_comments,
+                    "section5_comments": section5_comments,
+                    "qa_participants_bias": qa_participants_bias,
+                    "qa_participants_quotes": qa_participants_quotes,
+                    "qa_participants_comments": qa_participants_comments,
+                    "qa_predictors_bias": qa_predictors_bias,
+                    "qa_predictors_quotes": qa_predictors_quotes,
+                    "qa_predictors_comments": qa_predictors_comments,
+                    "qa_outcome_bias": qa_outcome_bias,
+                    "qa_outcome_quotes": qa_outcome_quotes,
+                    "qa_outcome_comments": qa_outcome_comments,
+                    "qa_analysis_bias": qa_analysis_bias,
+                    "qa_analysis_quotes": qa_analysis_quotes,
+                    "qa_analysis_comments": qa_analysis_comments,
+                    "qa_applicability": qa_applicability,
+                    "qa_applicability_quotes": qa_applicability_quotes,
+                    "qa_applicability_comments": qa_applicability_comments
                 }
                 
                 status_message = save_data(review_data)
