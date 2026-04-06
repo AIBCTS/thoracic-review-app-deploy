@@ -555,7 +555,7 @@ if reviewer_name and selected_pdf:
                     design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)", "Case-Control", "Case Report", "Other", "Not Reported"]
                     study_design = st.selectbox("Study Design", design_opts, index=get_index('study_design', design_opts), help="TRIPOD: Describe the study design (e.g., nested case-control, retrospective cohort).")
 
-                    arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other", "Not Reported"]
+                    arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Unsupervised Learning (Clustering)", "Other", "Not Reported"]
                     ai_architecture = st.selectbox("AI Model Architecture (Intervention 1)", arch_opts, index=get_index('ai_architecture', arch_opts), help="TRIPOD: Specify type of model and describe all statistical methods (e.g., CNN, Random Forest).")
 
                     algo_name = st.text_input("Algorithm Name", value=get_val('algorithm_name', ""), placeholder="e.g., DeepSurv", help="PROBAST: List the explicit name of the algorithm or model developed.")
