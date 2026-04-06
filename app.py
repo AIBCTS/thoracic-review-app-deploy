@@ -413,7 +413,7 @@ if reviewer_name and selected_pdf:
         val = get_val(key, None)
         if val in options:
             return options.index(val)
-        return 0
+        return None
         
     def get_multiselect(key, options):
         val = get_val(key, "")
@@ -430,7 +430,7 @@ if reviewer_name and selected_pdf:
     def get_index_with_migration(key, options):
         val = get_val(key, None)
         if not val:
-            return 0
+            return None
             
         # Migrate old multi-select values to single-select options (take first one if string)
         if isinstance(val, str):
@@ -736,6 +736,14 @@ if reviewer_name and selected_pdf:
                         "qa_applicability_comments": qa_applicability_comments
                     }
 
+                    # Cleanup: ensure any remaining `None` inputs are converted securely to "NR" or ""
+                    for k, v in review_data.items():
+                        if v is None:
+                            if 'comments' in k or 'quotes' in k or k == 'DatasetOther':
+                                review_data[k] = ""
+                            else:
+                                review_data[k] = "NR"
+                                
                     status_message = save_data(review_data)
                     st.success(f"✅ Data saved successfully! ({status_message})")
                     st.balloons()
