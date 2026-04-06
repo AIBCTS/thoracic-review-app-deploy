@@ -442,6 +442,17 @@ if reviewer_name and selected_pdf:
             return options.index(val)
         return 0
 
+    def get_num_val(key, val_type=int):
+        val = get_val(key, None)
+        if val == "NR" or val == "":
+            return None
+        if val is not None:
+            try:
+                return val_type(val)
+            except Exception:
+                return None
+        return None
+
     # Split screen layout
     col_pdf, col_form = st.columns([6, 4]) # 60% PDF, 40% Form
     
@@ -488,6 +499,9 @@ if reviewer_name and selected_pdf:
                     
                     organ_opts = ["Heart", "Lung", "Combined (Heart-Lung)", "Other", "Not Reported"]
                     organ_focus = st.selectbox("Organ Focus", organ_opts, index=get_index('organ_focus', organ_opts), help="The primary organ system the AI classifier targets.")
+                    
+                    fund_opts = ["Industry/Commercial", "Government/Public", "Foundation/Non-profit", "None", "Unclear", "Not Reported"]
+                    funding_source = st.selectbox("Funding Source", fund_opts, index=get_index('funding_source', fund_opts), help="Source of study funding (PRISMA).")
                 with col1_2:
                     dataset_opts = ["Single Center", "Multi-center", "National Registry", "International Registry", "Other", "Not Reported"]
                     dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="The nature of the data registry (e.g., national, international, specific hospital).")
@@ -499,11 +513,14 @@ if reviewer_name and selected_pdf:
                     if dataset_name == "Other Registry":
                         dataset_other = st.text_input("Other Dataset/Registry Name", value=get_val('DatasetOther', ""), placeholder="Enter specific registry name...")
                         
+                    coi_opts = ["Yes (Declared COI)", "No (Declared no COI)", "Not Reported"]
+                    coi_declared = st.selectbox("Conflict of Interest (COI) Declared", coi_opts, index=get_index('coi_declared', coi_opts), help="Conflict of interest transparency.")
+
                 col1_3, col1_4 = st.columns(2)
                 with col1_3:
-                    study_start = st.number_input("Study Period Start (Year)", min_value=1950, max_value=2050, value=int(get_val('study_start_year', 2010)), step=1, help="The year during which patient data collection began.")
+                    study_start = st.number_input("Study Period Start (Year)", min_value=1950, max_value=2050, value=get_num_val('study_start_year', int), step=1, help="The year during which patient data collection began.")
                 with col1_4:
-                    study_end = st.number_input("Study Period End (Year)", min_value=1950, max_value=2050, value=int(get_val('study_end_year', 2024)), step=1, help="The year during which patient data collection ended.")
+                    study_end = st.number_input("Study Period End (Year)", min_value=1950, max_value=2050, value=get_num_val('study_end_year', int), step=1, help="The year during which patient data collection ended.")
 
                 section1_comments = st.text_area("Section 1 Comments", value=get_val('section1_comments', ""), help="Add any comments or quotes related to Study Identification & Metadata.")
 
@@ -514,12 +531,19 @@ if reviewer_name and selected_pdf:
                 
                 col2_1, col2_2, col2_3 = st.columns(3)
                 with col2_1:
-                    sample_size = st.number_input("Total Sample Size (N)", min_value=0, value=int(get_val('total_sample_size', 0)), step=1, help="Total number of subjects analyzed in the study.")
+                    sample_size = st.number_input("Total Sample Size (N)", min_value=0, value=get_num_val('total_sample_size', int), step=1, help="Total number of subjects analyzed in the study.")
                 with col2_2:
-                    mean_age = st.number_input("Overall Mean Age", min_value=0.0, value=float(get_val('mean_age', 0.0)), step=0.1, help="The mean or median age of the total cohort.")
+                    mean_age = st.number_input("Overall Mean Age", min_value=0.0, value=get_num_val('mean_age', float), step=0.1, help="The mean or median age of the total cohort.")
                 with col2_3:
-                    female_sex_pct = st.number_input("Female Sex (%)", min_value=0.0, max_value=100.0, value=float(get_val('female_sex_pct', 0.0)), step=0.1, help="Percentage of female subjects in the total cohort.")
+                    female_sex_pct = st.number_input("Female Sex (%)", min_value=0.0, max_value=100.0, value=get_num_val('female_sex_pct', float), step=0.1, help="Percentage of female subjects in the total cohort.")
                     
+                col_pop1, col_pop2 = st.columns(2)
+                with col_pop1:
+                    yn_opts = ["Yes", "No", "Unclear", "Not Reported"]
+                    race_ethnicity_reported = st.radio("Race/Ethnicity Reported", yn_opts, index=get_index('race_ethnicity_reported', yn_opts), horizontal=True, help="Were clinical demographics beyond age/sex reported?")
+                with col_pop2:
+                    comorbidities_included = st.radio("Comorbidities / Clinical History Included", yn_opts, index=get_index('comorbidities_included', yn_opts), horizontal=True, help="Did the dataset include explicit patient histories?")
+
                 section2_comments = st.text_area("Section 2 Comments", value=get_val('section2_comments', ""), help="Add any comments or quotes related to Population.")
 
             # --- Section 3: Intervention & AI Methods (PICO - I & C / CONVINCE) ---
@@ -545,6 +569,17 @@ if reviewer_name and selected_pdf:
                 val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)", "Other", "Not Reported"]
                 validation_method = st.selectbox("Validation Method", val_opts, index=get_index('validation_method', val_opts), help="How the model's performance was evaluated to prevent overfitting.")
 
+                col3_1, col3_2 = st.columns(2)
+                with col3_1:
+                    exp_opts = ["Yes (e.g., SHAP, LIME)", "No", "Not Reported"]
+                    explainability_used = st.selectbox("Explainability / Interpretability Used", exp_opts, index=get_index('explainability_used', exp_opts), help="Did they use XAI techniques?")
+                    
+                    fs_opts = ["Manual/Clinical expertise", "Automated (e.g., LASSO, Stepwise)", "Unsupervised (e.g., PCA)", "None/All features", "Not Reported"]
+                    feature_selection = st.selectbox("Feature Selection Method", fs_opts, index=get_index('feature_selection', fs_opts), help="How variables were chosen for the model.")
+                with col3_2:
+                    yn_opts = ["Yes", "No", "Not Reported"]
+                    hyperparameter_tuning = st.radio("Hyperparameter Tuning Reported", yn_opts, index=get_index('hyperparameter_tuning', yn_opts), horizontal=True, help="Did the authors describe tuning to optimize the model?")
+
                 section3_comments = st.text_area("Section 3 Comments", value=get_val('section3_comments', ""), help="Add any comments or quotes related to Intervention & AI Methods.")
 
             # --- Section 4: AI Quality & Reproducibility (CONVINCE Standards) ---
@@ -552,14 +587,22 @@ if reviewer_name and selected_pdf:
                 missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Other", "Not Reported"]
                 missing_data = st.selectbox("Missing Data Handling", missing_opts, index=get_index('missing_data_handling', missing_opts), help="How the study dealt with missing variables.")
                 
-                code_opts = ["Yes", "No", "Other", "Not Reported"]
-                code_avail = st.radio("Code Availability", code_opts, index=get_index('code_availability', code_opts), horizontal=True, help="Is the AI training code open source or available upon request?")
+                imb_opts = ["Yes (e.g., SMOTE, weighted loss)", "No", "Not Applicable/Not Reported", "Other"]
+                class_imbalance = st.selectbox("Class Imbalance Addressed", imb_opts, index=get_index('class_imbalance', imb_opts), help="Did the authors handle outcome imbalance?")
+                
+                col4_a, col4_b = st.columns(2)
+                with col4_a:
+                    code_opts = ["Yes", "Algorithm/Model weights available", "No", "Other", "Not Reported"]
+                    code_avail = st.radio("Code Availability", code_opts, index=get_index('code_availability', code_opts), horizontal=True, help="Is the AI training code open source or available upon request?")
+                with col4_b:
+                    yn_opts = ["Yes", "No", "Not Reported"]
+                    preprocessing_described = st.radio("Data Preprocessing / Normalization Described", yn_opts, index=get_index('preprocessing_described', yn_opts), horizontal=True, help="Did the authors detail how raw data was transformed?")
                 
                 col4_1, col4_2 = st.columns(2)
                 with col4_1:
-                    train_size = st.number_input("Training Size (N)", min_value=0, value=int(get_val('training_size', 0)), step=1, help="Number of patients/samples used strictly for training.")
+                    train_size = st.number_input("Training Size (N)", min_value=0, value=get_num_val('training_size', int), step=1, help="Number of patients/samples used strictly for training.")
                 with col4_2:
-                    test_size = st.number_input("Test Size (N)", min_value=0, value=int(get_val('test_size', 0)), step=1, help="Number of patients/samples in the completely held-out test set.")
+                    test_size = st.number_input("Test Size (N)", min_value=0, value=get_num_val('test_size', int), step=1, help="Number of patients/samples in the completely held-out test set.")
 
                 section4_comments = st.text_area("Section 4 Comments", value=get_val('section4_comments', ""), help="Add any comments or quotes related to AI Quality & Reproducibility.")
 
@@ -570,14 +613,23 @@ if reviewer_name and selected_pdf:
                 
                 col5_1, col5_2 = st.columns(2)
                 with col5_1:
-                    model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=float(get_val('model_auc', 0.0)), step=0.01, format="%.2f", help="Area Under the Curve on the TEST set. The gold standard for discrimination.")
-                    model_acc = st.number_input("Model Accuracy (%)", min_value=0.0, max_value=100.0, value=float(get_val('model_accuracy', 0.0)), step=0.1, format="%.1f", help="Overall percentage of correct predictions on the TEST set.")
+                    model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=get_num_val('model_auc', float), step=0.01, format="%.2f", help="Area Under the Curve on the TEST set. The gold standard for discrimination.")
+                    model_acc = st.number_input("Model Accuracy (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_accuracy', float), step=0.1, format="%.1f", help="Overall percentage of correct predictions on the TEST set.")
+                    model_ppv = st.number_input("PPV / Precision (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_ppv', float), step=0.1, format="%.1f", help="Positive Predictive Value on the TEST set.")
                 with col5_2:
-                    model_sens = st.number_input("Sensitivity / Recall (%)", min_value=0.0, max_value=100.0, value=float(get_val('model_sensitivity', 0.0)), step=0.1, format="%.1f", help="True positive rate on the TEST set.")
-                    model_spec = st.number_input("Specificity (%)", min_value=0.0, max_value=100.0, value=float(get_val('model_specificity', 0.0)), step=0.1, format="%.1f", help="True negative rate on the TEST set.")
+                    model_sens = st.number_input("Sensitivity / Recall (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_sensitivity', float), step=0.1, format="%.1f", help="True positive rate on the TEST set.")
+                    model_spec = st.number_input("Specificity (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_specificity', float), step=0.1, format="%.1f", help="True negative rate on the TEST set.")
+                    model_npv = st.number_input("NPV (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_npv', float), step=0.1, format="%.1f", help="Negative Predictive Value on the TEST set.")
+                    
+                model_f1 = st.number_input("F1-Score", min_value=0.0, max_value=1.0, value=get_num_val('model_f1', float), step=0.01, format="%.2f", help="Harmonic mean of precision and recall.")
                 
-                calib_opts = ["Yes", "No", "Other", "Not Reported"]
-                calib_reported = st.radio("Calibration Reported", calib_opts, index=get_index('calibration_reported', calib_opts), horizontal=True, help="Did the study report calibration plots or use the Hosmer-Lemeshow test?")
+                col5_calib1, col5_calib2 = st.columns(2)
+                with col5_calib1:
+                    calib_opts = ["Yes", "No", "Other", "Not Reported"]
+                    calib_reported = st.radio("Calibration Reported", calib_opts, index=get_index('calibration_reported', calib_opts), horizontal=True, help="Did the study report calibration plots or use the Hosmer-Lemeshow test?")
+                with col5_calib2:
+                    dca_opts = ["Yes", "No", "Not Reported"]
+                    dca_reported = st.radio("Decision Curve Analysis (DCA) Reported", dca_opts, index=get_index('dca_reported', dca_opts), horizontal=True, help="Was Net Benefit or clinical utility graphed?")
 
                 section5_comments = st.text_area("Section 5 Comments", value=get_val('section5_comments', ""), help="Add any comments or quotes related to Outcomes & Performance.")
 
@@ -622,15 +674,19 @@ if reviewer_name and selected_pdf:
                     "study_metadata": study_meta,
                     "country_origin": country_origin,
                     "organ_focus": organ_focus,
+                    "funding_source": funding_source,
                     "dataset_source": dataset_source,
                     "DatasetName": dataset_name,
                     "DatasetOther": dataset_other if dataset_name == "Other Registry" else "",
-                    "study_start_year": study_start,
-                    "study_end_year": study_end,
+                    "coi_declared": coi_declared,
+                    "study_start_year": study_start if study_start is not None else "NR",
+                    "study_end_year": study_end if study_end is not None else "NR",
                     "target_population": target_pop,
-                    "total_sample_size": sample_size if sample_size > 0 else "NR",
-                    "mean_age": mean_age if mean_age > 0 else "NR",
-                    "female_sex_pct": female_sex_pct if female_sex_pct > 0 else "NR",
+                    "total_sample_size": sample_size if sample_size is not None else "NR",
+                    "mean_age": mean_age if mean_age is not None else "NR",
+                    "female_sex_pct": female_sex_pct if female_sex_pct is not None else "NR",
+                    "race_ethnicity_reported": race_ethnicity_reported,
+                    "comorbidities_included": comorbidities_included,
                     "primary_ml_component": primary_ml,
                     "study_design": study_design,
                     "ai_architecture": ai_architecture,
@@ -638,16 +694,25 @@ if reviewer_name and selected_pdf:
                     "input_modalities": ", ".join(input_modalities) if input_modalities else "NR",
                     "comparator": comparator,
                     "validation_method": validation_method,
+                    "explainability_used": explainability_used,
+                    "feature_selection": feature_selection,
+                    "hyperparameter_tuning": hyperparameter_tuning,
                     "missing_data_handling": missing_data,
+                    "class_imbalance": class_imbalance,
                     "code_availability": code_avail,
-                    "training_size": train_size if train_size > 0 else "NR",
-                    "test_size": test_size if test_size > 0 else "NR",
+                    "preprocessing_described": preprocessing_described,
+                    "training_size": train_size if train_size is not None else "NR",
+                    "test_size": test_size if test_size is not None else "NR",
                     "target_outcome": target_outcome,
-                    "model_auc": model_auc if model_auc > 0 else "NR",
-                    "model_accuracy": model_acc if model_acc > 0 else "NR",
-                    "model_sensitivity": model_sens if model_sens > 0 else "NR",
-                    "model_specificity": model_spec if model_spec > 0 else "NR",
+                    "model_auc": model_auc if model_auc is not None else "NR",
+                    "model_accuracy": model_acc if model_acc is not None else "NR",
+                    "model_ppv": model_ppv if model_ppv is not None else "NR",
+                    "model_sensitivity": model_sens if model_sens is not None else "NR",
+                    "model_specificity": model_spec if model_spec is not None else "NR",
+                    "model_npv": model_npv if model_npv is not None else "NR",
+                    "model_f1": model_f1 if model_f1 is not None else "NR",
                     "calibration_reported": calib_reported,
+                    "dca_reported": dca_reported,
                     "section1_comments": section1_comments,
                     "section2_comments": section2_comments,
                     "section3_comments": section3_comments,
