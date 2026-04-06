@@ -495,141 +495,141 @@ if reviewer_name and selected_pdf:
                 col1_1, col1_2 = st.columns(2)
                 with col1_1:
                     country_opts = ["USA", "Europe", "Asia", "Australia", "Africa", "South America", "Multi-national", "Other", "Not Reported"]
-                    country_origin = st.selectbox("Country of Data Origin", country_opts, index=get_index('country_origin', country_opts), help="Geographic origin of the training data.")
+                    country_origin = st.selectbox("Country of Data Origin", country_opts, index=get_index('country_origin', country_opts), help="TRIPOD: State the geographic region or setting where the study data were collected.")
                     
                     organ_opts = ["Heart", "Lung", "Combined (Heart-Lung)", "Other", "Not Reported"]
-                    organ_focus = st.selectbox("Organ Focus", organ_opts, index=get_index('organ_focus', organ_opts), help="The primary organ system the AI classifier targets.")
+                    organ_focus = st.selectbox("Organ Focus", organ_opts, index=get_index('organ_focus', organ_opts), help="TRIPOD: Clearly define the clinical setting and organ system the prediction model is intended for.")
                     
                     fund_opts = ["Industry/Commercial", "Government/Public", "Foundation/Non-profit", "None", "Unclear", "Not Reported"]
-                    funding_source = st.selectbox("Funding Source", fund_opts, index=get_index('funding_source', fund_opts), help="Source of study funding (PRISMA).")
+                    funding_source = st.selectbox("Funding Source", fund_opts, index=get_index('funding_source', fund_opts), help="PRISMA: Describe sources of funding for the systematic review and for the included studies.")
                 with col1_2:
                     dataset_opts = ["Single Center", "Multi-center", "National Registry", "International Registry", "Other", "Not Reported"]
-                    dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="The nature of the data registry (e.g., national, international, specific hospital).")
+                    dataset_source = st.selectbox("Dataset Source", dataset_opts, index=get_index('dataset_source', dataset_opts), help="TRIPOD: Describe the study design or source of data (e.g., randomized trial, cohort, or registry data).")
                     
                     dataset_name_opts = ["ISHLT Registry", "SRTR (Scientific Registry of Transplant Recipients)", "Eurotransplant Registry", "Scandiatransplant Registry", "UK Transplant Registry (NHSBT)", "Other Registry", "Not Applicable / Not Reported"]
-                    dataset_name = st.selectbox("Dataset Name", dataset_name_opts, index=get_index('DatasetName', dataset_name_opts), help="The specific name of the registry or database used.")
+                    dataset_name = st.selectbox("Dataset Name", dataset_name_opts, index=get_index('DatasetName', dataset_name_opts), help="TRIPOD: Specify the dataset or registry name to allow assessment of data source.")
                     
                     dataset_other = ""
                     if dataset_name == "Other Registry":
                         dataset_other = st.text_input("Other Dataset/Registry Name", value=get_val('DatasetOther', ""), placeholder="Enter specific registry name...")
                         
                     coi_opts = ["Yes (Declared COI)", "No (Declared no COI)", "Not Reported"]
-                    coi_declared = st.selectbox("Conflict of Interest (COI) Declared", coi_opts, index=get_index('coi_declared', coi_opts), help="Conflict of interest transparency.")
+                    coi_declared = st.selectbox("Conflict of Interest (COI) Declared", coi_opts, index=get_index('coi_declared', coi_opts), help="PRISMA: Declare any conflicts of interest of the study authors.")
 
                 col1_3, col1_4 = st.columns(2)
                 with col1_3:
-                    study_start = st.number_input("Study Period Start (Year)", min_value=1950, max_value=2050, value=get_num_val('study_start_year', int), step=1, help="The year during which patient data collection began.")
+                    study_start = st.number_input("Study Period Start (Year)", min_value=1950, max_value=2050, value=get_num_val('study_start_year', int), step=1, help="TRIPOD: Specify key study dates, including start of accrual.")
                 with col1_4:
-                    study_end = st.number_input("Study Period End (Year)", min_value=1950, max_value=2050, value=get_num_val('study_end_year', int), step=1, help="The year during which patient data collection ended.")
+                    study_end = st.number_input("Study Period End (Year)", min_value=1950, max_value=2050, value=get_num_val('study_end_year', int), step=1, help="TRIPOD: Specify key study dates, including end of accrual.")
 
                 section1_comments = st.text_area("Section 1 Comments", value=get_val('section1_comments', ""), help="Add any comments or quotes related to Study Identification & Metadata.")
 
             # --- Section 2: Population (PICO - P) ---
             with st.expander("Section 2: Population (PICO - P)", expanded=False):
                 target_opts = ["Transplant Candidates (Waitlist)", "Transplant Recipients (Post-op)", "Donors", "Organ (ex-vivo perfusion)", "Other", "Not Reported"]
-                target_pop = st.selectbox("Target Population", target_opts, index=get_index('target_population', target_opts), help="The clinical stage of the patients included.")
+                target_pop = st.selectbox("Target Population", target_opts, index=get_index('target_population', target_opts), help="TRIPOD: Specify key elements of the study setting and population (e.g., clinical stage, disease status).")
                 
                 col2_1, col2_2, col2_3 = st.columns(3)
                 with col2_1:
-                    sample_size = st.number_input("Total Sample Size (N)", min_value=0, value=get_num_val('total_sample_size', int), step=1, help="Total number of subjects analyzed in the study.")
+                    sample_size = st.number_input("Total Sample Size (N)", min_value=0, value=get_num_val('total_sample_size', int), step=1, help="TRIPOD: Report the number of participants and, where relevant, the number of events.")
                 with col2_2:
-                    mean_age = st.number_input("Overall Mean Age", min_value=0.0, value=get_num_val('mean_age', float), step=0.1, help="The mean or median age of the total cohort.")
+                    mean_age = st.number_input("Overall Mean Age", min_value=0.0, value=get_num_val('mean_age', float), step=0.1, help="TRIPOD: Give characteristics of the study participants, including basic demographics (Age).")
                 with col2_3:
-                    female_sex_pct = st.number_input("Female Sex (%)", min_value=0.0, max_value=100.0, value=get_num_val('female_sex_pct', float), step=0.1, help="Percentage of female subjects in the total cohort.")
+                    female_sex_pct = st.number_input("Female Sex (%)", min_value=0.0, max_value=100.0, value=get_num_val('female_sex_pct', float), step=0.1, help="TRIPOD: Give characteristics of the study participants, including basic demographics (Sex).")
                     
                 col_pop1, col_pop2 = st.columns(2)
                 with col_pop1:
                     yn_opts = ["Yes", "No", "Unclear", "Not Reported"]
-                    race_ethnicity_reported = st.radio("Race/Ethnicity Reported", yn_opts, index=get_index('race_ethnicity_reported', yn_opts), horizontal=True, help="Were clinical demographics beyond age/sex reported?")
+                    race_ethnicity_reported = st.radio("Race/Ethnicity Reported", yn_opts, index=get_index('race_ethnicity_reported', yn_opts), horizontal=True, help="TRIPOD: Report demographic characteristics required to assess generalizability (e.g., race/ethnicity).")
                 with col_pop2:
-                    comorbidities_included = st.radio("Comorbidities / Clinical History Included", yn_opts, index=get_index('comorbidities_included', yn_opts), horizontal=True, help="Did the dataset include explicit patient histories?")
+                    comorbidities_included = st.radio("Comorbidities / Clinical History Included", yn_opts, index=get_index('comorbidities_included', yn_opts), horizontal=True, help="TRIPOD: Report the distribution of predictors (e.g., comorbidities, relevant clinical history).")
 
                 section2_comments = st.text_area("Section 2 Comments", value=get_val('section2_comments', ""), help="Add any comments or quotes related to Population.")
 
             # --- Section 3: Intervention & AI Methods (PICO - I & C / CONVINCE) ---
             with st.expander("Section 3: Intervention & AI Methods", expanded=False):
                 ml_opts = ["Yes", "No", "Other", "Not Reported"]
-                primary_ml = st.radio("Primary ML Component", ml_opts, index=get_index('primary_ml_component', ml_opts), horizontal=True, help="Is Machine Learning/AI the primary analysis component of the paper?")
+                primary_ml = st.radio("Primary ML Component", ml_opts, index=get_index('primary_ml_component', ml_opts), horizontal=True, help="PRISMA-AI: State if AI/ML methodologies are the primary intervention being evaluated.")
                 
                 design_opts = ["Retrospective Cohort", "Prospective Cohort", "Randomized Controlled Trial (RCT)", "Case-Control", "Case Report", "Other", "Not Reported"]
-                study_design = st.selectbox("Study Design", design_opts, index=get_index('study_design', design_opts), help="The methodological design of the study.")
+                study_design = st.selectbox("Study Design", design_opts, index=get_index('study_design', design_opts), help="TRIPOD: Describe the study design (e.g., nested case-control, retrospective cohort).")
                 
                 arch_opts = ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN/LSTM)", "Artificial Neural Networks (ANN, MLP, NN)", "Random Forest", "Decision Tree", "Gradient Boosting (XGBoost/LightGBM)", "Support Vector Machine (SVM)", "Ensemble", "Transformer/LLM", "Other", "Not Reported"]
-                ai_architecture = st.selectbox("AI Model Architecture (Intervention 1)", arch_opts, index=get_index('ai_architecture', arch_opts), help="The specific non-linear algorithm used.")
+                ai_architecture = st.selectbox("AI Model Architecture (Intervention 1)", arch_opts, index=get_index('ai_architecture', arch_opts), help="TRIPOD: Specify type of model and describe all statistical methods (e.g., CNN, Random Forest).")
                 
-                algo_name = st.text_input("Algorithm Name", value=get_val('algorithm_name', ""), placeholder="e.g., DeepSurv", help="The specific name of the algorithm if provided.")
+                algo_name = st.text_input("Algorithm Name", value=get_val('algorithm_name', ""), placeholder="e.g., DeepSurv", help="PROBAST: List the explicit name of the algorithm or model developed.")
                 if algo_name == "NR": algo_name = ""
                 
                 modality_opts = ["Tabular (EMR/Clinical data)", "Waveforms/Signals (ECG)", "Imaging (CT/CXR/Echo)", "Pathology slides", "Donor metrics", "Multi-omics/Genetics", "Text / Clinical Notes (NLP)", "Other", "Not Reported"]
-                input_modalities = st.multiselect("Input Variables (Data Modality)", modality_opts, default=get_multiselect('input_modalities', modality_opts), help="The types of data fed into the AI model.")
+                input_modalities = st.multiselect("Input Variables (Data Modality)", modality_opts, default=get_multiselect('input_modalities', modality_opts), help="TRIPOD: Clearly define all predictors (input modalities) and how they were measured.")
                 
                 comp_opts = ["Human expert/Clinician", "Standard Clinical Guidelines", "Linear Risk Score (e.g., LAS, EuroSCORE)", "None", "Other", "Not Reported"]
-                comparator = st.selectbox("Comparator / Standard of Care (Intervention 2)", comp_opts, index=get_index('comparator', comp_opts), help="What the AI is being compared against.")
+                comparator = st.selectbox("Comparator / Standard of Care (Intervention 2)", comp_opts, index=get_index('comparator', comp_opts), help="TRIPOD/PRISMA: State the reference standard or comparator (e.g., clinical guidelines, existing score).")
                 
                 val_opts = ["Internal Split (Train/Test)", "Cross-Validation (k-fold)", "External Validation (Temporal)", "External Validation (Geographic/Different Hospital)", "Other", "Not Reported"]
-                validation_method = st.selectbox("Validation Method", val_opts, index=get_index('validation_method', val_opts), help="How the model's performance was evaluated to prevent overfitting.")
+                validation_method = st.selectbox("Validation Method", val_opts, index=get_index('validation_method', val_opts), help="TRIPOD: Describe any validation, including internal (e.g., bootstrapping) or external methods.")
 
                 col3_1, col3_2 = st.columns(2)
                 with col3_1:
                     exp_opts = ["Yes (e.g., SHAP, LIME)", "No", "Not Reported"]
-                    explainability_used = st.selectbox("Explainability / Interpretability Used", exp_opts, index=get_index('explainability_used', exp_opts), help="Did they use XAI techniques?")
+                    explainability_used = st.selectbox("Explainability / Interpretability Used", exp_opts, index=get_index('explainability_used', exp_opts), help="CONVINCE: Describe any explainability or interpretability methods used to justify prediction model outputs.")
                     
                     fs_opts = ["Manual/Clinical expertise", "Automated (e.g., LASSO, Stepwise)", "Unsupervised (e.g., PCA)", "None/All features", "Not Reported"]
-                    feature_selection = st.selectbox("Feature Selection Method", fs_opts, index=get_index('feature_selection', fs_opts), help="How variables were chosen for the model.")
+                    feature_selection = st.selectbox("Feature Selection Method", fs_opts, index=get_index('feature_selection', fs_opts), help="TRIPOD: Specify the predictor selection procedures (e.g., pre-selection, stepwise).")
                 with col3_2:
                     yn_opts = ["Yes", "No", "Not Reported"]
-                    hyperparameter_tuning = st.radio("Hyperparameter Tuning Reported", yn_opts, index=get_index('hyperparameter_tuning', yn_opts), horizontal=True, help="Did the authors describe tuning to optimize the model?")
+                    hyperparameter_tuning = st.radio("Hyperparameter Tuning Reported", yn_opts, index=get_index('hyperparameter_tuning', yn_opts), horizontal=True, help="CONVINCE: Report whether hyperparameters were optimized and how this was performed.")
 
                 section3_comments = st.text_area("Section 3 Comments", value=get_val('section3_comments', ""), help="Add any comments or quotes related to Intervention & AI Methods.")
 
             # --- Section 4: AI Quality & Reproducibility (CONVINCE Standards) ---
             with st.expander("Section 4: AI Quality & Reproducibility", expanded=False):
                 missing_opts = ["Complete Case Analysis (Excluded)", "Simple Imputation (Mean/Median)", "Multiple Imputation", "Algorithm handles natively", "Other", "Not Reported"]
-                missing_data = st.selectbox("Missing Data Handling", missing_opts, index=get_index('missing_data_handling', missing_opts), help="How the study dealt with missing variables.")
+                missing_data = st.selectbox("Missing Data Handling", missing_opts, index=get_index('missing_data_handling', missing_opts), help="TRIPOD: Describe how missing data were handled (e.g., complete-case analysis, multiple imputation).")
                 
                 imb_opts = ["Yes (e.g., SMOTE, weighted loss)", "No", "Not Applicable/Not Reported", "Other"]
-                class_imbalance = st.selectbox("Class Imbalance Addressed", imb_opts, index=get_index('class_imbalance', imb_opts), help="Did the authors handle outcome imbalance?")
+                class_imbalance = st.selectbox("Class Imbalance Addressed", imb_opts, index=get_index('class_imbalance', imb_opts), help="CONVINCE: Specify if techniques to handle class imbalance (e.g., SMOTE, weighting) were utilized.")
                 
                 col4_a, col4_b = st.columns(2)
                 with col4_a:
                     code_opts = ["Yes", "Algorithm/Model weights available", "No", "Other", "Not Reported"]
-                    code_avail = st.radio("Code Availability", code_opts, index=get_index('code_availability', code_opts), horizontal=True, help="Is the AI training code open source or available upon request?")
+                    code_avail = st.radio("Code Availability", code_opts, index=get_index('code_availability', code_opts), horizontal=True, help="PRISMA/PROBAST: Provide transparency on whether data and model code are available for reproducibility.")
                 with col4_b:
                     yn_opts = ["Yes", "No", "Not Reported"]
-                    preprocessing_described = st.radio("Data Preprocessing / Normalization Described", yn_opts, index=get_index('preprocessing_described', yn_opts), horizontal=True, help="Did the authors detail how raw data was transformed?")
+                    preprocessing_described = st.radio("Data Preprocessing / Normalization Described", yn_opts, index=get_index('preprocessing_described', yn_opts), horizontal=True, help="TRIPOD/CONVINCE: Detail data preprocessing (e.g., normalization, standardization) prior to modeling.")
                 
                 col4_1, col4_2 = st.columns(2)
                 with col4_1:
-                    train_size = st.number_input("Training Size (N)", min_value=0, value=get_num_val('training_size', int), step=1, help="Number of patients/samples used strictly for training.")
+                    train_size = st.number_input("Training Size (N)", min_value=0, value=get_num_val('training_size', int), step=1, help="TRIPOD: Provide the number of participants in the derivation/training set.")
                 with col4_2:
-                    test_size = st.number_input("Test Size (N)", min_value=0, value=get_num_val('test_size', int), step=1, help="Number of patients/samples in the completely held-out test set.")
+                    test_size = st.number_input("Test Size (N)", min_value=0, value=get_num_val('test_size', int), step=1, help="TRIPOD: Provide the number of participants in the validation/test set.")
 
                 section4_comments = st.text_area("Section 4 Comments", value=get_val('section4_comments', ""), help="Add any comments or quotes related to AI Quality & Reproducibility.")
 
             # --- Section 5: Outcomes & Performance (PICO - O) ---
             with st.expander("Section 5: Outcomes & Performance", expanded=False):
                 outcome_opts = ["1-year survival", "5-year survival", "30-day survival", "6-month survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay", "Hospital/ICU Readmission", "Adverse Events/Complications", "Donor acceptance for transplantation", "Other", "Not Reported"]
-                target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index_with_migration('target_outcome', outcome_opts), help="What the primary outcome the AI is predicting or classifying.")
+                target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index_with_migration('target_outcome', outcome_opts), help="TRIPOD: Clearly define the primary outcome that is predicted by the model.")
                 
                 col5_1, col5_2 = st.columns(2)
                 with col5_1:
-                    model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=get_num_val('model_auc', float), step=0.01, format="%.2f", help="Area Under the Curve on the TEST set. The gold standard for discrimination.")
-                    model_acc = st.number_input("Model Accuracy (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_accuracy', float), step=0.1, format="%.1f", help="Overall percentage of correct predictions on the TEST set.")
-                    model_ppv = st.number_input("PPV / Precision (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_ppv', float), step=0.1, format="%.1f", help="Positive Predictive Value on the TEST set.")
+                    model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=get_num_val('model_auc', float), step=0.01, format="%.2f", help="TRIPOD: Report performance measures for discrimination (e.g., AUC/c-statistic).")
+                    model_acc = st.number_input("Model Accuracy (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_accuracy', float), step=0.1, format="%.1f", help="TRIPOD: Report accuracy as an overall performance measure, where applicable.")
+                    model_ppv = st.number_input("PPV / Precision (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_ppv', float), step=0.1, format="%.1f", help="TRIPOD: Report performance measures for clinical utility and predictive values (PPV/Precision).")
                 with col5_2:
-                    model_sens = st.number_input("Sensitivity / Recall (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_sensitivity', float), step=0.1, format="%.1f", help="True positive rate on the TEST set.")
-                    model_spec = st.number_input("Specificity (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_specificity', float), step=0.1, format="%.1f", help="True negative rate on the TEST set.")
-                    model_npv = st.number_input("NPV (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_npv', float), step=0.1, format="%.1f", help="Negative Predictive Value on the TEST set.")
+                    model_sens = st.number_input("Sensitivity / Recall (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_sensitivity', float), step=0.1, format="%.1f", help="TRIPOD: Report model sensitivity or recall to characterize true positive identification.")
+                    model_spec = st.number_input("Specificity (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_specificity', float), step=0.1, format="%.1f", help="TRIPOD: Report model specificity to characterize true negative identification.")
+                    model_npv = st.number_input("NPV (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_npv', float), step=0.1, format="%.1f", help="TRIPOD: Report Negative Predictive Value (NPV).")
                     
-                model_f1 = st.number_input("F1-Score", min_value=0.0, max_value=1.0, value=get_num_val('model_f1', float), step=0.01, format="%.2f", help="Harmonic mean of precision and recall.")
+                model_f1 = st.number_input("F1-Score", min_value=0.0, max_value=1.0, value=get_num_val('model_f1', float), step=0.01, format="%.2f", help="TRIPOD/CONVINCE: Report combined metrics (e.g., F1-score) for imbalanced classification evaluation.")
                 
                 col5_calib1, col5_calib2 = st.columns(2)
                 with col5_calib1:
                     calib_opts = ["Yes", "No", "Other", "Not Reported"]
-                    calib_reported = st.radio("Calibration Reported", calib_opts, index=get_index('calibration_reported', calib_opts), horizontal=True, help="Did the study report calibration plots or use the Hosmer-Lemeshow test?")
+                    calib_reported = st.radio("Calibration Reported", calib_opts, index=get_index('calibration_reported', calib_opts), horizontal=True, help="TRIPOD: Report performance measures for calibration (e.g., calibration plots, Hosmer-Lemeshow).")
                 with col5_calib2:
                     dca_opts = ["Yes", "No", "Not Reported"]
-                    dca_reported = st.radio("Decision Curve Analysis (DCA) Reported", dca_opts, index=get_index('dca_reported', dca_opts), horizontal=True, help="Was Net Benefit or clinical utility graphed?")
+                    dca_reported = st.radio("Decision Curve Analysis (DCA) Reported", dca_opts, index=get_index('dca_reported', dca_opts), horizontal=True, help="TRIPOD: Report clinical utility evaluations such as Decision Curve Analysis (DCA).")
 
                 section5_comments = st.text_area("Section 5 Comments", value=get_val('section5_comments', ""), help="Add any comments or quotes related to Outcomes & Performance.")
 
