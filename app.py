@@ -583,7 +583,7 @@ if reviewer_name and selected_pdf:
 
             # --- Section 6: Quality Assessment (Risk of Bias) ---
             with st.expander("Section 6: Quality Assessment (Risk of Bias)", expanded=False):
-                bias_opts = ["Low Risk", "High Risk", "Unclear-Judgement", "Not Reported"]
+                bias_opts = ["Low Risk", "High Risk", "Unclear", "Not Reported"]
                 
                 st.markdown("#### 1. Participants (Selection Bias)")
                 qa_participants_bias = st.selectbox("Participants Risk of Bias", bias_opts, index=get_index('qa_participants_bias', bias_opts))
@@ -606,7 +606,7 @@ if reviewer_name and selected_pdf:
                 qa_analysis_comments = st.text_area("Analysis Comments", value=get_val('qa_analysis_comments', ""))
 
                 st.markdown("#### 5. Applicability to Review Question")
-                applicability_opts = ["High Concern", "Low Concern", "Unclear-Judgement", "Not Reported"]
+                applicability_opts = ["High Concern", "Low Concern", "Unclear", "Not Reported"]
                 qa_applicability = st.selectbox("Applicability", applicability_opts, index=get_index('qa_applicability', applicability_opts))
                 qa_applicability_quotes = st.text_area("Applicability Quotes", value=get_val('qa_applicability_quotes', ""))
                 qa_applicability_comments = st.text_area("Applicability Comments", value=get_val('qa_applicability_comments', ""))
