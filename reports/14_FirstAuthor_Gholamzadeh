@@ -1,0 +1,70 @@
+First Author: Gholamzadeh
+Title: Analysis of the most influential factors affecting outcomes of lung transplant recipients: a multivariate prediction model based on UNOS Data
+Source number: 14  ￼
+
+Very short summary: This study developed machine-learning regression models to predict lung-transplant waiting-list priority scores using UNOS data. Five key findings were: (1) after preprocessing, the final analytic dataset contained 32,966 records and 15 features; (2) six regression models were compared, and the random forest regressor performed best; (3) the target outcome was the continuous lung-transplant priority/allocation score rather than post-transplant survival; (4) SHAP identified 11 key predictors, including oxygen requirement, diagnosis group, waiting time, medical condition, hemodynamics, ventilator need, support variables, cigarette use, and transfusion events; and (5) the authors deployed the final model as a web-based Streamlit decision-support tool. The paper explicitly notes that the model still requires external validation in other populations and healthcare systems.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2005
+	•	Study Period End (Year): 2023
+	•	Section 1 Comments/Quotes: The study states that data were retrieved from the “United Network for Organ Sharing (UNOS) open-source database of transplant patients between 2005 and 2023,” which is a U.S. national transplant registry. I did not identify an explicit funding statement or conflict-of-interest declaration in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Candidates (Waitlist)
+	•	Total Sample Size (N): 32966
+	•	Overall Mean Age: 54.27
+	•	Female Sex (%): 33.20
+	•	Race/Ethnicity Reported: Not Reported
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final dataset “contains 32 966 records with 15 features,” and after preprocessing the “overall patient population consisted of 66.88% men and 33.20% women, with a median age of 54.27 ± 14.24 years.” Clinical and demographic features were used as predictors for waiting-list priority. Race/ethnicity was not reported in the retrieved text excerpts.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random forest regressor (best model); also multiple linear regression, SVM regressor, XGBoost regressor, multilayer perceptron, and deep learning model
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The paper compares six regression models, with the RF regressor identified as best. It used preprocessing, feature engineering, feature selection, and hyperparameter tuning via random search. The target was a continuous “priority score,” so regression models were used. SHAP was used for explainability and ranking feature importance. The dataset was split 80:20 for training and testing, with k-fold cross-validation additionally used to confirm robustness.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 26372
+	•	Test Size (N): 6594
+	•	Section 4 Comments/Quotes: Missing numerical data were imputed using the mean of each feature, features with >80% missingness were removed, outliers were handled with IQR/boxplot-based filtering, and data normalization was performed. Because the outcome is continuous regression rather than class prediction, class imbalance is not applicable. The study used an 80:20 split, which corresponds to 26,372 training and 6,594 test records from 32,966 total. I found no public code-release statement.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target was the continuous waiting-list “priority” or “allocation score,” so the closest category is Other. The paper evaluated models using regression metrics including “R-squared (R2) and other error rate metrics,” and states that the RF model achieved the highest R2 and lowest error values. However, the exact numeric R2, MAE, and RMSE values were not visible in the retrieved excerpts, so I have not guessed them. No classification metrics, calibration analysis, or decision-curve analysis were reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large UNOS national registry dataset of adult lung-transplant candidates, which reduces single-center selection bias, though exclusions were applied during preprocessing.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinical and demographic waiting-list variables derived from UNOS and selected through a structured, expert-guided preprocessing and feature-engineering workflow.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as the candidate “priority” or “allocation score,” treated as a continuous numerical variable for regression modeling.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include preprocessing, feature engineering, random-search hyperparameter tuning, cross-validation, and SHAP explainability, but the model was validated only on UNOS data and the paper explicitly states that external validation is still needed.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses AI/ML for lung-transplant allocation prioritization using transplant registry data, which is well aligned with the review scope.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the end-to-end ML workflow; Table 3 for the top 11 SHAP-ranked features; and Figure 3 for the Streamlit-based web interface. The retrieved excerpts also describe preprocessing, splitting, tuning, and evaluation methods, but I did not invent exact regression metric values because they were not visible in the provided text.

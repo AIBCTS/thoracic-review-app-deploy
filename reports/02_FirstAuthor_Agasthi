@@ -1,0 +1,69 @@
+First Author: Agasthi
+Title: Machine learning helps predict long-term mortality and graft failure in patients undergoing heart transplant
+Source number: 2  ￼
+
+Very short summary: This retrospective study used the ISHLT registry to develop a gradient-boosted machine model for predicting 5-year mortality and 5-year graft failure after orthotopic heart transplantation. Five key findings were: (1) the final cohort included 15,236 adult heart transplant recipients; (2) the model used 87 variables selected from an initial 342; (3) 5-year mortality was 27.3% and 5-year graft failure was 28.1%; (4) the model achieved AUC 0.717 for 5-year mortality and 0.716 for 5-year graft failure; and (5) the most influential predictors were hospital length of stay, recipient age, donor age, recipient and donor BMI, and ischemic time, with Figure 2 showing better graft-failure prediction in recipients older than 60 years and better mortality prediction when ischemic time exceeded 4 hours.  ￼  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Heart
+	•	Funding Source: None
+	•	Dataset Source: International Registry
+	•	Dataset Name: ISHLT
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2005
+	•	Study Period End (Year): 2009
+	•	Section 1 Comments/Quotes: The data source was the “ISHLT Registry,” described as including “223 centers in 18 countries,” making this an international registry study. The modeling cohort was restricted to OHTs “outside the window 2005–2009” being excluded, and the paper states, “Funding No funding was available” and “The authors have no conflict of interest to declare.”  ￼  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 15236
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final study population included “15,236 OHT patients.” The article states continuous variables were summarized by mean/SD and categorical variables by count/percent, but the retrieved article text does not report an overall cohort table with mean age or female percentage in the main paper. Clinical history and transplant variables were included among the 342 initial variables and 87 modeled variables, including functional status, inotrope use, creatinine, bilirubin, graft function at discharge, and immunosuppressive therapy.  ￼  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Gradient-boosted machine (GBM)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The paper describes a retrospective registry cohort and states that endpoints were evaluated “using the gradient-boosted machine (GBM) algorithm.” The dataset was split into “training cohort” 80% and “validation cohort” 20%, with “tenfold cross-validation repeated 5 times” used within training to tune hyperparameters. Feature selection was automated by removing variables with >50% missingness and near-zero variance, with recoding of sparse categories, resulting in 87 variables for modeling. No explicit clinical-rule comparator was tested in the main analysis.  ￼  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 12189
+	•	Test Size (N): 3047
+	•	Section 4 Comments/Quotes: Missingness was handled primarily by excluding variables with more than 50% missingness and filtering out patients missing survival/graft-failure time; blank categorical categories were recoded to “No” or equivalent, but no imputation was reported. Preprocessing steps were described, including exclusion filters, recoding, and near-zero-variance removal. The 80/20 split implies approximately 12,189 training and 3,047 validation/holdout patients from 15,236 total. The paper does not report code availability, and no class imbalance method was described.  ￼  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 5-year survival
+	•	Model AUC / C-Statistic: 0.717
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The two primary endpoints were “all cause mortality and graft failure at 5 years after OHT.” Figure 1 and the Results report AUC 0.717 (95% CI 0.696–0.737) for 5-year mortality and 0.716 (95% CI 0.696–0.736) for graft failure. The user asked for tables and figures, and Figure 2 shows subgroup ROC analyses: graft-failure prediction was significantly better when recipient age was >60 years, and mortality prediction trended better when ischemic time was >4 hours. Although the methods say sensitivity, specificity, PPV, and NPV were provided, these numerical values were not present in the retrieved main-article text, so they are NR. Calibration and DCA were not reported.  ￼  ￼  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the ISHLT international registry with “223 centers in 18 countries,” which reduces single-center selection bias, although eligibility restrictions were applied.  ￼
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The model included both pre- and post-transplant variables, including “hospital length of stay,” “graft function at discharge,” and discharge immunosuppression, which limits interpretability for purely pre-transplant risk prediction and creates predictor-timing concerns.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcomes were explicitly defined as “all cause mortality and graft failure at 5 years after OHT,” and graft failure was further defined using the ISHLT reporting definition.  ￼  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The analysis treated each endpoint as a binary outcome and “time-to-event was not taken into account,” and patients lost to follow-up before year 5 were treated as not having had the event, which is a substantial risk of bias.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies machine learning for heart transplant outcomes using donor-recipient and transplant variables, which is closely aligned with the review question.  ￼
+
+Tables and figures explicitly used in extraction: Figure 1 for the ROC/AUC values for 5-year mortality and graft failure, and Figure 2 for subgroup analyses by recipient age, ischemic time, length of stay, and donor age. The main retrieved text did not include a main-paper demographic table with overall mean age or female proportion, so those fields were left as not reported.  ￼  ￼

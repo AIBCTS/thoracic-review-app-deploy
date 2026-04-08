@@ -1,0 +1,70 @@
+First Author: Ahady Dolatsara
+Title: A two-stage machine learning framework to predict heart transplantation survival probabilities over time with a monotonic probability constraint
+Source number: 3  ￼
+
+Very short summary: This study proposed a two-stage machine-learning framework to predict personalized post-heart-transplant survival probabilities over multiple time points and then enforce monotonicity using isotonic regression. Five key findings were: (1) the study used a national U.S. UNOS heart transplant dataset covering 1987–2016; (2) Stage I evaluated multiple ML approaches, with the reported selected implementation being UP-LASSO-logistic regression; (3) holdout AUCs increased over time from 0.608 at month 1 to about 0.70 at years 8–10; (4) isotonic regression improved AUC slightly at all time points and guaranteed monotonic survival curves; and (5) the paper made both code and a web app publicly available. Figures showed the two-stage framework, transplant decision process, ROC curves, monotonic probability correction, and observed-vs-forecast calibration plots; Tables 4 and 5 reported holdout performance before and after isotonic regression.  ￼  ￼  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 1987
+	•	Study Period End (Year): 2016
+	•	Section 1 Comments/Quotes: The paper states, “Our UNOS dataset covered 103,570 heart transplant events up to and including September 30, 2016,” and the registry/process described are explicitly U.S.-based through UNOS. Funding was supported “in part by the Ohio Supercomputer Center” and the “National Science Foundation,” and the paper declares “Declaration of Competing Interest None.”  ￼  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 103570
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The main article reports a UNOS dataset of “103,570 heart transplant events,” but because censoring was applied separately at each time point, the effective sample size varies by prediction horizon. The paper does not report an overall mean age, female proportion, or race/ethnicity summary in the retrieved main-text tables/figures. Clinical history and transplant factors were included among the 494 variables and engineered features used for modeling.  ￼  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Other
+	•	Algorithm Name: Two-stage framework with Stage I ML models and Stage II isotonic regression; selected implementation reported in main results: UP-LASSO-logistic regression
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Stage I examined seven algorithms: “LR, LDA, ANN, CART, SVM, RF and XGB,” along with variable selection methods including “fast feature selection, LASSO, and random forests,” and the paper reports holdout performance for the “UP-LASSO-logistic regression implementation.” Stage II applied isotonic regression to calibrate survival probabilities over month 1 and years 1–10 so they are monotonically decreasing. Figure 3 summarizes this workflow. The framework used internal training/holdout evaluation plus 5-fold cross-validation for model selection.  ￼  ￼  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing data were handled through a structured cleaning strategy rather than a single standard method: variables with high missingness were removed, and the authors compared models with no imputation versus median/mode imputation; categorical missingness could also be imputed as “unknown.” Class imbalance was explicitly addressed with several subsampling methods: “none, DOWN, UP, SMOTE and ROSE.” Data preprocessing was described in detail, including removal of intra/post-transplant variables, censoring rules, engineered features, regrouping categorical levels, and encoding choices. Code availability was stronger than a simple yes/no because the paper states that “our code, analysis and results are detailed in an R Markdown document” and also provides a public web app; however, algorithm weights were not reported. Exact training/test N for the selected final model at each time point were not provided in the retrieved text.  ￼  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.702
+	•	Model Accuracy (%): 62.7
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 75.2
+	•	Specificity (%): 53.3
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target outcome was multi-period post-transplant survival probability at month 1 and years 1–10 rather than a single fixed endpoint. Table 4 reports holdout performance for the selected UP-LASSO-logistic regression model: AUC rose from 0.608 at month 1 to 0.702 at year 10; year-10 accuracy was 0.627, sensitivity 0.752, and specificity 0.533. Figure 7 presents observed-versus-forecast survival probabilities after isotonic regression, so calibration was reported graphically. Table 5 shows isotonic regression slightly improved AUC at all time points. No PPV, NPV, F1-score, or DCA were reported. Since the prompt asks for the test/validation set, I used the holdout results from Table 4; the single numeric AUC field here is the year-10 holdout AUC of 0.702, while the article reports a range across time points.  ￼  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry with 103,570 heart transplant events, which lowers single-center selection bias, although censoring varied by time point.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The authors intentionally removed intra- and post-transplant variables in the main prediction framework, keeping a pre-operative decision-support orientation, and also engineered clinically motivated donor-recipient features.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The survival outcome at each time point was explicitly coded using G-TIME and G-STATUS, with censoring rules clearly described for whether the recipient was alive or dead at the time point of interest.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include extensive preprocessing, class-imbalance handling, multiple algorithms, cross-validation, holdout testing, and post hoc monotonic calibration; however, the very large analytic design space and time-point-specific censoring introduce complexity and possible instability, and exact final training/test sample sizes per horizon were not clearly reported in the retrieved text.  ￼  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly concerns AI/ML for heart transplant outcome prediction using donor-recipient pre-operative variables and is highly aligned with the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 (illustration of isotonic regression concept), Figure 2 (overview of transplantation decisions), Figure 3 (two-stage framework), Figure 4 (ROC plots for years 1–9), Figure 6 (sample patient probability curves before/after isotonic regression), Figure 7 (observed vs forecast survival probabilities after isotonic regression), Table 4 (holdout performance across month 1 and years 1–10), and Table 5 (differences after isotonic regression). No demographic baseline table with age/sex/race summary was visible in the retrieved main-article content, so those items were left as not reported.  ￼  ￼  ￼

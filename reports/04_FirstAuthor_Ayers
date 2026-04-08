@@ -1,0 +1,69 @@
+First Author: Ayers
+Title: Using machine learning to improve survival prediction after heart transplantation
+Source number: 4  ￼
+
+Very short summary: This retrospective UNOS registry study evaluated whether modern machine-learning methods improve 1-year survival prediction after orthotopic heart transplantation. Five key findings were: (1) 33,657 adult primary isolated heart transplant recipients were included; (2) 1-year mortality was 11% (n=3738); (3) after manual and automated filtering, 47 variables were used for model training; (4) the final 400-model ensemble achieved the best discrimination with AUROC 0.764, outperforming logistic regression and each individual ML method; and (5) the ensemble also improved net reclassification by 72.9% and had superior decision-curve performance, with calibration assessed visually by deciles of predicted vs observed risk. Figures showed cohort selection, ensemble training design, ROC comparison, and decision-curve analysis; Table 1 reported balanced training and validation cohorts.  ￼  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2000
+	•	Study Period End (Year): 2019
+	•	Section 1 Comments/Quotes: The study used the “United Network for Organ Sharing (UNOS) registry” and included adult patients undergoing OHT “between 2000 and 2019.” A disclosures section was present, listing industry relationships for several authors, so COI was declared. I did not identify a funding statement in the retrieved article text, so funding is marked Not Reported.  ￼  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 33657
+	•	Overall Mean Age: 52.8
+	•	Female Sex (%): 25
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study included “33,657 OHT patients,” and “the majority of study participants were male (75%) with an average age of 52.8 ± 12.4 years,” implying female sex 25%. Table 1 reports race as White 70% and includes multiple clinical-history/support variables such as prior cardiac surgery, dialysis, ventilator, ICU, inotropes, ECMO, IABP, LVAD/RVAD/TAH, bilirubin, creatinine, and waitlist time.  ￼  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Ensemble
+	•	Algorithm Name: Final ensemble ML model combining deep neural network, logistic regression, AdaBoost, and random forest
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper describes a “retrospective study” using UNOS data with patients split into training (80%) and validation (20%) sets. The final model was an ensemble of four algorithm classes: deep neural network, logistic regression, AdaBoost, and random forest, built from 400 total models. Inputs were preoperative donor and recipient registry variables. The main explicit comparator in reported results was a “singular logistic regression,” which best fits the review option of a linear risk-score comparator rather than human expert/guideline. Feature selection combined clinician review and random-forest importance, producing 47 final variables. The paper does not describe SHAP/LIME-style explainability or an explicit hyperparameter-tuning process.  ￼  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 26926
+	•	Test Size (N): 6731
+	•	Section 4 Comments/Quotes: Missing continuous data were imputed with the median and categorical data with the mode. Class imbalance was addressed using “over-sampling (SVM Smote) and under-sampling (Repeated Edited Nearest Neighbors).” Preprocessing was clearly described, including exclusion of non-preoperative variables, clinician review, grouping sparse categories, one-hot encoding, and standardization of continuous variables. The paper states models were trained in Python using Keras/Tensorflow but does not provide code release, so code availability is No. Table 1 gives training n=26,926 and validation n=6,731.  ￼  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.764
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The primary outcome was “1-year post-transplant survival,” with 1-year mortality 11% (n=3738). In the validation cohort, AUROCs were 0.649 for logistic regression, 0.691 for random forest, 0.691 for deep neural network, 0.653 for AdaBoost, and 0.764 for the final ensemble ML model. The ensemble improved predictive performance by 72.9% ± 3.8% by NRI and had better DCA across the full risk spectrum. Calibration was evaluated visually by plotting predicted versus observed risk by decile. The paper did not report accuracy, PPV, sensitivity, specificity, NPV, or F1-score numerically in the retrieved text.  ￼  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry cohort of 33,657 patients, which reduces single-center selection bias, although exclusions for prior transplant, multiorgan transplant, age <18, and incomplete 1-year survival were applied.  ￼  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The authors explicitly excluded variables that “would not be available in the preoperative setting,” which supports appropriate predictor timing for clinical use.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as “1-year post-transplant survival,” and Figure 1 classified patients as alive vs dead at one year.  ￼  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a separate validation cohort, resampling for imbalance, multiple algorithms, AUROC/NRI/DCA evaluation, and calibration assessment. However, there was no external validation cohort, and the authors acknowledge this as a limitation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies machine learning for heart-transplant survival prediction using donor-recipient preoperative variables, matching the review question closely.  ￼
+
+Tables and figures explicitly used in extraction: Table 1 for baseline cohort characteristics and training/validation sizes; Figure 1 for cohort derivation and 1-year outcome counts; Figure 2 for the ensemble training/validation scheme; Figure 3 for AUROC comparison; and Figure 4 for decision-curve analysis. The paper also references Figure S1 for feature importance and Figure S2 for calibration, but the retrieved main-text content only described those supplementary figures rather than showing them directly.  ￼  ￼

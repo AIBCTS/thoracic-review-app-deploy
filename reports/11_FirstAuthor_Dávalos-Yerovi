@@ -1,0 +1,70 @@
+First Author: Dávalos-Yerovi
+Title: Factors Influencing the Attrition Rate of a 10-Week Multimodal Rehabilitation Program in Patients After Lung Transplant: A Neural Network Analysis
+Source number: 11  ￼
+
+Very short summary: This prospective observational study used an artificial neural network to identify baseline factors linked to attrition during a 10-week multimodal rehabilitation program after lung transplantation. Five key findings were: (1) 41 first-time lung transplant recipients were included; (2) 17/41 patients (41.4%) had a high attrition rate; (3) only 23 baseline variables without missing data were entered into the ANN; (4) the strongest determinants of high attrition were low age-dependent BMI, lung-transplant indication, lower health-related quality of life, and lower handgrip strength; and (5) the cohort had a high prevalence of malnutrition (80.5%) and sarcopenia (56.1%), but these newer consensus-based syndromic definitions could not be fully tested in the ANN because of missing data constraints. Tables and figures used directly here include Table 1, Table 2, and Figures 2–5.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2022
+	•	Study Period End (Year): 2023
+	•	Section 1 Comments/Quotes: The study was conducted in “a tertiary university hospital in Barcelona (Catalonia, Spain)” and “took place between January 2022 and September 2023,” which supports Europe and single-center classification. I did not identify an explicit funding or conflict-of-interest statement in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 41
+	•	Overall Mean Age: 55.8
+	•	Female Sex (%): 46.3
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The Results state: “Of the 41 patients referred to the multimodal rehabilitation program (mean age of 55.8 [SD 9.7] years; 22 men).” This implies 19 women, or 46.3%. Table 1 reports comorbidity and clinical-history-related variables including Charlson Comorbidity Index, transplant indication, malnutrition, sarcopenia, muscle strength, exercise capacity, and quality of life. Race/ethnicity was not reported.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Prospective Cohort
+	•	AI Model Architecture: ANN/MLP/NN
+	•	Algorithm Name: Artificial neural network (ANN) using the nnet function
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: Yes (e.g., Garson’s algorithm)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The paper explicitly states this was a “prospective observational study” and that “an ANN and regression analysis were used.” The ANN was implemented in R using the nnet package, with “30 neurons, a decay of 0.001, ‘tanh’ activator, and linear output relationships,” so architecture details were reported. Garson’s algorithm was used to quantify variable contribution and select variables with relative importance >0.5 for subsequent regression, which supports both explainability and automated feature selection. No explicit train/validation/test split or cross-validation was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The primary analysis used “23 common baseline variables that were complete (with no missing data points) for all participants,” which is best classified as complete case analysis. Data preprocessing was described: variables were defined by type, attrition classes were encoded as 1/2/3, numeric and ordinal variables were rescaled between −1 and +1, and categorical variables were dummy coded. I found no mention of class-imbalance handling and no released code repository; only function names and package details were provided. Because a separate training/test split was not reported, training and test sample sizes are NR.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was attrition rate in the rehabilitation program, classified as low (<5% missing data), medium (5–10%), or high (>10%), so the closest allowed category is Other. The article reports significance of factors associated with attrition rather than conventional predictive metrics such as AUC or accuracy. Table 2 shows significant variables: low age-dependent BMI (p = 7.08 × 10−5), end-stage respiratory disease requiring LT (p = 0.000111), EQ-5D VAS (p = 0.0009078), low handgrip strength by Mediterranean reference values (p = 0.0230351), and low handgrip strength by EWGSOP2 cutoffs (p = 0.0455796). No calibration or DCA was reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The study included only 41 patients from a single center, all referred to one rehabilitation program, which limits representativeness and creates substantial selection risk.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: Baseline predictors were clinically relevant, but only the 23 variables with no missing data were analyzed in the ANN, so potentially important factors were excluded.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Attrition was explicitly defined using the percentage of missing data per participant and then categorized into low, medium, or high attrition.  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The ANN was trained on a very small sample without a reported holdout validation set, and the authors note that including all variables in regression led to overfitting and/or multicollinearity.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly concerns AI use in lung-transplant recipient care, specifically rehabilitation-program attrition after transplantation.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for baseline cohort characteristics, malnutrition, and sarcopenia prevalence; Table 2 for the regression/ANOVA p-values of variables associated with attrition; Figure 2 for attrition distribution by low handgrip and low BMI categories; Figure 3 for attrition distribution by transplant indication; Figure 4 for handgrip strength/BMI relationships; and Figure 5 for quality-of-life relationships. I did not report any prediction metric that was not explicitly shown in the uploaded article.

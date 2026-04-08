@@ -1,0 +1,70 @@
+First Author: Glass
+Title: A machine learning algorithm improves the diagnostic accuracy of the histologic component of antibody mediated rejection (AMR-H) in cardiac transplant endomyocardial biopsies
+Source number: 15
+
+Very short summary: This retrospective pathology study developed a deep-learning image-classification model to diagnose the histologic component of antibody-mediated rejection (pAMR-H) in cardiac transplant biopsies. Five key findings were: (1) 4,212 annotated image regions were generated from 300 H&E slides; (2) the model used a ResNet50 convolutional neural network with transfer learning; (3) overall validation accuracy across four classes was 98%; (4) pAMR-H was distinguished from normal myocardium, healing injury, and acute cellular rejection with very high accuracy and AUCs around 0.992–0.995; and (5) human pathologist agreement was substantially lower, especially when pAMR-H co-occurred with healing injury or mixed rejection. Figures 1–3 and the methods/results text were used directly for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2018
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The biopsies were “previously as pAMR2 as part of routine standard of clinical care between 2018 and 2021 from Duke University Medical Center Department of Pathology,” so the data source was single-center in the USA. The paper includes a “Declaration of competing interest” stating “None.” I did not identify a funding statement in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 300
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: No
+	•	Section 2 Comments/Quotes: The study used “300 hematoxylin and eosin slides” from cardiac transplant endomyocardial biopsies. It did not report recipient mean age, sex distribution, race/ethnicity, or baseline comorbidity data in the retrieved text. The unit of model development was annotated biopsy regions rather than a clinical cohort table.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: ResNet50 convolutional neural network with transfer learning
+	•	Input Variables (Data Modality): Pathology
+	•	Comparator / Standard of Care: Human expert
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The study used annotated H&E pathology image patches and a “convolutional neural network approach utilizing transfer learning.” The ResNet50 model was initialized with pretrained weights and fine-tuned. The model was compared against blinded human pathologist review in a separate curated set of slides. Regions of interest were manually annotated by experts, which functions as manual/clinical feature selection at the region level. Training settings including Adam optimizer, learning rate 0.0001, cross-entropy loss, and stopping on validation-loss plateau were reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 2948
+	•	Test Size (N): 842
+	•	Section 4 Comments/Quotes: The dataset contained 4,212 annotations split 70%/10%/20% into training, validation, and testing. That corresponds to approximately 2,948 training annotations and 842 test annotations. The four classes were balanced at 1,053 regions each, so explicit class-imbalance correction was not reported and was likely unnecessary. Preprocessing was described through de-identification, whole-slide scanning at 40X, annotation, extraction of non-overlapping 224×224 windows, and train/validation/test splitting. Code availability was not reported. Missing-data handling was not relevant to image patches and was not described.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Acute Rejection
+	•	Model AUC / C-Statistic: 0.995
+	•	Model Accuracy (%): 98
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The task was histologic diagnosis of pAMR-H in cardiac transplant biopsies. The closest category in the allowed list is Acute Rejection. The algorithm achieved “98% overall validation accuracy.” Figure 3 shows multiclass AUROC 0.982 and binary AUCs of 0.995 for pAMR-H vs normal endomyocardium, 0.992 for pAMR-H vs healing injury, and 0.992 for pAMR-H vs ACR. The paper also reports pAMR-H classification accuracies of 99.5%, 99.2%, and 99.2% against those three categories, respectively. PPV, sensitivity, specificity, NPV, F1-score, calibration, and DCA were not reported. I used the highest explicitly reported AUC value for the single AUC field.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The training material came from previously diagnosed Duke cases from 2018–2021, so this was a retrospective single-center pathology dataset and not a broad clinical recipient sample.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized digital H&E pathology image patches scanned at 40X, with expert consensus used to define ground truth and expert annotation of regions of interest.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Ground truth for pAMR-H was based on expert consensus plus cases confirmed as pAMR2 with immunologic evidence such as “>50% positive C4d immunofluorescence and/or >10% CD68 positive intravascular macrophages.”
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include balanced classes, predefined train/validation/test splitting, transfer learning, ROC/AUC reporting, and human-reader comparison. Limitations acknowledged by the authors include patch-level rather than whole-slide development and single-institution staining/scanning, with ongoing external verification still needed.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly applies AI to heart-transplant pathology and rejection diagnosis, which is clearly within thoracic organ transplantation AI.
+
+Tables and figures explicitly used in extraction:
+Figure 1 for representative annotated biopsy regions and pathology classes; Figure 2 for the algorithm-development workflow; and Figure 3 for multiclass confusion/AUROC and binary ROC/AUC curves. No conventional baseline demographic table was present in the retrieved text, so unreported patient-level variables were left as NR rather than inferred.

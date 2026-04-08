@@ -14,6 +14,9 @@ st.set_page_config(layout="wide", page_title="Artificial Intelligence in Thoraci
 BASE_DIR = Path(__file__).parent.resolve()
 DATA_DIR = BASE_DIR / "data"
 BIB_FILE = DATA_DIR / "library.bib"
+REPORTS_DIR = BASE_DIR / "reports"
+# Exported Google Sheet CSV (read-only fallback when GSheets is unavailable)
+SHEET_CSV_FILE = BASE_DIR / "AI_Thoracic_Review_Database - Sheet1.csv"
 
 # Define a writable results directory
 def get_writable_csv_path():
@@ -54,6 +57,15 @@ print(f"DATA_DIR: {DATA_DIR} (exists: {DATA_DIR.exists()})")
 print(f"CSV_FILE Path: {CSV_FILE}")
 
 # --- Helper Functions ---
+import re
+
+def get_numeric_prefix(filename):
+    """Extracts and returns the leading integer prefix from a filename like '07_...' or '7_...'"""
+    m = re.match(r'^(\d+)[_\s]', filename)
+    if m:
+        return int(m.group(1))
+    return None
+
 @st.cache_data
 def load_bibtex():
     """Loads and parses the bibtex file once."""
@@ -69,6 +81,8 @@ def get_bibtex_metadata(pdf_filename, bib_database):
         return pdf_filename
         
     filename_clean = pdf_filename.replace(".pdf", "")
+    # Strip leading numeric prefix (e.g. "07_" or "7_") before matching
+    filename_clean = re.sub(r'^\d+[_\s]', '', filename_clean).strip()
     parts = filename_clean.split(" - ")
     
     # Simple heuristic: try to match the title or author from the filename
@@ -94,6 +108,200 @@ def get_bibtex_metadata(pdf_filename, bib_database):
             return f"{title}\n{authors}\n{journal} / {year}"
             
     return pdf_filename
+
+@st.cache_data
+def load_report_files():
+    """Loads all report files indexed by their numeric prefix."""
+    report_map = {}  # int prefix -> Path
+    if not REPORTS_DIR.exists():
+        return report_map
+    for f in REPORTS_DIR.iterdir():
+        if f.is_file() and not f.name.startswith('.'):
+            prefix = get_numeric_prefix(f.name)
+            if prefix is not None:
+                report_map[prefix] = f
+    return report_map
+
+def find_matching_report(pdf_filename):
+    """Returns the Path of the report file matching a given PDF filename, or None."""
+    prefix = get_numeric_prefix(pdf_filename)
+    if prefix is None:
+        return None
+    report_map = load_report_files()
+    return report_map.get(prefix)
+
+def parse_report(report_path):
+    """Parses a structured report text file into a dict of field->value."""
+    field_map = {}
+    if report_path is None or not report_path.exists():
+        return field_map
+
+    # Regex to capture bullet-point fields: "\t• Key: Value"
+    bullet_re = re.compile(r'^\s*[•\-]\s*(.+?):\s*(.+)$')
+    # Regex for quoted/reasoning fields in Section 6: "Risk: Low Risk | Quote/Reasoning: ..."
+    bias_field_re = re.compile(
+        r'^\s*[•\-]\s*(.+?):\s*(Low Risk|High Risk|Unclear|Not Reported|Low Concern|High Concern)'
+        r'(?:\s*\|\s*(?:Quote/Reasoning|Reasoning|Quote)?:?\s*(.*))?$',
+        re.IGNORECASE
+    )
+
+    with open(report_path, 'r', encoding='utf-8', errors='replace') as fh:
+        lines = fh.readlines()
+
+    for line in lines:
+        # Try bias/applicability lines first (Section 6 format)
+        m = bias_field_re.match(line)
+        if m:
+            key_raw = m.group(1).strip()
+            risk_val = m.group(2).strip()
+            quote_val = (m.group(3) or "").strip()
+            # Sanitize unicode symbols from quotes
+            quote_val = quote_val.replace('\ufffc', '').strip()
+            field_map[key_raw] = risk_val
+            if quote_val:
+                field_map[key_raw + "__quote"] = quote_val
+            continue
+
+        # Try normal bullet fields
+        m2 = bullet_re.match(line)
+        if m2:
+            key_raw = m2.group(1).strip()
+            val = m2.group(2).strip()
+            # Sanitize unicode symbols (e.g. object-replacement chars from PDF copy-paste)
+            val = val.replace('\ufffc', '').strip()
+            field_map[key_raw] = val
+
+    return field_map
+
+# Mapping from report field keys -> app form field keys
+_FIELD_ALIASES = {
+    # Section 1
+    "Country of Data Origin":       "country_origin",
+    "Organ Focus":                   "organ_focus",
+    "Funding Source":                "funding_source",
+    "Dataset Source":                "dataset_source",
+    "Dataset Name":                  "DatasetName",
+    "Conflict of Interest (COI) Declared": "coi_declared",
+    "Study Period Start (Year)":     "study_start_year",
+    "Study Period End (Year)":       "study_end_year",
+    "Section 1 Comments/Quotes":     "section1_comments",
+    # Section 2
+    "Target Population":             "target_population",
+    "Total Sample Size (N)":         "total_sample_size",
+    "Overall Mean Age":              "mean_age",
+    "Female Sex (%)": "female_sex_pct",
+    "Race/Ethnicity Reported":       "race_ethnicity_reported",
+    "Comorbidities / Clinical History Included": "comorbidities_included",
+    "Section 2 Comments/Quotes":     "section2_comments",
+    # Section 3
+    "Primary ML Component":          "primary_ml_component",
+    "Study Design":                  "study_design",
+    "AI Model Architecture":         "ai_architecture",
+    "Algorithm Name":                "algorithm_name",
+    "Input Variables (Data Modality)": "input_modalities",
+    "Comparator / Standard of Care": "comparator",
+    "Validation Method":             "validation_method",
+    "Explainability / Interpretability Used": "explainability_used",
+    "Feature Selection Method":      "feature_selection",
+    "Hyperparameter Tuning Reported": "hyperparameter_tuning",
+    "Section 3 Comments/Quotes":     "section3_comments",
+    # Section 4
+    "Missing Data Handling":         "missing_data_handling",
+    "Class Imbalance Addressed":     "class_imbalance",
+    "Code Availability":             "code_availability",
+    "Data Preprocessing / Normalization Described": "preprocessing_described",
+    "Training Size (N)":             "training_size",
+    "Test Size (N)":                 "test_size",
+    "Section 4 Comments/Quotes":     "section4_comments",
+    # Section 5
+    "Target Clinical Outcome":       "target_outcome",
+    "Model AUC / C-Statistic":       "model_auc",
+    "Model Accuracy (%)": "model_accuracy",
+    "PPV / Precision (%)":           "model_ppv",
+    "Sensitivity / Recall (%)": "model_sensitivity",
+    "Specificity (%)":               "model_specificity",
+    "NPV (%)":                       "model_npv",
+    "F1-Score":                      "model_f1",
+    "Calibration Reported":          "calibration_reported",
+    "Decision Curve Analysis (DCA) Reported": "dca_reported",
+    "Section 5 Comments/Quotes":     "section5_comments",
+    # Section 6 bias fields
+    "Participants (Selection Bias)": "qa_participants_bias",
+    "Participants (Selection Bias)__quote": "qa_participants_quotes",
+    "Predictors (Input Variable Bias)": "qa_predictors_bias",
+    "Predictors (Input Variable Bias)__quote": "qa_predictors_quotes",
+    "Outcome (Definition Bias)":     "qa_outcome_bias",
+    "Outcome (Definition Bias)__quote": "qa_outcome_quotes",
+    "Analysis (Modeling Bias)":      "qa_analysis_bias",
+    "Analysis (Modeling Bias)__quote": "qa_analysis_quotes",
+    "Applicability to Review Question": "qa_applicability",
+    "Applicability to Review Question__quote": "qa_applicability_quotes",
+}
+
+# Mapping from report values -> app option labels (for partial/abbreviated strings)
+_VALUE_NORMALISE = {
+    # AI Architecture
+    "CNN": "Convolutional Neural Network (CNN)",
+    "RNN": "Recurrent Neural Network (RNN/LSTM)",
+    "LSTM": "Recurrent Neural Network (RNN/LSTM)",
+    "ANN": "Artificial Neural Networks (ANN, MLP, NN)",
+    "MLP": "Artificial Neural Networks (ANN, MLP, NN)",
+    "Random Forest": "Random Forest",
+    "Gradient Boosting": "Gradient Boosting (XGBoost/LightGBM)",
+    "XGBoost": "Gradient Boosting (XGBoost/LightGBM)",
+    "SVM": "Support Vector Machine (SVM)",
+    "Unsupervised Learning (Clustering)": "Unsupervised Learning (Clustering)",
+    "Unsupervised": "Unsupervised Learning (Clustering)",
+    "Transformer": "Transformer/LLM",
+    # Input modalities
+    "Waveforms (ECG)": "Waveforms/Signals (ECG)",
+    "Imaging": "Imaging (CT/CXR/Echo)",
+    "Tabular": "Tabular (EMR/Clinical data)",
+    "Tabular (EMR/Clinical data)": "Tabular (EMR/Clinical data)",
+    "Text": "Text / Clinical Notes (NLP)",
+    "NLP": "Text / Clinical Notes (NLP)",
+    # Comparator
+    "None": "None",
+    "Other": "Other",
+    # Validation
+    "Internal Split": "Internal Split (Train/Test)",
+    "Cross-Validation": "Cross-Validation (k-fold)",
+    "External Validation (Temporal)": "External Validation (Temporal)",
+    "External Validation (Geographic/Different Hospital)": "External Validation (Geographic/Different Hospital)",
+    # Missing data
+    "Complete Case Analysis": "Complete Case Analysis (Excluded)",
+    "Simple Imputation": "Simple Imputation (Mean/Median)",
+    "Multiple Imputation": "Multiple Imputation",
+    # Class imbalance
+    "Not Applicable": "Not Applicable/Not Reported",
+    "Not Applicable/Not Reported": "Not Applicable/Not Reported",
+    # Outcomes
+    "Acute Rejection": "Acute Rejection",
+    "Donor acceptance": "Donor acceptance for transplantation",
+    "Donor acceptance for transplantation": "Donor acceptance for transplantation",
+}
+
+def normalise_report_value(val):
+    """Map abbreviated report values to full app option strings."""
+    if not val or val in ("NR", "Not Reported"):
+        return val
+    # Direct lookup
+    if val in _VALUE_NORMALISE:
+        return _VALUE_NORMALISE[val]
+    # Partial prefix match
+    for k, v in _VALUE_NORMALISE.items():
+        if val.lower().startswith(k.lower()):
+            return v
+    return val
+
+def report_to_review_dict(report_path):
+    """Parse a report file and return a review data dict compatible with get_val/get_index."""
+    raw = parse_report(report_path)
+    result = {}
+    for report_key, app_key in _FIELD_ALIASES.items():
+        if report_key in raw:
+            result[app_key] = normalise_report_value(raw[report_key])
+    return result
 
 def display_pdf(file_path):
     """Displays a PDF within a Streamlit app using an iframe."""
@@ -125,12 +333,12 @@ def get_secret_val(key, subkey=None):
     if env_key in os.environ:
         return os.environ[env_key]
     
-    # 3. Try Mounted File (e.g. at /app/secrets/secrets.toml or /home/secrets/secrets.toml)
-    # This is for SciLifeLab Serve persistent storage
+    # 3. Try Mounted File — local project secrets first, then SciLifeLab Serve paths
     mount_paths = [
-        Path("/app/secrets/secrets.toml"), 
+        BASE_DIR / "secrets" / "secrets.toml",   # Local dev: project/secrets/secrets.toml
+        Path("/app/secrets/secrets.toml"),
         Path("/srv/secrets/secrets.toml"),
-        Path("/home/secrets/secrets.toml")
+        Path("/home/secrets/secrets.toml"),
     ]
     for mount_path in mount_paths:
         if mount_path.exists():
@@ -191,6 +399,36 @@ def get_worksheet():
         print(f"Get Worksheet Error: {e}")
     return None
 
+def _strip_prefix(name):
+    """Strip leading numeric prefix (e.g. '01_' or '7_') from a study_id or filename."""
+    m = re.match(r'^\d+[_\s](.*)', name)
+    return m.group(1).strip() if m else name
+
+def _study_ids_match(id_a, id_b):
+    """Compare two study_ids ignoring numeric prefix differences."""
+    # Exact match first
+    if id_a == id_b:
+        return True
+    # Try stripping prefix from both sides
+    return _strip_prefix(id_a) == _strip_prefix(id_b)
+
+def _find_in_df(df, study_id, reviewer):
+    """Find a review row in a DataFrame using prefix-aware study_id matching."""
+    if df.empty or 'study_id' not in df.columns or 'reviewer' not in df.columns:
+        return None
+    study_norm = _strip_prefix(str(study_id))
+    for _, row in df[df['reviewer'] == reviewer].iterrows():
+        if _strip_prefix(str(row['study_id'])) == study_norm:
+            return row.where(pd.notna(row), None).to_dict()
+    return None
+
+def _reviewed_ids_from_df(df, reviewer_name):
+    """Return a set of strip-prefix-normalised study_ids reviewed by reviewer_name."""
+    if df.empty or 'reviewer' not in df.columns or 'study_id' not in df.columns:
+        return set()
+    reviewed = df[df['reviewer'] == reviewer_name]
+    return set(_strip_prefix(str(sid)) for sid in reviewed['study_id'].tolist())
+
 def load_pdf_list(reviewer_name=None):
     """Returns a list of PDF files, marking those already reviewed by the user."""
     if not DATA_DIR.exists():
@@ -199,31 +437,30 @@ def load_pdf_list(reviewer_name=None):
         
     pdfs = [f.name for f in DATA_DIR.glob("*.pdf")]
     
-    # Check which ones are already reviewed
-    reviewed_set = set()
+    # Build set of normalised study_ids already reviewed
+    reviewed_norm_set = set()
     if reviewer_name:
         worksheet = get_worksheet()
         if worksheet:
-            # GS fallback
             try:
-                # Get all records to check existing
                 records = worksheet.get_all_records()
                 for req in records:
                     if str(req.get('reviewer', '')) == str(reviewer_name):
-                        reviewed_set.add(str(req.get('study_id', '')))
+                        reviewed_norm_set.add(_strip_prefix(str(req.get('study_id', ''))))
             except Exception:
                 pass
-        elif CSV_FILE.exists():
-            df = read_csv_safe(CSV_FILE)
-            if not df.empty and 'reviewer' in df.columns and 'study_id' in df.columns:
-                reviewed_df = df[df['reviewer'] == reviewer_name]
-                reviewed_set = set(reviewed_df['study_id'].tolist())
+        else:
+            # Try writable CSV first, then the exported Sheet CSV
+            for csv_path in [CSV_FILE, SHEET_CSV_FILE]:
+                df = read_csv_safe(csv_path)
+                norm_ids = _reviewed_ids_from_df(df, reviewer_name)
+                reviewed_norm_set.update(norm_ids)
             
     # Return a list of tuples (actual_filename, display_name)
     display_list = []
     for pdf in sorted(pdfs):
         study_id = pdf.replace(".pdf", "")
-        if study_id in reviewed_set:
+        if _strip_prefix(study_id) in reviewed_norm_set:
             display_list.append((pdf, f"✅ {pdf}"))
         else:
             display_list.append((pdf, pdf))
@@ -231,28 +468,29 @@ def load_pdf_list(reviewer_name=None):
     return display_list
 
 def get_existing_review(study_id, reviewer):
-    """Returns a dictionary of existing review data if it exists."""
+    """Returns a dictionary of existing review data if it exists.
+    
+    Matches by stripping numeric prefixes so '1_Adedinsewo...' matches
+    'Adedinsewo...' already saved in the Google Sheet or CSV.
+    """
     worksheet = get_worksheet()
     if worksheet:
         try:
             records = worksheet.get_all_records()
+            study_norm = _strip_prefix(str(study_id))
             for record in records:
-                if str(record.get('study_id', '')) == str(study_id) and str(record.get('reviewer', '')) == str(reviewer):
-                    # Convert empty strings to None to match Pandas behavior
+                if _strip_prefix(str(record.get('study_id', ''))) == study_norm and \
+                   str(record.get('reviewer', '')) == str(reviewer):
                     return {k: (v if v != "" else None) for k, v in record.items()}
         except Exception:
             pass
-            
-    # CSV Fallback
-    if CSV_FILE.exists():
-        df = read_csv_safe(CSV_FILE)
-        if not df.empty and 'study_id' in df.columns and 'reviewer' in df.columns:
-            mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
-            if mask.any():
-                # Convert the matched row to a dictionary, replacing NaN with None
-                row = df[mask].iloc[0]
-                record = row.where(pd.notna(row), None).to_dict()
-                return record
+
+    # Try writable CSV first, then the exported Sheet CSV
+    for csv_path in [CSV_FILE, SHEET_CSV_FILE]:
+        df = read_csv_safe(csv_path)
+        record = _find_in_df(df, study_id, reviewer)
+        if record is not None:
+            return record
             
     return None
 
@@ -403,14 +641,25 @@ if reviewer_name and selected_pdf:
         
     study_id = selected_pdf.replace(".pdf", "")
     existing_data = get_existing_review(study_id, reviewer_name)
+
+    # Report prefill: only load report data if a button is clicked (Johan Nilsson only)
+    report_prefill_key = f"use_report_{study_id}"
+    report_path = find_matching_report(selected_pdf)
+    # Use report data only when button was pressed and no existing saved data
+    report_data = st.session_state.get(report_prefill_key, {})
+    if existing_data:
+        report_data = {}  # Never use report data when saved review exists
+
+    # Merge: saved review takes priority, then report (if button was clicked), then empty
+    effective_data = existing_data or report_data or None
     
     # Helper functions to get safe defaults
     def get_val(key, default):
-        if existing_data and key in existing_data and existing_data[key] is not None:
-            if existing_data[key] == "NR":
+        if effective_data and key in effective_data and effective_data[key] is not None:
+            if effective_data[key] == "NR":
                 if isinstance(default, (int, float)):
                     return default # Keep default number if NR was saved
-            return existing_data[key]
+            return effective_data[key]
         return default
         
     def get_index(key, options):
@@ -472,6 +721,17 @@ if reviewer_name and selected_pdf:
         st.write(f"**Current Article:** `{selected_pdf}`")
         if existing_data:
             st.info("ℹ️ You have previously reviewed this article. Form is pre-filled with your saved data.")
+        elif report_data:
+            st.success(f"📄 Pre-filled from report: `{report_path.name if report_path else 'report'}`")
+        elif report_path and reviewer_name.strip().lower() == "johan nilsson":
+            # Show prefill button only for Johan Nilsson when form is empty
+            if st.button("📄 Pre-fill form from report file", key=f"btn_prefill_{study_id}"):
+                parsed = report_to_review_dict(report_path)
+                if parsed:
+                    st.session_state[report_prefill_key] = parsed
+                    st.rerun()
+                else:
+                    st.warning("Could not parse report file.")
         
         with st.container(height=1200, border=False):
             with st.form(key=f"extraction_form_{study_id}"):

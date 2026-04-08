@@ -1,0 +1,69 @@
+First Author: Brahmbhatt
+Title: The lung allocation score and other available models lack predictive accuracy for post-lung transplant survival
+Source number: 6  ￼
+
+Very short summary: This retrospective UNOS study evaluated whether the LAS and several alternative models could accurately predict post-lung-transplant mortality. Five key findings were: (1) 19,900 adults undergoing first lung transplant between 2005 and 2017 were studied; (2) all tested models had poor discrimination for 1-year death or re-transplant, with AUCs only 0.55 to 0.62; (3) all models had reasonable negative predictive value but poor positive predictive value, with all PPVs below 0.25; (4) the LAS post-transplant survival measure consistently overestimated mortality risk, especially in higher deciles and at 3-, 6-, 9-, and 12-month time points; and (5) machine-learning models, disease-specific models, donor-variable models, and 3-year models did not improve prediction. Tables and figures used directly here include Table 1, Table 2, Table 3, Figure 1, Figure 2, Figure 3, Figure 4, and Figure 5.  ￼  ￼  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2005
+	•	Study Period End (Year): 2017
+	•	Section 1 Comments/Quotes: The study used the “United Network for Organ Sharing database (2005-2017)” and included adults receiving their first lung transplant between “May 1, 2005, and May 1, 2017.” The registry is a U.S. national dataset. I did not identify an explicit funding statement or COI disclosure in the retrieved text, so both are marked Not Reported.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 19900
+	•	Overall Mean Age: 55.3
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort included “19,900 adults who received their first LTx between May 1, 2005, and May 1, 2017.” Table 1 reports age means of 55.1 and 56.5 years in the two 1-year outcome groups; the weighted overall mean is about 55.3 years. Female sex is reported separately by outcome group (41% vs 37%) rather than as one overall cohort percentage in the retrieved text, so I marked the single overall female percentage as NR rather than infer it. Table 1 also reports race and multiple clinical variables, including diabetes, dialysis, steroid use, mechanical ventilation, BMI, GFR, bilirubin, creatinine, oxygen requirement, pulmonary arterial pressure, and diagnosis.  ￼  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: LASSO and Random Forests; compared with LAS, Chan et al. model, and a clinician model
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: This was a retrospective cohort study comparing five models: LAS, Chan et al., a clinician logistic model with 27 a priori covariates, LASSO, and Random Forests. Because the paper centers on evaluating machine-learning approaches alongside existing risk scores, the primary ML component is Yes. The machine-learning architectures explicitly reported were LASSO and Random Forests. Inputs were pre-transplant recipient covariates from UNOS, with donor covariates added in secondary analyses. The main comparators were LAS and Chan’s risk score, both best categorized here as linear risk-score comparators. The validation approach used an 85% development set and 15% validation set. No SHAP/LIME-type interpretability or hyperparameter-tuning details were reported in the retrieved text.  ￼  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 16915
+	•	Test Size (N): 2985
+	•	Section 4 Comments/Quotes: The paper states that “for binary and categorical variables, patients with missing measurements were grouped into their own category” and “missing measurements for continuous variables were estimated using mean imputation,” so this is best classified as simple imputation. I found no mention of resampling, weighting, or other imbalance handling. Preprocessing/model-building details were described, including a priori variable selection for the clinician model and alternative ML approaches. Code availability was not reported. The development/validation split was 85%/15%, which corresponds to approximately 16,915 training and 2,985 validation patients from 19,900 total.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The modeled outcome was “death or re-transplant within the indicated timeframe,” primarily at 1 year and secondarily at 3 years, so the closest allowed label is Other. Figure 1 and the Results state that all 1-year models had low AUCs ranging from 0.55 to 0.62. The paper also states that all models had NPV 0.87-0.90 and PPV <0.25, but the retrieved text does not provide model-specific numeric PPV/NPV/sensitivity/specificity values for a single chosen model, so I leave those fields NR rather than guess. Calibration was clearly reported through calibration slopes and Figures 2, 4, and 5. DCA was not reported. The LAS post-transplant survival measure had calibration slope 0.38 (95% CI 0.03-0.73), indicating overestimation of mortality risk.  ￼  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national UNOS registry cohort including 19,900 adult first lung transplant recipients, reducing single-center selection bias, although patients lost to follow-up were excluded.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The models were based on pre-transplant covariates from UNOS, and donor covariates were tested separately in secondary analyses, which is appropriate for allocation-related prediction.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly used “death or re-transplant within the indicated timeframe” as the modeled outcome, which is clearly defined.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a held-out validation set, calibration analysis, and multiple comparative models; concerns include mean imputation, exclusion of patients lost to follow-up, limited details on tuning, and persistently poor discrimination across all models.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies prediction modeling, including machine learning, for lung transplant post-transplant survival using national recipient data.  ￼
+
+Tables and figures explicitly used in extraction: Table 1 for cohort characteristics and event counts; Table 2 for clinician-model coefficients; Table 3 for variables selected by LASSO; Figure 1 for 1-year ROC performance and model comparison; Figure 2 for calibration of LASSO, Random Forests, and clinician models; Figure 3 for Random Forest variable importance; Figure 4 for calibration of LAS post-transplant survival; and Figure 5 for calibration of LAS at 3, 6, 9, and 12 months. Some exact model-specific sensitivity/specificity/PPV/NPV values likely appeared in Figure 1’s embedded table, but those numbers were not fully visible in the retrieved text, so I did not invent them.

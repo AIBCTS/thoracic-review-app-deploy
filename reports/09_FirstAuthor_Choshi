@@ -1,0 +1,70 @@
+First Author: Choshi
+Title: Long short-term memory algorithm for personalized tacrolimus dosing: A simple and effective time series forecasting approach post-lung transplantation
+Source number: 9  ￼
+
+Very short summary: This single-center retrospective study developed an LSTM-based time-series tool to predict tacrolimus trough levels (TTLs) after lung transplantation. Five key findings were: (1) the development dataset included 117 lung transplant recipients with 87,112 clinical data points and 3,327 measured TTL time points; (2) SHAP showed that prior tacrolimus dose and prior TTL were by far the most influential predictors of the next TTL; (3) the simplest LSTM model using only tacrolimus-related factors—previous TTL, dose, and route—performed best; (4) the final model predicted TTLs within 30% of the true value at 88.5% of time points and had test-set R² of 0.67; and (5) in 6 subsequent simulation cases, the tool rapidly approached actual TTLs and identified situations where dose increase or decrease would likely have improved control. Figures 1-7 and Table 1 were directly used for extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2011
+	•	Study Period End (Year): 2023
+	•	Section 1 Comments/Quotes: The study was conducted at “a single center, Okayama University Hospital” in Japan. Figure 1 shows lung transplant recipients from “Apr. 2011 - May 2023,” with the study cohort for model development spanning “Apr. 2011 - Mar. 2022” and the simulation cohort “Apr. 2022 - May. 2023.” I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 117
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The model-development cohort included “117 cases,” with an additional 6 later cases reserved for simulation testing. The retrieved text does not report overall age, sex, or race/ethnicity. Clinical and perioperative history variables were included among the 36 collected factors, including age, sex, height, weight, procedure, operation time, cardiopulmonary bypass, ECMO/CHDF period, POD, azole antifungals, and multiple laboratory values.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: RNN/LSTM
+	•	Algorithm Name: Multivariate 3-step long short-term memory (LSTM) model
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper states that “a multivariate long short-term memory algorithm was applied to forecast subsequent TTLs,” and Figure 2 shows a “multivariate 3-step” LSTM. The input data were tabular clinical variables from routine care. SHAP was used to identify influential features and guide input selection. Within the 117-case study cohort, 80%, 10%, and 10% were randomly assigned to training, validation, and test datasets. The final model did not use an explicit comparator model; rather, different input combinations were compared by MSE. Explicit hyperparameter tuning was not reported in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 93
+	•	Test Size (N): 12
+	•	Section 4 Comments/Quotes: The first 117 cases were split into training dataset n=93, validation dataset n=12, and test dataset n=12, as shown in Figure 1. Data preprocessing was described in detail: intravenous dose was multiplied by 6, all clinical data were standardized using Z-score normalization, and missing prior time points for the 3-step LSTM were filled with cohort mean values plus an imputation flag. Class imbalance is not applicable because this is a regression/forecasting task rather than class prediction. Code availability was not reported.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): 88.5
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target was next-step tacrolimus trough level forecasting, so the closest category is Other. The final model predicted TTLs “within 30% of the actual values for 88.5% of time points,” and within 20% for 74.3%. Figure 5a showed a positive predicted-vs-actual relationship, with test-set R² = 0.67. Figure 5b showed better accuracy later after transplant, and Figure 5c showed similar performance for intravenous and oral administration routes. Standard classification metrics such as AUC, PPV, sensitivity, specificity, NPV, F1-score, calibration, and DCA were not reported because this was a forecasting/regression-style model.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center study with 117 development cases and 6 later simulation cases, after exclusions for short administration periods, infants <10 kg, and an outlier case.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The final model intentionally used only routine tacrolimus-related time-series factors—dose, route, and previous TTL—which are objective and readily available in practice.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The predicted outcome was clearly defined as the subsequent measured tacrolimus trough level, obtained in routine monitoring using a specified assay method.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include explicit train/validation/test splitting, SHAP-guided feature selection, and separate simulation cases, but the study was small, single-center, and lacked external multicenter validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This paper directly applies AI to a clinically important management problem after lung transplantation, namely tacrolimus dose-to-trough prediction.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort derivation and train/validation/test sizes; Table 1 for the 36 collected clinical factors; Figure 2 for the multivariate 3-step LSTM structure; Figure 3 for the model-development workflow; Figure 4 for SHAP feature importance and summary plots; Figure 5 for predicted-vs-actual relationship and stratified accuracies; Figure 6 for representative time-series prediction examples; and Figure 7 for the 6-case simulation validation. I did not report any value not explicitly present in the uploaded article.  ￼

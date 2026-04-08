@@ -1,0 +1,69 @@
+First Author: Chang
+Title: Patterns of Left Ventricular Regional Wall Motion Abnormalities After Brain Death and Their Clinical Significance
+Source number: 7  ￼
+
+Very short summary: This prospective multicenter Donor Heart Study used unsupervised machine learning to classify regional wall motion abnormality (RWMA) patterns in potential heart donors after brain death. Five key findings were: (1) among 913 analyzed initial echocardiograms with RWMA, 4 phenotypes were identified: focal basal septal (FBS), basal and midventricular, apical, and global hypokinesis; (2) FBS was the most common phenotype (55%); (3) the phenotypes differed in troponin, NT-proBNP, and initial LVEF, with FBS showing the lowest biomarkers and highest LVEF; (4) all phenotypes improved on follow-up echocardiography, with global hypokinesis showing the largest LVEF improvement; and (5) FBS had the highest donor-heart acceptance rate for transplantation, but recipient survival after transplant did not differ significantly by donor RWMA phenotype. Figures 1-3 and Tables 1-2 were directly used for this extraction, along with the article’s funding/disclosure section.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: Multi-center
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): NR
+	•	Study Period End (Year): NR
+	•	Section 1 Comments/Quotes: The study was the “Donor Heart Study,” coordinated at Stanford and “conducted at 8 organ procurement organizations across the United States,” so the data origin was U.S. multicenter rather than a registry. Funding was from the “National Institutes of Health (NIH)/National Heart, Lung, and Blood Institute (R01 HL125303),” and the authors stated that they had “no relationships relevant to the contents of this paper to disclose.” Specific calendar start and end years for donor enrollment were not reported in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Donors
+	•	Total Sample Size (N): 913
+	•	Overall Mean Age: 34.3
+	•	Female Sex (%): 42.6
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Although the Donor Heart Study enrolled 4,333 potential heart donors, “the final analytical cohort included 913 initial TTEs.” Table 1 reports mean age 34.3 years and female sex 42.6% for the analytical cohort, and also reports race/ethnicity plus medical-history variables including hypertension, diabetes mellitus, tobacco use, Public Health Service risk status, and cause of death.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Prospective Cohort
+	•	AI Model Architecture: Unsupervised Learning (Clustering)
+	•	Algorithm Name: k-means clustering
+	•	Input Variables (Data Modality): Imaging
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper states that the Donor Heart Study was a “5-year multicenter observational prospective cohort study.” The machine-learning method was unsupervised “k-means clustering,” using all 17 segment-level wall motion scores from transthoracic echocardiography to identify RWMA phenotypes. The number of clusters was chosen using the cubic clustering criterion, but no held-out validation, SHAP/LIME-style interpretability method, or hyperparameter-tuning procedure was reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The analysis excluded donors without adequate initial TTE quality and then excluded 70 outliers after cluster analysis, which is most consistent with complete case analysis plus exclusions rather than imputation. Class imbalance handling was not relevant because this was unsupervised phenotyping rather than a binary classifier. Data preprocessing was described: only donors with RWMA on initial TTE entered clustering, 17 segment-specific WMS values were used, 8 preliminary clusters were generated and then consolidated into 4 clinically plausible phenotypes, and 70 outliers were excluded. Code availability was not reported.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Donor acceptance
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: This was not a supervised prediction model with held-out discrimination metrics. Instead, the clinically relevant outcomes associated with the RWMA phenotypes were donor-heart acceptance, changes in LVEF/WMSI on follow-up TTE, and recipient survival after transplantation. Table 1 reports donor-heart acceptance was highest in FBS (68.2%), and recipient 2-year survival among transplanted hearts was similar across phenotypes. Figure 3 shows all phenotypes improved in LVEF on second echocardiogram. Because no AUC, accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA were reported for a predictive model, those fields are NR/No.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The final analysis was restricted from 4,333 enrolled donors to 913 initial TTEs with RWMA and complete pre- and post-transplant data, and 70 outliers were additionally excluded after clustering, which may introduce selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The clustering inputs were standardized echocardiographic wall motion scores for all 17 LV segments, interpreted by a blinded expert core reviewer, which supports objective predictor assessment.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The key clinical outcomes were clearly defined, including donor-heart acceptance, serial LVEF/WMSI changes, and recipient 2-year survival, and TTE interpretation was core-lab based.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The analysis used unsupervised clustering followed by investigator consolidation into 4 clinically plausible phenotypes and exclusion of outliers, without external validation or a separate test set, which raises concern about stability and reproducibility of the phenotypes.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly involves machine learning in the cardiac transplant donor setting and evaluates clinically important transplantation outcomes, so it is relevant to a thoracic organ transplantation AI review.
+
+Tables and figures explicitly used in extraction: Figure 1 for cohort derivation and exclusions; Figure 2 for the four RWMA phenotypes; Figure 3 for serial LVEF improvement; Table 1 for donor characteristics, donor-heart acceptance, and recipient 2-year survival; and Table 2 for initial LV function by phenotype. I did not report any metric that was not explicitly shown in the retrieved article content.  ￼

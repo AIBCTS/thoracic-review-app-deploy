@@ -1,0 +1,70 @@
+First Author: Chao
+Title: Improving prognostic accuracy in lung transplantation using unique features of isolated human lung radiographs
+Source number: 8  ￼
+
+Very short summary: This study developed a computer-vision approach to analyze ex vivo lung perfusion (EVLP) radiographs and tested whether radiographic features improve donor-lung prognostication. Five key findings were: (1) CNNs were trained on 1300 longitudinal radiographs from 650 EVLP cases; (2) the best CNN validation performance for donor-lung outcome classification was 66.9% accuracy with AUROC 78.4%; (3) CNN-extracted image features significantly outperformed manually labeled radiographic features in accuracy, while AUROC was similar; (4) the top principal component of the CNN latent space strongly correlated with radiographic infiltration and consolidation; and (5) adding radiographic principal components to the existing InsighTx tabular model significantly improved outcome prediction from 73% to 78% accuracy and from 88% to 94% AUROC. Tables 1-2 and Figures 1-3 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Other
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2008
+	•	Study Period End (Year): 2022
+	•	Section 1 Comments/Quotes: The cohort came from “Clinical EVLP cases performed from 2008 to 2022 at Toronto General Hospital,” which makes this a single-center study rather than a registry. The country is not one of the prompt’s fixed options, so “Other” is the closest fit. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Organ (ex-vivo perfusion)
+	•	Total Sample Size (N): 650
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Unclear
+	•	Section 2 Comments/Quotes: The study included “n = 650 clinical EVLP cases” and “n = 1300 radiographs.” The analysis was centered on isolated donor lungs on EVLP rather than recipient cohorts or waitlist candidates. No overall age, sex, or race/ethnicity summary was reported in the retrieved text. Donor information was correlated with principal components, but the excerpt does not clearly establish a structured comorbidity/history table, so that item is best marked Unclear.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: ResNet-50 CNN; InsighTx XGBoost model
+	•	Input Variables (Data Modality): Imaging
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: Yes (SHAP)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper used CNNs including “ResNet-50, ResNeXt-50, RexNet-100, EfficientNet-B2, EfficientNet-B3, and DenseNet-121,” with the best model being CADLab-pretrained ResNet-50. The image-analysis task used EVLP radiographs, while the multimodal stage combined image PCs with physiological and biological EVLP data in an XGBoost-based “InsighTx” model. Comparator performance was reported against manually labeled radiographic scores rather than a clinical rule or human decision-maker directly. The cohort was split “temporally” 80:20, with training from 2008-2020 and validation from 2020-2022, which is best categorized as external temporal. Explainability was present via Grad-CAM and “Shapley Additive explanation values.” The extracted text does not describe explicit hyperparameter tuning.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 520
+	•	Test Size (N): 130
+	•	Section 4 Comments/Quotes: Missing-data handling was not described in the retrieved text. I found no statement about class weighting, oversampling, or imbalance correction. Data processing was described in detail, including temporal image pairing at 1 h and 3 h, pretraining/fine-tuning, latent-feature extraction, PC analysis, Grad-CAM, and multimodal fusion with tabular EVLP data. The EVLP case split was 80:20 into training “n = 520” and validation “n = 130.” Code availability is best marked “Other” because the paper states that source code and data are being worked toward and that the authors will make best efforts for access, but the data are not publicly available.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.94
+	•	Model Accuracy (%): 78
+	•	PPV / Precision (%): 73
+	•	Sensitivity / Recall (%): 79
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The modeled outcome was a 3-class donor-lung endpoint: “(1) recipient time to extubation of <72 h, (2) ≥72 h, and (3) lungs unsuitable for transplantation,” so the closest fixed category is Other. For the multimodal model, Table 2 reports improved performance from 73 ± 5% to 78 ± 4% accuracy and from 88 ± 2% to 94 ± 2% AUROC after adding radiographic PCs. The paper also states that both “precision (73% vs. 64%)” and “recall (79% vs. 72%)” improved significantly with image PCs added. Table 1 reports that the imaging-only CNN achieved 62.7 ± 1.8% accuracy and 76.1 ± 1.2% AUROC, while the best validation-set donor-lung outcome classification for ResNet-50 was 66.9% accuracy with AUROC 78.4%. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: The study included all bilateral EVLP cases with both 1 h and 3 h radiographs from a single center, which is systematic but still narrow and potentially selective relative to all donor lungs.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The main predictors were objective EVLP radiographs processed by a standardized CNN pipeline, and the multimodal model added structured physiological and biological EVLP parameters.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The 3 outcome classes were explicitly defined in the Methods as transplanted lungs with recipient ventilation <72 h, transplanted lungs with recipient ventilation ≥72 h, and lungs unsuitable for transplant.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include temporal validation, comparison against manual radiographic labels, latent-feature interpretation, and multimodal testing; however, missing-data handling and tuning details were not reported in the retrieved text, and the XGBoost multimodal stage was developed on a subset of 115 validation-cohort cases.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This paper directly applies AI to thoracic organ transplantation, specifically donor-lung assessment and transplant-related outcome prediction during EVLP.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for comparison of manual radiographic labels vs CNN-derived features; Table 2 for improvement of InsighTx with radiographic PCs; Figure 1 for Grad-CAM visualization; Figure 2 for correlation of principal components with radiographic abnormalities; and Figure 3 for the image-processing pipeline. I did not report any values that were not explicitly visible in the article text or tables.  ￼

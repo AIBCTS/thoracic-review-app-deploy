@@ -1,0 +1,70 @@
+First Author: Dueñas-Jurado
+Title: New models for donor-recipient matching in lung transplantations
+Source number: 13  ￼
+
+Very short summary: This retrospective single-center Spanish study developed a hybrid logistic regression–product unit neural network model to support donor-recipient matching in lung transplantation. Five key findings were: (1) the analysis included 404 lung transplants performed over 23 years; (2) the target outcome was graft survival at 6 months; (3) the final model was a hybrid LRIPU model with 48 parameters; (4) variables associated with higher survival probability included higher pre- and post-transplant FVC, lower pre-transplant PCO2, shorter donor intubation time, and shorter ischemia time; and (5) variables associated with lower survival probability included lower pre-transplant FEV1, lower donor PaO2/FiO2, older donor and recipient age, bilobular transplant, bypass use, tailoring, hospitalized/ICU pre-transplant status, and traumatic brain injury as donor cause of death. The extraction below is based only on information explicitly reported in the uploaded article and its tables.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 1993
+	•	Study Period End (Year): 2016
+	•	Section 1 Comments/Quotes: The paper states that it analyzed “404 lung transplants carried out at the Reina Sofía University Hospital (Córdoba, Spain) over 23 years,” and the database covered “October 1993, up until January 2016.” Funding came from the “Spanish Ministry of Economy and Competitiveness (MINECO), and FEDER funds (EU),” and the authors declared “no competing interests exist.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 404
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study database contained “404 lung transplant patients.” Recipient variables in Table 1 included sex, age, diagnosis group, pre-transplant status, pre-transplant gas exchange and spirometry, and transplant-type variables, but the paper did not provide one overall mean age or female percentage for the whole cohort, and race/ethnicity was not reported.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Other
+	•	Algorithm Name: LRIPU (logistic regression using initial covariates and product units); EPUNN (evolutionary product unit neural network)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The authors describe “a retrospective analysis,” combining “logistic regression (LR) with a special type of neural network,” specifically EPUNN, yielding the hybrid LRIPU model. Inputs were donor, recipient, intraoperative, and postoperative clinical variables listed in Table 1. The paper states the model exceeded “classical statistical methods,” but it does not report a clear external or internal validation framework or explicit hyperparameter tuning procedure.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The paper reports that “categorical variables were transformed into binary variables” and that variables in Table 2 were “scaled in the [1, 2] range,” so preprocessing was described. Missing-data handling was not described. The article did not report class-imbalance handling, code release, or exact train/test sample sizes.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 6-month survival
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The dependent variable was “graft survival, when considering the end-point at six months,” and Table 1 defines y as “Survival of the graft after six months: 1 (YES), 0 (NO).” The paper presents the final LRIPU equation and discusses coefficient directions, but it does not report AUROC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA. I did not infer any unreported performance metric.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center cohort of 404 transplants from one hospital, with pediatric and some combined/multi-organ recipients excluded, which limits representativeness.  ￼
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: Table 1 includes post-transplant variables such as “fvc_prp” and “fev1_prp,” which would not be available for donor-recipient allocation at the time of transplant decision-making.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “Survival of the graft after six months: 1 (YES), 0 (NO).”  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: Although the paper provides the final model equation and coefficient interpretation, it does not report standard validation metrics or a clear validation design, and it does not describe missing-data handling.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI/statistical modeling for lung donor-recipient matching and short-term graft survival in lung transplantation.
+
+Tables and figures explicitly used in extraction:
+Table 1 was used for the variable list, cohort framing, and definition of the 6-month survival endpoint. Table 2 was used for the final LRIPU model structure and coefficients. In the retrieved content, no separate figures with extractable performance metrics were visible, so I did not invent figure-based results.  ￼

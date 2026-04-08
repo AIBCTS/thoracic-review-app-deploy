@@ -1,10 +1,23 @@
 .streamlit/
+secrets/
 *.pyc
 __pycache__/
 *.json
+
+# CSV files — reviewer data should not be in git
 *.csv
+
 .DS_Store
 .venv/
 env/
 venv/
 data_llm/
+
+# Old data folder (to be deleted, do not track)
+data_/
+
+# PDFs are large — exclude from git but keep other data/ files (e.g. library.bib)
+data/*.pdf
+
+# reports/ is intentionally tracked in git
+!reports/
