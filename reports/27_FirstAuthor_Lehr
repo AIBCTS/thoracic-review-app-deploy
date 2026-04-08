@@ -1,0 +1,70 @@
+First Author: Lehr
+Title: Differential effects of donor factors on post-transplant survival in lung transplantation
+Source number: 27  ￼
+
+Very short summary: This SRTR study examined how donor factors and donor-recipient interactions affect post-transplant survival after bilateral lung transplantation. Five key findings were: (1) 7,609 adult primary bilateral lung transplant recipients were analyzed; (2) donor-factor effects varied by recipient age, sex, and diagnosis; (3) important interactions included donation after circulatory death in recipients aged 55–69 years, donor smoking in recipients aged 30–54 and ≥70 years, CMV mismatch in males, and donor diabetes in restrictive lung disease; (4) adding donor-factor interactions to the PT-CAS framework modestly improved 1-year discrimination from AUC 0.609 to 0.626; and (5) the combined Cox + PT-CAS model also improved calibration across a broader range of predicted risk. Tables 1–3, Figure 1, Figure 2, and Figure 3 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2015
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study used the “US Scientific Registry of Transplant Recipients” and included primary bilateral lung transplant recipients from “19 February 2015–1 February 2020.” I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 7609
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 40.3
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Adult bilateral lung transplant recipients “(n = 7,609)” were included. Recipient age was reported as median 59 years, not mean, so mean age is NR. Table 1 reports recipient sex, race/ethnicity, diagnosis group, insurance, and functional status.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random forest model (RF) alongside Cox donor-factor interaction models
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper compared Cox donor-factor models and a “random forest model (RF)” against the “PT-CAS” post-transplant survival model. Predictors were donor and recipient registry variables, with clinically guided staged interaction testing by recipient age, sex, and diagnosis. Ten-fold cross-validation was used for time-dependent AUC estimates. I did not find SHAP/LIME or explicit hyperparameter tuning.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: For model comparison, “437 recipients were omitted due to missingness of values used in the CAS post-transplant survival model,” which is most consistent with complete-case analysis. Preprocessing and cohort restriction were described, including exclusion of single-lung recipients and restriction to complete-data subsets for some comparisons. Class-imbalance handling and code release were not reported. Fixed train/test sizes were not given because evaluation used ten-fold cross-validation.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.626
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was post-transplant survival, reported at 1, 3, and 5 years. The best-performing combined model, “COX + PT-CAS,” achieved 1-year AUC 0.626 versus PT-CAS 0.609. Figure 3 also showed improved calibration for the combined Cox + PT-CAS model across a broader range of predicted risk. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult primary bilateral lung transplant recipients, minimizing single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient registry variables available around transplant, and interaction testing was prespecified across clinically relevant recipient groups.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly modeled post-transplant survival and reported alive/censored proportions at 1, 3, and 5 years.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include staged interaction modeling, Cox and random forest comparisons, cross-validation, and calibration analysis. Uncertainty remains because improvements were modest and complete-case restriction was required for some model comparisons.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses lung-transplant survival prediction using donor-recipient factors and machine-learning/statistical modeling, which fits the review question well.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort flow; Table 1 for recipient characteristics; Table 2 for donor characteristics; Table 3 for multivariable donor-recipient interaction results; Figure 2 for hazard-ratio forest plot; and Figure 3 for discrimination and calibration comparisons across PT-CAS, Cox, and random forest models. I did not report any value not explicitly shown in the uploaded article.  ￼

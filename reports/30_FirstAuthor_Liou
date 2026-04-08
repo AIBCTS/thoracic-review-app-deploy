@@ -1,0 +1,70 @@
+First Author: Liou
+Title: Survival machine learning methods for mortality prediction after heart transplantation in the contemporary era
+Source number: 30  ￼
+
+Very short summary: This study benchmarked survival machine-learning methods for predicting 1-year mortality after heart transplantation in the contemporary post-2018 allocation era. Five key findings were: (1) the post-policy cohort included 7,160 adult first-time heart-only transplant recipients from SRTR; (2) crude 1-year survival was 90.9%, with 506 deaths; (3) Random Survival Forests and Cox Gradient Boost performed best in the post-policy cohort, with holdout C-indices of 0.628 and 0.627; (4) model performance was only moderate overall, with CoxPH worst at 0.585 in the post-policy holdout; and (5) variable importance shifted between pre-policy and post-policy eras, with factors such as absence of ECMO gaining relevance post-policy. Figures 1–2 and Tables 1–2 were directly used for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2018
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The analysis used the “Scientific Registry of Transplant Recipients (SRTR)” in the U.S. and included recipients transplanted “on or after October 18, 2018,” with follow-up to “June 3, 2021.” The paper states “The author(s) received no specific funding for this work” and “The authors have declared that no competing interests exist.”  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 7160
+	•	Overall Mean Age: 53.5
+	•	Female Sex (%): 27.5
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The post-policy cohort included “7,160 adult heart-only transplant recipients.” The average recipient age was 53.5 years, and 27.5% were female. Race was reported, with 72.1% white, and numerous clinical/history variables were included such as diabetes, prior cardiac surgery, dialysis, VAD, ECMO, IABP, bilirubin, GFR, viral serologies, and functional status.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Lasso, Ridge, Elastic Net, Cox Gradient Boost, XGBoost Linear, XGBoost Tree, and Random Survival Forests
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The study benchmarked seven survival ML/statistical models plus Cox PH using SRTR tabular recipient, donor, waitlist, clinical, and procedural variables. Predictors were chosen “based on expert opinion and literature review.” The data were split 90% training and 10% holdout, with nested repeated cross-validation within the derivation set and random-search hyperparameter tuning. There was no SHAP/LIME-style explainability.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Yes
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 6444
+	•	Test Size (N): 716
+	•	Section 4 Comments/Quotes: The authors used “multiple imputation with chained equations,” z-score standardization, and one-hot encoding, while excluding predictors with >20% missingness. A 90/10 split implies about 6,444 training and 716 holdout patients. I found no resampling or class-weighting for imbalance. The paper explicitly states that “The code used in the analysis can be found” on GitHub.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.628
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was “one-year all-cause mortality,” so the closest extraction label is 1-year survival. In the post-policy holdout set, Random Survival Forests had the highest C-index at 0.628, followed by Cox Boost at 0.627. Table 2 shows the other post-policy holdout C-indices: CoxPH 0.585, Ridge 0.586, Lasso 0.613, Elastic Net 0.613, XGBoost Linear 0.600, and XGBoost Tree 0.612. Calibration plots were not described for this paper in the retrieved text, and DCA was not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult first-time heart-only transplant recipients after clear exclusions, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were registry variables available around transplantation, and preprocessing excluded variables with excessive missingness, supporting appropriate predictor selection.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “one-year all-cause mortality assessed from the time of heart transplantation to death or end of the one-year follow-up.”  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested repeated cross-validation, a holdout test set, multiple imputation, and comparison across several model classes. Uncertainty remains because discrimination was only modest and the retrieved text did not document calibration results for the final models.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-based mortality prediction after heart transplantation in a contemporary registry cohort and is closely aligned with the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the benchmarking workflow and derivation/holdout split; Table 1 for post-policy cohort characteristics; Table 2 for holdout C-indices across models; and Figure 2 for cross-validation performance distributions. I did not report any metric not explicitly shown in the uploaded article.

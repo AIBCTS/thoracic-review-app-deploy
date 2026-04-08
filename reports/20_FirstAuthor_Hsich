@@ -1,0 +1,70 @@
+First Author: Hsich
+Title: Heart Transplantation: An In-Depth Survival Analysis
+Source number: 20  ￼
+
+Very short summary: This national SRTR study examined post-heart-transplant survival using both temporal decomposition and Random Survival Forests. Five key findings were: (1) 30,606 adult isolated heart-transplant recipients were included; (2) 8,278 deaths occurred during a median 3.9-year follow-up; (3) three mortality phases were identified—early, constant, and late; (4) sex was not an important overall mortality risk factor, although a few sex-specific interactions were found; and (5) key predictors included recipient and donor age, bilirubin, renal function, BMI, congenital heart disease, mechanical ventilation, ECMO, diabetes, ischemic time, and donor-recipient interactions. Tables 1–3, Figure 1, the Central Illustration, and the interaction figures described in the Results were used for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2004
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: The study included adults in the “Scientific Registry of Transplant Recipients database who underwent isolated heart transplantation from January 1, 2004, to July 1, 2018.” Funding was from NIH grants “HL141892 and GM125072,” and the paper states that “the authors have reported that they have no relationships relevant to the contents of this paper to disclose.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 30606
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 25.4
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final cohort had “30,606 adult heart transplants.” Table 1 reports 7,778 female recipients out of 30,606 total, which is 25.4%. Age was reported as median (Q1, Q3), not mean. Race/ethnicity and multiple comorbidities/history variables were reported, including diabetes, dialysis, prior surgery, infection requiring IV antibiotics, ventilator use, inotropes, VAD/ECMO/IABP, renal and liver function, and donor characteristics.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Survival Forests (RSF); temporal decomposition parametric survival model
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The study used “two complimentary time-related analyses,” including a “random survival forests method” and a temporal decomposition model. RSF was used to determine “importance of mortality risk factors and their interactions.” Inputs were recipient and donor tabular variables from SRTR. The paper does not frame this against a human or guideline comparator. Variable screening in the sex-focused parametric models used “machine learning variable selection,” which is best categorized as automated. Explicit hyperparameter tuning was not reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing data were handled with “multiple imputation by chained equations for parametric survival models” and “missForest for the random forest analysis,” so this fits best as Other. The paper describes exclusions, missingness rates, and imputation. No class-imbalance method or code release was reported. Exact training/test sizes were not given because the analyses were not based on a simple fixed split in the retrieved text.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary endpoint was “all-cause mortality assessed as time from heart transplantation to death or end of follow-up,” so the closest restricted category is Other. The study focused on hazard phases, variable importance, and interactions rather than reporting AUC, accuracy, sensitivity, specificity, PPV, NPV, or F1-score. Figure 1 showed 1-month survival 96%, 1-year survival 89%, and 12-year survival 50%, but these are cohort survival estimates rather than model discrimination metrics. Calibration and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national SRTR cohort including all adult isolated heart transplants in the United States over the study period, which minimizes center-level selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were recorded at the time of transplantation and included clinically relevant recipient and donor variables, including hemodynamics, labs, support devices, donor cause of death, and ischemic time.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as all-cause mortality from transplantation to death or end of follow-up, with mortality verified through the Social Security Death Master File.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope, complementary parametric and RSF analyses, interaction assessment at multiple time points, and imputation for missingness. Uncertainty remains because conventional predictive performance metrics for a deployable model were not reported in the retrieved text.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies AI/statistical risk modeling for post-heart-transplant survival using a national transplant registry, which is highly relevant to the review question.
+
+Tables and figures explicitly used in extraction:
+Table 1 for baseline recipient and donor characteristics; Figure 1 for sex-specific post-transplant survival curves; the Central Illustration for the three-phase hazard structure; Table 2 for phase-specific multivariable risk factors; Table 3 for RSF variables of importance by time horizon; and the interaction figures described in the Results for 90-day, 1-year, 5-year, and 10-year interactions. I did not report any performance metric not explicitly shown in the uploaded article.  ￼

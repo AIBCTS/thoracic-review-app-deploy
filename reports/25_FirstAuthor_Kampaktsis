@@ -1,0 +1,70 @@
+First Author: Kampaktsis
+Title: Machine learning-based prediction of mortality after heart transplantation in adults with congenital heart disease: A UNOS database analysis
+Source number: 25  ￼
+
+Very short summary: This retrospective UNOS study developed and internally validated a CatBoost machine-learning model to predict mortality after heart transplantation in adults with congenital heart disease (ACHD). Five key findings were: (1) the cohort included 1033 ACHD recipients undergoing isolated heart transplantation; (2) 1-year mortality was 19.9% with 205 deaths; (3) 10 variables were selected from 49 candidates for the final 1-year model; (4) the 1-year model achieved AUC 0.80, accuracy 75.2%, sensitivity 75%, specificity 75%, PPV 42%, and NPV 93%; and (5) SHAP identified post-transplant hemodialysis, eGFR, ischemic time, age, and total bilirubin as the most influential predictors. Figures 1–5 and the reported tables were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2000
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The authors queried the “United Network for Organ Sharing (UNOS) database” and identified ACHD patients who underwent isolated heart transplantation “from 2000 to 2020.” I did not identify an explicit funding or conflict-of-interest statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 1033
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 38.9
+	•	Race/Ethnicity Reported: Not Reported
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study cohort included “1033 recipients (median age 34 years, 61% male),” implying female sex 38.9%. Age was reported as median, not mean, so mean age is NR. The text reports recipient characteristics such as dialysis, ECMO, mechanical ventilation, eGFR, bilirubin, HIV status, ischemic time, stroke, and post-transplant dialysis, so clinical history was included. Race/ethnicity was not reported in the retrieved excerpts I could verify.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: CatBoost
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The study used a “CatBoost ML model” with random splitting into derivation (70%) and validation (30%) cohorts. Input variables included recipient, donor, procedural, and post-transplant characteristics. Feature selection was performed using SHAP with recursive feature elimination, followed by expert review. Explainability was also done with SHAP summary and force plots. I did not see explicit hyperparameter-tuning details in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 723
+	•	Test Size (N): 310
+	•	Section 4 Comments/Quotes: The authors excluded variables with “>10% missing values,” which is best classified here as complete-case style handling at the variable level rather than imputation. Class imbalance was addressed by random oversampling. Preprocessing and random 70/30 splitting were described in Figure 1 and Methods. Based on the cohort of 1033, the training and validation sizes are approximately 723 and 310, respectively. I did not find a code-availability statement.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.80
+	•	Model Accuracy (%): 75.2
+	•	PPV / Precision (%): 42
+	•	Sensitivity / Recall (%): 75
+	•	Specificity (%): 75
+	•	NPV (%): 93
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary modeled endpoint was 1-year mortality/survival after heart transplantation. The paper reports that the final 1-year CatBoost model achieved “AUC of .80,” “predictive accuracy of 75.2%,” “sensitivity of 75%,” “specificity of 75%,” “PPV of 42%,” and “NPV of 93%.” The 3-year model achieved AUC 0.69 and accuracy 74.2%. Calibration and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a national UNOS cohort of ACHD heart-transplant recipients across the United States, which reduces single-center selection bias, although subgroup size remained modest.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: The model included recipient, donor, procedural, and post-transplant variables; this improves prediction but mixes pre- and post-transplant information, which may limit use as a strictly pre-transplant decision tool.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as mortality at 1 year and 3 years after heart transplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include internal validation, oversampling, SHAP-based feature selection, and explainability. Uncertainty remains because external validation and calibration assessment were not reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI-based outcome prediction after heart transplantation in a clinically important ACHD subgroup and is clearly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for study design and 70/30 derivation-validation split; Figure 2 for 1-year confusion matrix and ROC/AUC; Figure 3 for SHAP summary of 1-year mortality predictors; Figure 4 for individualized SHAP force plots; and Figure 5 for 3-year model performance. The text also reports baseline characteristics and 1-year/3-year performance metrics directly, which I used without inferring any unreported values.  ￼

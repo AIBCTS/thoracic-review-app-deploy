@@ -1,0 +1,70 @@
+First Author: Kainuma
+Title: Predictors of 1-year outcome after cardiac re-transplantation: Machine learning analysis
+Source number: 23
+
+Very short summary: This retrospective UNOS registry study used random survival forests to identify predictors of 1-year mortality after cardiac re-transplantation. Five key findings were: (1) 1294 adult cardiac re-transplant recipients were analyzed; (2) 137 underwent early re-transplantation (≤1 year after first transplant) and 1157 underwent late re-transplantation (>1 year); (3) 1-year mortality was markedly higher after early versus late re-transplantation, 40.6% versus 13.6%; (4) in the early group, total bilirubin >2 mg/dL was the top RSF predictor of 1-year mortality with VIMP 2.99%; and (5) in the late group, ventilator dependence and BMI >30 kg/m² were the leading RSF predictors, with VIMP 1.47% and 1.43%, respectively. Figures 1–4 and Tables 1–3 were used directly for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2000
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study “retrospectively reviewed the United Network for Organ Sharing registry” and included adult recipients undergoing cardiac re-transplantation “between January 2000 and March 2020.” I did not identify an explicit funding or conflict-of-interest statement in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 1294
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 35.5
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Table 1 reports a total cohort of 1294 recipients, with 460 women (35.5%). Age was reported as median 45 years [30–57], not mean, so mean age is NR. Ethnicity and multiple clinical history variables were reported, including malignancy, smoking history, diabetes, creatinine, dialysis, bilirubin, ECMO, IABP, LVAD, TAH, ventilator dependence, PRA, functional status, and ICU stay.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Survival Forests (RandomForestSRC) on Cox modeling
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The authors used the “random forest algorithm on Cox modeling” and the R package “RandomForestSRC” to calculate variable importance for 1-year mortality. Recipient and donor tabular variables from UNOS were included. A complementary Cox model was used to verify findings, so the comparator is best classified as Other. I did not find a reported train/test split, cross-validation scheme, SHAP/LIME-style interpretability, or hyperparameter tuning. Variable selection was clinically/manual in the sense that variables “known to be associated with risk of mortality after OHT” were included, with high-missingness variables excluded.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: No
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The paper states that variables with more than 10% missing data “were excluded from the machine learning analysis,” which is most consistent with complete-case style handling at the variable level rather than imputation. No class-imbalance handling or code availability statement was reported. I also did not find explicit preprocessing/normalization procedures or separate training/test sizes.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target outcome was 1-year mortality after cardiac re-transplantation, which maps most closely to 1-year survival in the extraction framework. Figure 2 and the abstract report 1-year mortality of 40.6% in early versus 13.6% in late re-transplantation. RSF results were reported as variable-importance rankings, not AUROC or classification metrics. No calibration or DCA was reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the national UNOS registry and included all adult cardiac re-transplant recipients meeting criteria between 2000 and 2020, which reduces single-center selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor factors measured at transplant, including end-organ function, support devices, hemodynamics, donor risk, and ischemic time.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The modeled outcome was clearly defined as time to 1-year mortality, analyzed with Kaplan–Meier, Cox modeling, and RSF variable importance for 1-year death.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope and complementary RSF plus Cox analyses, but no held-out validation metrics, calibration assessment, or external validation were reported in the retrieved text.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses machine-learning-based risk stratification in heart transplantation, specifically cardiac re-transplantation, and is closely aligned with the review question.
+
+Tables and figures explicitly used in extraction:
+Figure 1 for study flow and cohort derivation; Table 1 for recipient baseline characteristics; Table 2 for donor baseline characteristics; Table 3 for post-transplant outcomes; Figure 2 for Kaplan–Meier 1-year survival difference between early and late re-transplantation; and Figures 3–4 for RSF-ranked variable importance. I did not report any metric not explicitly shown in the uploaded article.

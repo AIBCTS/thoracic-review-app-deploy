@@ -1,0 +1,70 @@
+First Author: Lehr
+Title: Extremes of Age Decrease Survival in Adults After Lung Transplant
+Source number: 28  ￼
+
+Very short summary: This SRTR study examined how recipient age influences survival after adult lung transplantation using parametric survival modeling and random survival forests. Five key findings were: (1) 14,253 adult lung transplant recipients in the LAS era were included; (2) both the youngest adults (<30 years) and the oldest adults (>55 years) had worse post-transplant survival than recipients aged 30–55 years; (3) age was the most important risk factor for death at all post-transplant time points, and its effect increased over time; (4) random survival forests identified higher creatinine, single-lung transplant, hospitalization before transplant, and higher bilirubin as major mortality predictors in the overall cohort; and (5) age-specific risk patterns differed, with social determinants such as education and insurance disproportionately affecting survival in the youngest recipients. Tables 1–2 and Figures 1–3 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2006
+	•	Study Period End (Year): 2015
+	•	Section 1 Comments/Quotes: The study used the “Scientific Registry of Transplant Recipients” and included adult lung transplant recipients between “January 1, 2006, and February 19, 2015.” The paper explicitly states, “no funding was received for this study.” I did not identify an explicit COI declaration in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 14253
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort included “14,253 patients,” with median age 59 years. Sex was reported by age subgroup in Table 1, but not as a single overall cohort percentage in the retrieved text, so I did not infer an overall female proportion. Table 1 reports multiple clinical/history variables including BMI, diagnosis group, tobacco use, chronic steroid use, functional status, ECMO, mechanical ventilation, creatinine clearance, bilirubin, dialysis, cardiac index, pCO2, FEV1, FVC, 6MWD, hospitalization, LAS, and transplant type. Race/ethnicity was not reported.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random survival forest (RSF)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Other
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper states that “random-survival forest methodology was used to examine risk factors for death,” alongside a nonproportional hazard model. RSF used 96 variables to grow 500 trees, and “final selection of model variables was performed using bootstrap aggregation.” Inputs included recipient, donor, and paired donor-recipient variables. The analysis is better characterized as internal modeling/variable-importance analysis rather than a conventional train-test split or cross-validation framework, so validation is listed as Other.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: No
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The paper states that management of missing values is described in an appendix, but the retrieved main text does not provide enough detail to classify it as simple or multiple imputation with confidence, so I marked it as Other. No class-imbalance method or code release was reported. The RSF analysis used the full cohort with bootstrapping and 500 trees rather than a separate training and test split, so training/test sizes are NR. Explicit normalization/preprocessing steps typical of ML papers were not described in the retrieved text.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 5-year survival
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The paper focused on post-transplant survival across time, with particular emphasis on long-term survival beyond 5 years; the text notes that “increased age is associated with decreased long-term survival defined as greater than 5 years after lung transplant.” Figure 1 shows Kaplan-Meier survival by age group, and the text reports 5-year predicted survival of 64.5% for age 20, 81.2% for age 45, and 71.5% for age 65 in a hypothetical adjusted model. However, no AUC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult lung transplant recipients in the LAS era, minimizing single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor domains included recipient, donor, and donor-recipient matching variables available around listing/transplant, and RSF explicitly evaluated variable interactions with age.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Death was ascertained through SRTR linked to the Social Security Death Master File, with patients followed to death or end of follow-up and censored at retransplant.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope, complementary parametric and RSF modeling, bootstrap aggregation, and age-interaction analysis; uncertainty remains because conventional predictive validation metrics such as AUC and calibration were not reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-assisted risk modeling for post-lung-transplant survival and is clearly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for recipient characteristics by age group; Table 2 for incremental risk factors for death after lung transplant; Figure 1 for Kaplan-Meier survival by recipient age group; Figure 2 for adjusted predicted survival by age; and Figure 3/e-Figures described in the results for age interactions and RSF variable-importance patterns. I did not report any metric not explicitly shown in the uploaded article.  ￼

@@ -1,0 +1,70 @@
+First Author: Linse
+Title: A machine learning model for prediction of 30-day primary graft failure after heart transplantation
+Source number: 29  ￼
+
+Very short summary: This study developed and internally validated an artificial neural network model to predict 30-day primary graft failure (PGF) after heart transplantation using the ISHLT Heart Transplant Registry. Five key findings were: (1) the final cohort included 64,964 adult recipients transplanted between 1994 and 2013; (2) PGF incidence within 30 days was 3.7%; (3) the ANN selected 33 of 77 risk variables as relevant for PGF prediction; (4) the internally validated test-cohort C-index/AUROC was 0.70 (95% CI 0.68–0.71); and (5) the most influential predictors included donor age, recipient diagnosis, mechanical ventilation, female-donor-to-male-recipient sex match, and ischemic time, while the ANN outperformed both the original and recalibrated RADIAL score. Tables 1–4 and Figures 1–2 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: International Registry
+	•	Dataset Name: ISHLT
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1994
+	•	Study Period End (Year): 2013
+	•	Section 1 Comments/Quotes: The study used the “ISHLT registry,” described as “a global collaborative effort and the largest repository of heart transplant data in the world,” and included transplants from “January 1, 1994, and December 31, 2013.” I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 64964
+	•	Overall Mean Age: 51.4
+	•	Female Sex (%): 22
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final study population comprised “64,964 patients,” with mean age “51.4 ± 11.9 years” and “22% (N = 13,607) of the transplanted patients were female.” Table 2 reports extensive donor and recipient clinical-history variables, including diagnosis, vascular disease, stroke after listing, dialysis, ventilation, ECMO, prior transplantation, prior cardiac surgery, bilirubin, creatinine, PRA, donor hypertension, smoking, cocaine history, and cause of death. Race/ethnicity was not reported in the retrieved excerpts.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: ANN/MLP/NN
+	•	Algorithm Name: Fully connected multilayer perceptron artificial neural network (ANN/MLP)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The authors developed “a non-linear artificial neural networks (ANN) model” using fully connected MLP architectures with up to three hidden layers, and compared it with the RADIAL model. The model used donor-recipient tabular variables available at transplant. Validation used an internal “nested K-fold cross-validation approach” with an outer and inner stratified 5-fold loop. Model selection used random search over hyperparameters. Variable selection was automated via permutation testing and model-based ranking. No SHAP/LIME-style interpretability was reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missingness was substantial, and the authors explicitly evaluated “multiple probability imputation (MPI)” as well as mean imputation; MPI during training with mean imputation during validation is best aligned with multiple imputation among the restricted choices. Class imbalance was addressed with a weighted error function, where positive samples were weighted threefold. Preprocessing included normalization of continuous variables to zero mean/unit variance, binary coding, and one-hot encoding for categorical variables. Fixed train/test counts were not reported because validation used nested 5-fold cross-validation across the whole cohort. The software stack was reported (Theano, Lasagne, scikit-learn), but I did not see a public code-release statement, so code availability is marked Other rather than No.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: PGD
+	•	Model AUC / C-Statistic: 0.70
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary endpoint was PGF within 30 days, defined as death due to graft failure or cardiovascular causes, or retransplant within 30 days for causes other than rejection. In the extraction framework, PGF maps most closely to PGD. The best ANN achieved a test AUROC/C-index of “0.70 (95% CI: 0.68–0.71).” The paper also reports that the score-based RADIAL model had AUROC 0.53 and recalibrated RADIAL 0.61, both significantly worse. No classification accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA were reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the ISHLT registry, “the largest repository of heart transplant data in the world,” with 64,964 adult recipients after prespecified exclusions, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient variables available “at the time of transplantation,” supporting appropriate timing of inputs for risk prediction.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary endpoint was explicitly defined as PGF within 30 days based on death from graft failure/cardiovascular causes or retransplantation for non-rejection causes.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested stratified 5-fold validation, hyperparameter search, imbalance weighting, and comparison with RADIAL. Uncertainty remains due to substantial missingness, mixed imputation strategies, and lack of external validation or calibration reporting.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses machine-learning prediction of early graft failure after heart transplantation using a large transplant registry, which is strongly aligned with the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the nested internal-validation/model-selection strategy; Table 1 for sampled ANN hyperparameters; Table 2 for donor and recipient baseline characteristics; Table 3 for variable ranking and effective odds ratios; Table 4 for validation/test AUROC performance across MLP variants and imputation schemes; and Figure 2 for regression-tree interpretation of the best MLP model. I did not report any value not explicitly shown in the uploaded article.  ￼

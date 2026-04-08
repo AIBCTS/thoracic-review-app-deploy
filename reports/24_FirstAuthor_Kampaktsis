@@ -1,0 +1,70 @@
+First Author: Kampaktsis
+Title: State-of-the-art machine learning algorithms for the prediction of outcomes after contemporary heart transplantation: Results from the UNOS database
+Source number: 24  ￼
+
+Very short summary: This retrospective UNOS study developed and internally validated machine-learning models for outcome prediction after contemporary heart transplantation using only pre-transplant variables. Five key findings were: (1) the cohort included 18,625 adult isolated heart transplant recipients from 2010–2018; (2) 1-year mortality was 12.5% with 2,334 deaths; (3) 39 of 134 pre-transplant variables were selected for the main 1-year model; (4) Adaboost had the best discrimination for 1-year survival with AUC 0.689, outperforming IMPACT score AUC 0.569; and (5) secondary models for 3-year survival, 5-year survival, and acute rejection achieved AUCs of 0.629, 0.609, and 0.610, respectively. Figures 1–2 and Tables 1–2 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2010
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: The article used the “United Network for Organ Sharing (UNOS) database” and included adult heart transplant recipients “between 2010 and 2018.” I did not identify a funding statement or explicit conflict-of-interest disclosure in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 18625
+	•	Overall Mean Age: 53
+	•	Female Sex (%): 27
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study cohort comprised “18 625 patients (53 ± 13 years, 73% males),” implying 27% female. Table 1 reports recipient ethnicity and multiple pre-transplant clinical variables, including diabetes, prior cardiac surgery, creatinine, HIV/CMV/EBV/HBV serology, diagnosis, inotropes, ventilation, and VAD use.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Ensemble
+	•	Algorithm Name: Adaboost, Logistic Regression, Decision Tree, Support Vector Machine, and K-nearest neighbor
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: This was a retrospective UNOS analysis using “solely pre-transplant variables.” The dataset was split 3:1 into derivation and validation cohorts. Five supervised ML algorithms were trained after automated feature selection with “SVM-FuzCoC.” Hyperparameter optimization was explicitly performed, and LIME was used to explain the best-performing model. The IMPACT score served as a comparator for 1-year survival.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 13969
+	•	Test Size (N): 4656
+	•	Section 4 Comments/Quotes: The authors excluded variables with “>10% missing values,” which is best classified here as complete-case style handling at the variable level rather than imputation. Class imbalance was addressed by “random oversampling.” Preprocessing was described, including exclusion criteria and conversion of categorical/textual variables to numerical format. Figure 1 reports training n = 13,969 and validation n = 4,656. No code release statement was identified.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.689
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was 1-year survival after heart transplantation. The abstract reports AUCs of 0.689, 0.642, 0.649, 0.637, and 0.526 for Adaboost, Logistic Regression, Decision Tree, SVM, and KNN, respectively, while IMPACT had AUC 0.569. Secondary analyses yielded AUCs of 0.629, 0.609, and 0.610 for 3-year survival, 5-year survival, and acute rejection. Although the paper states sensitivity, specificity, PPV, and NPV were evaluated, the exact model-specific values were not fully visible in the retrieved excerpts, so I have not guessed them. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry cohort of 18,625 adult isolated heart transplant recipients, reducing single-center selection bias, though exclusions were applied.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Only pre-transplant recipient, donor, and transplant variables were used, which is appropriate for clinical prediction at or before transplant.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary endpoint was clearly defined as 1-year survival after heart transplantation, with secondary endpoints of 3-year survival, 5-year survival, and acute rejection.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include feature selection, hyperparameter optimization, oversampling for class imbalance, internal validation, and comparison with IMPACT. Uncertainty remains because no external validation or calibration assessment was reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of outcomes after heart transplantation using a contemporary national registry.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for study design and train/validation sizes; Table 1 for donor and recipient baseline characteristics; Table 2 for the 39 selected variables used in the 1-year model; and Figure 2 for AUC performance and the relationship between model performance and number of variables. I did not report any value not explicitly shown in the uploaded article.  ￼

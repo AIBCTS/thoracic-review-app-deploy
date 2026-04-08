@@ -1,0 +1,70 @@
+First Author: Johnston
+Title: Estimating Calibrated Risks Using Focal Loss and Gradient-Boosted Trees for Clinical Risk Prediction
+Source number: 22
+
+Very short summary: This study evaluated a calibration-aware gradient-boosted tree strategy for clinical risk prediction, including post-transplant lymphoproliferative disorder (PTLD) after lung transplantation using SRTR data. Five key findings were: (1) the lung-transplant cohort included 33,244 adult recipients after exclusions; (2) the binary outcome was post-transplant PTLD, modeled at 1, 3, 5, 8, and 10 years; (3) the methodology combined focal-loss gradient-boosted trees with a closed-form calibration transformation (Ψγ) and Bayesian hyperparameter optimization; (4) raw focal-loss models were miscalibrated and systematically overestimated PTLD risk in calibration plots; and (5) calibration improved substantially after Ψγ transformation while maintaining discrimination, with calibrated focal-aware XGBoost achieving AUROC 0.700, Brier score 0.128, and calibration slope 0.968 for 10-year PTLD risk. Tables 1–3 and Figures 2, 5–9 were used directly for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Unclear
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1988
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The lung-transplant application used “data extracted from the Scientific Registry of Transplant Recipients (SRTR),” and the final lung dataset included patients “from 1 January 1988 to 28 November 2020.” The article itself is from U.S.-based authors and the SRTR is a U.S. registry. I did not identify a study-specific funding statement or COI disclosure in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 33244
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Unclear
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final SRTR lung-transplant dataset included “33,244 patients,” with 984 PTLD cases and 32,260 non-cases. The extracted text does not provide a main baseline table with overall age or sex percentages for the lung cohort in the main results section I could verify. The features included demographics, immunosuppression, viral infections, and HLA variables, so clinical history was included.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Focal-aware XGBoost / focal-aware LightGBM with Ψγ calibration transformation
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The study used gradient-boosted decision trees, specifically XGBoost and LightGBM, trained with focal loss and then calibrated using the “Ψγ transformation.” It also compared against standard XGBoost, logistic regression, Platt scaling, and isotonic regression. The lung-transplant task used 54 tabular SRTR features. Evaluation used repeated 10-fold cross-validation experiments, and Bayesian hyperparameter optimization was explicitly described. I did not find SHAP/LIME or a separate feature-selection step beyond using the defined feature set.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The lung-transplant datasets were described as “high degree of class-imbalance,” and the focal-loss strategy was explicitly motivated as a way to handle imbalanced or skewed class distributions. Preprocessing/exclusion steps were described in Figure 2 and Section 4.1.1. However, I did not find a clear statement on missing-data imputation for the SRTR lung dataset, nor explicit fixed training/test sample counts because the study relied on repeated 10-fold cross-validation rather than a single holdout split. I also did not identify a code-availability statement in the retrieved text.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.700
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 63.1
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The lung-transplant outcome was PTLD, which is not one of the preset transplant-outcome categories, so the closest allowed choice is Other. The abstract states that the calibrated focal-aware XGBoost achieved “AUROC, Brier score, and calibration slope of 0.700, 0.128, and 0.968 for predicting the 10-year cancer risk.” The paper also reports that for 1-year PTLD prediction, “XGBoost-Focal calibrated using the Ψγ transformation achieved the best sensitivity (0.631).” Calibration plots, calibration slopes/intercepts, and Brier scores were central to the paper; DCA was not reported. I did not infer PPV, specificity, or NPV because they were not clearly stated in the retrieved excerpts.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The lung-transplant analysis used a large national SRTR cohort and applied transparent exclusion criteria, reducing single-center selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were structured SRTR variables available in the registry, including demographics, immunosuppression, viral infection history, and HLA data.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The binary outcome was explicitly defined as PTLD, derived from the SRTR malignancy file, with time-to-PTLD calculated from transplant date to diagnosis date.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include repeated 10-fold cross-validation, Bayesian hyperparameter optimization, and detailed calibration assessment. Remaining uncertainty comes from the lack of a fully independent external validation cohort and the absence, in the retrieved text, of a clear missing-data strategy for the SRTR lung dataset.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses AI-based clinical risk prediction in lung transplant recipients using SRTR data and is highly relevant to the review question.
+
+Tables and figures explicitly used in extraction:
+Figure 2 for lung-cohort derivation and exclusions; Table 1 for discrimination results; Table 2 for calibration/Brier-score performance; Table 3 and Figure 6 for classification metrics including sensitivity; Figure 5 for discrimination comparisons; Figures 7–8 for raw focal-loss calibration plots across time horizons; and Figure 9 for calibration slopes and intercepts after post-processing. I did not report any value not explicitly stated in the uploaded article or retrieved excerpts.

@@ -1,0 +1,70 @@
+First Author: Hsich
+Title: Variables of importance in the Scientific Registry of Transplant Recipients database predictive of heart transplant waitlist mortality
+Source number: 19  ￼
+
+Very short summary: This national SRTR study used Random Survival Forests to identify the most important predictors of heart-transplant waitlist mortality. Five key findings were: (1) 33,069 adult active waitlist candidates were analyzed; (2) during a median 4.3-month follow-up, 5,514 candidates died; (3) the strongest predictors included eGFR, serum albumin, ECMO, ventricular assist devices, mechanical ventilation, peak oxygen consumption, hemodynamics, inotrope support, and heart-disease type; (4) eGFR and albumin showed additive risk, with worse survival at lower values; and (5) important sex interactions were identified, including worse survival in women than men at UNOS 1A/1B when eGFR was roughly 40–80 mL/min/1.73 m². Tables 1 and Figures 1–5 were used directly for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2004
+	•	Study Period End (Year): 2015
+	•	Section 1 Comments/Quotes: The study included “all 33 069 adult candidates on the active waiting list for heart transplantation in the national Scientific Registry of Transplant Recipients (SRTR) database between January 1, 2004 and August 31, 2015.” Funding came from the “National Heart, Lung, and Blood Institute, Grant/Award Number: R01HL141892.” I did not identify an explicit COI statement in the retrieved text.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Candidates (Waitlist)
+	•	Total Sample Size (N): 33069
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort contained 33,069 adult active waitlist candidates. Table 1 reports age by UNOS stratum as medians rather than a single overall mean, so mean age is NR. Sex and race were reported, as were multiple clinical-history variables including diabetes, hypertension, tobacco use, malignancy, peripheral vascular disease, prior stroke, and device/inotrope support.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Survival Forest (RSF)
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper used “Random Survival Forests,” described as a “robust, nonparametric machine learning algorithmic method,” to identify risk factors without prespecified parametric assumptions. Inputs were prelisting SRTR tabular variables. The analysis used bootstrap/out-of-bag internal validation, which is most consistent with cross-validation style internal validation. The study did not use SHAP/LIME. No separate feature-selection step was described; variables in the SRTR dataset at listing were analyzed directly. Explicit hyperparameter tuning was not reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing data were “imputed using missForest imputation,” which fits best under Other. Data preparation is described, including stratification by UNOS status, use of listing-time variables only, bootstrap sampling, and out-of-bag estimation. No class-imbalance mitigation was described. Code availability was not reported. Exact train/test sizes were not reported because the method used bootstrap and out-of-bag evaluation rather than a fixed split.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Waitlist mortality
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary endpoint was “all-cause mortality assessed as time from listing to death, right censored at time of heart transplantation or end of follow-up.” The paper emphasizes variable importance and partial survival plots rather than standard classification metrics. It reports a median follow-up of 4.3 months and 5,514 deaths, but no AUC, accuracy, PPV, sensitivity, specificity, NPV, or F1-score. Calibration and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national SRTR cohort including all adult active waitlist candidates in the United States over the study period, which minimizes center-level selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor variables were obtained at the time of initial waitlisting from the national registry and included clinically relevant laboratory, hemodynamic, diagnostic, and support-device variables.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as all-cause mortality from listing to death, with censoring at transplant or end of follow-up, and mortality was verified using the Social Security Death Master File.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include RSF, imputation with missForest, out-of-bag validation, and stratification by UNOS status; however, the paper does not report conventional discrimination or calibration metrics for a deployable prediction model.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-based prediction of heart-transplant waitlist mortality using a national transplant registry, which is highly relevant to the review question.
+
+Tables and figures explicitly used in extraction:
+Table 1 for waitlist cohort characteristics by UNOS status; Figure 1 for sex-specific survival by eGFR; Figure 2 for the relationship between albumin and survival; Figure 3 for the additive interaction of eGFR and albumin on survival; Figure 4 for ranking strong and weak correlates by variable importance; and Figure 5 for the blood-type/BMI interaction among UNOS 1A candidates. I did not report any metric not explicitly present in the uploaded article.  ￼

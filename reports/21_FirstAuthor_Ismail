@@ -1,0 +1,70 @@
+First Author: Ismail
+Title: Artificial intelligence-driven automated lung sizing from chest radiographs
+Source number: 21  ￼
+
+Very short summary: This pilot study developed a deep-learning and computer-vision system to automate lung size measurement from portable chest radiographs for transplant size matching. Five key findings were: (1) the validation cohort included 50 lung transplant recipients; (2) the framework used a 2-step pipeline with lung-mask segmentation followed by automated feature-point detection; (3) the system generated 6 standardized lung height/width measurements; (4) average measurement error versus the mean of 2 radiologists was <2.5% (<7.0 mm); and (5) agreement between AI and radiologists was very high, with Pearson correlation 0.97 and intraclass correlations generally 0.95–0.99. Figures 1–3 and Tables 1–2 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): NR
+	•	Study Period End (Year): NR
+	•	Section 1 Comments/Quotes: The validation cohort came from “lung transplant recipients at the University of Pennsylvania,” making this a single-center U.S. study. Funding was “supported by National Institutes of Health grants HL155821.” The paper includes a disclosure section listing conflicts for two authors and stating all others had none. Study years for the recipient cohort were not reported.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 50
+	•	Overall Mean Age: 59.4
+	•	Female Sex (%): 30
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: No
+	•	Section 2 Comments/Quotes: The paper states that measurements were validated in “50 portable CXRs acquired in lung transplant recipients.” Table 1 reports age 59.4 ± 10.8 years, 35 males (70%), implying 30% female, and race categories. The cohort table did not report comorbidities or broader clinical history.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: PSPNet-based 2-step framework for automated lung sizing
+	•	Input Variables (Data Modality): Imaging
+	•	Comparator / Standard of Care: Human expert
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The system used a “2-step framework” with automatic lung segmentation using “PSPNet” and then computer-vision postprocessing to derive 6 size measurements from CXRs. The validation comparator was two radiologists in a blinded setting. The segmentation model was trained on the public Darwin dataset, then validated against radiologist measurements in the 50-recipient cohort. No SHAP/LIME-style explainability or explicit hyperparameter tuning was reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 6500
+	•	Test Size (N): 50
+	•	Section 4 Comments/Quotes: The segmentation model was trained on the “Darwin data set, comprising 6500 CXRs and lung masks,” and validated on 50 recipient CXRs. Preprocessing was described, including data augmentation and contrast-limited adaptive histogram equalization. Missing-data handling was not discussed. Class imbalance is not applicable for this measurement task. Code was made publicly available, but algorithm weights were not mentioned, so “Other” is the best fit.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Donor acceptance
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The task was automated lung sizing to support donor-recipient size matching, so the closest allowed outcome category is Donor acceptance. The reported metrics were measurement-agreement metrics rather than classification metrics: average error <2.5% (<7.0 mm), Pearson correlation 0.97, and intraclass correlations mostly above 0.90. No AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small pilot validation cohort of 50 lung transplant recipients from a single center, which limits representativeness.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized portable chest radiographs processed through a clearly described segmentation and feature-point extraction pipeline.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The measured outcome was explicit and objective: 6 predefined lung size measurements validated against two radiologists’ independent measurements.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include blinded radiologist comparison, quantitative agreement analysis, and public code availability; limitations include small sample size, single-center validation, and lack of larger external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies AI to lung transplant donor-recipient size matching, which is clearly relevant to thoracic transplantation AI.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the 2-step framework and defined measurement points; Table 1 for cohort demographics; Figure 2 for representative CXRs including technical challenges and abnormalities; Figure 3 for measurement error plots; and Table 2 for intraclass correlation coefficients between AI and radiologists. I did not report any value not explicitly shown in the uploaded article.  ￼
