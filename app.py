@@ -478,7 +478,7 @@ if reviewer_name and selected_pdf:
                 st.markdown("Please fill out the following sections based on the PRISMA, PICO, and CONVINCE guidelines.")
 
                 # --- Section 1: Study Identification & Metadata ---
-                with st.expander("Section 1: Study Identification & Metadata", expanded=True):
+                with st.expander("Section 1: Study Identification & Metadata", expanded=False):
                     # Bibtex fallback
                     bibtex_meta = get_bibtex_metadata(selected_pdf, bib_db)
 
