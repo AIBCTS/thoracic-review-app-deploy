@@ -1,0 +1,70 @@
+First Author: Zafar
+Title: Lung Transplantation Advanced Prediction Tool: Determining Recipient’s Outcome for a Certain Donor
+Source number: 56  ￼
+
+Very short summary: This UNOS-based study developed a recipient-donor matching risk model and web-based prediction tool for long-term survival after double lung transplantation. Five key findings were: (1) 15,124 double lung transplants in recipients aged ≥12 years were analyzed; (2) the cohort was split into a derivation set of 10,660 and a validation set of 4,464; (3) the final Cox-Lasso model retained 19 variables, including 13 recipient, 4 donor, and 2 transplant factors; (4) the model stratified matches into low-, medium-, and high-risk clusters with similar observed and predicted survival in validation; and (5) the reported C statistics for 1-, 5-, and 10-year survival were 0.67, 0.64, and 0.72, respectively, with estimated half-lives of 10.5, 7.3, and 5.2 years across the three risk groups. Figures 1–7 and Tables 1–3 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2005
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study used the United Network for Organ Sharing Registry and included eligible double lung transplants from “January 2005 and March 2020,” so this is a U.S. national-registry lung-transplant study. Funding was explicitly stated as “NIH 1R01HL147957-01.” I did not identify an explicit COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 15124
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 42.3
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final analytic cohort included 15,124 double lung transplants. Recipient age was reported as median 57 years rather than mean, so mean age is NR. Female recipients comprised 42.7% in the derivation cohort and 41.4% in the validation cohort, which is about 42.3% overall. Race/ethnicity and multiple clinical-history variables were reported, including diagnosis, functional status, eGFR, albumin, tobacco, steroid use, ECMO, ventilation, CMV, and donor factors.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Other
+	•	Algorithm Name: Cox-Lasso regression; comparison with Cox regression with backward elimination and random forest Cox; Lung Transplantation Advanced Prediction Tool (LAPT)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The main predictive model was Cox-Lasso, compared with backward-elimination Cox and random-forest Cox. Inputs included recipient, donor, and transplant characteristics from UNOS. The cohort was randomly split into derivation and validation sets, so Internal Split fits best. Variable selection was automated using the Lasso method, and the optimal lambda was selected to balance overfitting and simplicity. I did not see SHAP/LIME-type interpretability; interpretability came through the explicit risk score and cluster assignment.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 10660
+	•	Test Size (N): 4464
+	•	Section 4 Comments/Quotes: The paper states that records with a single missing point were imputed and that “imputation of missing data for recipient and donor variables was conducted separately,” which best fits multiple imputation among the available categories. Preprocessing included exclusions, categorization of continuous variables, expectation-maximization clustering, and derivation/validation splitting. The derivation and validation cohorts were 10,660 and 4,464. I did not find a class-imbalance method. A web-based tool was released, but no public code repository was mentioned, so code availability is best classified as Other.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 5-year survival
+	•	Model AUC / C-Statistic: 0.64
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The model predicts 1-, 5-, and 10-year survival plus half-life. Since a single target must be chosen, 5-year survival is the most central medium-term endpoint and has an explicitly reported C statistic of 0.64; 1-year and 10-year C statistics were 0.67 and 0.72. Calibration was reported by showing that model-estimated survival probabilities were similar to observed survival in the validation cohort and by comparing Kaplan–Meier curves across derivation and validation cohorts. Accuracy, PPV, sensitivity, specificity, NPV, and F1 were not reported. DCA was not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large UNOS national-registry cohort of double lung transplants with clear inclusion and exclusion criteria and a separate validation sample.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors included clinically relevant recipient, donor, and transplant variables available at transplant decision-making, which matches the intended use of the model.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined as post-transplant survival over multiple horizons, with survival probabilities and half-life estimated and validated against observed outcomes.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national data, separate derivation/validation cohorts, Lasso-based selection, clustering into risk groups, and calibration against observed survival. Uncertainty remains because the snippets do not show full details of all imputation steps and the model mixes conventional survival modeling with clustering rather than fully external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses advanced predictive modeling for recipient-donor matching and short-/long-term survival after lung transplantation, which is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort selection and exclusions; Figure 2 for adjusted total risk-score density and survival by score; Figure 3 for clustering of total scores into low-, medium-, and high-risk groups; Figure 4 for Kaplan–Meier validation across cohorts; Figure 5 for hazard-ratio comparisons; Figures 6–7 for the web-based calculator outputs; Table 1 for recipient, donor, and transplant characteristics in derivation and validation cohorts; Table 2 for Cox-Lasso coefficients; and Table 3/results text for cluster distributions, observed versus predicted survival, C statistics, and half-life estimates. I did not report any value not explicitly shown in the uploaded article.  ￼

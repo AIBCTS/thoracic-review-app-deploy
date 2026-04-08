@@ -1,0 +1,11 @@
+46_Shou et al. - 2022 - Pre-operative Machine Learning for Heart Transplant Patients Bridged with Temporary Mechanical Circu.pdf
+10_Dalton-2023-Refining the Lung Allocation Score.pdf
+5_Barbosa et al. - 2018 - Machine Learning Algorithms Utilizing Quantitative CT Features May Predict Eventual Onset of Bronchi.pdf
+7_Chang-2025-Patterns of Left Ventricular Region.pdf
+47_Singh et al. - 2024 - CT-Based Lung Size Matching in Delayed Chest Closure for Systemic Sclerosis Lung Transplantation.pdf
+53_Yeo et al. - 2025 - Machine Learning for 1-Year Mortality Prediction in Lung Transplant Recipients ISHLT Registry.pdf
+57_Zhou-2021-Prediction of 1-year mortality after.pdf
+52_Wang et al. - 2022 - Comparison of Four Machine Learning Techniques for Prediction of Intensive Care Unit Length of Stay.pdf
+16_Gnanasambandhan-2023-HEL-MCNN_ Hybrid extreme.pdf
+15_Glass-2024-A machine learning algorithm improv.pdf
+56_Zafar-2022-Lung Transplantation Advanced Predi.pdf
