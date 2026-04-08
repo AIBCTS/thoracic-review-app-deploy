@@ -17,7 +17,7 @@ data_llm/
 # Old data folder (to be deleted, do not track)
 data_/
 
-# PDFs are large — exclude from git but keep other data/ files (e.g. library.bib)
+# PDFs are pushed once but not version-controlled (use git add -f to add)
 data/*.pdf
 
 # reports/ is intentionally tracked in git
