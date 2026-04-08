@@ -1,5 +1,6 @@
 .streamlit/
 secrets/
+.secrets/
 *.pyc
 __pycache__/
 *.json
