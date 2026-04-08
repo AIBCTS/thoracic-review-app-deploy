@@ -6,6 +6,7 @@ from pathlib import Path
 import bibtexparser
 import gspread
 from google.oauth2.service_account import Credentials
+import unicodedata
 
 # --- Configuration ---
 st.set_page_config(layout="wide", page_title="Artificial Intelligence in Thoracic Transplantation: Current State and Future Directions")
@@ -59,6 +60,13 @@ print(f"CSV_FILE Path: {CSV_FILE}")
 # --- Helper Functions ---
 import re
 
+def _normalize_string(s):
+    """Normalize string to NFC format, lowercased and stripped."""
+    if s is None:
+        return ""
+    # NFC normalization is standard for web/data comparisons
+    return unicodedata.normalize('NFC', str(s).strip().lower())
+
 def get_numeric_prefix(filename):
     """Extracts and returns the leading integer prefix from a filename like '07_...' or '7_...'"""
     m = re.match(r'^(\d+)[_\s]', filename)
@@ -83,23 +91,23 @@ def get_bibtex_metadata(pdf_filename, bib_database):
     filename_clean = pdf_filename.replace(".pdf", "")
     # Strip leading numeric prefix (e.g. "07_" or "7_") before matching
     filename_clean = re.sub(r'^\d+[_\s]', '', filename_clean).strip()
-    parts = filename_clean.split(" - ")
+    parts = [p.strip() for p in filename_clean.split(" - ")]
     
-    # Simple heuristic: try to match the title or author from the filename
-    match_title = parts[2].strip().lower() if len(parts) >= 3 else filename_clean.lower()
-    match_author = parts[0].replace(" et al.", "").strip().lower() if len(parts) >= 1 else ""
+    # Heuristic: try to match the title or author from the filename
+    match_title = _normalize_string(parts[2]) if len(parts) >= 3 else _normalize_string(filename_clean)
+    match_author = _normalize_string(parts[0].replace(" et al.", "")) if len(parts) >= 1 else ""
     
     for entry in bib_database.entries:
-        entry_title = entry.get('title', '').replace('{', '').replace('}', '').lower()
-        entry_author = entry.get('author', '').lower()
+        entry_title = _normalize_string(entry.get('title', '').replace('{', '').replace('}', ''))
+        entry_author = _normalize_string(entry.get('author', ''))
         
-        # If the filename title is in the bibtex title, or vice versa, or author matches roughly
-        if (len(match_title) > 10 and (match_title in entry_title or entry_title[:20] in match_title)) or \
-           (match_author and match_author in entry_author):
-               
+        # Match if title is very similar or author is found
+        title_match = (len(match_title) > 10 and (match_title in entry_title or entry_title in match_title))
+        author_match = (match_author and match_author in entry_author)
+        
+        if title_match or author_match:
             title = entry.get('title', 'Unknown Title').replace('{', '').replace('}', '')
             authors = entry.get('author', 'Unknown Authors').replace('\n', ' ')
-            # Shorten authors if too long
             author_list = authors.split(' and ')
             if len(author_list) > 3:
                 authors = f"{author_list[0]} et al."
@@ -109,7 +117,6 @@ def get_bibtex_metadata(pdf_filename, bib_database):
             
     return pdf_filename
 
-@st.cache_data
 def load_report_files():
     """Loads all report files indexed by their numeric prefix."""
     report_map = {}  # int prefix -> Path
@@ -401,24 +408,23 @@ def get_worksheet():
 
 def _strip_prefix(name):
     """Strip leading numeric prefix (e.g. '01_' or '7_') from a study_id or filename."""
-    m = re.match(r'^\d+[_\s](.*)', name)
-    return m.group(1).strip() if m else name
+    name_str = _normalize_string(name)
+    m = re.match(r'^\d+[_\s](.*)', name_str)
+    return m.group(1).strip() if m else name_str
 
 def _study_ids_match(id_a, id_b):
-    """Compare two study_ids ignoring numeric prefix differences."""
-    # Exact match first
-    if id_a == id_b:
-        return True
-    # Try stripping prefix from both sides
+    """Compare two study_ids ignoring numeric prefix differences and encoding."""
     return _strip_prefix(id_a) == _strip_prefix(id_b)
 
 def _find_in_df(df, study_id, reviewer):
     """Find a review row in a DataFrame using prefix-aware study_id matching."""
     if df.empty or 'study_id' not in df.columns or 'reviewer' not in df.columns:
         return None
-    study_norm = _strip_prefix(str(study_id))
-    for _, row in df[df['reviewer'] == reviewer].iterrows():
-        if _strip_prefix(str(row['study_id'])) == study_norm:
+    study_norm = _strip_prefix(study_id)
+    reviewer_norm = _normalize_string(reviewer)
+    for _, row in df.iterrows():
+        if _normalize_string(row['reviewer']) == reviewer_norm and \
+           _strip_prefix(row['study_id']) == study_norm:
             return row.where(pd.notna(row), None).to_dict()
     return None
 
@@ -426,8 +432,9 @@ def _reviewed_ids_from_df(df, reviewer_name):
     """Return a set of strip-prefix-normalised study_ids reviewed by reviewer_name."""
     if df.empty or 'reviewer' not in df.columns or 'study_id' not in df.columns:
         return set()
-    reviewed = df[df['reviewer'] == reviewer_name]
-    return set(_strip_prefix(str(sid)) for sid in reviewed['study_id'].tolist())
+    reviewer_norm = _normalize_string(reviewer_name)
+    df_reviewed = df[df['reviewer'].apply(lambda x: _normalize_string(x) == reviewer_norm)]
+    return set(_strip_prefix(str(sid)) for sid in df_reviewed['study_id'].tolist())
 
 def load_pdf_list(reviewer_name=None):
     """Returns a list of PDF files, marking those already reviewed by the user."""
@@ -477,10 +484,11 @@ def get_existing_review(study_id, reviewer):
     if worksheet:
         try:
             records = worksheet.get_all_records()
-            study_norm = _strip_prefix(str(study_id))
+            study_norm = _strip_prefix(study_id)
+            reviewer_norm = _normalize_string(reviewer)
             for record in records:
-                if _strip_prefix(str(record.get('study_id', ''))) == study_norm and \
-                   str(record.get('reviewer', '')) == str(reviewer):
+                if _strip_prefix(record.get('study_id', '')) == study_norm and \
+                   _normalize_string(record.get('reviewer', '')) == reviewer_norm:
                     return {k: (v if v != "" else None) for k, v in record.items()}
         except Exception:
             pass
@@ -502,8 +510,11 @@ def save_data(data_dict):
             records = worksheet.get_all_records()
             # Find if it exists
             row_index = None
+            study_norm = _strip_prefix(data_dict['study_id'])
+            reviewer_norm = _normalize_string(data_dict['reviewer'])
             for i, record in enumerate(records):
-                if str(record.get('study_id', '')) == str(data_dict['study_id']) and str(record.get('reviewer', '')) == str(data_dict['reviewer']):
+                if _strip_prefix(record.get('study_id', '')) == study_norm and \
+                   _normalize_string(record.get('reviewer', '')) == reviewer_norm:
                     # get_all_records is 0-indexed, but Google Sheets rows are 1-indexed, and row 1 is the header.
                     # So record index 0 is row 2.
                     row_index = i + 2
@@ -532,7 +543,10 @@ def save_data(data_dict):
     if CSV_FILE.exists():
         df_existing = read_csv_safe(CSV_FILE)
         if not df_existing.empty and 'study_id' in df_existing.columns and 'reviewer' in df_existing.columns:
-            mask = (df_existing['study_id'] == data_dict['study_id']) & (df_existing['reviewer'] == data_dict['reviewer'])
+            study_norm = _strip_prefix(data_dict['study_id'])
+            reviewer_norm = _normalize_string(data_dict['reviewer'])
+            mask = ((df_existing['study_id'].apply(lambda x: _strip_prefix(str(x)))) == study_norm) & \
+                   ((df_existing['reviewer'].apply(lambda x: _normalize_string(str(x)))) == reviewer_norm)
             if mask.any():
                 index = df_existing[mask].index[0]
                 for key, value in data_dict.items():
@@ -558,7 +572,10 @@ def delete_data(study_id, reviewer):
         try:
             records = worksheet.get_all_records()
             for i, record in enumerate(records):
-                if str(record.get('study_id', '')) == str(study_id) and str(record.get('reviewer', '')) == str(reviewer):
+                study_norm = _strip_prefix(str(study_id))
+                reviewer_norm = _normalize_string(str(reviewer))
+                if _strip_prefix(str(record.get('study_id', ''))) == study_norm and \
+                   _normalize_string(str(record.get('reviewer', ''))) == reviewer_norm:
                     row_index = i + 2
                     worksheet.delete_rows(row_index)
                     return True
@@ -569,7 +586,10 @@ def delete_data(study_id, reviewer):
     if CSV_FILE.exists():
         df = read_csv_safe(CSV_FILE)
         if not df.empty and 'study_id' in df.columns and 'reviewer' in df.columns:
-            mask = (df['study_id'] == study_id) & (df['reviewer'] == reviewer)
+            study_norm = _strip_prefix(str(study_id))
+            reviewer_norm = _normalize_string(str(reviewer))
+            mask = ((df['study_id'].apply(lambda x: _strip_prefix(str(x)))) == study_norm) & \
+                   ((df['reviewer'].apply(lambda x: _normalize_string(str(x)))) == reviewer_norm)
             if mask.any():
                 df = df[~mask]
                 df.to_csv(CSV_FILE, index=False)
