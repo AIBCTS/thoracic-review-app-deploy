@@ -88,6 +88,19 @@ def get_bibtex_metadata(pdf_filename, bib_database):
     if not bib_database:
         return pdf_filename
         
+    # 1. Exact match on the 'file' field
+    for entry in bib_database.entries:
+        if pdf_filename in entry.get('file', ''):
+            title = entry.get('title', 'Unknown Title').replace('{', '').replace('}', '')
+            authors = entry.get('author', 'Unknown Authors').replace('\n', ' ')
+            author_list = authors.split(' and ')
+            if len(author_list) > 3:
+                authors = f"{author_list[0]} et al."
+            journal = entry.get('journal', 'Unknown Journal')
+            year = entry.get('year', 'Unknown Year')
+            return f"{title}\n{authors}\n{journal} / {year}"
+
+    # 2. Fallback Heuristic: try to match the title or author from the filename
     filename_clean = pdf_filename.replace(".pdf", "")
     # Strip leading numeric prefix (e.g. "07_" or "7_") before matching
     filename_clean = re.sub(r'^\d+[_\s]', '', filename_clean).strip()
@@ -97,8 +110,7 @@ def get_bibtex_metadata(pdf_filename, bib_database):
         if len(parts_alt) >= 3:
             parts = parts_alt
             
-    # Heuristic: try to match the title or author from the filename
-    match_title = _normalize_string(parts[2]) if len(parts) >= 3 else _normalize_string(filename_clean)
+    match_title = _normalize_string(parts[2]) if len(parts) >= 3 else _normalize_string(filename_clean[:30])
     match_author = _normalize_string(parts[0].replace(" et al.", "")) if len(parts) >= 1 else ""
     
     for entry in bib_database.entries:
@@ -744,8 +756,18 @@ if reviewer_name and selected_pdf:
     with col_form:
         st.subheader("Extraction Form")
         st.write(f"**Current Article:** `{selected_pdf}`")
+        bibtex_meta = get_bibtex_metadata(selected_pdf, bib_db)
+
         if existing_data:
             st.info("ℹ️ You have previously reviewed this article. Form is pre-filled with your saved data.")
+            # Check for metadata mismatch
+            saved_meta = existing_data.get('study_metadata', '')
+            if bibtex_meta and saved_meta and _normalize_string(saved_meta) != _normalize_string(bibtex_meta):
+                st.warning("⚠️ The saved Title/Author/Journal/Year metadata differs from the library.bib file.")
+                if st.button("Update metadata with correct values from BibTeX", key=f"update_meta_{study_id}"):
+                    st.session_state[f"force_meta_{study_id}"] = bibtex_meta
+                    st.rerun()
+
         elif report_data:
             st.success(f"📄 Pre-filled from report: `{report_path.name if report_path else 'report'}`")
         elif report_path and reviewer_name.strip().lower() == "johan nilsson":
@@ -753,6 +775,7 @@ if reviewer_name and selected_pdf:
             if st.button("📄 Pre-fill form from report file", key=f"btn_prefill_{study_id}"):
                 parsed = report_to_review_dict(report_path)
                 if parsed:
+                    parsed['study_metadata'] = bibtex_meta
                     st.session_state[report_prefill_key] = parsed
                     st.rerun()
                 else:
@@ -764,16 +787,18 @@ if reviewer_name and selected_pdf:
 
                 # --- Section 1: Study Identification & Metadata ---
                 with st.expander("Section 1: Study Identification & Metadata", expanded=False):
-                    # Bibtex fallback
-                    bibtex_meta = get_bibtex_metadata(selected_pdf, bib_db)
 
-                    if existing_data and existing_data.get('study_metadata'):
+                    if f"force_meta_{study_id}" in st.session_state:
+                        meta_default = st.session_state[f"force_meta_{study_id}"]
+                    elif existing_data and existing_data.get('study_metadata'):
                         meta_default = existing_data.get('study_metadata')
                         # Convert old ' / ' format to newlines if it's on one line
                         if '\n' not in meta_default and ' / ' in meta_default:
                             parts = meta_default.split(' / ')
                             if len(parts) >= 3:
                                 meta_default = f"{parts[0]}\n{parts[1]}\n{' / '.join(parts[2:])}"
+                    elif report_data and report_data.get('study_metadata'):
+                        meta_default = report_data.get('study_metadata')
                     else:
                         meta_default = bibtex_meta
 
