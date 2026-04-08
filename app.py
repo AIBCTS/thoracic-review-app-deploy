@@ -397,6 +397,10 @@ st.divider()
 # Only show the main UI if a reviewer name is entered and a PDF is selected
 if reviewer_name and selected_pdf:
     
+    if 'current_pdf' not in st.session_state or st.session_state.current_pdf != selected_pdf:
+        st.session_state.current_pdf = selected_pdf
+        st.session_state.start_time = pd.Timestamp.now()
+        
     study_id = selected_pdf.replace(".pdf", "")
     existing_data = get_existing_review(study_id, reviewer_name)
     
@@ -665,11 +669,21 @@ if reviewer_name and selected_pdf:
                     qa_applicability_comments = st.text_area("Applicability Comments", value=get_val('qa_applicability_comments', ""))
 
                 # Form submission
-                submit_button = st.form_submit_button(label="Save PRISMA/CONVINCE Review Data")
+                col_submit, col_time = st.columns([5, 5])
+                with col_submit:
+                    submit_button = st.form_submit_button(label="Save PRISMA/CONVINCE Review Data")
 
                 if submit_button:
+                    end_time = pd.Timestamp.now()
+                    duration_seconds = int((end_time - st.session_state.start_time).total_seconds())
+                    minutes, seconds = divmod(duration_seconds, 60)
+                    
+                    with col_time:
+                        st.markdown(f"<p style='margin-top: 10px; font-size: 16px;'>⏱️ <b>Review Duration:</b> {minutes} min {seconds} sec</p>", unsafe_allow_html=True)
+
                     review_data = {
-                        "date_reviewed": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "date_reviewed": end_time.strftime("%Y-%m-%d %H:%M:%S"),
+                        "review_duration_seconds": duration_seconds,
                         "reviewer": reviewer_name,
                         "study_id": study_id,
                         "study_metadata": study_meta,
