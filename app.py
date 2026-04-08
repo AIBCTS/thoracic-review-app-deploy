@@ -92,7 +92,11 @@ def get_bibtex_metadata(pdf_filename, bib_database):
     # Strip leading numeric prefix (e.g. "07_" or "7_") before matching
     filename_clean = re.sub(r'^\d+[_\s]', '', filename_clean).strip()
     parts = [p.strip() for p in filename_clean.split(" - ")]
-    
+    if len(parts) < 3:
+        parts_alt = [p.strip() for p in filename_clean.split("-")]
+        if len(parts_alt) >= 3:
+            parts = parts_alt
+            
     # Heuristic: try to match the title or author from the filename
     match_title = _normalize_string(parts[2]) if len(parts) >= 3 else _normalize_string(filename_clean)
     match_author = _normalize_string(parts[0].replace(" et al.", "")) if len(parts) >= 1 else ""
@@ -280,8 +284,8 @@ _VALUE_NORMALISE = {
     "Simple Imputation": "Simple Imputation (Mean/Median)",
     "Multiple Imputation": "Multiple Imputation",
     # Class imbalance
-    "Not Applicable": "Not Applicable/Not Reported",
-    "Not Applicable/Not Reported": "Not Applicable/Not Reported",
+    "Not Applicable": "Not Applicable / Not Reported",
+    "Not Applicable/Not Reported": "Not Applicable / Not Reported",
     # Outcomes
     "Acute Rejection": "Acute Rejection",
     "Donor acceptance": "Donor acceptance for transplantation",
@@ -342,6 +346,7 @@ def get_secret_val(key, subkey=None):
     
     # 3. Try Mounted File — local project secrets first, then SciLifeLab Serve paths
     mount_paths = [
+        BASE_DIR / ".secrets" / "secrets.toml",  # Local dev alternative
         BASE_DIR / "secrets" / "secrets.toml",   # Local dev: project/secrets/secrets.toml
         Path("/app/secrets/secrets.toml"),
         Path("/srv/secrets/secrets.toml"),
