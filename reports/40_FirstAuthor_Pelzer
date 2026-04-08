@@ -1,0 +1,70 @@
+First Author: Pelzer
+Title: The Accuracy of Initial U.S. Heart Transplant Candidate Rankings
+Source number: 40  ￼
+
+Very short summary: This SRTR registry study compared the current U.S. 6-status heart allocation ranking with multivariable urgency prediction models for death before transplant. Five key findings were: (1) 32,294 adult heart-transplant candidates were analyzed; (2) the 6-status system had only moderate discrimination at listing, with C-index 0.67; (3) Cox proportional hazards and random survival forest models trained on prepolicy data performed better in the postpolicy cohort, with C-indices 0.76 and 0.74; (4) statuses 4 and 6 had no significant survival difference, while status 5 had worse survival than status 4; and (5) physiologic measurements, especially glomerular filtration rate, had the highest variable importance. Tables 1–2, Figure 1, and the Kaplan–Meier/calibration figures were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2010
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The data source was the “Scientific Registry of Transplant Recipients,” with a prepolicy training set from “2010-2017” and a postpolicy test set from “November 1, 2018, and March 1, 2020.” I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Candidates (Waitlist)
+	•	Total Sample Size (N): 32294
+	•	Overall Mean Age: 53
+	•	Female Sex (%): 26.3
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final cohort contained “32,294 adult heart transplant candidates (mean age: 53.0 years; 73.7% male),” implying 26.3% female. Race/ethnicity was not reported in the retrieved text. Clinical history included malignant disease, cerebrovascular disease, tobacco use, diabetes, diagnosis categories, and supportive treatments.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random survival forest (RSF); comparator Cox proportional hazards (CPH)
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The study compared therapy-based “6-status” ranking with two multivariable methods: “Cox proportional hazards models and random survival forest models.” Predictors were clinically chosen listing-time variables including age, diagnosis, laboratory measurements, hemodynamics, and supportive treatment. Models were trained on prepolicy data and evaluated on a later postpolicy cohort, which is best classified as external temporal validation. No SHAP/LIME-style interpretability or hyperparameter-tuning details were reported in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 27200
+	•	Test Size (N): 5094
+	•	Section 4 Comments/Quotes: “Other missing data were imputed with the multiple imputation by chained equations algorithm,” so missing-data handling is multiple imputation. The prepolicy training cohort included 27,200 candidates and the postpolicy test cohort 5,094. The authors also specified assumptions for missing indicator variables and exclusion of obvious data-entry errors. I did not identify class-imbalance mitigation or code release.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Waitlist mortality
+	•	Model AUC / C-Statistic: 0.76
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was “death before receipt of a heart transplant,” which maps to waitlist mortality. In the postpolicy test set, the best-performing model was the Cox model with treatment variables, C-index 0.76, followed by the random survival forest with treatment variables, C-index 0.74; the 6-status system had C-index 0.67. Calibration was assessed with Kaplan–Meier survival by predicted 90-day risk groups and Brier scores. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. DCA was not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult heart-transplant candidates, which minimizes single-center selection bias, although some candidates with data errors were excluded.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were listing-time physiologic measures, treatments, diagnoses, blood type, and medical history variables that are clinically relevant to urgency ranking.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “death without receiving a heart transplant,” including death while waitlisted and after delisting, with transplant treated as censoring.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal train-test separation, multiple imputation, comparison of CPH and RSF, bootstrap CIs, calibration assessment, and variable-importance analysis.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses ML-based urgency ranking among heart-transplant candidates and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for prepolicy and postpolicy candidate characteristics; Table 2 for C-indices of the 6-status system and the Cox/RSF models; Figure 1 for individual and joint variable importance in the RSF models; and the Kaplan–Meier/calibration figures described in the Results for survival separation across status categories and model-predicted 90-day risk groups. I did not report any value not explicitly shown in the uploaded article.  ￼
