@@ -1,0 +1,70 @@
+First Author: Ma
+Title: Developing approaches to incorporate donor-lung computed tomography images into machine learning models to predict severe primary graft dysfunction after lung transplantation
+Source number: 33  ￼
+
+Very short summary: This single-center study evaluated how donor-lung CT scans can be integrated with clinical data to predict severe primary graft dysfunction (PGD) after bilateral lung transplantation. Five key findings were: (1) 160 first-time bilateral lung transplant recipients with donor-lung CT scans were analyzed; (2) severe PGD occurred in 44 patients (27.5%); (3) among imaging-only models, a 3D ResNet approach performed best, with median AUROC 0.63 and AUPRC 0.48; (4) after reducing 98 clinical variables to 13 features, late fusion of CT and clinical data gave the best overall performance; and (5) the late-fusion multimodal model outperformed clinical-data-only prediction, achieving median AUROC 0.74 and AUPRC 0.61. Figures 1–2 and Tables 1–3 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2010
+	•	Study Period End (Year): 2019
+	•	Section 1 Comments/Quotes: The study included patients undergoing bilateral lung transplantation “at Washington University in St. Louis between January 1, 2010 and December 31, 2019,” making this a U.S. single-center cohort. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 160
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 41.88
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: “In total, 160 patients were eligible for inclusion,” and Table 1 reports female sex in 67 of 160 recipients (41.88%). Age was reported as median 61 years rather than mean, so mean age is NR. Race, diagnosis, hospitalization status, ICU status, mechanical ventilation, ECMO, LAS, BMI, pulmonary artery pressure, and donor characteristics were reported.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: 3D ResNet (SE ResNet50 3D) with multimodal fusion; EfficientNetB7 and ResNet50 comparator imaging pipelines
+	•	Input Variables (Data Modality): Imaging; Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The study tested four computer-vision architectures, including ResNet50 montage approaches, EfficientNetB7 slice-based extraction, and a pretrained “3D ResNet model (SE ResNet50 3D).” Clinical and imaging data were then fused by early, joint, and late fusion. Feature reduction used repeated LASSO with selection frequency thresholding. Model training used stratified 7-fold cross-validation plus held-out validation/test sets. Hyperparameters included focal-loss gamma testing and were selected during cross-validation.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 120
+	•	Test Size (N): 20
+	•	Section 4 Comments/Quotes: The paper states, “Missing clinical data was median imputed,” which is simple imputation. The cohort was split “75%:12.5%:12.5% train:test:validation,” so for 160 patients this corresponds to about 120 training and 20 held-out test patients. Preprocessing included DICOM handling, grayscale normalization, automatic exclusion of the top 15% and bottom 5% of scan series, resizing/cropping, and feature ablation. Class imbalance was addressed using focal loss optimized for AUPRC. Code availability was not reported in the retrieved text.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: PGD
+	•	Model AUC / C-Statistic: 0.74
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was “severe PGD (grade 3) at any time within the first 72 hours after transplantation.” Among imaging-only approaches, the best model had median AUROC 0.63 and AUPRC 0.48. The best overall model was late fusion of imaging and clinical data, with median AUROC 0.74 and AUPRC 0.61, significantly better than clinical EHR data alone (AUROC 0.64, AUPRC 0.43). The paper also reports F1, recall, PPV, NPV, and accuracy in tables, but the provided excerpt does not show all final fused-model numeric values clearly enough for me to extract them without risk of error, so I leave them NR. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center cohort of only 160 recipients, restricted to transplanted donors with available CT scans, which limits representativeness and introduces selection risk.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient/donor EHR data and routinely reviewed donor-lung CT scans, and the image preprocessing pipeline was explicitly described.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Severe PGD was defined according to “International Society for Heart and Lung Transplantation criteria” and graded by two board-certified pulmonologists.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include TRIPOD+AI reporting, held-out validation/test sets, bootstrap analysis, repeated LASSO, and multimodal comparison; uncertainty remains because the sample size is small for deep learning and external validation was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly applies AI/ML to lung transplantation, specifically donor-CT-enhanced prediction of severe PGD after transplant, which is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the four imaging-model architectures; Figure 2 for early, joint, and late fusion strategies; Table 1 for recipient and donor characteristics plus PGD incidence; Table 2 for imaging-only model performance; and Table 3/results text for the 13 selected clinical features and superior late-fusion multimodal performance. I did not report any value not explicitly shown in the uploaded article excerpt.  ￼

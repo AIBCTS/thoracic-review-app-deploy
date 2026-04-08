@@ -1,0 +1,70 @@
+First Author: Ozcan
+Title: Artificial intelligence–derived cardiac ageing is associated with cardiac events post-heart transplantation
+Source number: 39  ￼
+
+Very short summary: This single-center retrospective cohort study evaluated an AI-ECG age algorithm in heart transplant recipients to determine whether post-transplant “physiological ageing” predicts adverse events. Five key findings were: (1) 540 heart transplant recipients with available pre- and post-transplant ECG data were analyzed; (2) pre-transplant ECG age averaged 63 ± 11 years and post-transplant ECG age 54 ± 10 years; (3) post-transplant ECG age correlated with both donor age and recipient age; (4) during median follow-up of 8.8 years, 307 patients experienced major adverse cardiovascular events (MACE); and (5) an increase in ECG age after transplant was independently associated with higher MACE risk, with multivariable HR 1.58 (95% CI 1.18–2.10, P = 0.002). Figure 1, Table 1, and Table 2 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1990
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: The study was performed “at Mayo Clinic in Rochester, MN” and included “564 consecutive cardiac transplant patients who underwent HTx in our institution between 1990 and 2018,” so this is a U.S. single-center cohort. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 540
+	•	Overall Mean Age: 49
+	•	Female Sex (%): 32
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: “A total of 540 patients with available pre- and post-transplantation ECG data were included.” Table 1 reports recipient age 49 ± 14 years and recipient sex male in 366/540, implying 32% female. Race/ethnicity was not reported in the retrieved text. Clinical history included hypertension, diabetes mellitus, ischemic cardiomyopathy, lipid measures, ischemic time, immunosuppression, rejection, CAV grade, and pacemaker implantation.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: AI-ECG age algorithm / ECG-age convolutional neural network
+	•	Input Variables (Data Modality): Waveforms (ECG)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper used “an AI-ECG algorithm that was previously developed and validated in the non-transplant population” and states that “the convolutional neural network model was developed using Keras with a TensorFlow and Python backend.” Raw 12-lead ECGs were input to estimate ECG age. The model was applied without additional training to this transplant cohort. No SHAP/LIME-type explainability or hyperparameter-tuning process for this study cohort was reported. Validation here is best marked as not reported because this paper is primarily an application/prognostic study of a previously developed model rather than a new derivation-validation paper.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The analysis included only patients “with available pre- and post-transplantation ECG data,” which is most consistent with complete-case inclusion. The ECG-age algorithm had been previously trained on 774,783 subjects outside this study, but this paper did not retrain or provide study-specific train/test counts for the transplant cohort. Data handling was described, including averaging ECG ages from ECGs obtained within 1 year before and after HTx and excluding ECGs used in the original training/validation sets. Class imbalance is not applicable to this prognostic exposure analysis. The network architecture was “available on request,” so code availability is best classified as Other rather than Yes.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Adverse Events
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The study outcome was MACE, defined as “any incident of coronary revascularization, heart failure hospitalization, re-transplantation, and all-cause mortality,” so the closest allowed category is Adverse Events. During median follow-up of 8.8 years, 307 patients experienced MACE. The main reported performance/result metric was association strength rather than discrimination: ΔECG age ≥ 0 was associated with MACE in multivariable Cox analysis, HR 1.58 (95% CI 1.18–2.10, P = 0.002). No AUC, accuracy, sensitivity, specificity, PPV, NPV, F1, calibration, or DCA were reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center Mayo Clinic cohort, and only patients with both pre- and post-transplant ECG data were included in the final analysis.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized 12-lead ECGs processed by a previously developed CNN, and the study clearly defined pre- and post-transplant ECG age windows.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: MACE was explicitly defined as coronary revascularization, heart failure hospitalization, re-transplantation, and all-cause mortality, with events collected by detailed chart review.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multivariable Cox models, competing-risk analysis, and long follow-up. Uncertainty remains because this was a prognostic application of an existing AI tool rather than a full derivation/validation study within the transplant cohort, and no discrimination/calibration metrics were reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies AI to post-heart-transplant risk stratification and cardiac events, which is clearly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the correlations between recipient/donor chronological age and ECG age before and after transplant; Table 1 for recipient and donor baseline characteristics and the stratification by increase vs decrease in ECG age; and Table 2 for the univariable and multivariable Cox models showing the association between ECG-age increase and future MACE. I did not report any value not explicitly shown in the uploaded article.  ￼

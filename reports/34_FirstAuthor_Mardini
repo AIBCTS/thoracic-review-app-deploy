@@ -1,0 +1,70 @@
+First Author: Mardini
+Title: An explainable machine learning approach using contemporary UNOS data to identify patients who fail to bridge to heart transplantation
+Source number: 34  ￼
+
+Very short summary: This study developed explainable XGBoost models to predict failure to bridge to heart transplantation among UNOS Status 2 candidates supported with IABP or Impella. Five key findings were: (1) 4,178 Status 2 patients from 2018–2022 were analyzed, and 12% experienced Status 2 failure; (2) the overall XGBoost model used 19 variables and achieved AUC 0.71 ± 0.03; (3) performance varied by UNOS region, with AUCs ranging from 0.44 ± 0.08 to 0.74 ± 0.01; (4) specificity was consistently high, ranging from 0.75 to 0.96; and (5) the top overall predictors were number of inotropes, creatinine, sodium, BMI, and blood group. Tables 1–2 and Figures 1–2 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2018
+	•	Study Period End (Year): 2022
+	•	Section 1 Comments/Quotes: The study “utilized the UNOS registry” and identified candidates “listed between 2018 and 2022 as UNOS Status 2,” making this a U.S. national registry study. I did not identify an explicit funding or competing-interest declaration in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Candidates (Waitlist)
+	•	Total Sample Size (N): 4178
+	•	Overall Mean Age: 54.1
+	•	Female Sex (%): 23.5
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort included “4,178 patients listed as Status 2.” From Table 1, mean age was 52.3 in failures and 54.3 in non-failures; weighted overall mean is about 54.1 years. Female sex was 96/504 in failures and 885/3674 in non-failures, for an overall 981/4178 = 23.5%. Race, diabetes, ventilation, dialysis, cardiomyopathy type, hemodynamics, biochemistry, medications, and region were all reported.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: eXtreme Gradient Boosting (XGBoost)
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The authors “used the eXtreme Gradient Boosting (XGBoost) algorithm” and developed one comprehensive model plus region-specific models. Inputs were structured UNOS tabular clinical features. Model interpretation used SHAP. Predictors were chosen from clinically different features between groups and then reduced to 19 inputs after removing highly correlated variables and creating missingness indicators. Validation used 5 × 5 nested cross-validation with grid search.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Algorithm handles natively
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The study explicitly compared several imputation methods, including “XGBoost’s built-in imputation mechanism,” and Supplementary Table S1 determined the best strategy per model; among the restricted categories, “algorithm handles natively” fits best. Class imbalance was addressed by testing under-sampling, SMOTE, and increased class weights. Preprocessing included removal of correlated features, creation of PAPi, missingness indicators, and categorical encoding. Fixed train/test counts were not reported because evaluation used nested cross-validation folds. Code availability was not stated.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Waitlist mortality
+	•	Model AUC / C-Statistic: 0.71
+	•	Model Accuracy (%): 72
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 54
+	•	Specificity (%): 75
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was failure to bridge to transplant, defined as “death while on the waiting list, being too sick to transplant, being listed as an inactive patient due to a high risk of transplantation (Status 7) or upgrading to UNOS status 1.” Within the restricted outcome labels, Waitlist mortality is the closest fit, though the actual endpoint is broader than mortality alone. The overall model achieved AUC 0.71 ± 0.03, accuracy 0.72 ± 0.02, sensitivity 0.54 ± 0.04, and specificity 0.75 ± 0.02. PPV, NPV, F1, calibration, and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a contemporary UNOS national registry cohort of 4,178 Status 2 candidates with explicit inclusion criteria, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant pre-listing/support variables measured near MCS initiation, including hemodynamics, labs, support devices, medications, and demographics.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as Status 2 failure, including death, too sick for transplant, Status 7 inactivation due to high transplant risk, or upgrade to Status 1.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested cross-validation, grid search, SHAP-based interpretation, and explicit handling of missingness and imbalance. Uncertainty remains because performance was only moderate and varied substantially across regions.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning prediction in heart transplant candidates awaiting transplantation and is clearly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for cohort characteristics and failure vs non-failure comparisons; Table 2 for model performance across all patients and by UNOS region; Figure 1 for SHAP summary of the top 15 features; and Figure 2 for the heatmap summarizing feature-rank variation across regions. I did not report any value not explicitly shown in the uploaded article.  ￼

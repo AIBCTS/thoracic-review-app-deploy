@@ -1,0 +1,70 @@
+First Author: Lisboa
+Title: Enhanced survival prediction using explainable artificial intelligence in heart transplantation
+Source number: 32  ￼
+
+Very short summary: This study evaluated an explainable artificial intelligence approach for predicting 1-year mortality after heart transplantation and benchmarked it against deep learning and conventional models. Five key findings were: (1) the main blinded external validation cohort included 4,750 UNOS transplants from 2017–2018, with an additional Scandinavian external cohort of 2,293 transplants; (2) the final PRN-Lasso model retained 9 univariate effects plus 1 two-way interaction; (3) in the UNOS 2017–2018 external cohort, PRN-Lasso achieved AUROC 0.628, comparable to the deep IHTSA model at 0.635; (4) the PRN model showed good calibration in the blinded external cohort with Hosmer–Lemeshow chi-square 15.01, p = 0.135; and (5) key effects included recipient age, donor age, creatinine, ischemic time, ventilator at transplant, infection within 2 weeks, recipient female sex, transplant year, diagnosis, and an interaction between recipient age and ischemic cardiomyopathy. Figures 1–4 and Tables 1–3 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: International Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1997
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: The study used UNOS cohorts from 1997–2018 and an external Scandinavian cohort from 1997–2018, so the data origin is multinational and best classified as international registry data rather than a single-country registry alone. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 44478
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 26
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The UNOS cohorts included derivation n = 31,315, test n = 6,120, and blinded external validation n = 4,750, totaling 42,185 UNOS recipients; the Scandinavian cohort added 2,293 recipients, for 44,478 total across all cohorts described. Female sex was 26% in the external validation cohort and 24% in the derivation cohort; I report 26% because the primary external-validation cohort is the main focus of performance reporting. Race and multiple comorbidities/clinical variables were reported, including diabetes, dialysis, infection, ECMO, IABP, VAD, ventilator use, bilirubin, creatinine, and diagnosis. A single overall mean age across all cohorts was not reported in the retrieved text.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: ANN/MLP/NN
+	•	Algorithm Name: Partial Response Network (PRN-Lasso); benchmarked against IHTSA deep learning model, IMPACT, and Explainable Boosting Machine
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The paper developed a self-explaining neural network, the Partial Response Network, and benchmarked it against the previously published deep learning IHTSA model, IMPACT, and EBM. Inputs were tabular recipient and donor variables. The main study design was a temporal derivation/tuning/validation framework: 1997–2013 for training, 2014–2016 for testing/hyperparameter optimization, and 2017–2018 as blinded external validation. Explainability was intrinsic to the PRN design through explicit partial-response functions rather than SHAP/LIME, but it still meets the user’s category of explainability used.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 31315
+	•	Test Size (N): 4750
+	•	Section 4 Comments/Quotes: The Scandinavian external dataset had missing values imputed using the median for each column, which fits best under simple imputation. The model-development workflow clearly described derivation, test, and external validation cohorts and standardization around medians for partial responses. I did not find any resampling or class-weighting approach for class imbalance, nor a code-release statement. The derivation cohort size was 31,315 and the primary blinded external validation cohort size was 4,750.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.628
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The modeled outcome was 1-year mortality after heart transplantation, which maps to 1-year survival in this extraction framework. In the blinded external UNOS 2017–2018 cohort, PRN-Lasso achieved AUROC 0.628 [0.602, 0.654], compared with 0.635 [0.609, 0.662] for IHTSA; calibration for PRN was good with Hosmer–Lemeshow chi-square 15.01, p = 0.135. In the Scandinavian cohort, AUROC was 0.626 with imputed data and 0.634 with observed-only data. Accuracy, PPV, sensitivity, specificity, NPV, F1, and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used large registry-based cohorts from UNOS plus an external Scandinavian dataset, with clear temporal separation for derivation, testing, and blinded validation, which reduces major selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor variables commonly used for 1-year mortality prediction, including age, creatinine, ischemic time, ventilator status, diagnosis, infection, and transplant year.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The paper explicitly modeled 1-year mortality after heart transplantation and reported event rates and AUROCs consistently across cohorts.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal external validation, comparison with multiple benchmarks, calibration assessment, and additional external validation in Scandinavia. Remaining uncertainty is limited compared with many studies in this review.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This study directly addresses explainable AI for prediction of 1-year mortality after heart transplantation and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort derivation and temporal validation structure; Tables 1 and 2 for recipient baseline characteristics across cohorts; Figure 2 for partial-response functions and selected effects; Table 3 and Figure 3 for discrimination benchmarking against IHTSA, IMPACT, and EBM; and Figure 4 for calibration of PRN versus comparator models. I did not report any metric not explicitly shown in the uploaded article.  ￼

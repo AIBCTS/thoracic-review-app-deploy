@@ -1,0 +1,70 @@
+First Author: Medved
+Title: Improving prediction of heart transplantation outcome using deep learning techniques
+Source number: 36  ￼
+
+Very short summary: This UNOS registry study compared a deep-learning heart-transplant survival model (IHTSA) with the conventional IMPACT score for predicting post-transplant mortality. Five key findings were: (1) 27,860 adult heart transplants, corresponding to 27,705 patients, were analyzed; (2) one-year mortality was 13% (n = 3,561), with median survival 12 years; (3) in the 2009–2011 test cohort, recalibrated IHTSA achieved AUROC 0.65 versus 0.61 for IMPACT for 1-year mortality; (4) for long-term survival discrimination in the same test cohort, recalibrated IHTSA had C-index 0.63 versus 0.58 for IMPACT; and (5) calibration was better for IHTSA, with predicted 1-year mortality 12% versus actual 10%, compared with 22% for IMPACT. Tables 1–6 and Figures 1–3 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1997
+	•	Study Period End (Year): 2011
+	•	Section 1 Comments/Quotes: The study used “data from adult heart transplanted patients between January 1997 to December 2011… collected from the UNOS registry,” which is a U.S. national registry. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 27860
+	•	Overall Mean Age: 52
+	•	Female Sex (%): 24
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study included “27,860 heart transplantations, corresponding to 27,705 patients.” Recipient mean age was “52 ± 13 years,” and 76% were male, implying 24% female. Race and numerous clinical-history variables were reported, including diabetes, infection, dialysis, previous transplant, previous cardiac surgery, ICU status, ventilation, ECMO, IABP, VAD, bilirubin, creatinine, PRA, and diagnosis.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: ANN/MLP/NN
+	•	Algorithm Name: International Heart Transplantation Survival Algorithm (IHTSA); comparator IMPACT
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The paper compared the deep-learning IHTSA model with the logistic-regression-based IMPACT score. IHTSA used recipient and donor tabular registry variables, whereas IMPACT used recipient variables only. The study split cohorts into pre-2009 derivation and 2009–2011 temporal test cohorts, which is best classified as external temporal validation relative to the derivation era. The text mentions CART was used by IHTSA developers to assess relative feature importance, but not as a main explainability framework in this paper. Hyperparameter tuning was not described in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: No
+	•	Training Size (N): 22263
+	•	Test Size (N): 5597
+	•	Section 4 Comments/Quotes: The derivation cohort contained 22,263 transplants and the test cohort 5,597. The tables repeatedly report “N, number of transplants with non-missing values,” which indicates analysis on available cases rather than explicit imputation, so complete-case style handling is the best fit. No class-imbalance strategy or preprocessing/normalization details were reported. A web calculator for IHTSA is mentioned, but no code repository or released weights were identified, so code availability is marked Other.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.65
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: In the 2009–2011 test cohort, recalibrated IHTSA achieved AUROC 0.65 (95% CI 0.63–0.68) for 1-year mortality, compared with 0.61 (0.58–0.63) for IMPACT. For long-term survival, recalibrated IHTSA had C-index 0.63 (0.61–0.65) versus 0.58 (0.56–0.61) for IMPACT. Calibration was reported through predicted versus actual mortality and Hosmer–Lemeshow statistics, with IHTSA closer to observed 1-year mortality than IMPACT. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large UNOS national registry cohort of adult heart transplant recipients with explicit temporal separation into derivation and test eras.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor variables available in UNOS, and the models compared recipient-only versus recipient-plus-donor approaches.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly modeled one-year mortality and long-term survival after heart transplantation, with follow-up summarized over 165,206 patient-years.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include large scale, temporal test validation, comparison with an established score, ROC/C-index evaluation, and calibration analysis. Uncertainty remains because missing-data handling and full modeling details were not extensively described in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI/deep-learning prediction of post-heart-transplant survival and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for recipient features and baseline characteristics; Table 2 for donor features; Table 3 for AUROC comparison for 1-year mortality; Table 4 for C-index comparison for long-term survival; Figures 1–2 for ROC and sensitivity/correctly classified-patient comparisons; and Figure 3 plus accompanying text for calibration versus observed 1-year mortality. I did not report any value not explicitly shown in the uploaded article.  ￼
