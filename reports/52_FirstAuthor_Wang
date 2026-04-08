@@ -1,0 +1,70 @@
+First Author: Wang
+Title: Comparison of Four Machine Learning Techniques for Prediction of Intensive Care Unit Length of Stay in Heart Transplantation Patients
+Source number: 52  ￼
+
+Very short summary: This single-center retrospective study compared several machine-learning methods for predicting prolonged ICU length of stay after heart transplantation. Five key findings were: (1) 365 heart-transplant recipients from Wuhan Union Hospital were included; (2) patients were split into 256 training and 109 test cases; (3) LASSO selected six key predictors, with ECMO use ranked most important by SHAP; (4) among the tested models, XGBoost performed best; and (5) the XGBoost model achieved AUC-ROC 0.88 with accuracy 0.87, sensitivity 0.98, specificity 0.51, PPV 0.86, and NPV 0.93 for predicting prolonged ICU stay. Figures 1–3 and Tables 1–2 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2017
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The cohort came from “Wuhan Union Hospital” and included patients undergoing heart transplantation “between April 2017 and August 2020,” so this is an Asian single-center heart-transplant study. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 365
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study included 365 consecutive heart-transplant recipients. Recipient age was reported as median 47.2 years, not mean age, so mean age is NR. The provided text gives donor sex distribution but does not clearly provide recipient female percentage, so I leave female sex as NR. Race/ethnicity was not reported. Clinical/history features included ECMO, IABP, CRRT, creatinine, renal/hepatic complications, diabetes, hypertension, and operative variables.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: XGBoost, Random Forest, Naive Bayes, Support Vector Machine, plus logistic regression benchmark
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The paper developed four ML models and a logistic regression benchmark to predict prolonged ICU-LOS, and XGBoost performed best. Inputs were structured clinical variables, including donor and recipient data. The study used a 7:3 train/test split, LASSO with fivefold cross-validation for feature selection, and SHAP for interpretation. I did not see an explicit hyperparameter-tuning process described in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Other
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 256
+	•	Test Size (N): 109
+	•	Section 4 Comments/Quotes: The paper states that “Missing values were imputed with median of each corresponding variable,” which is simple imputation. The study also states “we use up-sampling to process the data,” so class imbalance was addressed. Preprocessing included random 7:3 splitting, LASSO feature selection, and fivefold cross-validation. The authors also created an online web-server, but I did not see public source code or weights, so code availability is best marked Other.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Economy/Length of Stay
+	•	Model AUC / C-Statistic: 0.88
+	•	Model Accuracy (%): 87
+	•	PPV / Precision (%): 86
+	•	Sensitivity / Recall (%): 98
+	•	Specificity (%): 51
+	•	NPV (%): 93
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was prolonged ICU length of stay, defined using the 75th percentile threshold of 9.08 days, so the best category is Economy/Length of Stay. The paper reports for XGBoost: “AUC-ROC = 0.88” and “Accuracy: 0.87; sensitivity: 0.98; specificity: 0.51; PPV: 0.86; NPV: 0.93.” F1-score, calibration, and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a retrospective single-center cohort of heart-transplant recipients, which limits generalizability, although the series was consecutive and reasonably sized.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected donor, recipient, complication, and operative variables that are clinically plausible for ICU-LOS prediction.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: ICU-LOS was clearly operationalized using the 75th percentile threshold of 9.08 days to define prolonged stay.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include train/test splitting, LASSO selection, fivefold cross-validation, up-sampling, SHAP interpretation, and comparison across several ML models. Uncertainty remains because the study was internally validated only and calibration reporting was not shown.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies ML to a clinically relevant heart-transplant postoperative outcome and is relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the study workflow; Figure 2 for the correlation matrix; Figure 3 for LASSO feature selection; Table 1 for baseline characteristics and ICU-LOS groups; and Table 2 for train/test split characteristics. The abstract and results text were used for the final XGBoost performance metrics and SHAP-ranked feature importance. I did not report any value not explicitly shown in the uploaded article.  ￼

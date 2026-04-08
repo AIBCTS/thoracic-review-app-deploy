@@ -1,0 +1,70 @@
+First Author: Tian
+Title: Machine Learning–Based Prognostic Model for Patients After Lung Transplantation
+Source number: 50  ￼
+
+Very short summary: This retrospective prognostic study developed a random survival forest (RSF) model to predict overall survival after lung transplantation. Five key findings were: (1) 504 adult lung transplant recipients were included, split into 353 training and 151 test patients; (2) 16 variables were selected for the final RSF model from 22 candidate characteristics; (3) postoperative ECMO time was the most important predictor; (4) the RSF model achieved excellent test-set performance with iAUC 0.879 and iBS 0.130; and (5) the RSF model significantly outperformed the benchmark Cox model and stratified patients into prognostically distinct risk groups. Figures 1–3 and Tables 1–2 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2017
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study was conducted at Wuxi People’s Hospital and included patients who underwent LTx “between January 2017 and December 2020,” making this an Asian single-center lung-transplant cohort. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 504
+	•	Overall Mean Age: 55.56
+	•	Female Sex (%): 33.7
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study included “504 patients,” with mean age 55.56 years; 334 were male (66.3%), implying 33.7% female. Race/ethnicity was not reported. Clinical/history variables included diagnosis, BMI, PGD3 at 72 h, ECMO type, preoperative hormone use, multidrug-resistant bacterial infection, operative variables, donor oxygenation, and pulmonary function indices.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Survival Forests (RSF)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The paper developed an “RSF model” for overall survival and used a Cox regression model as the benchmark comparator. Patients were randomly assigned to training and test sets at a 7:3 ratio. Feature selection used RSF variable importance with bootstrapping, and “grid search” was used for hyperparameter tuning. No SHAP/LIME-type interpretability was reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 353
+	•	Test Size (N): 151
+	•	Section 4 Comments/Quotes: The methods state that missing data were handled “by multiple imputation by chained equations.” The training and test sets included 353 and 151 patients, respectively. Data preprocessing included random split, feature selection by bootstrapped variable importance, and hold-out validation. Class imbalance is not especially applicable for time-to-event survival modeling. No code-release statement was identified.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.879
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 88.7
+	•	Specificity (%): 79.6
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary endpoint was overall survival after lung transplantation, which does not map exactly to the preset time-specific labels, so Other is the safest category. In the test set, the RSF model had iAUC 0.879 and iBS 0.130 for OS prediction. For 1-year survival, the RSF had tAUC 0.921 and PE 0.115, with sensitivity 88.7%, specificity 79.6%, and accuracy 82.8%. Calibration was reported through iBS/PE and observed-vs-predicted agreement. DCA was not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a single-center retrospective cohort, which limits generalizability, although exclusions were prespecified and the sample was moderately sized for a transplant study.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected recipient, donor, operative, and early post-transplant variables, and feature selection was handled systematically with bootstrapped RSF importance.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The target outcome was clearly overall survival with regular follow-up and censoring handled within standard survival-analysis methods.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include separate training/test cohorts, multiple imputation, bootstrapped variable selection, grid-search tuning, calibration/discrimination assessment, and direct benchmark comparison to Cox regression.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning survival prediction after lung transplantation and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for variable importance and feature selection; Figure 2 for survival stratification by RSF-predicted risk; Figure 3/results text for 1-month and 1-year prediction summaries; Table 1 for cohort characteristics across all, training, and test sets; and Table 2 for RSF versus Cox performance metrics including iAUC, iBS, tAUC, and prediction error. I did not report any value not explicitly shown in the uploaded article.  ￼

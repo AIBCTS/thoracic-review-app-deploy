@@ -1,0 +1,70 @@
+First Author: Seraphin
+Title: Prediction of heart transplant rejection from routine pathology slides with self-supervised deep learning
+Source number: 44  ￼
+
+Very short summary: This multicentre German study evaluated self-supervised deep learning on routine endomyocardial biopsy slides to predict cellular heart-transplant rejection. Five key findings were: (1) 1,079 histopathology slides from 325 patients across four cohorts from three German transplant centres were analyzed; (2) the primary training cohort contained 393 slides from 107 patients, with three independent hold-out/external cohorts used for validation; (3) for binary rejection prediction, mean cross-validated AUROC was 0.849, and external AUROCs were 0.734, 0.729, and 0.716; (4) for ISHLT grade prediction, the model performed best for 0R and 2/3R, with weaker performance for 1R; and (5) the authors’ SSL-attention MIL approach outperformed the CRANE comparator on their cohorts and produced attention maps that highlighted plausible morphology. Figures 1–2 and Table 1 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: Multi-center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1999
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The data came from “three different medical centres in Germany,” with cohorts from Regensburg, Hamburg, and Aachen. Table 1 shows recruitment years spanning 1999–2014, 2016–2018, and 2019–2021, so the overall study period was 1999–2021. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 325
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 21
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: No
+	•	Section 2 Comments/Quotes: The four cohorts included 107, 95, 86, and 37 patients, totaling 325 patients, with 1,079 slides. Age was reported as median by cohort, not as a single mean. Table 1 reports female:male per slides as 55:338, 55:301, 70:121, and 47:94, which totals 227 female slide-labels out of 1,079, about 21%; patient-level female percentage was not directly reported. Race/ethnicity and comorbidity summaries were not reported in the retrieved text.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: Self-supervised learning attention-based multiple instance learning pipeline using RetCCL encoder and Marugoto; comparator CRANE
+	•	Input Variables (Data Modality): Pathology
+	•	Comparator / Standard of Care: Human expert
+	•	Validation Method: External Geographic
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The authors trained “our own deep learning pipeline using an SSL-based feature extractor combined with attention-based MIL” on H&E whole-slide pathology images and compared it against the CRANE method. The ground truth came from “two expert pathologists… grading the degree of rejection in consensus,” so human expert is the best comparator. Validation included hold-out and separate cohorts from other German centers, so external geographic is the strongest label. Interpretability came from attention maps and Grad-CAM visualizations. The paper reports optimizer choice, learning-rate finding, early stopping, and training settings, which count as hyperparameter/training-procedure reporting.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Yes, Algorithm weights available
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 393
+	•	Test Size (N): 686
+	•	Section 4 Comments/Quotes: Only samples “with information on ISHLT grading” were eligible, which is most consistent with complete-case inclusion. The primary training cohort had 393 slides, and the three validation cohorts had 356, 189, and 141 slides, totaling 686 test slides. The paper describes digitization, tessellation, patch extraction, feature extraction, bag construction, and training procedures. No class-imbalance correction was described. The code repositories for preprocessing and deep learning are explicitly provided, satisfying code availability. The retrieved text did not explicitly mention released trained weights, but the available option set requires one of the listed labels; code availability is clearly affirmative.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Acute Rejection
+	•	Model AUC / C-Statistic: 0.849
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target was cellular cardiac allograft rejection on endomyocardial biopsy, which fits Acute Rejection. In cross-validation, the binary rejection yes/no AUROC was 0.849. External AUROCs were 0.734, 0.729, and 0.716. For multiclass ISHLT grades, the cross-validated AUROCs were 0.835 for 0R, 0.633 for 1R, and 0.905 for 2/3R. Although the methods mention calculation of accuracy, precision, recall, and F1-score, I did not see explicit numeric values for these in the retrieved text, so I leave them NR. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicentre retrospective series with external validation, which is a strength, but cohort sizes were still modest and selected from archived biopsies with available ISHLT grading.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routine H&E pathology whole-slide images from endomyocardial biopsies, processed in a standardized digital workflow.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Ground truth labels were assigned by “two expert pathologists… in consensus, following the 2004 revision of the ISHLT grading system.”  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include repeated three-fold cross-validation, three external validation cohorts, comparison with CRANE, bootstrapped confidence intervals, and code availability. Remaining limitations are mainly sample size and reduced external performance, not major analytic flaws.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI-based detection of heart-transplant rejection from pathology and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for study design, slide preprocessing, feature extraction, and internal/external validation workflow; Figure 2 for ROC results across cross-validation and validation cohorts; and Table 1 for cohort sizes, centers, years, age medians, sex distribution, and ISHLT rejection distribution. I did not report any metric not explicitly shown in the uploaded article.  ￼

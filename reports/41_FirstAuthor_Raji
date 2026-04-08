@@ -1,0 +1,70 @@
+First Author: Raji
+Title: Computational methods for predicting the outcome of thoracic transplantation
+Source number: 41  ￼
+
+Very short summary: This study developed artificial neural network models for thoracic transplantation survival prediction using UNOS data. Five key findings were: (1) the original UNOS thoracic dataset contained 148,509 records and 543 attributes, from which a final analytic dataset of 485 adult cases and 24 input attributes was derived; (2) the primary proposed model was a multilayer perceptron (MLP) with back-propagation; (3) the MLP achieved reported accuracy of 97.1%; (4) a radial basis function (RBF) network was used as a secondary validation model and achieved 92.37% accuracy; and (5) in the comparison table, the proposed MLP also showed sensitivity 0.966 and specificity 0.984, outperforming the cited earlier heart–lung MLP system with 85.9% accuracy. Tables 1, 2, and 6 and Figures 1, 2, 3, and 6 were explicitly used for this extraction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Other
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): NR
+	•	Study Period End (Year): NR
+	•	Section 1 Comments/Quotes: The study states that data were collected from the “United Network for Organ Sharing database,” so the source is a U.S. national registry. The paper says “Funding: Not applicable,” but also notes the OPTN data source support contract in the ethics section; I therefore classify the study-specific funding as None. The exact calendar years of the included thoracic transplant records were not reported in the retrieved text. The paper uses the broad term “thoracic transplantation,” not a clearly separated heart-only or lung-only cohort.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 485
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The paper reports an initial UNOS thoracic dataset of 148,509 records, then after removing pediatric cases and validation steps, “24 important attributes with 485 records were extracted.” Age, donor age, creatinine, serum albumin, ECMO, IABP, rejection episodes, ischemic time, HLA mismatch, infection resistance, and graft-failure cause were included, so clinical history was incorporated. Mean age, sex distribution, and race/ethnicity were not reported for the final 485-case dataset.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: ANN/MLP/NN
+	•	Algorithm Name: Multilayer Perceptron (MLP) with back-propagation; Radial Basis Function (RBF) network
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Other
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper’s main proposed model is the “multi-layer perceptron algorithm,” and it also implemented “the Radial Basis Function Network model to prove the accuracy of proposed model.” Inputs were donor, recipient, and transplantation tabular variables selected from UNOS using InfoGain Attribute Eval with ranker search. The comparison was against an earlier published computational system rather than a clinical guideline or human reader. The paper discusses “validation” but the retrieved text does not clearly describe a standard split or CV protocol, so I classify validation as Other rather than guessing. No SHAP/LIME-style interpretability or explicit hyperparameter tuning was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Data preprocessing was described extensively: multi-organ records were filtered to thoracic transplantation, pediatric records were removed, relevant attributes were selected, and InfoGain-based ranking reduced the feature space to 24 inputs. However, the retrieved text does not describe a missing-data method, class-imbalance handling, public code release, or explicit train/test counts. Because those details were not reported clearly, I left them as NR/No rather than inferring them.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): 97.1
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 96.6
+	•	Specificity (%): 98.4
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The study outcome was graft/survival status after thoracic transplantation, represented by GRF_STAT, but the exact clinical horizon was not clearly specified in the retrieved text, so the safest category is Other. The paper reports “accuracy of 97.1%” for the MLP and “92.37%” for the RBF model. Table 6 reports sensitivity 0.966 and specificity 0.984 for the proposed MLP. AUC/C-statistic, PPV, NPV, F1, calibration, and DCA were not reported in the retrieved text.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Although the source was UNOS, the final analytic sample was reduced from a very large registry to only 485 records after multiple filtering and validation steps, and the paper does not clearly describe cohort assembly in a clinically transparent way.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: The included predictors are clinically plausible donor, recipient, and transplant variables, but several choices are not well justified clinically and one top-ranked variable was recipient sex, suggesting possible dataset-driven instability.  ￼
+	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The outcome variable was GRF_STAT, with “N” indicating graft failure and “Y” success, but the paper does not clearly define the exact time horizon for this success/failure endpoint in the retrieved text.  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The reported accuracy is very high, but the retrieved text does not clearly document dataset split strategy, external validation, calibration, or robust modern reporting standards, which creates substantial risk of optimistic performance estimation.
+	•	Applicability to Review Question: Unclear | Quote/Reasoning: The study is directly about computational prediction after thoracic transplantation and uses UNOS data, but it mixes broad “thoracic transplantation” terminology with heart-focused background and does not clearly define a heart-only or lung-only clinically interpretable cohort.  ￼
+
+Tables and figures explicitly used in extraction:
+Table 1 for the final donor, recipient, and transplantation input variables; Table 2 for InfoGain-based ranking of the 24 selected attributes; Figure 1 for the basic ANN structure; Figure 2 for the multilayer perceptron architecture; Figure 3 for the radial basis function network structure; Figure 6 for performance comparison with the existing system; and Table 6 for the proposed MLP accuracy, sensitivity, and specificity versus prior systems. I did not report any metric not explicitly shown in the uploaded article.

@@ -1,0 +1,70 @@
+First Author: Sage
+Title: A machine-learning approach to human ex vivo lung perfusion predicts transplantation outcomes and promotes organ utilization
+Source number: 43  ￼
+
+Very short summary: This study developed InsighTx, an XGBoost-based machine-learning model for ex vivo lung perfusion (EVLP) assessment, using the largest reported clinical EVLP dataset to date. Five key findings were: (1) 725 eligible clinical EVLP cases from 2008–2022 were included; (2) the overall InsighTx AUROC was 79 ± 3% in training, 75 ± 4% in test dataset 1, and 85 ± 3% in test dataset 2; (3) the model performed especially well for unsuitable lungs, with AUROC up to 95 ± 2%, and for lungs leading to extubation <72 h, with AUROC up to 83 ± 4%; (4) among lungs predicted to have extubation <72 h, the negative predictive value for PGD grade 3 at 72 h was 88%; and (5) in a blinded implementation analysis, InsighTx increased the odds of a favorable transplant decision for suitable lungs by 13-fold and decreased the odds of transplanting unsuitable lungs. Tables 1–4 and Figures 1 and the supplementary decision-analysis figures were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Other
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2008
+	•	Study Period End (Year): 2022
+	•	Section 1 Comments/Quotes: The study used EVLP data “collected in our center over the past decade,” specifically from the Toronto Lung Transplant Program/University Health Network, Toronto, Canada, with cases spanning “2008 to 2022.” I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Organ (ex-vivo perfusion)
+	•	Total Sample Size (N): 725
+	•	Overall Mean Age: 46
+	•	Female Sex (%): 35
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: No
+	•	Section 2 Comments/Quotes: The cohort included “n = 725 eligible clinical EVLP cases.” From Table 1, donor mean age was 45, 48, and 47 years across the three cohorts, which is approximately 46 overall. Male sex was 65%, 64%, and 64% across cohorts, implying about 35% female overall. This is an organ-assessment cohort rather than a recipient cohort. Race/ethnicity and comorbidity history were not reported in the retrieved text.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: InsighTx; eXtreme Gradient Boosting (XGBoost)
+	•	Input Variables (Data Modality): Donor metrics; Other
+	•	Comparator / Standard of Care: Human expert
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: None/All features
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The paper states that the authors “evaluated eXtreme Gradient Boosting (XGBoost)” and developed “our ML model, termed InsighTx,” using donor features plus biological, physiological, and biochemical EVLP assessments. The model was then examined in a retrospective blinded implementation study involving EVLP specialists, so human expert is the best comparator. Because the development cohort preceded two later consecutive validation cohorts, external temporal is the best validation category. SHAP importance values were explicitly used to assess feature importance. The retrieved text does not describe a separate feature-selection stage or explicit hyperparameter tuning.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 504
+	•	Test Size (N): 221
+	•	Section 4 Comments/Quotes: The development dataset contained 504 EVLP cases, and the two independent temporal validation cohorts contained 97 and 124 cases, totaling 221 test cases. Data preprocessing is described at a high level through donor plus EVLP biological/physiological/biochemical feature extraction and temporal cohort separation. I did not find a clear missing-data strategy, class-imbalance method, or code-availability statement in the retrieved text.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: PGD
+	•	Model AUC / C-Statistic: 0.85
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 81
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): 88
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The model predicted EVLP suitability and post-transplant duration of mechanical ventilation; within the extraction framework, the closest postoperative adverse-outcome category is PGD because the paper also linked predictions to PGD grade 3 at 72 h. For the overall model, the best held-out AUROC was 85 ± 3% in test dataset 2. For unsuitable lungs, AUROC reached 95 ± 2%, and for extubation <72 h it reached 83 ± 4%. The paper reports model precision of 81% for identifying any unsuitable donor lung and 72% for suitable donor lungs. For donor lungs predicted to have extubation <72 h, the NPV for PGD grade 3 at 72 h was 88%. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This is the largest clinical EVLP cohort reported, but it comes from a single expert center, which may limit generalizability to other EVLP programs.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were rich EVLP biological, physiological, and biochemical features collected longitudinally during standardized ex vivo assessment, and SHAP-based importance was examined.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined as three clinically meaningful categories after EVLP—extubation <72 h, extubation ≥72 h, and declined for transplant—with additional linkage to PGD grade 3 at 72 h.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a sizable development cohort, two consecutive temporal test cohorts, and blinded implementation analysis. Uncertainty remains because the retrieved text does not clearly describe missing-data handling, hyperparameter tuning, or multicenter external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies ML-guided assessment of donor lungs during EVLP and its relationship to post-transplant outcomes and organ utilization, which is highly relevant to thoracic transplantation AI.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the InsighTx workflow and EVLP feature domains; Table 1 for cohort characteristics and post-transplant outcomes across the development and validation datasets; Table 2 for AUROC performance across the overall and endpoint-specific models; Table 3 for ranked EVLP features driving each endpoint; and Table 4/results text for the blinded implementation effect on decision-making. I did not report any value not explicitly shown in the uploaded article.  ￼

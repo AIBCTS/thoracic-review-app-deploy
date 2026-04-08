@@ -1,0 +1,70 @@
+First Author: Tian
+Title: Machine learning model predicts airway stenosis requiring clinical intervention in patients after lung transplantation: a retrospective case-controlled study
+Source number: 51  ￼
+
+Very short summary: This retrospective single-center study developed machine-learning models to predict airway stenosis (AS) requiring clinical intervention after lung transplantation. Five key findings were: (1) 381 lung transplant recipients were included, and 40 patients (10.5%) developed AS requiring intervention; (2) multivariate logistic regression identified male sex, pulmonary arterial hypertension, and lower postoperative 6-minute walking test distance as independent predictors; (3) 56 ML models were built from 7 feature-selection methods and 8 algorithms; (4) the best model was a random forest with determination-coefficient feature selection; and (5) the optimal ML model outperformed conventional logistic regression, achieving AUC 0.760 (95% CI 0.666–0.864) and Brier score 0.085 (95% CI 0.058–0.117). Figures 1–5 and Tables 1–4 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2017
+	•	Study Period End (Year): 2019
+	•	Section 1 Comments/Quotes: The study included patients who underwent LTx “between January 2017 and December 2019” at “Wuxi People’s Hospital affiliated with Nanjing Medical University,” making this an Asian single-center lung-transplant study. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 381
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 36.0
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: A total of 381 recipients were analyzed. The median age was reported as 57 years, not mean age, so mean age is NR. Sex distribution was 137 female and 244 male, so female sex was 36.0%. Race/ethnicity was not reported. Clinical/history variables included diagnosis, BMI, ECMO type, hormone use, 72 h PGD3, ventilator time, ICU stay, cold ischemia time, and postoperative 6MWT.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random forest optimal ML model; candidate algorithms included LR, DT, KNN, NB, SVM, GBRM, RF, and XGB
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Other
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The paper states that 7 feature-selection methods and 8 algorithms were combined to build 56 ML models. The “optimal ML model was the model fitted using a random forest algorithm with a determination coefficient feature selection method.” The comparator was a conventional logistic regression model derived from independent risk factors, so Other fits best. Internal validation was by bootstrap with 1000 resamples rather than a standard split or cross-validation, so Validation Method is Other. No SHAP/LIME-type interpretability or explicit hyperparameter-tuning description was reported in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: No
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The study excluded patients with incomplete clinical records and used bootstrap internal validation; no imputation strategy was described in the retrieved text, so this is best classified as complete-case analysis. I did not find any class-imbalance method, code-release statement, or detailed normalization/preprocessing workflow beyond variable extraction and feature-selection strategy. There was no explicit train/test split.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Adverse Events
+	•	Model AUC / C-Statistic: 0.760
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 25.2
+	•	Sensitivity / Recall (%): 78.2
+	•	Specificity (%): 68.9
+	•	NPV (%): 96.5
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target outcome was AS requiring clinical intervention, which best fits Adverse Events within the allowed labels. The optimal random-forest model had AUC 0.760 and Brier score 0.085. It also had sensitivity 0.782, specificity 0.689, PPV 0.252, and NPV 0.965. Calibration was reported using the Brier score. DCA was not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a retrospective single-center cohort, which limits generalizability, although exclusions were clearly described and follow-up loss was minimal.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected clinical characteristics after LTx, including diagnosis, ECMO, PGD3, ventilatory variables, and 6MWT, which are clinically relevant to AS risk.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: AS requiring intervention was clinically adjudicated by an experienced physician according to the 2018 ISHLT consensus definitions and grading systems.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multiple feature-selection methods, multiple algorithms, benchmark logistic regression, and bootstrap internal validation. Uncertainty remains because there was no external validation and the event count was relatively small at 40 AS cases.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses machine-learning prediction of a clinically important post-lung-transplant complication and is relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort flow and exclusions; Figure 2 for the heatmap of 56 ML models and selection of the optimal model; Figure 3 for risk-threshold stratification histogram; Figure 4 for mean decrease accuracy of features in the optimal model; Figure 5 for variable importance in the random-forest model; Table 1 for cohort characteristics by AS status; Table 2 for univariate and multivariate logistic regression risk factors; Table 3 for feature-selection outputs; and Table 4 for model performance including AUC, Brier score, sensitivity, specificity, PPV, and NPV. I did not report any value not explicitly shown in the uploaded article.  ￼

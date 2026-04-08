@@ -1,0 +1,70 @@
+First Author: Yeo
+Title: Machine Learning for 1-Year Mortality Prediction in Lung Transplant Recipients: ISHLT Registry
+Source number: 53  ￼
+
+Very short summary: This registry-based study developed and externally validated machine-learning models for predicting 1-year mortality after lung transplantation using ISHLT data. Five key findings were: (1) 29,364 adult lung transplant recipients from the ISHLT registry were analyzed, with 16.1% dying within 1 year; (2) 25 pretransplant variables were initially identified and then reduced to the top 10 by SHAP importance without loss of performance; (3) the Gradient Boosting Machine (GBM) model achieved the best internal performance with AUC 0.958 and accuracy 0.949; (4) the simplified 10-feature GBM model maintained identical internal performance; and (5) in external validation, the in-house dataset showed reduced GBM performance (AUC 0.852, accuracy 0.764), while the multilayer perceptron showed the best generalization (AUC 0.911, accuracy 0.870). Figures 1–3 and Tables 1–4 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: International Registry
+	•	Dataset Name: ISHLT
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2009
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: The main dataset came from the “International Society for Heart and Lung Transplantation (ISHLT) registry” with patients registered “from June 2009 to June 2018,” and 45 centers worldwide had submitted data, so this is a multinational international-registry study. I did not identify explicit funding or COI statements in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 29364
+	•	Overall Mean Age: 53.4
+	•	Female Sex (%): 42.0
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study included “29,364 patients,” with average age 53.4 ± 13.4 years; 17,032 were male (58%), implying 42.0% female. Race/ethnicity was not reported in the retrieved text. Clinical history included diabetes, malignancy history, ventilator use, ECMO use, dialysis, prior surgeries, chronic steroid use, tracheostomy, pulmonary embolism, albumin, bilirubin, creatinine, BMI, and diagnosis categories.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Gradient Boosting Machine (GBM); compared with LR, SVM, RF, BRF, and MLP
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: External Geographic
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The authors employed six machine-learning models, and “the GBM model achieved the highest performance.” Inputs were 25 pretransplant tabular variables from the ISHLT registry, later reduced to the top 10 using SHAP importance. External validation was performed with an in-house hospital dataset, so external geographic validation is the strongest applicable label. SHAP was explicitly used for interpretation. The text states “Default model settings were applied without additional hyperparameter tuning.”  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The paper states that variables with >20% missingness were removed and “patient samples with any missing data were excluded,” which is complete-case analysis. Class imbalance was addressed using class-weight adjustments for LR, RF, SVM, and BRF. Preprocessing included exclusion criteria, feature screening, five-fold cross-validation, and SHAP-based refinement. Because the internal validation used five-fold cross-validation rather than a fixed split, training and test N are NR. No code-release statement was identified.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.958
+	•	Model Accuracy (%): 94.9
+	•	PPV / Precision (%): 91.4
+	•	Sensitivity / Recall (%): 75.5
+	•	Specificity (%): 98.6
+	•	NPV (%): 95.5
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The target was explicitly 1-year mortality after lung transplantation, which maps to 1-year survival in this extraction framework. With the top-10-feature model, GBM had AUC 0.958 and accuracy 0.949, with sensitivity 0.755, specificity 0.986, PPV 0.914, and NPV 0.955. The same internal performance was reported for the 25-feature GBM model. External validation showed GBM AUC 0.852/accuracy 0.764, while MLP generalized best with AUC 0.911/accuracy 0.870. Calibration and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The primary cohort was a large international ISHLT registry with 29,364 adult recipients from 45 centers, which reduces major selection bias, although complete-case exclusions were applied.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were pretransplant clinical variables available before transplantation and relevant to candidate assessment and counseling.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The endpoint was clearly defined as death within 1 year versus survival at 1 year after lung transplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include large registry size, comparison of six ML models, SHAP-based simplification, five-fold cross-validation, and external validation. Uncertainty remains because complete-case analysis may bias estimates and calibration was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses machine-learning prediction of 1-year mortality after lung transplantation and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for patient inclusion; Figure 2 for SHAP-based feature importance among the 25-variable and 10-variable models; Figure 3/results text for Kaplan–Meier separation of model-defined risk groups; Table 1 for baseline pretransplant characteristics; Table 2 for univariate associations with 1-year survival; Table 3 for performance of the 25-feature models; and Table 4 for performance of the 10-feature models. I did not report any value not explicitly shown in the uploaded article.  ￼

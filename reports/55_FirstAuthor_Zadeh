@@ -1,0 +1,70 @@
+First Author: Zadeh
+Title: Predictive analytics for de novo malignancies after lung transplantation
+Source number: 55  ￼
+
+Very short summary: This study developed machine-learning models to predict de novo malignancy after lung transplantation using U.S. STAR/UNOS data. Five key findings were: (1) the final analytic cohort included 30,917 lung-transplant recipients without prior malignancy, of whom 25% developed post-transplant malignancy; (2) the initial lung-transplant dataset comprised 66,590 cases, which was reduced after excluding prior malignancy and loss to follow-up; (3) several ML methods were compared, with gradient boosting performing best; (4) the best model achieved AUROC 0.746; and (5) important predictors included recipient DR52 antigen, BMI, CMV status, and total serum albumin. Figures 1–2 and Tables 1 and the methods/results descriptions were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 1984
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The paper states that STAR/UNOS data were used and that medical records of lung transplant recipients “between 1984 and 2021 were utilized for this study,” making this a U.S. national-registry study. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 30917
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 43
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final table consisted of “30,917 individuals,” among whom 25% developed malignancy after lung transplantation. Figure 2 shows a demographic snapshot with 43% female and 57% male. Ethnicity was explicitly shown in Figure 2, and the paper describes recipient/donor demographics, HLA antigens, CMV, albumin, BMI, survival, hospital length of stay, and complications as included variables. Mean age was not explicitly reported in the retrieved text, only the age distribution histogram.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Gradient Boosting; additional models included decision trees, logistic regression, neural networks, random forest, LARS, and SVM
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The study developed several supervised models, including decision trees, logistic regression, neural networks, gradient boosting, random forest, and SVM, and reported gradient boosting as best-performing. Inputs came from merged STAR sources including waitlist, transplant, donor, and follow-up datasets, which are tabular recipient/donor variables. The data were split into 70% training and 30% validation/testing. Variable review by lung-transplant experts excluded irrelevant, redundant, and highly missing variables, so Manual/Clinical is the best fit for feature selection. The paper explicitly describes setting/tuning key parameters for gradient boosting and random forest.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 21642
+	•	Test Size (N): 9275
+	•	Section 4 Comments/Quotes: The paper states that experts excluded variables with “a high percentage of unacceptable missing values (>30%),” rather than using a standard imputation method in the retrieved text, so Other is the best fit. Because of class imbalance, “oversampling was employed to increase the percentage of the minority class by replicating instances from the minority class.” Preprocessing included merging multiple STAR sources, restricting to lung transplants, excluding prior malignancy and loss to follow-up, and removing 173 variables. A 70/30 split on 30,917 cases corresponds to about 21,642 training and 9,275 test/validation cases. No code-release statement was identified.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Adverse Events
+	•	Model AUC / C-Statistic: 0.746
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The endpoint was de novo malignancy after lung transplantation, which best fits Adverse Events among the allowed categories. The abstract states that gradient boosting “outperformed all other predictive models… achieving an area under the ROC curve (AUC) of 0.746.” Although the methods discuss accuracy, sensitivity, specificity, precision, and related metrics, the retrieved text snippet does not provide final numeric values for those measures, so I leave them NR. Calibration and DCA were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large U.S. national transplant registry dataset and included 30,917 lung-transplant recipients after explicit exclusions, which reduces major center-level selection bias.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: Predictors included recipient, donor, and follow-up variables, but the retrieved text indicates a mix of pre-, during-, and post-transplant measures, which may complicate interpretation depending on intended clinical use.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study specifically identified individuals “diagnosed with malignant cancers during their respective follow-up periods,” and excluded those with prior malignancy, giving a clear definition of de novo malignancy.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a large registry-derived cohort, multiple model comparisons, class-imbalance handling, and a held-out validation set. Uncertainty remains because the retrieved text does not show full reporting of calibration or all test metrics, and some predictor timing may affect transportability.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses machine-learning prediction of a clinically important post-lung-transplant outcome and is relevant to thoracic-transplant AI, even though the endpoint is malignancy rather than survival or rejection.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the research framework and train/validation split; Figure 2 for demographic distributions including sex, ethnicity, blood type, and age; Table 1 for theoretic transplantation counts by organ type; and the methods/results text for cohort reduction from 66,590 lung cases to 30,917 final cases, 25% malignancy incidence, model classes, oversampling, 70/30 split, and best-model AUROC. I did not report any value not explicitly shown in the uploaded article.  ￼

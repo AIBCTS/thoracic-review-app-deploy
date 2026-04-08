@@ -1,0 +1,70 @@
+First Author: Yoon
+Title: Personalized survival predictions via Trees of Predictors: An application to cardiac transplantation
+Source number: 54  ￼
+
+Very short summary: This study developed an interpretable machine-learning framework, Trees of Predictors (ToPs), to improve personalized survival prediction before and after cardiac transplantation using the UNOS registry. Five key findings were: (1) the adult cohort included 51,971 transplanted patients and 30,911 wait-listed patients from the United States; (2) ToPs used 53 selected clinical features after excluding variables with high missingness and post-transplant-only information; (3) for post-transplant 3-month survival, ToPs achieved AUC 0.660 versus 0.587 for the best clinical risk score (RSS); (4) ToPs consistently outperformed clinical scores, regression models, and several machine-learning benchmarks across multiple post- and pre-transplant time horizons; and (5) the model was explicitly designed to personalize prediction by learning clusters of patients and assigning different predictive learners to different clusters. Figures 1–3 and Tables 1–2 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 1985
+	•	Study Period End (Year): 2015
+	•	Section 1 Comments/Quotes: The study used the “United Network for Organ Sharing (UNOS) database” of patients registered for heart transplantation in the United States “during 1985–2015.” Funding was reported from the Office of Naval Research and the National Science Foundation, so Government/Public is appropriate. The paper explicitly states that the authors “have declared that no competing interests exist.”  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Other
+	•	Total Sample Size (N): 82882
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: After excluding patients younger than 18 years, the study included “51,971 transplanted patients and 30,911 wait-listed patients,” totaling 82,882 adult candidates/recipients. Because the paper analyzes both pre-transplant wait-list and post-transplant cohorts, Other is the safest target-population label. Mean age and overall female percentage were not reported in the retrieved text. The dataset included many clinical features relating to recipients, donors, and donor-recipient compatibility.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Ensemble
+	•	Algorithm Name: Trees of Predictors (ToPs / ToPs-R)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: The paper developed “ToPs: Trees of Predictors,” an interpretable method that clusters patients and assigns different predictive models to different clusters. Inputs were tabular recipient, donor, and compatibility variables from UNOS. The main comparators were existing clinical risk scores such as DRI, RSS, and IMPACT, so Linear Risk Score is the closest label. Validation used 5-fold cross-validation. Explainability was intrinsic through the tree structure and cluster-specific relevant features, even though SHAP/LIME was not used. Feature selection was automated by excluding features with high missingness and then learning predictive clusters and relevant covariates from the data. Explicit hyperparameter tuning was not described in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: No
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing feature components were handled using “10 multiple imputations using Multiple Imputation by Chained Equations (MICE).” Preprocessing included exclusion of post-transplant-only variables, removal of features with >10% missingness, binarization of categorical variables, and 5-fold cross-validation. Since the design used cross-validation on large cohorts rather than a single fixed split, training and test N are NR. Class imbalance is not especially applicable for these survival-prediction settings as reported here. I did not identify a code-release statement.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.660
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The study predicted survival across multiple time horizons both post-transplant and pre-transplant, so no single preset outcome label fits perfectly; Other is safest. For post-transplant 3-month survival, ToPs/R achieved AUC 0.660, compared with 0.587 for the best clinical risk score (RSS). The paper also reports post-transplant AUCs of 0.641, 0.623, and 0.631 at 1 year, 3 years, and 10 years, respectively, and average C-index 0.577. Calibration was reported through calibration curves with 95% confidence bounds. DCA was not reported. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a very large national UNOS registry study covering adult heart-transplant candidates and recipients across three decades, which substantially reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors included recipient, donor, and donor-recipient compatibility features available in UNOS, and features with excessive missingness were excluded systematically.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined as survival before and after transplantation across fixed time horizons, with right-censoring explicitly handled.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include large-scale registry data, multiple imputation, 5-fold cross-validation, comparison with clinical scores and many ML benchmarks, and interpretable clustering. Uncertainty remains because performance varied by time horizon and the retrieved text does not detail all implementation settings beyond the main algorithm design.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI/ML-based survival prediction in heart transplantation, including both wait-list and post-transplant settings, and is highly relevant to the review question.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for patient and feature exclusion criteria from the UNOS dataset; Figure 2 for the conceptual construction of ToPs; Figure 3 for the example tree of predictors for 3-year post-transplant survival and cluster-specific relevant features; Table 1 for post-transplant AUC and C-index comparisons against clinical scores and ML benchmarks; and Table 2 for pre-transplant survival prediction performance. I did not report any value not explicitly shown in the uploaded article.  ￼

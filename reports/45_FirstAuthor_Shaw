@@ -1,0 +1,70 @@
+First Author: Shaw
+Title: Multicenter analysis of immunosuppressive medications on the risk of malignancy following adult solid organ transplantation
+Source number: 45  ￼
+
+Very short summary: This multicenter U.S. retrospective cohort study evaluated how maintenance immunosuppressive drugs relate to post-transplant malignancy across adult solid-organ recipients. Five key findings were: (1) 5,591 patients with 6,142 transplanted organs were included; (2) 517 post-transplant malignancies were identified, with skin cancer the most common at 52.8%; (3) heart and lung recipients initially appeared to have higher malignancy incidence, but this was not significant after adjustment for immunosuppressive medications; (4) random forest variable-importance analysis identified age at transplant and total number of immunosuppressive medications as the strongest predictors; and (5) time-dependent multivariable Cox analysis showed higher cancer risk with azathioprine, cyclosporine, and sirolimus, while tacrolimus was associated with lower risk. Tables/figures used directly included Figures 1–3 and the malignancy/immunosuppression summaries in the main text.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Other
+	•	Funding Source: Not Reported
+	•	Dataset Source: Multi-center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2000
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: This was a “retrospective cohort study from a multicenter hospital system in the United States,” using EHR data from three hospitals in the greater Chicago area queried “from January 1, 2000, to March 10, 2021.” Because it spans all adult solid organ transplants rather than a single thoracic organ, organ focus is best classified as Other. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 5591
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 39
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The study identified “5,591 unique patients” and “6,142 transplanted organs.” The median age of transplant recipients was 54 years, but no overall mean age was reported. “Overall, 39% of transplant recipients were women.” Race was reported, including White, Black, Hispanic, Asian, and other groups. Clinical history variables included organ type, age, sex, race, and longitudinal immunosuppressive exposure.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Other
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random forest variable-importance model with time-dependent multivariable Cox proportional hazards analysis
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Not Reported
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The primary study aim was epidemiologic risk assessment using time-dependent Cox models, with ML used as a complementary variable-importance analysis, so Primary ML Component is best classified as Other. The authors state that “a random forest model was used to assess variable importance in predicting post-transplant malignancy.” Categorical variables under 10% frequency were grouped, variables were one-hot encoded or normalized, and the model was “fit across a variety of hyperparameters within a Latin hypercube of size 25.” No human comparator or guideline comparator was used. Validation specifics for prediction performance were not reported.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: Other
+	•	Code Availability: Yes, Algorithm weights available
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: The paper describes preprocessing: low-frequency categories were grouped, nominal variables were one-hot encoded, numerical variables were normalized, and the dataset was “bootstrap resampled 10 times and stratified by the outcome.” This stratified bootstrap handling is best categorized as Other for class imbalance rather than a standard reweighting method. Missing-data handling was not clearly reported. The paper states that “the complete analysis code is available” on GitHub, so code availability is affirmative under the available labels. No fixed train/test split sizes were reported.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The study outcome was post-transplant malignancy, which is not one of the preset transplant endpoints, so the best category is Other. The paper reports hazard ratios rather than standard predictive discrimination metrics: sirolimus HR 1.41, azathioprine HR 2.1, cyclosporine HR 1.59, and tacrolimus HR 0.59 for post-transplant malignancy. No AUC, accuracy, PPV, sensitivity, specificity, NPV, F1, calibration, or DCA were reported in the retrieved text.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicenter cohort, which improves representativeness, but it was limited to three hospitals in the greater Chicago area and relied on retrospective ICD/EHR ascertainment.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clearly defined EHR-derived exposures and demographics, especially time-dependent immunosuppressive medication use, age, sex, race, and organ type.  ￼
+	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: Malignancies were identified using ICD-9/10 codes, which is practical but introduces some risk of misclassification compared with adjudicated cancer registries.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include time-dependent Cox modeling, competing-risk analysis, and complementary random forest variable-importance assessment. Limitations acknowledged by the authors include retrospective design, potential under-ascertainment outside the hospital system, modest sample size relative to national databases, and lack of dose/plasma-level adjustment for immunosuppressants.  ￼
+	•	Applicability to Review Question: High Concern | Quote/Reasoning: Although the paper includes heart and lung recipients, it is a broad solid-organ oncology/immunosuppression study rather than a thoracic-transplant-specific AI prediction study, so applicability to the thoracic AI review question is limited.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for transplant cohort size and organ-type distribution; Figure 2 for malignancy distribution, latency, race-stratified malignancy proportions, and immunosuppressive use by organ; and Figure 3 for random forest variable importance, cumulative incidence by organ and medication, heatmap of malignancy by immunosuppression, and multivariable Cox hazard ratios. I did not report any metric not explicitly shown in the uploaded article.  ￼

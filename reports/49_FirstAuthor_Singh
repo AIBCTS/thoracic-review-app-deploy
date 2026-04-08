@@ -1,0 +1,70 @@
+First Author: Singh
+Title: Predicting post-lung transplant survival in systemic sclerosis using CT-derived features from preoperative chest CT scans
+Source number: 49  ￼
+
+Very short summary: This retrospective single-center study investigated whether CT-derived body-composition and cardiopulmonary features from preoperative chest CT improve survival prediction after lung transplantation in systemic sclerosis. Five key findings were: (1) 102 systemic sclerosis recipients were included, with mean age 50 years and 61% female; (2) 49.0% died during follow-up, with Kaplan–Meier survival rates of 76.3% at 1 year, 64.3% at 3 years, and 52.2% at 5 years; (3) several CT-derived features were significantly associated with survival, including muscle mass ratio, bone density, artery–vein volume ratio, muscle volume, and heart volume ratio; (4) models using only CT-derived features outperformed state-of-the-art clinical models; and (5) adding CT-derived features to demographic and clinical models improved prediction, reaching maximum AUCs of 0.77 for 1-year, 0.85 for 3-year, and 0.90 for 5-year survival. Figures 1–2 and Tables 1–3 were directly used for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Not Reported
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2004
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study identified “a cohort of 102 SSc patients who underwent LTx at the University of Pittsburgh Medical Center from 2004 to 2020,” so this is a U.S. single-center lung-transplant study. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 102
+	•	Overall Mean Age: 50
+	•	Female Sex (%): 61
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The abstract reports “102 patients (mean age, 50 years ± 10, 61% (62/102) females).” Race was reported in Table 1, and clinical variables included BMI, smoking, Charlson comorbidity index, tracheostomy, calcinosis, PAH, atrial fibrillation, previous chest procedure, esophageal dysmotility, and ILD.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Other
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: CNN
+	•	Algorithm Name: 3-D CNN/U-Net CT segmentation with Cox proportional hazards survival modeling
+	•	Input Variables (Data Modality): Imaging; Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: No
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: No
+	•	Section 3 Comments/Quotes: Deep-learning algorithms were used to “automatically segment and quantify five different body tissues and cardiopulmonary features” from CT, while the actual survival prediction models were Cox proportional-hazards models integrating CT, demographic, and clinical variables. Since ML/CNN primarily enabled feature extraction and the main survival model was Cox regression, Primary ML Component is best classified as Other. Validation used 5-fold cross-validation for time-point survival classification. Feature selection in the multivariate CPH models used backward-stepwise regression. I did not see explicit hyperparameter tuning for the CNN or Cox models in the retrieved text.  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis
+	•	Class Imbalance Addressed: Not Applicable
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Clinical features with “missing values, lack of variance, or unreadable data were excluded,” which best fits complete-case/exclusion-based handling rather than imputation. The paper describes preprocessing including one-hot encoding of categorical variables, z-score standardization of linear features, collinearity filtering by VIF, and 5-fold cross-validation. Because the analysis used repeated fold-based validation rather than a fixed train/test split, training and test N are NR. Class imbalance is not especially applicable for censored survival modeling. No code-release statement was identified.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 5-year survival
+	•	Model AUC / C-Statistic: 0.90
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The study modeled survival at 1, 3, and 5 years after lung transplantation. Within the restricted outcome list, 5-year survival best captures the most emphasized final performance. The abstract reports maximum AUCs of 0.77 for 1-year, 0.85 for 3-year, and 0.90 for 5-year survival after integrating CT-derived features. The methods also mention c-index and Brier score, but the retrieved text does not provide a single final held-out c-index value to report here. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center retrospective cohort of only 102 systemic sclerosis recipients, which limits generalizability despite being substantial for this rare population.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant demographic and preoperative clinical factors plus objectively derived CT body-composition and cardiopulmonary features generated with previously validated algorithms.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Survival was clearly defined with right censoring at the study cutoff, and Kaplan–Meier plus Cox proportional-hazards methods were used appropriately for time-to-event analysis.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multivariable Cox modeling, time-dependent ROC-AUC evaluation, c-index and Brier-score reporting, and 5-fold cross-validation. Uncertainty remains because the study is single-center and the snippets do not show external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI/CT-enhanced prediction of post-lung-transplant survival and is highly relevant, although focused on the specific systemic sclerosis subgroup.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for the automated CT segmentation of cardiopulmonary and body-composition structures; Figure 2 for the Kaplan–Meier survival curve; Table 1 for demographic predictors; Table 2 for clinical predictors; and Table 3/results text for CT-derived predictors and model performance summaries. I did not report any value not explicitly shown in the uploaded article.  ￼

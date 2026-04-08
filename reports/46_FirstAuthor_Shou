@@ -1,0 +1,70 @@
+First Author: Shou
+Title: Pre-Operative Machine Learning for Heart Transplant Patients Bridged with Temporary Mechanical Circulatory Support
+Source number: 46  ￼
+
+Very short summary: This UNOS-based study developed an interpretable XGBoost model to predict 1-year mortality after heart transplantation in patients bridged with temporary mechanical circulatory support (tMCS). Five key findings were: (1) 1,584 adult isolated heart-transplant recipients on tMCS were included; (2) observed 1-year mortality was 12.1%; (3) from 498 pre-transplant variables, 43 were selected for the final model; (4) the XGBoost model achieved an AUC of 0.71 (95% CI 0.62–0.78); and (5) the most important predictors included recipient functional status, age, pulmonary capillary wedge pressure, cardiac output, ECMO use, and serum creatinine. Tables 1 and S2 plus Figures 1–4 were used directly for this extraction.  ￼
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Not Reported
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Not Reported
+	•	Study Period Start (Year): 2009
+	•	Study Period End (Year): 2017
+	•	Section 1 Comments/Quotes: The study used the “United Network for Organ Sharing (UNOS) database” and included patients transplanted between “01/2009 and 12/2017,” so this is a U.S. national-registry heart-transplant study. I did not identify an explicit funding or COI statement in the retrieved text.  ￼
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 1584
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 26
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort included “1584 patients,” with median age 56 years, not mean age, so mean age is NR. The paper reports “74% male,” implying 26% female. Ethnicity categories were reported in Table 1, and clinical history variables included diabetes, implantable cardiac defibrillator, creatinine, bilirubin, hemodynamics, inotrope use, and support-device type.  ￼
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Extreme Gradient Boosting (XGBoost)
+	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The authors “constructed a machine learning model using extreme gradient boosting (XGBoost) with a 70:30 train:test split.” They positioned the work against existing pre-operative risk scores such as IMPACT and CARRS, so Linear Risk Score is the best comparator label. SHAP was explicitly used for interpretation, and a grid search optimized hyperparameters. Forty-three predictors were “automatically selected for inclusion in the final XGBoost model based on predictive utility.”  ￼
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Algorithm handles natively
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 1267
+	•	Test Size (N): 317
+	•	Section 4 Comments/Quotes: The paper states that missing values “were automatically imputed on a case-by-case basis in the XGBoost model,” which best fits algorithm handles natively. Class imbalance was addressed by setting scale_pos_weight = 7.8. Preprocessing included manual removal of post-transplant-only variables, one-hot encoding of categorical variables, numerical treatment of continuous/ordinal variables, and grid search tuning. The development and validation cohorts included 1,267 and 317 patients, respectively. No code-release statement was reported.  ￼
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.71
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary endpoint was “1-year post-transplant mortality,” which maps to 1-year survival in this extraction framework. The XGBoost model achieved “an AUC of 0.71 (95% CI: 0.62–0.78).” Although an AUCPR of 0.357 was reported, the paper did not provide explicit held-out accuracy, PPV, sensitivity, specificity, NPV, or F1 values in the retrieved text. Calibration and DCA were not reported.  ￼
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national UNOS cohort of adult isolated first-time heart-transplant recipients bridged with tMCS, reducing single-center selection bias, though it is limited to a specific high-risk subgroup.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were restricted to variables available “at or before the time of transplantation,” which is appropriate for pre-operative risk modeling.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as “1-year post-transplant mortality.”  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national data, train/test split, hyperparameter tuning, imbalance adjustment, SHAP-based interpretation, and bootstrap CIs. Uncertainty remains because validation was internal only and calibration was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses ML-based outcome prediction in heart transplantation, specifically a clinically important tMCS bridge-to-transplant subgroup.  ￼
+
+Tables and figures explicitly used in extraction:
+Figure 1 for cohort inclusion and exclusions; Table 1 for baseline characteristics of survivors vs non-survivors; Figure 2 for ROC/AUC of the XGBoost model; Figure 3 for SHAP summary of the top predictors; and Figure 4 plus accompanying text for individualized feature contributions. I did not report any value not explicitly shown in the uploaded article.  ￼
