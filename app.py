@@ -679,7 +679,7 @@ if reviewer_name and selected_pdf:
     study_id = selected_pdf.replace(".pdf", "")
     existing_data = get_existing_review(study_id, reviewer_name)
 
-    # Report prefill: only load report data if a button is clicked (Johan Nilsson only)
+    # Report prefill: only load report data if a button is clicked
     report_prefill_key = f"use_report_{study_id}"
     report_path = find_matching_report(selected_pdf)
     # Use report data only when button was pressed and no existing saved data
@@ -770,8 +770,8 @@ if reviewer_name and selected_pdf:
 
         elif report_data:
             st.success(f"📄 Pre-filled from report: `{report_path.name if report_path else 'report'}`")
-        elif report_path and reviewer_name.strip().lower() == "johan nilsson":
-            # Show prefill button only for Johan Nilsson when form is empty
+        elif report_path:
+            # Show prefill button for all users when form is empty
             if st.button("📄 Pre-fill form from report file", key=f"btn_prefill_{study_id}"):
                 parsed = report_to_review_dict(report_path)
                 if parsed:
