@@ -22,6 +22,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Downcase repository name for GHCR tag
+        run: |
+          echo "REPO_LC=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -29,5 +33,5 @@ jobs:
           push: true
           # Providing both 'latest' and a unique tag (run number)
           tags: |
-            ghcr.io/aibcts/thoracic-review-app-deploy:latest
-            ghcr.io/aibcts/thoracic-review-app-deploy:v${{ github.run_number }}
+            ghcr.io/${{ env.REPO_LC }}:latest
+            ghcr.io/${{ env.REPO_LC }}:v${{ github.run_number }}
