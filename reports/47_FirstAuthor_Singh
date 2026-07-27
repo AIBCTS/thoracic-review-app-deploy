@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was DCC occurrence, which is best categorized as Adverse Events within the restricted list. The multivariate logistic regression model achieved “a mean accuracy of 0.73 (0.60, 0.86) and a mean AUC of 0.82 (95% CI: 0.70, 0.94) in predicting DCC occurrence pre-LTx.” The paper also reports no significant difference in survival between DCC and PCC at 30 days, 90 days, 1 year, and 5 years. PPV, sensitivity, specificity, NPV, F1, calibration, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small, highly selected single-center cohort of only 92 systemic sclerosis recipients, which limits generalizability.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant preoperative variables plus objectively derived CT volumetric measures from validated CNN algorithms.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome, DCC vs PCC, was clearly defined intraoperatively, and survival outcomes were assessed with Kaplan–Meier analysis at prespecified time points.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include CT-derived quantitative metrics, cross-validation, hyperparameter tuning, and multivariable modeling; uncertainty remains because of the small sample size, single-center design, and lack of external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly concerns lung transplantation, uses deep-learning-derived CT measurements, and addresses a clinically meaningful perioperative transplant outcome.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort inclusion; Figure 2 for Kaplan–Meier survival comparison between DCC and PCC; Figure 3 for ROC performance of the preoperative DCC prediction model; Table 1 for recipient and donor demographics; Table 2 for CT-based lung-size matching and univariate associations with DCC; and Table 3/results text for the final multivariate logistic regression features and coefficients. I did not report any value not explicitly shown in the uploaded article.  ￼

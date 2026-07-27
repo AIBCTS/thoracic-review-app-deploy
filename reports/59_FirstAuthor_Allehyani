@@ -62,11 +62,11 @@ Section 5: Outcomes & Performance (PICO - O)
 • Section 5 Comments/Quotes: The extracted performance corresponds to the SVM on the held-out test set. The paper reports accuracy 0.952381, precision 0.90, recall 0.75, F1 score 0.818182, and ROC-AUC 0.868056; no 95% confidence interval for AUC was provided. Specificity, NPV, calibration assessment, and DCA were not reported. The LR comparator achieved an AUC of 0.875 and accuracy of 96.43%. The orientation or labels of the displayed confusion matrices appear inconsistent with the reported precision and recall values, so the explicitly tabulated performance values were extracted.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-• Participants (Selection Bias): Low Risk
-• Predictors (Input Variable Bias): High Risk
-• Outcome (Definition Bias): Unclear
-• Analysis (Modeling Bias): High Risk
-• Applicability to Review Question: Low Concern
+• Participants (Selection Bias): Low Risk | Quote/Reasoning: The authors stated that “all patients who underwent orthotropic heart transplantation recorded between January 2007 and December 2022 were included.” Although retrospective and single-centre, the use of all eligible transplant recipients reduces evidence of selective participant inclusion.
+• Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The feature-importance figures appear to include “Status,” explicitly defined as patient death during 1-year follow-up, and “cause OF DEATH during 1 year” among the model features. Inclusion of the outcome or a direct consequence of the outcome as an input would constitute substantial target leakage. The timing and availability of other variables, including immunosuppressive therapy, were also insufficiently specified.
+• Outcome (Definition Bias): Unclear | Quote/Reasoning: One-year mortality is an objective outcome, and the paper defines class 1 as mortality within one year. However, the ascertainment method was not described, six participants had unknown survival status in Table 3, and the handling of these unknown outcomes in model development was not reported.
+• Analysis (Modeling Bias): High Risk | Quote/Reasoning: The test set was small and contained few mortality events, class imbalance was not addressed, the training/test split and k-fold procedure were inadequately specified, and no confidence intervals or calibration analyses were reported. Potential outcome leakage and inconsistencies between the confusion-matrix orientation and reported precision/recall further increase the risk of biased performance estimates.
+• Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly concerns ML-based prediction of 1-year mortality among post-operative heart transplant recipients and is therefore directly applicable to a review of AI models in thoracic organ transplantation.
 
 Tables and figures used in this extraction:
 Table 3 for cohort demographics, clinical characteristics, and survival status; the model-performance table on page 7 for accuracy, precision, recall, F1 score, AUC, and training accuracy; Figure 1 for the logistic-regression test confusion matrix; Figure 2 for LR feature importance; Figure 3 for the SVM test confusion matrix; Figure 4 for SVM feature importance.

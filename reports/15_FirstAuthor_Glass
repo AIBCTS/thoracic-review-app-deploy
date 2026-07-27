@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The task was histologic diagnosis of pAMR-H in cardiac transplant biopsies. The closest category in the allowed list is Acute Rejection. The algorithm achieved “98% overall validation accuracy.” Figure 3 shows multiclass AUROC 0.982 and binary AUCs of 0.995 for pAMR-H vs normal endomyocardium, 0.992 for pAMR-H vs healing injury, and 0.992 for pAMR-H vs ACR. The paper also reports pAMR-H classification accuracies of 99.5%, 99.2%, and 99.2% against those three categories, respectively. PPV, sensitivity, specificity, NPV, F1-score, calibration, and DCA were not reported. I used the highest explicitly reported AUC value for the single AUC field.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The training material came from previously diagnosed Duke cases from 2018–2021, so this was a retrospective single-center pathology dataset and not a broad clinical recipient sample.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized digital H&E pathology image patches scanned at 40X, with expert consensus used to define ground truth and expert annotation of regions of interest.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Ground truth for pAMR-H was based on expert consensus plus cases confirmed as pAMR2 with immunologic evidence such as “>50% positive C4d immunofluorescence and/or >10% CD68 positive intravascular macrophages.”
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include balanced classes, predefined train/validation/test splitting, transfer learning, ROC/AUC reporting, and human-reader comparison. Limitations acknowledged by the authors include patch-level rather than whole-slide development and single-institution staining/scanning, with ongoing external verification still needed.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly applies AI to heart-transplant pathology and rejection diagnosis, which is clearly within thoracic organ transplantation AI.
 
 Tables and figures explicitly used in extraction:
 Figure 1 for representative annotated biopsy regions and pathology classes; Figure 2 for the algorithm-development workflow; and Figure 3 for multiclass confusion/AUROC and binary ROC/AUC curves. No conventional baseline demographic table was present in the retrieved text, so unreported patient-level variables were left as NR rather than inferred.

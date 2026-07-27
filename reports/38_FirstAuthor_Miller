@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “1-year survival.” The neural network had the highest C-statistic at 0.66, while logistic regression, ridge regression, and LASSO each had C-statistic 0.65. Calibration was evaluated using calibration curves, Hosmer–Lemeshow testing, and Brier scores; traditional models plus random forest and stochastic gradient boosting showed good calibration, whereas some other advanced models were inferior. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported in the retrieved text. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national UNOS cohort of adult first single-organ heart transplant recipients across multiple eras, which reduces single-center bias, though exclusions for missingness were applied.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant donor and recipient variables from UNOS, including renal function, BMI, liver function, hemodynamics, donor blood pH, and diagnosis.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as 1-year survival after heart transplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include comparison across multiple traditional and advanced models, train/test splitting, bootstrapping, ROC/C-statistics, and calibration assessment. Uncertainty remains because the paper provides limited detail on preprocessing and tuning, and all models showed only modest discrimination.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly evaluates machine learning for outcome prediction after heart transplantation using a national transplant registry and is clearly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for discrimination across traditional and advanced models; Table 1 for neural-network C-statistics across UNOS regions and eras; and Figure 2 for major predictors of 1-year mortality and how AUC changed with increasing number of variables. I did not report any value not explicitly shown in the uploaded article.  ￼

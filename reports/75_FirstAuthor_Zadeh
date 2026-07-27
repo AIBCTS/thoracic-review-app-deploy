@@ -62,11 +62,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was occurrence of de novo malignant cancer after lung transplantation among recipients with no prior malignancy. In the held-out test set, Gradient Boosting achieved AUC 0.746, accuracy 0.690, sensitivity 0.731, specificity 0.649, and precision 0.676. No AUC confidence interval, NPV, or F1-score was reported. The study did not report formal calibration assessment or decision-curve analysis.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): High Risk
-	•	Outcome (Definition Bias): High Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Of 66,590 lung transplant records, only 30,917 remained after excluding recipients with prior malignancy and all individuals lost to follow-up. Exclusion of approximately 7,871 recipients after the no-prior-malignancy cohort was formed was not accompanied by a comparison of included and excluded patients, creating risk of informative selection.
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The model combined pretransplant, perioperative, and post-transplant variables, including hospital length of stay and treatment for rejection within 1 year. The intended prediction time was not defined, so predictors may have occurred during the same follow-up period in which malignancy developed, creating temporal leakage and limiting prospective use.
+	•	Outcome (Definition Bias): High Risk | Quote/Reasoning: De novo malignancy was identified from a malignancy follow-up data source, but no fixed prediction horizon, minimum follow-up duration, standardized malignancy definition, or time-to-event/censoring method was reported. Treating variable-duration follow-up as a binary classification outcome can misclassify recipients with insufficient observation time.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study used only a random internal split and no external or temporal validation. It is unclear whether expert variable filtering, correlation screening, and oversampling were performed exclusively within the training data. The paper also reports both a 70:30 dataset split and Gradient Boosting trained on 60% of observations without fully reconciling these procedures. Confidence intervals and calibration were not reported, and post-transplant predictors introduce substantial leakage risk.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates machine-learning models for predicting a clinically relevant complication in post-transplant lung recipients using a national thoracic-transplant registry. It is directly applicable to AI research in thoracic organ transplantation, although the unspecified prediction time limits clinical implementation.
 
 Tables and figures used in this extraction:
 Table 1 for the initial organ-specific STAR record counts; Figure 1 for the data-preparation, training/testing, and model-comparison workflow; Figure 2 for sex, ethnicity, blood group, and age distributions; Table 2 for held-out classification performance; Table 3 for Gradient Boosting variable importance.

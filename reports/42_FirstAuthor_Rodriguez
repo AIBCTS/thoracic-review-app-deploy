@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled clinical decision was lung-transplant referral, and the downstream patient outcome was 5-year survival under different referral policies; because this does not map neatly to the preset categories, the best label is Other. The ML model’s baseline AUROC for 2-year mortality was 0.914 versus 0.876 for FEV1. Calibration is discussed because the paper states that the ML model had “better calibration than FEV1.” The paper’s main outcome results were survival and referral consequences in simulation rather than standard test-set accuracy, PPV, sensitivity, specificity, NPV, or F1. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: High Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national CFF registry linked to UNOS, covering a substantial proportion of the U.S. cystic fibrosis population, which reduces major center-level selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were longitudinal real-world clinical variables collected at repeated encounters and used dynamically over time, which closely matches intended clinical use.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined, including referral, transplant, pretransplant death, post-transplant death, and 5-year overall survival, with explicit state transitions in the microsimulation model.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include linked real-world registries, dynamic decision modeling, patient-level microsimulation, and explicit accounting for organ supply and heterogenous treatment effects. Uncertainty remains because many downstream effects were simulated rather than directly observed, and results depend on structural assumptions such as organ allocation and post-transplant survival modeling.  ￼
+	•	Applicability to Review Question: High Concern | Quote/Reasoning: Although the paper is highly relevant to lung transplantation and ML-based referral decisions, the population is adults with cystic fibrosis rather than a general thoracic transplant candidate population, and the article is mainly a methodological framework rather than a standard transplant prediction-model development paper.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the five-state microsimulation structure; Figure 2 for the dynamic referral example under ML and FEV1; Table 1 for referral numbers, characteristics at referral/transplant, and outcomes across ML, FEV1, and usual care policies; Figure 3 for patients missed under usual care but captured by ML or FEV1; and Figure 4 for state membership over time under each referral policy. I did not report any value not explicitly shown in the uploaded article.  ￼

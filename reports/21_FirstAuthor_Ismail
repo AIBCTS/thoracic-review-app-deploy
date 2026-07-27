@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The task was automated lung sizing to support donor-recipient size matching, so the closest allowed outcome category is Donor acceptance. The reported metrics were measurement-agreement metrics rather than classification metrics: average error <2.5% (<7.0 mm), Pearson correlation 0.97, and intraclass correlations mostly above 0.90. No AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small pilot validation cohort of 50 lung transplant recipients from a single center, which limits representativeness.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized portable chest radiographs processed through a clearly described segmentation and feature-point extraction pipeline.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The measured outcome was explicit and objective: 6 predefined lung size measurements validated against two radiologists’ independent measurements.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include blinded radiologist comparison, quantitative agreement analysis, and public code availability; limitations include small sample size, single-center validation, and lack of larger external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies AI to lung transplant donor-recipient size matching, which is clearly relevant to thoracic transplantation AI.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the 2-step framework and defined measurement points; Table 1 for cohort demographics; Figure 2 for representative CXRs including technical challenges and abnormalities; Figure 3 for measurement error plots; and Table 2 for intraclass correlation coefficients between AI and radiologists. I did not report any value not explicitly shown in the uploaded article.  ￼

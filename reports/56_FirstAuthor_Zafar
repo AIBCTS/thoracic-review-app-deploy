@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The model predicts 1-, 5-, and 10-year survival plus half-life. Since a single target must be chosen, 5-year survival is the most central medium-term endpoint and has an explicitly reported C statistic of 0.64; 1-year and 10-year C statistics were 0.67 and 0.72. Calibration was reported by showing that model-estimated survival probabilities were similar to observed survival in the validation cohort and by comparing Kaplan–Meier curves across derivation and validation cohorts. Accuracy, PPV, sensitivity, specificity, NPV, and F1 were not reported. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large UNOS national-registry cohort of double lung transplants with clear inclusion and exclusion criteria and a separate validation sample.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors included clinically relevant recipient, donor, and transplant variables available at transplant decision-making, which matches the intended use of the model.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined as post-transplant survival over multiple horizons, with survival probabilities and half-life estimated and validated against observed outcomes.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national data, separate derivation/validation cohorts, Lasso-based selection, clustering into risk groups, and calibration against observed survival. Uncertainty remains because the snippets do not show full details of all imputation steps and the model mixes conventional survival modeling with clustering rather than fully external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses advanced predictive modeling for recipient-donor matching and short-/long-term survival after lung transplantation, which is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort selection and exclusions; Figure 2 for adjusted total risk-score density and survival by score; Figure 3 for clustering of total scores into low-, medium-, and high-risk groups; Figure 4 for Kaplan–Meier validation across cohorts; Figure 5 for hazard-ratio comparisons; Figures 6–7 for the web-based calculator outputs; Table 1 for recipient, donor, and transplant characteristics in derivation and validation cohorts; Table 2 for Cox-Lasso coefficients; and Table 3/results text for cluster distributions, observed versus predicted survival, C statistics, and half-life estimates. I did not report any value not explicitly shown in the uploaded article.  ￼

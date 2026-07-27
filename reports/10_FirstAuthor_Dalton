@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcomes were waitlist death or removal as too sick, and post-transplant death or retransplantation. For waitlist models, discrimination was strongest in the baseline cohort, with AUC about 0.92-0.93 at 1 month, declining to about 0.87-0.89 at 3 months and 0.84-0.85 at 6 months. For post-transplant models, discrimination remained poor across models, generally “0.58-0.61,” including at 1, 3, and 5 years. Figure 1 shows subgroup AUC patterns, especially worse variability among Medicaid patients. Because the paper centers on AUC/C-statistic-style discrimination across many models and time horizons rather than a single deployed model, and because the prompt asks for held-out test/validation metrics, I leave the single numeric AUC field as NR rather than choose one arbitrary value. Calibration and DCA were not reported in the retrieved text.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used large national SRTR cohorts of waitlist candidates and transplant recipients in the United States, which reduces center-level selection bias, although exclusions for missing key variables were applied.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were derived from SRTR variables available at allocation or cohort time points, consistent with the clinical use case for LAS/CAS modeling.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcomes were clearly defined as time from waitlist placement to death or removal as too sick, and time from transplant to death or retransplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include TRIPOD-aligned internal validation, 10-fold cross-validation, multiple imputation, inverse probability-of-censoring weighting, and comparison of several model classes; however, only internal validation was performed and post-transplant discrimination remained poor across all models.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly evaluates machine-learning and alternative modeling approaches for lung transplant allocation-related prediction, making it highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for waitlist baseline and residual-cohort characteristics; Table 2 for waitlist-model AUCs across models and time horizons; Table 3 for post-transplant cohort counts; Table 4 for post-transplant model AUCs; and Figure 1A/1B for subgroup discrimination performance by socioeconomic and clinical factors. I did not report any metric not explicitly present in the article text or visible table excerpts.

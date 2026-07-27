@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “death before receipt of a heart transplant,” which maps to waitlist mortality. In the postpolicy test set, the best-performing model was the Cox model with treatment variables, C-index 0.76, followed by the random survival forest with treatment variables, C-index 0.74; the 6-status system had C-index 0.67. Calibration was assessed with Kaplan–Meier survival by predicted 90-day risk groups and Brier scores. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Low Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult heart-transplant candidates, which minimizes single-center selection bias, although some candidates with data errors were excluded.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were listing-time physiologic measures, treatments, diagnoses, blood type, and medical history variables that are clinically relevant to urgency ranking.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “death without receiving a heart transplant,” including death while waitlisted and after delisting, with transplant treated as censoring.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal train-test separation, multiple imputation, comparison of CPH and RSF, bootstrap CIs, calibration assessment, and variable-importance analysis.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses ML-based urgency ranking among heart-transplant candidates and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for prepolicy and postpolicy candidate characteristics; Table 2 for C-indices of the 6-status system and the Cox/RSF models; Figure 1 for individual and joint variable importance in the RSF models; and the Kaplan–Meier/calibration figures described in the Results for survival separation across status categories and model-predicted 90-day risk groups. I did not report any value not explicitly shown in the uploaded article.  ￼

@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was “all-cause mortality assessed as time from heart transplantation to death or end of follow-up,” so the closest restricted category is Other. The study focused on hazard phases, variable importance, and interactions rather than reporting AUC, accuracy, sensitivity, specificity, PPV, NPV, or F1-score. Figure 1 showed 1-month survival 96%, 1-year survival 89%, and 12-year survival 50%, but these are cohort survival estimates rather than model discrimination metrics. Calibration and DCA were not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national SRTR cohort including all adult isolated heart transplants in the United States over the study period, which minimizes center-level selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were recorded at the time of transplantation and included clinically relevant recipient and donor variables, including hemodynamics, labs, support devices, donor cause of death, and ischemic time.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as all-cause mortality from transplantation to death or end of follow-up, with mortality verified through the Social Security Death Master File.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope, complementary parametric and RSF analyses, interaction assessment at multiple time points, and imputation for missingness. Uncertainty remains because conventional predictive performance metrics for a deployable model were not reported in the retrieved text.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies AI/statistical risk modeling for post-heart-transplant survival using a national transplant registry, which is highly relevant to the review question.
 
 Tables and figures explicitly used in extraction:
 Table 1 for baseline recipient and donor characteristics; Figure 1 for sex-specific post-transplant survival curves; the Central Illustration for the three-phase hazard structure; Table 2 for phase-specific multivariable risk factors; Table 3 for RSF variables of importance by time horizon; and the interaction figures described in the Results for 90-day, 1-year, 5-year, and 10-year interactions. I did not report any performance metric not explicitly shown in the uploaded article.  ￼

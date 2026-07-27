@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was “one-year all-cause mortality,” so the closest extraction label is 1-year survival. In the post-policy holdout set, Random Survival Forests had the highest C-index at 0.628, followed by Cox Boost at 0.627. Table 2 shows the other post-policy holdout C-indices: CoxPH 0.585, Ridge 0.586, Lasso 0.613, Elastic Net 0.613, XGBoost Linear 0.600, and XGBoost Tree 0.612. Calibration plots were not described for this paper in the retrieved text, and DCA was not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult first-time heart-only transplant recipients after clear exclusions, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were registry variables available around transplantation, and preprocessing excluded variables with excessive missingness, supporting appropriate predictor selection.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “one-year all-cause mortality assessed from the time of heart transplantation to death or end of the one-year follow-up.”  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested repeated cross-validation, a holdout test set, multiple imputation, and comparison across several model classes. Uncertainty remains because discrimination was only modest and the retrieved text did not document calibration results for the final models.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-based mortality prediction after heart transplantation in a contemporary registry cohort and is closely aligned with the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the benchmarking workflow and derivation/holdout split; Table 1 for post-policy cohort characteristics; Table 2 for holdout C-indices across models; and Figure 2 for cross-validation performance distributions. I did not report any metric not explicitly shown in the uploaded article.

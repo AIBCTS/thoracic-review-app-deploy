@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was the continuous waiting-list “priority” or “allocation score,” so the closest category is Other. The paper evaluated models using regression metrics including “R-squared (R2) and other error rate metrics,” and states that the RF model achieved the highest R2 and lowest error values. However, the exact numeric R2, MAE, and RMSE values were not visible in the retrieved excerpts, so I have not guessed them. No classification metrics, calibration analysis, or decision-curve analysis were reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large UNOS national registry dataset of adult lung-transplant candidates, which reduces single-center selection bias, though exclusions were applied during preprocessing.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinical and demographic waiting-list variables derived from UNOS and selected through a structured, expert-guided preprocessing and feature-engineering workflow.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as the candidate “priority” or “allocation score,” treated as a continuous numerical variable for regression modeling.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include preprocessing, feature engineering, random-search hyperparameter tuning, cross-validation, and SHAP explainability, but the model was validated only on UNOS data and the paper explicitly states that external validation is still needed.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses AI/ML for lung-transplant allocation prioritization using transplant registry data, which is well aligned with the review scope.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the end-to-end ML workflow; Table 3 for the top 11 SHAP-ranked features; and Figure 3 for the Streamlit-based web interface. The retrieved excerpts also describe preprocessing, splitting, tuning, and evaluation methods, but I did not invent exact regression metric values because they were not visible in the provided text.

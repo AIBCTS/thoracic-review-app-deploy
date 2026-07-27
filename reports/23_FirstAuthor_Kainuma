@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target outcome was 1-year mortality after cardiac re-transplantation, which maps most closely to 1-year survival in the extraction framework. Figure 2 and the abstract report 1-year mortality of 40.6% in early versus 13.6% in late re-transplantation. RSF results were reported as variable-importance rankings, not AUROC or classification metrics. No calibration or DCA was reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the national UNOS registry and included all adult cardiac re-transplant recipients meeting criteria between 2000 and 2020, which reduces single-center selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor factors measured at transplant, including end-organ function, support devices, hemodynamics, donor risk, and ischemic time.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The modeled outcome was clearly defined as time to 1-year mortality, analyzed with Kaplan–Meier, Cox modeling, and RSF variable importance for 1-year death.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope and complementary RSF plus Cox analyses, but no held-out validation metrics, calibration assessment, or external validation were reported in the retrieved text.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses machine-learning-based risk stratification in heart transplantation, specifically cardiac re-transplantation, and is closely aligned with the review question.
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study flow and cohort derivation; Table 1 for recipient baseline characteristics; Table 2 for donor baseline characteristics; Table 3 for post-transplant outcomes; Figure 2 for Kaplan–Meier 1-year survival difference between early and late re-transplantation; and Figures 3–4 for RSF-ranked variable importance. I did not report any metric not explicitly shown in the uploaded article.

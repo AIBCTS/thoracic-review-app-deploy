@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was post-transplant survival, reported at 1, 3, and 5 years. The best-performing combined model, “COX + PT-CAS,” achieved 1-year AUC 0.626 versus PT-CAS 0.609. Figure 3 also showed improved calibration for the combined Cox + PT-CAS model across a broader range of predicted risk. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult primary bilateral lung transplant recipients, minimizing single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient registry variables available around transplant, and interaction testing was prespecified across clinically relevant recipient groups.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly modeled post-transplant survival and reported alive/censored proportions at 1, 3, and 5 years.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include staged interaction modeling, Cox and random forest comparisons, cross-validation, and calibration analysis. Uncertainty remains because improvements were modest and complete-case restriction was required for some model comparisons.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses lung-transplant survival prediction using donor-recipient factors and machine-learning/statistical modeling, which fits the review question well.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort flow; Table 1 for recipient characteristics; Table 2 for donor characteristics; Table 3 for multivariable donor-recipient interaction results; Figure 2 for hazard-ratio forest plot; and Figure 3 for discrimination and calibration comparisons across PT-CAS, Cox, and random forest models. I did not report any value not explicitly shown in the uploaded article.  ￼

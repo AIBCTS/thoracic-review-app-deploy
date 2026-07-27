@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The paper focused on post-transplant survival across time, with particular emphasis on long-term survival beyond 5 years; the text notes that “increased age is associated with decreased long-term survival defined as greater than 5 years after lung transplant.” Figure 1 shows Kaplan-Meier survival by age group, and the text reports 5-year predicted survival of 64.5% for age 20, 81.2% for age 45, and 71.5% for age 65 in a hypothetical adjusted model. However, no AUC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult lung transplant recipients in the LAS era, minimizing single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor domains included recipient, donor, and donor-recipient matching variables available around listing/transplant, and RSF explicitly evaluated variable interactions with age.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Death was ascertained through SRTR linked to the Social Security Death Master File, with patients followed to death or end of follow-up and censored at retransplant.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national scope, complementary parametric and RSF modeling, bootstrap aggregation, and age-interaction analysis; uncertainty remains because conventional predictive validation metrics such as AUC and calibration were not reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-assisted risk modeling for post-lung-transplant survival and is clearly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for recipient characteristics by age group; Table 2 for incremental risk factors for death after lung transplant; Figure 1 for Kaplan-Meier survival by recipient age group; Figure 2 for adjusted predicted survival by age; and Figure 3/e-Figures described in the results for age interactions and RSF variable-importance patterns. I did not report any metric not explicitly shown in the uploaded article.  ￼

@@ -60,10 +60,10 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was “death or re-transplant within the indicated timeframe,” primarily at 1 year and secondarily at 3 years, so the closest allowed label is Other. Figure 1 and the Results state that all 1-year models had low AUCs ranging from 0.55 to 0.62. The paper also states that all models had NPV 0.87-0.90 and PPV <0.25, but the retrieved text does not provide model-specific numeric PPV/NPV/sensitivity/specificity values for a single chosen model, so I leave those fields NR rather than guess. Calibration was clearly reported through calibration slopes and Figures 2, 4, and 5. DCA was not reported. The LAS post-transplant survival measure had calibration slope 0.38 (95% CI 0.03-0.73), indicating overestimation of mortality risk.  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national UNOS registry cohort including 19,900 adult first lung transplant recipients, reducing single-center selection bias, although patients lost to follow-up were excluded.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The models were based on pre-transplant covariates from UNOS, and donor covariates were tested separately in secondary analyses, which is appropriate for allocation-related prediction.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly used “death or re-transplant within the indicated timeframe” as the modeled outcome, which is clearly defined.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a held-out validation set, calibration analysis, and multiple comparative models; concerns include mean imputation, exclusion of patients lost to follow-up, limited details on tuning, and persistently poor discrimination across all models.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies prediction modeling, including machine learning, for lung transplant post-transplant survival using national recipient data.  ￼
 
 Tables and figures explicitly used in extraction: Table 1 for cohort characteristics and event counts; Table 2 for clinician-model coefficients; Table 3 for variables selected by LASSO; Figure 1 for 1-year ROC performance and model comparison; Figure 2 for calibration of LASSO, Random Forests, and clinician models; Figure 3 for Random Forest variable importance; Figure 4 for calibration of LAS post-transplant survival; and Figure 5 for calibration of LAS at 3, 6, 9, and 12 months. Some exact model-specific sensitivity/specificity/PPV/NPV values likely appeared in Figure 1’s embedded table, but those numbers were not fully visible in the retrieved text, so I did not invent them.

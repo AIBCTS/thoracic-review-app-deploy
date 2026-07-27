@@ -60,10 +60,10 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “1-year post-transplant survival,” with 1-year mortality 11% (n=3738). In the validation cohort, AUROCs were 0.649 for logistic regression, 0.691 for random forest, 0.691 for deep neural network, 0.653 for AdaBoost, and 0.764 for the final ensemble ML model. The ensemble improved predictive performance by 72.9% ± 3.8% by NRI and had better DCA across the full risk spectrum. Calibration was evaluated visually by plotting predicted versus observed risk by decile. The paper did not report accuracy, PPV, sensitivity, specificity, NPV, or F1-score numerically in the retrieved text.  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry cohort of 33,657 patients, which reduces single-center selection bias, although exclusions for prior transplant, multiorgan transplant, age <18, and incomplete 1-year survival were applied.  ￼  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The authors explicitly excluded variables that “would not be available in the preoperative setting,” which supports appropriate predictor timing for clinical use.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as “1-year post-transplant survival,” and Figure 1 classified patients as alive vs dead at one year.  ￼  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a separate validation cohort, resampling for imbalance, multiple algorithms, AUROC/NRI/DCA evaluation, and calibration assessment. However, there was no external validation cohort, and the authors acknowledge this as a limitation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies machine learning for heart-transplant survival prediction using donor-recipient preoperative variables, matching the review question closely.  ￼
 
 Tables and figures explicitly used in extraction: Table 1 for baseline cohort characteristics and training/validation sizes; Figure 1 for cohort derivation and 1-year outcome counts; Figure 2 for the ensemble training/validation scheme; Figure 3 for AUROC comparison; and Figure 4 for decision-curve analysis. The paper also references Figure S1 for feature importance and Figure S2 for calibration, but the retrieved main-text content only described those supplementary figures rather than showing them directly.  ￼  ￼

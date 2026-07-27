@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was “1-year post-transplant mortality,” which maps to 1-year survival in this extraction framework. The XGBoost model achieved “an AUC of 0.71 (95% CI: 0.62–0.78).” Although an AUCPR of 0.357 was reported, the paper did not provide explicit held-out accuracy, PPV, sensitivity, specificity, NPV, or F1 values in the retrieved text. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national UNOS cohort of adult isolated first-time heart-transplant recipients bridged with tMCS, reducing single-center selection bias, though it is limited to a specific high-risk subgroup.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were restricted to variables available “at or before the time of transplantation,” which is appropriate for pre-operative risk modeling.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as “1-year post-transplant mortality.”  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include national data, train/test split, hyperparameter tuning, imbalance adjustment, SHAP-based interpretation, and bootstrap CIs. Uncertainty remains because validation was internal only and calibration was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses ML-based outcome prediction in heart transplantation, specifically a clinically important tMCS bridge-to-transplant subgroup.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort inclusion and exclusions; Table 1 for baseline characteristics of survivors vs non-survivors; Figure 2 for ROC/AUC of the XGBoost model; Figure 3 for SHAP summary of the top predictors; and Figure 4 plus accompanying text for individualized feature contributions. I did not report any value not explicitly shown in the uploaded article.  ￼

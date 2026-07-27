@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The study outcome was post-transplant malignancy, which is not one of the preset transplant endpoints, so the best category is Other. The paper reports hazard ratios rather than standard predictive discrimination metrics: sirolimus HR 1.41, azathioprine HR 2.1, cyclosporine HR 1.59, and tacrolimus HR 0.59 for post-transplant malignancy. No AUC, accuracy, PPV, sensitivity, specificity, NPV, F1, calibration, or DCA were reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Unclear
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: High Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicenter cohort, which improves representativeness, but it was limited to three hospitals in the greater Chicago area and relied on retrospective ICD/EHR ascertainment.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clearly defined EHR-derived exposures and demographics, especially time-dependent immunosuppressive medication use, age, sex, race, and organ type.  ￼
+	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: Malignancies were identified using ICD-9/10 codes, which is practical but introduces some risk of misclassification compared with adjudicated cancer registries.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include time-dependent Cox modeling, competing-risk analysis, and complementary random forest variable-importance assessment. Limitations acknowledged by the authors include retrospective design, potential under-ascertainment outside the hospital system, modest sample size relative to national databases, and lack of dose/plasma-level adjustment for immunosuppressants.  ￼
+	•	Applicability to Review Question: High Concern | Quote/Reasoning: Although the paper includes heart and lung recipients, it is a broad solid-organ oncology/immunosuppression study rather than a thoracic-transplant-specific AI prediction study, so applicability to the thoracic AI review question is limited.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for transplant cohort size and organ-type distribution; Figure 2 for malignancy distribution, latency, race-stratified malignancy proportions, and immunosuppressive use by organ; and Figure 3 for random forest variable importance, cumulative incidence by organ and medication, heatmap of malignancy by immunosuppression, and multivariable Cox hazard ratios. I did not report any metric not explicitly shown in the uploaded article.  ￼

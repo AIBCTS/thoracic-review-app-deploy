@@ -62,11 +62,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: Performance was extracted for the best held-out test model: the 61-variable XGBoost model predicting circulatory death within 120 minutes after extubation. It achieved ROC-AUC 0.89 and PR-AUC 0.97; no 95% confidence interval, accuracy, PPV, sensitivity, specificity, NPV, or F1-score was reported. The corresponding 30-minute max-variable test model achieved ROC-AUC 0.76 and PR-AUC 0.80. Calibration curves and Brier scores were reported in supplementary figures, but decision-curve analysis was not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): High Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: All potential DCD donors with initiated withdrawal of life-sustaining therapy were eligible, and the total cohort was large and multicenter. However, the best-performing max-variable model was restricted to 2,092 donors from only two of the three OPOs to obtain 61 sufficiently complete variables, and the paper does not provide a detailed comparison of included versus unavailable cases for this model.
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: Predictor collection was not standardized to a fixed time before the organ offer; the authors state that “a standardized datapoint prior to offer could not be defined” and acknowledge that inputs may not reflect exact values at the time of procurement offer. Measurements also varied across OPOs and may have been affected by unmeasured sedative or pharmacologic treatment.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The endpoints—circulatory death within 30 and 120 minutes after extubation—were objective, clearly time-defined binary outcomes and were measured after withdrawal of life-sustaining therapy.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: Evaluation used only a random internal 80:20 split, despite data from multiple OPOs, and no prospective, geographic, or temporal external validation was performed. It was not stated whether median/mode imputation and importance-based feature elimination were fitted exclusively within the training set. Exact split counts, confidence intervals, detailed hyperparameter tuning, and threshold-specific classification metrics were not reported.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates machine-learning prediction in potential DCD donors to support heart and lung procurement decisions. The population, donor predictors, and clinically relevant expiration windows are directly applicable to AI research in thoracic organ transplantation.
 
 Tables and figures used in this extraction:
 Table 1 for donor demographics, comorbidities, clinical variables, and endpoint prevalence; Tables 2–4 for univariable and multivariable regression comparators; Table 5 for training and held-out test ROC-AUC and PR-AUC; Table 6 for XGBoost feature importance; Figures 1 and 2 for ROC and precision-recall curves; Supplementary Figures 3 and 4 as referenced for calibration curves and Brier scores.

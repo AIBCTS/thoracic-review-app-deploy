@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The dependent variable was “graft survival, when considering the end-point at six months,” and Table 1 defines y as “Survival of the graft after six months: 1 (YES), 0 (NO).” The paper presents the final LRIPU equation and discusses coefficient directions, but it does not report AUROC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA. I did not infer any unreported performance metric.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): High Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center cohort of 404 transplants from one hospital, with pediatric and some combined/multi-organ recipients excluded, which limits representativeness.
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: Table 1 includes post-transplant variables such as “fvc_prp” and “fev1_prp,” which would not be available for donor-recipient allocation at the time of transplant decision-making.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “Survival of the graft after six months: 1 (YES), 0 (NO).”
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: Although the paper provides the final model equation and coefficient interpretation, it does not report standard validation metrics or a clear validation design, and it does not describe missing-data handling.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI/statistical modeling for lung donor-recipient matching and short-term graft survival in lung transplantation.
 
 Tables and figures explicitly used in extraction:
 Table 1 was used for the variable list, cohort framing, and definition of the 6-month survival endpoint. Table 2 was used for the final LRIPU model structure and coefficients. In the retrieved content, no separate figures with extractable performance metrics were visible, so I did not invent figure-based results.  ￼

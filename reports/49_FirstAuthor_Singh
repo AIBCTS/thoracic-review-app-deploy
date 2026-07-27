@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The study modeled survival at 1, 3, and 5 years after lung transplantation. Within the restricted outcome list, 5-year survival best captures the most emphasized final performance. The abstract reports maximum AUCs of 0.77 for 1-year, 0.85 for 3-year, and 0.90 for 5-year survival after integrating CT-derived features. The methods also mention c-index and Brier score, but the retrieved text does not provide a single final held-out c-index value to report here. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center retrospective cohort of only 102 systemic sclerosis recipients, which limits generalizability despite being substantial for this rare population.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant demographic and preoperative clinical factors plus objectively derived CT body-composition and cardiopulmonary features generated with previously validated algorithms.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Survival was clearly defined with right censoring at the study cutoff, and Kaplan–Meier plus Cox proportional-hazards methods were used appropriately for time-to-event analysis.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multivariable Cox modeling, time-dependent ROC-AUC evaluation, c-index and Brier-score reporting, and 5-fold cross-validation. Uncertainty remains because the study is single-center and the snippets do not show external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI/CT-enhanced prediction of post-lung-transplant survival and is highly relevant, although focused on the specific systemic sclerosis subgroup.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the automated CT segmentation of cardiopulmonary and body-composition structures; Figure 2 for the Kaplan–Meier survival curve; Table 1 for demographic predictors; Table 2 for clinical predictors; and Table 3/results text for CT-derived predictors and model performance summaries. I did not report any value not explicitly shown in the uploaded article.  ￼

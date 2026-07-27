@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was “postoperative 1-year mortality,” which maps to 1-year survival in this extraction framework. Under bootstrap validation, the random forest model achieved the best AUC of 0.801, with accuracy 0.828, sensitivity 0.268, and specificity 0.927. GBM had slightly lower AUC 0.786 but the highest sensitivity 0.271. PPV/NPV were not reported numerically in the shown results tables, and calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center cohort from one Chinese institution, which limits generalizability despite consecutive inclusion.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected recipient and donor clinical variables available before or at transplantation and were screened systematically.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as postoperative 1-year mortality, including in-hospital and 1-year follow-up mortality.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include 70/30 train-test splitting, LASSO selection, grid-search tuning with five-fold cross-validation, bootstrap validation, and SHAP interpretation. Uncertainty remains because the sample size was modest and sensitivity was poor across models.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of 1-year mortality after heart transplantation and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the study workflow; Figure 2 for ROC curves across the seven machine-learning models; Figure 3 for random-forest feature importance; Figure 4 for SHAP-based feature importance; Figure 5 for individual prediction explanations; Table 1 for baseline recipient characteristics and train/test distribution; and Table 2 for bootstrap-validated model performance. I did not report any value not explicitly shown in the uploaded article.  ￼

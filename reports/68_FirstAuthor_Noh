@@ -62,11 +62,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was 1-year graft failure, defined as death or retransplantation due to graft failure within 1 year; retransplantation date was treated as equivalent to the date of death. Across stratified 5-fold cross-validation, the MLP achieved AUC 0.780, accuracy 0.733, sensitivity 0.673, specificity 0.751, PPV 0.449, NPV 0.886, and F1-score 0.537. No 95% confidence interval for AUC was reported. Calibration analysis and DCA were not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Sixty-three of 303 enrolled recipients were excluded because of withdrawal, heart-lung transplantation, loss to follow-up, or incomplete data, but the numbers attributable to each exclusion were not reported. Complete-case inclusion of only 240 recipients may have produced a selected cohort and biased the event distribution.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The final model used only pretransplant variables, and the authors explicitly excluded intraoperative and early postoperative outcomes. Clinical definitions and measurement timing were described, with laboratory values taken from the measurement closest to transplantation.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: One-year graft failure was objectively defined as death or retransplantation due to graft failure within 1 year. Retransplantation was consistently treated as graft failure by assigning the retransplantation date as the equivalent event date.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The cohort contained only 55 graft-failure events, yet 25 candidate predictors and six algorithms were evaluated. Feature selection appears to have been performed using the same dataset used for cross-validated performance estimation rather than within a fully nested validation procedure, increasing leakage and optimism risk. There was no independent external validation, no AUC confidence interval, and no calibration assessment.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates machine-learning prediction of a clinically relevant 1-year outcome in lung transplant recipients using pretransplant variables. It is directly applicable to AI research in thoracic organ transplantation.
 
 Tables and figures used in this extraction:
 Table 1 for recipient demographics, clinical history, laboratory, and immunologic variables; Table 2 for operative and postoperative outcomes; Table 3 for performance of all six models; Figure 1 for participant inclusion; Figures 2 and 3 for coefficient-based feature selection and number-of-feature assessment; Figure 4 for SHAP interpretation; Figure 5 for Kaplan–Meier outcomes in predicted risk groups.

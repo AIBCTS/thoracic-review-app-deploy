@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was explicitly 1-year mortality after lung transplantation, which maps to 1-year survival in this extraction framework. With the top-10-feature model, GBM had AUC 0.958 and accuracy 0.949, with sensitivity 0.755, specificity 0.986, PPV 0.914, and NPV 0.955. The same internal performance was reported for the 25-feature GBM model. External validation showed GBM AUC 0.852/accuracy 0.764, while MLP generalized best with AUC 0.911/accuracy 0.870. Calibration and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The primary cohort was a large international ISHLT registry with 29,364 adult recipients from 45 centers, which reduces major selection bias, although complete-case exclusions were applied.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were pretransplant clinical variables available before transplantation and relevant to candidate assessment and counseling.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The endpoint was clearly defined as death within 1 year versus survival at 1 year after lung transplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include large registry size, comparison of six ML models, SHAP-based simplification, five-fold cross-validation, and external validation. Uncertainty remains because complete-case analysis may bias estimates and calibration was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses machine-learning prediction of 1-year mortality after lung transplantation and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for patient inclusion; Figure 2 for SHAP-based feature importance among the 25-variable and 10-variable models; Figure 3/results text for Kaplan–Meier separation of model-defined risk groups; Table 1 for baseline pretransplant characteristics; Table 2 for univariate associations with 1-year survival; Table 3 for performance of the 25-feature models; and Table 4 for performance of the 10-feature models. I did not report any value not explicitly shown in the uploaded article.  ￼

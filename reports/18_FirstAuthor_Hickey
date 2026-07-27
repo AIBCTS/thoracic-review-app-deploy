@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The paper evaluates both 1-year and 10-year survival. Figure 1 and the text report clinically interpretable decision rules rather than AUC-style performance. For 1-year outcomes, transplanted patients with SVP <14 mmHg had 100% survival, and non-transplanted patients with PCWP <15 mmHg had 100% survival. For 10-year outcomes, all waitlisted/declined patients with PCWP ≥17 mmHg died, and all transplanted/deferred patients with SVP <10 mmHg were alive. Kaplan–Meier curves in Figure 2 show 1-year survival of 100% for deferred, 85.7% for transplanted, 42.1% for waitlisted, and 54.5% for declined patients. No AUC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center retrospective cohort of only 58 included patients, and 13 of 71 identified patients were excluded because not all relevant data were available.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors included clinically relevant pre-listing hemodynamic, laboratory, and functional variables collected during transplant evaluation, especially catheter-based measurements such as PCWP, SVP, and EDP.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcomes were clearly defined as 1- and 10-year survival after transplant evaluation/decision, and the paper reports group-specific survival at multiple time points via Kaplan–Meier analysis.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include use of univariate analysis, multivariate decision-tree analysis, and K-fold cross-validation, but the small sample size, complete-case inclusion, and lack of standard predictive performance metrics limit robustness.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly studies machine-learning-assisted outcome prediction in heart transplant evaluation, albeit in a congenital heart disease subgroup rather than a general thoracic transplant population.
 
 Tables and figures explicitly used in extraction:
 Table 1 for demographics, diagnoses, sex, race, and comorbidities; Table 2 for factors influencing transplantation decisions including PCWP, SVP, EDP, CPET, and sternotomies; Figure 1 for 1-year and 10-year decision-tree thresholds and hazard-ratio summary; and Figure 2 for Kaplan–Meier survival across deferred, transplanted, waitlisted, and declined groups. I did not report any metric not explicitly shown in the uploaded article.

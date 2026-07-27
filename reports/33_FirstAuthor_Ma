@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “severe PGD (grade 3) at any time within the first 72 hours after transplantation.” Among imaging-only approaches, the best model had median AUROC 0.63 and AUPRC 0.48. The best overall model was late fusion of imaging and clinical data, with median AUROC 0.74 and AUPRC 0.61, significantly better than clinical EHR data alone (AUROC 0.64, AUPRC 0.43). The paper also reports F1, recall, PPV, NPV, and accuracy in tables, but the provided excerpt does not show all final fused-model numeric values clearly enough for me to extract them without risk of error, so I leave them NR. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center cohort of only 160 recipients, restricted to transplanted donors with available CT scans, which limits representativeness and introduces selection risk.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient/donor EHR data and routinely reviewed donor-lung CT scans, and the image preprocessing pipeline was explicitly described.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Severe PGD was defined according to “International Society for Heart and Lung Transplantation criteria” and graded by two board-certified pulmonologists.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include TRIPOD+AI reporting, held-out validation/test sets, bootstrap analysis, repeated LASSO, and multimodal comparison; uncertainty remains because the sample size is small for deep learning and external validation was not reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly applies AI/ML to lung transplantation, specifically donor-CT-enhanced prediction of severe PGD after transplant, which is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the four imaging-model architectures; Figure 2 for early, joint, and late fusion strategies; Table 1 for recipient and donor characteristics plus PGD incidence; Table 2 for imaging-only model performance; and Table 3/results text for the 13 selected clinical features and superior late-fusion multimodal performance. I did not report any value not explicitly shown in the uploaded article excerpt.  ￼

@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target outcome was multi-period post-transplant survival probability at month 1 and years 1–10 rather than a single fixed endpoint. Table 4 reports holdout performance for the selected UP-LASSO-logistic regression model: AUC rose from 0.608 at month 1 to 0.702 at year 10; year-10 accuracy was 0.627, sensitivity 0.752, and specificity 0.533. Figure 7 presents observed-versus-forecast survival probabilities after isotonic regression, so calibration was reported graphically. Table 5 shows isotonic regression slightly improved AUC at all time points. No PPV, NPV, F1-score, or DCA were reported. Since the prompt asks for the test/validation set, I used the holdout results from Table 4; the single numeric AUC field here is the year-10 holdout AUC of 0.702, while the article reports a range across time points.  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry with 103,570 heart transplant events, which lowers single-center selection bias, although censoring varied by time point.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The authors intentionally removed intra- and post-transplant variables in the main prediction framework, keeping a pre-operative decision-support orientation, and also engineered clinically motivated donor-recipient features.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The survival outcome at each time point was explicitly coded using G-TIME and G-STATUS, with censoring rules clearly described for whether the recipient was alive or dead at the time point of interest.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include extensive preprocessing, class-imbalance handling, multiple algorithms, cross-validation, holdout testing, and post hoc monotonic calibration; however, the very large analytic design space and time-point-specific censoring introduce complexity and possible instability, and exact final training/test sample sizes per horizon were not clearly reported in the retrieved text.  ￼  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly concerns AI/ML for heart transplant outcome prediction using donor-recipient pre-operative variables and is highly aligned with the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 (illustration of isotonic regression concept), Figure 2 (overview of transplantation decisions), Figure 3 (two-stage framework), Figure 4 (ROC plots for years 1–9), Figure 6 (sample patient probability curves before/after isotonic regression), Figure 7 (observed vs forecast survival probabilities after isotonic regression), Table 4 (holdout performance across month 1 and years 1–10), and Table 5 (differences after isotonic regression). No demographic baseline table with age/sex/race summary was visible in the retrieved main-article content, so those items were left as not reported.  ￼  ￼  ￼

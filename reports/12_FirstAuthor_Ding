@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was PGD after heart transplantation. Table 3 reports the best model, MLP, with AUROC 0.868 ± 0.006 and AUPRC 0.794 ± 0.015. Figure 2 shows ROC and PRC curves across 5 folds, with ROC AUCs around 0.86-0.87 and PRC AUCs around 0.76-0.80. The paper does not report accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Unclear
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the national UNOS database and included 8008 heart transplant recipients, reducing single-center bias, although exclusions were applied for multiple transplants during the index hospitalization.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor domains were clearly described in Tables 1-2 and included recipient, donor, operative, pair, and life-support variables available around transplantation; no obvious post-outcome leakage is described in the retrieved text.
+	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The paper states that y indicates “the diagnosis of PGD after a heart transplant,” but the retrieved excerpt does not provide a full operational definition or ascertainment algorithm within the Methods.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multiple model comparisons, kNN imputation, 5-fold cross-validation, and explainability analyses, but uncertainty remains because hyperparameter tuning, calibration, and exact split sizes were not reported.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This study directly addresses AI/ML for heart transplant PGD prediction using donor-recipient variables and is closely aligned with the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for recipient and donor cohort demographics; Table 2 for feature domains; Table 3 for model performance; Table 4 for top single features and top feature combinations; Figure 1 for the ML workflow; Figure 2 for 5-fold ROC/PRC curves; Figure 3 for single feature importance ranking; Figure 4 for salient-feature scatter plots; and Figure 5 for top feature interaction ranking. I did not report any values not explicitly shown in the uploaded article.

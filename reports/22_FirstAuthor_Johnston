@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The lung-transplant outcome was PTLD, which is not one of the preset transplant-outcome categories, so the closest allowed choice is Other. The abstract states that the calibrated focal-aware XGBoost achieved “AUROC, Brier score, and calibration slope of 0.700, 0.128, and 0.968 for predicting the 10-year cancer risk.” The paper also reports that for 1-year PTLD prediction, “XGBoost-Focal calibrated using the Ψγ transformation achieved the best sensitivity (0.631).” Calibration plots, calibration slopes/intercepts, and Brier scores were central to the paper; DCA was not reported. I did not infer PPV, specificity, or NPV because they were not clearly stated in the retrieved excerpts.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The lung-transplant analysis used a large national SRTR cohort and applied transparent exclusion criteria, reducing single-center selection bias.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were structured SRTR variables available in the registry, including demographics, immunosuppression, viral infection history, and HLA data.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The binary outcome was explicitly defined as PTLD, derived from the SRTR malignancy file, with time-to-PTLD calculated from transplant date to diagnosis date.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include repeated 10-fold cross-validation, Bayesian hyperparameter optimization, and detailed calibration assessment. Remaining uncertainty comes from the lack of a fully independent external validation cohort and the absence, in the retrieved text, of a clear missing-data strategy for the SRTR lung dataset.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses AI-based clinical risk prediction in lung transplant recipients using SRTR data and is highly relevant to the review question.
 
 Tables and figures explicitly used in extraction:
 Figure 2 for lung-cohort derivation and exclusions; Table 1 for discrimination results; Table 2 for calibration/Brier-score performance; Table 3 and Figure 6 for classification metrics including sensitivity; Figure 5 for discrimination comparisons; Figures 7–8 for raw focal-loss calibration plots across time horizons; and Figure 9 for calibration slopes and intercepts after post-processing. I did not report any value not explicitly stated in the uploaded article or retrieved excerpts.

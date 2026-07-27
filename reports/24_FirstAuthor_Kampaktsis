@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was 1-year survival after heart transplantation. The abstract reports AUCs of 0.689, 0.642, 0.649, 0.637, and 0.526 for Adaboost, Logistic Regression, Decision Tree, SVM, and KNN, respectively, while IMPACT had AUC 0.569. Secondary analyses yielded AUCs of 0.629, 0.609, and 0.610 for 3-year survival, 5-year survival, and acute rejection. Although the paper states sensitivity, specificity, PPV, and NPV were evaluated, the exact model-specific values were not fully visible in the retrieved excerpts, so I have not guessed them. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry cohort of 18,625 adult isolated heart transplant recipients, reducing single-center selection bias, though exclusions were applied.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Only pre-transplant recipient, donor, and transplant variables were used, which is appropriate for clinical prediction at or before transplant.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary endpoint was clearly defined as 1-year survival after heart transplantation, with secondary endpoints of 3-year survival, 5-year survival, and acute rejection.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include feature selection, hyperparameter optimization, oversampling for class imbalance, internal validation, and comparison with IMPACT. Uncertainty remains because no external validation or calibration assessment was reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of outcomes after heart transplantation using a contemporary national registry.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study design and train/validation sizes; Table 1 for donor and recipient baseline characteristics; Table 2 for the 39 selected variables used in the 1-year model; and Figure 2 for AUC performance and the relationship between model performance and number of variables. I did not report any value not explicitly shown in the uploaded article.  ￼

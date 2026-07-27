@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target outcome was AS requiring clinical intervention, which best fits Adverse Events within the allowed labels. The optimal random-forest model had AUC 0.760 and Brier score 0.085. It also had sensitivity 0.782, specificity 0.689, PPV 0.252, and NPV 0.965. Calibration was reported using the Brier score. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a retrospective single-center cohort, which limits generalizability, although exclusions were clearly described and follow-up loss was minimal.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected clinical characteristics after LTx, including diagnosis, ECMO, PGD3, ventilatory variables, and 6MWT, which are clinically relevant to AS risk.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: AS requiring intervention was clinically adjudicated by an experienced physician according to the 2018 ISHLT consensus definitions and grading systems.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multiple feature-selection methods, multiple algorithms, benchmark logistic regression, and bootstrap internal validation. Uncertainty remains because there was no external validation and the event count was relatively small at 40 AS cases.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses machine-learning prediction of a clinically important post-lung-transplant complication and is relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort flow and exclusions; Figure 2 for the heatmap of 56 ML models and selection of the optimal model; Figure 3 for risk-threshold stratification histogram; Figure 4 for mean decrease accuracy of features in the optimal model; Figure 5 for variable importance in the random-forest model; Table 1 for cohort characteristics by AS status; Table 2 for univariate and multivariate logistic regression risk factors; Table 3 for feature-selection outputs; and Table 4 for model performance including AUC, Brier score, sensitivity, specificity, PPV, and NPV. I did not report any value not explicitly shown in the uploaded article.  ￼

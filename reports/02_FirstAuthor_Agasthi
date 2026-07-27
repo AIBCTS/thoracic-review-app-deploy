@@ -60,10 +60,10 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The two primary endpoints were “all cause mortality and graft failure at 5 years after OHT.” Figure 1 and the Results report AUC 0.717 (95% CI 0.696–0.737) for 5-year mortality and 0.716 (95% CI 0.696–0.736) for graft failure. The user asked for tables and figures, and Figure 2 shows subgroup ROC analyses: graft-failure prediction was significantly better when recipient age was >60 years, and mortality prediction trended better when ischemic time was >4 hours. Although the methods say sensitivity, specificity, PPV, and NPV were provided, these numerical values were not present in the retrieved main-article text, so they are NR. Calibration and DCA were not reported.  ￼  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): High Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the ISHLT international registry with “223 centers in 18 countries,” which reduces single-center selection bias, although eligibility restrictions were applied.  ￼
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The model included both pre- and post-transplant variables, including “hospital length of stay,” “graft function at discharge,” and discharge immunosuppression, which limits interpretability for purely pre-transplant risk prediction and creates predictor-timing concerns.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcomes were explicitly defined as “all cause mortality and graft failure at 5 years after OHT,” and graft failure was further defined using the ISHLT reporting definition.  ￼  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The analysis treated each endpoint as a binary outcome and “time-to-event was not taken into account,” and patients lost to follow-up before year 5 were treated as not having had the event, which is a substantial risk of bias.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies machine learning for heart transplant outcomes using donor-recipient and transplant variables, which is closely aligned with the review question.  ￼
 
 Tables and figures explicitly used in extraction: Figure 1 for the ROC/AUC values for 5-year mortality and graft failure, and Figure 2 for subgroup analyses by recipient age, ischemic time, length of stay, and donor age. The main retrieved text did not include a main-paper demographic table with overall mean age or female proportion, so those fields were left as not reported.  ￼  ￼

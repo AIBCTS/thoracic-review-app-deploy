@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was attrition rate in the rehabilitation program, classified as low (<5% missing data), medium (5–10%), or high (>10%), so the closest allowed category is Other. The article reports significance of factors associated with attrition rather than conventional predictive metrics such as AUC or accuracy. Table 2 shows significant variables: low age-dependent BMI (p = 7.08 × 10−5), end-stage respiratory disease requiring LT (p = 0.000111), EQ-5D VAS (p = 0.0009078), low handgrip strength by Mediterranean reference values (p = 0.0230351), and low handgrip strength by EWGSOP2 cutoffs (p = 0.0455796). No calibration or DCA was reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Unclear
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): High Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The study included only 41 patients from a single center, all referred to one rehabilitation program, which limits representativeness and creates substantial selection risk.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: Baseline predictors were clinically relevant, but only the 23 variables with no missing data were analyzed in the ANN, so potentially important factors were excluded.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Attrition was explicitly defined using the percentage of missing data per participant and then categorized into low, medium, or high attrition.  ￼
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The ANN was trained on a very small sample without a reported holdout validation set, and the authors note that including all variables in regression led to overfitting and/or multicollinearity.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly concerns AI use in lung-transplant recipient care, specifically rehabilitation-program attrition after transplantation.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for baseline cohort characteristics, malnutrition, and sarcopenia prevalence; Table 2 for the regression/ANOVA p-values of variables associated with attrition; Figure 2 for attrition distribution by low handgrip and low BMI categories; Figure 3 for attrition distribution by transplant indication; Figure 4 for handgrip strength/BMI relationships; and Figure 5 for quality-of-life relationships. I did not report any prediction metric that was not explicitly shown in the uploaded article.

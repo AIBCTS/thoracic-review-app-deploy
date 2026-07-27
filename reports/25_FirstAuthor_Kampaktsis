@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary modeled endpoint was 1-year mortality/survival after heart transplantation. The paper reports that the final 1-year CatBoost model achieved “AUC of .80,” “predictive accuracy of 75.2%,” “sensitivity of 75%,” “specificity of 75%,” “PPV of 42%,” and “NPV of 93%.” The 3-year model achieved AUC 0.69 and accuracy 74.2%. Calibration and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Unclear
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a national UNOS cohort of ACHD heart-transplant recipients across the United States, which reduces single-center selection bias, although subgroup size remained modest.  ￼
+	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: The model included recipient, donor, procedural, and post-transplant variables; this improves prediction but mixes pre- and post-transplant information, which may limit use as a strictly pre-transplant decision tool.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as mortality at 1 year and 3 years after heart transplantation.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include internal validation, oversampling, SHAP-based feature selection, and explainability. Uncertainty remains because external validation and calibration assessment were not reported in the retrieved text.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI-based outcome prediction after heart transplantation in a clinically important ACHD subgroup and is clearly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study design and 70/30 derivation-validation split; Figure 2 for 1-year confusion matrix and ROC/AUC; Figure 3 for SHAP summary of 1-year mortality predictors; Figure 4 for individualized SHAP force plots; and Figure 5 for 3-year model performance. The text also reports baseline characteristics and 1-year/3-year performance metrics directly, which I used without inferring any unreported values.  ￼

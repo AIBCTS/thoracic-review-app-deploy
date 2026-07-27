@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was failure to bridge to transplant, defined as “death while on the waiting list, being too sick to transplant, being listed as an inactive patient due to a high risk of transplantation (Status 7) or upgrading to UNOS status 1.” Within the restricted outcome labels, Waitlist mortality is the closest fit, though the actual endpoint is broader than mortality alone. The overall model achieved AUC 0.71 ± 0.03, accuracy 0.72 ± 0.02, sensitivity 0.54 ± 0.04, and specificity 0.75 ± 0.02. PPV, NPV, F1, calibration, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a contemporary UNOS national registry cohort of 4,178 Status 2 candidates with explicit inclusion criteria, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant pre-listing/support variables measured near MCS initiation, including hemodynamics, labs, support devices, medications, and demographics.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as Status 2 failure, including death, too sick for transplant, Status 7 inactivation due to high transplant risk, or upgrade to Status 1.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested cross-validation, grid search, SHAP-based interpretation, and explicit handling of missingness and imbalance. Uncertainty remains because performance was only moderate and varied substantially across regions.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning prediction in heart transplant candidates awaiting transplantation and is clearly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for cohort characteristics and failure vs non-failure comparisons; Table 2 for model performance across all patients and by UNOS region; Figure 1 for SHAP summary of the top 15 features; and Figure 2 for the heatmap summarizing feature-rank variation across regions. I did not report any value not explicitly shown in the uploaded article.  ￼

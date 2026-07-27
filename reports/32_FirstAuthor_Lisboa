@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was 1-year mortality after heart transplantation, which maps to 1-year survival in this extraction framework. In the blinded external UNOS 2017–2018 cohort, PRN-Lasso achieved AUROC 0.628 [0.602, 0.654], compared with 0.635 [0.609, 0.662] for IHTSA; calibration for PRN was good with Hosmer–Lemeshow chi-square 15.01, p = 0.135. In the Scandinavian cohort, AUROC was 0.626 with imputed data and 0.634 with observed-only data. Accuracy, PPV, sensitivity, specificity, NPV, F1, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Low Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used large registry-based cohorts from UNOS plus an external Scandinavian dataset, with clear temporal separation for derivation, testing, and blinded validation, which reduces major selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor variables commonly used for 1-year mortality prediction, including age, creatinine, ischemic time, ventilator status, diagnosis, infection, and transplant year.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The paper explicitly modeled 1-year mortality after heart transplantation and reported event rates and AUROCs consistently across cohorts.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal external validation, comparison with multiple benchmarks, calibration assessment, and additional external validation in Scandinavia. Remaining uncertainty is limited compared with many studies in this review.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This study directly addresses explainable AI for prediction of 1-year mortality after heart transplantation and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort derivation and temporal validation structure; Tables 1 and 2 for recipient baseline characteristics across cohorts; Figure 2 for partial-response functions and selected effects; Table 3 and Figure 3 for discrimination benchmarking against IHTSA, IMPACT, and EBM; and Figure 4 for calibration of PRN versus comparator models. I did not report any metric not explicitly shown in the uploaded article.  ￼

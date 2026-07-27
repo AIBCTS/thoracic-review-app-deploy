@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “PGD grade 3 at any time within 72 hours of transplantation,” which maps to PGD. The abstract states that the final selected KNN model had “an area under the receiver operating characteristics curve of 0.65.” Table 3 shows KNN among the better-performing models, and Table 4/Figure 4 show explicit calibration assessment using Cox intercepts, slopes, and calibration curves before and after sigmoid calibration. The retrieved text does not provide clear final held-out PPV, sensitivity, specificity, NPV, or F1 values for the selected final KNN model, so I leave those as NR. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center study of 576 recipients from one institution, which limits representativeness despite a decent sample size.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient variables “known at the time of donor offer acceptance,” making them appropriately timed and clinically relevant for prediction.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: PGD grade 3 was defined according to International Society for Heart and Lung Transplant criteria and graded by two board-certified pulmonologists.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include lasso feature reduction, train/test splitting, 5-fold CV with random grid search, 50 bootstrap iterations, and formal calibration assessment. Uncertainty remains because discrimination was only modest and no external validation was reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI/ML prediction of PGD after lung transplantation using donor-recipient clinical data and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the modeling workflow; Figure 2 for PGD grade distribution over 0, 24, 48, and 72 hours; Table 1 for donor and recipient baseline characteristics; Table 2 for the 11 lasso-selected features; Table 3 for performance comparisons across LR, KNN, XGB, and SVC; Table 4 and Figure 4 for calibration assessment; Figure 5 for feature importance of the selected KNN model; and Figure 6 for website deployment of the final calculator. I did not report any value not explicitly shown in the uploaded article.  ￼

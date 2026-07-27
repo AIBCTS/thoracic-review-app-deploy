@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The study outcome was MACE, defined as “any incident of coronary revascularization, heart failure hospitalization, re-transplantation, and all-cause mortality,” so the closest allowed category is Adverse Events. During median follow-up of 8.8 years, 307 patients experienced MACE. The main reported performance/result metric was association strength rather than discrimination: ΔECG age ≥ 0 was associated with MACE in multivariable Cox analysis, HR 1.58 (95% CI 1.18–2.10, P = 0.002). No AUC, accuracy, sensitivity, specificity, PPV, NPV, F1, calibration, or DCA were reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center Mayo Clinic cohort, and only patients with both pre- and post-transplant ECG data were included in the final analysis.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized 12-lead ECGs processed by a previously developed CNN, and the study clearly defined pre- and post-transplant ECG age windows.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: MACE was explicitly defined as coronary revascularization, heart failure hospitalization, re-transplantation, and all-cause mortality, with events collected by detailed chart review.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multivariable Cox models, competing-risk analysis, and long follow-up. Uncertainty remains because this was a prognostic application of an existing AI tool rather than a full derivation/validation study within the transplant cohort, and no discrimination/calibration metrics were reported.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies AI to post-heart-transplant risk stratification and cardiac events, which is clearly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the correlations between recipient/donor chronological age and ECG age before and after transplant; Table 1 for recipient and donor baseline characteristics and the stratification by increase vs decrease in ECG age; and Table 2 for the univariable and multivariable Cox models showing the association between ECG-age increase and future MACE. I did not report any value not explicitly shown in the uploaded article.  ￼

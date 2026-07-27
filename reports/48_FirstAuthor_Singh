@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was explicitly “grade 3 PGD at 72 h post-LTx,” which maps directly to PGD. The abstract reports that “the MLP model achieved a maximum AUROC of 0.85 (95% CI: 0.81–0.88)” using four features. The methods state that AUPRC was also used for evaluation, but specific final AUPRC and other classification metrics were not visible in the retrieved text, so I left them NR rather than guessing. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small single-center cohort of only 92 systemic sclerosis recipients, which limits generalizability and increases selection risk.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant preoperative variables plus detailed CT-derived cardiopulmonary and body-composition features extracted with previously validated deep-learning algorithms.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: PGD was explicitly defined using ISHLT criteria as pulmonary edema on chest X-ray plus PaO2/FiO2 < 200 at 72 hours.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include repeated stratified cross-validation, randomized hyperparameter search, multiple model classes, and multimodal feature integration. Uncertainty remains because of the small sample size and lack of external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of PGD after lung transplantation and is highly relevant, even though it focuses on the specific systemic sclerosis subgroup.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort inclusion; the ROC/AUROC performance figure for the final prediction model; Table 1 for recipient and donor characteristics by PGD status; Table 2 for significant clinical associations with PGD; and Table 3/results text for CT-derived predictors and the final model inputs. I did not report any value not explicitly shown in the uploaded article.  ￼

@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The model predicted EVLP suitability and post-transplant duration of mechanical ventilation; within the extraction framework, the closest postoperative adverse-outcome category is PGD because the paper also linked predictions to PGD grade 3 at 72 h. For the overall model, the best held-out AUROC was 85 ± 3% in test dataset 2. For unsuitable lungs, AUROC reached 95 ± 2%, and for extubation <72 h it reached 83 ± 4%. The paper reports model precision of 81% for identifying any unsuitable donor lung and 72% for suitable donor lungs. For donor lungs predicted to have extubation <72 h, the NPV for PGD grade 3 at 72 h was 88%. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This is the largest clinical EVLP cohort reported, but it comes from a single expert center, which may limit generalizability to other EVLP programs.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were rich EVLP biological, physiological, and biochemical features collected longitudinally during standardized ex vivo assessment, and SHAP-based importance was examined.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Outcomes were clearly defined as three clinically meaningful categories after EVLP—extubation <72 h, extubation ≥72 h, and declined for transplant—with additional linkage to PGD grade 3 at 72 h.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a sizable development cohort, two consecutive temporal test cohorts, and blinded implementation analysis. Uncertainty remains because the retrieved text does not clearly describe missing-data handling, hyperparameter tuning, or multicenter external validation.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies ML-guided assessment of donor lungs during EVLP and its relationship to post-transplant outcomes and organ utilization, which is highly relevant to thoracic transplantation AI.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the InsighTx workflow and EVLP feature domains; Table 1 for cohort characteristics and post-transplant outcomes across the development and validation datasets; Table 2 for AUROC performance across the overall and endpoint-specific models; Table 3 for ranked EVLP features driving each endpoint; and Table 4/results text for the blinded implementation effect on decision-making. I did not report any value not explicitly shown in the uploaded article.  ￼

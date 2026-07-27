@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was overall survival after lung transplantation, which does not map exactly to the preset time-specific labels, so Other is the safest category. In the test set, the RSF model had iAUC 0.879 and iBS 0.130 for OS prediction. For 1-year survival, the RSF had tAUC 0.921 and PE 0.115, with sensitivity 88.7%, specificity 79.6%, and accuracy 82.8%. Calibration was reported through iBS/PE and observed-vs-predicted agreement. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Low Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a single-center retrospective cohort, which limits generalizability, although exclusions were prespecified and the sample was moderately sized for a transplant study.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected recipient, donor, operative, and early post-transplant variables, and feature selection was handled systematically with bootstrapped RSF importance.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The target outcome was clearly overall survival with regular follow-up and censoring handled within standard survival-analysis methods.  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include separate training/test cohorts, multiple imputation, bootstrapped variable selection, grid-search tuning, calibration/discrimination assessment, and direct benchmark comparison to Cox regression.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning survival prediction after lung transplantation and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for variable importance and feature selection; Figure 2 for survival stratification by RSF-predicted risk; Figure 3/results text for 1-month and 1-year prediction summaries; Table 1 for cohort characteristics across all, training, and test sets; and Table 2 for RSF versus Cox performance metrics including iAUC, iBS, tAUC, and prediction error. I did not report any value not explicitly shown in the uploaded article.  ￼

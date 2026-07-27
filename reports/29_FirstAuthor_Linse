@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was PGF within 30 days, defined as death due to graft failure or cardiovascular causes, or retransplant within 30 days for causes other than rejection. In the extraction framework, PGF maps most closely to PGD. The best ANN achieved a test AUROC/C-index of “0.70 (95% CI: 0.68–0.71).” The paper also reports that the score-based RADIAL model had AUROC 0.53 and recalibrated RADIAL 0.61, both significantly worse. No classification accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA were reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the ISHLT registry, “the largest repository of heart transplant data in the world,” with 64,964 adult recipients after prespecified exclusions, which reduces single-center selection bias.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient variables available “at the time of transplantation,” supporting appropriate timing of inputs for risk prediction.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary endpoint was explicitly defined as PGF within 30 days based on death from graft failure/cardiovascular causes or retransplantation for non-rejection causes.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested stratified 5-fold validation, hyperparameter search, imbalance weighting, and comparison with RADIAL. Uncertainty remains due to substantial missingness, mixed imputation strategies, and lack of external validation or calibration reporting.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses machine-learning prediction of early graft failure after heart transplantation using a large transplant registry, which is strongly aligned with the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the nested internal-validation/model-selection strategy; Table 1 for sampled ANN hyperparameters; Table 2 for donor and recipient baseline characteristics; Table 3 for variable ranking and effective odds ratios; Table 4 for validation/test AUROC performance across MLP variants and imputation schemes; and Figure 2 for regression-tree interpretation of the best MLP model. I did not report any value not explicitly shown in the uploaded article.  ￼

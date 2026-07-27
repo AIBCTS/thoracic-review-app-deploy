@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was cellular cardiac allograft rejection on endomyocardial biopsy, which fits Acute Rejection. In cross-validation, the binary rejection yes/no AUROC was 0.849. External AUROCs were 0.734, 0.729, and 0.716. For multiclass ISHLT grades, the cross-validated AUROCs were 0.835 for 0R, 0.633 for 1R, and 0.905 for 2/3R. Although the methods mention calculation of accuracy, precision, recall, and F1-score, I did not see explicit numeric values for these in the retrieved text, so I leave them NR. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Low Risk
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicentre retrospective series with external validation, which is a strength, but cohort sizes were still modest and selected from archived biopsies with available ISHLT grading.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routine H&E pathology whole-slide images from endomyocardial biopsies, processed in a standardized digital workflow.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Ground truth labels were assigned by “two expert pathologists… in consensus, following the 2004 revision of the ISHLT grading system.”  ￼
+	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include repeated three-fold cross-validation, three external validation cohorts, comparison with CRANE, bootstrapped confidence intervals, and code availability. Remaining limitations are mainly sample size and reduced external performance, not major analytic flaws.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI-based detection of heart-transplant rejection from pathology and is highly relevant to the review question.  ￼
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study design, slide preprocessing, feature extraction, and internal/external validation workflow; Figure 2 for ROC results across cross-validation and validation cohorts; and Table 1 for cohort sizes, centers, years, age medians, sex distribution, and ISHLT rejection distribution. I did not report any metric not explicitly shown in the uploaded article.  ￼

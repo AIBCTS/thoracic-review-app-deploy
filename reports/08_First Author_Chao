@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was a 3-class donor-lung endpoint: “(1) recipient time to extubation of <72 h, (2) ≥72 h, and (3) lungs unsuitable for transplantation,” so the closest fixed category is Other. For the multimodal model, Table 2 reports improved performance from 73 ± 5% to 78 ± 4% accuracy and from 88 ± 2% to 94 ± 2% AUROC after adding radiographic PCs. The paper also states that both “precision (73% vs. 64%)” and “recall (79% vs. 72%)” improved significantly with image PCs added. Table 1 reports that the imaging-only CNN achieved 62.7 ± 1.8% accuracy and 76.1 ± 1.2% AUROC, while the best validation-set donor-lung outcome classification for ResNet-50 was 66.9% accuracy with AUROC 78.4%. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear
-	•	Predictors (Input Variable Bias): Low Risk
-	•	Outcome (Definition Bias): Low Risk
-	•	Analysis (Modeling Bias): Unclear
-	•	Applicability to Review Question: Low Concern
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: The study included all bilateral EVLP cases with both 1 h and 3 h radiographs from a single center, which is systematic but still narrow and potentially selective relative to all donor lungs.  ￼
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The main predictors were objective EVLP radiographs processed by a standardized CNN pipeline, and the multimodal model added structured physiological and biological EVLP parameters.  ￼
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The 3 outcome classes were explicitly defined in the Methods as transplanted lungs with recipient ventilation <72 h, transplanted lungs with recipient ventilation ≥72 h, and lungs unsuitable for transplant.  ￼
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include temporal validation, comparison against manual radiographic labels, latent-feature interpretation, and multimodal testing; however, missing-data handling and tuning details were not reported in the retrieved text, and the XGBoost multimodal stage was developed on a subset of 115 validation-cohort cases.  ￼
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This paper directly applies AI to thoracic organ transplantation, specifically donor-lung assessment and transplant-related outcome prediction during EVLP.  ￼
 
 Tables and figures explicitly used in extraction:
 Table 1 for comparison of manual radiographic labels vs CNN-derived features; Table 2 for improvement of InsighTx with radiographic PCs; Figure 1 for Grad-CAM visualization; Figure 2 for correlation of principal components with radiographic abnormalities; and Figure 3 for the image-processing pipeline. I did not report any values that were not explicitly visible in the article text or tables.  ￼
