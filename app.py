@@ -444,8 +444,12 @@ def get_worksheet():
     return None
 
 def _strip_prefix(name):
-    """Strip leading numeric prefix (e.g. '01_' or '7_') from a study_id or filename."""
+    """Strip leading numeric prefix (e.g. '01_' or '7_') and .pdf extension from a study_id or filename."""
+    if not name:
+        return ""
     name_str = _normalize_string(name)
+    if name_str.endswith(".pdf"):
+        name_str = name_str[:-4].strip()
     m = re.match(r'^\d+[_\s](.*)', name_str)
     return m.group(1).strip() if m else name_str
 
@@ -488,13 +492,14 @@ def load_pdf_list(reviewer_name=None):
         if worksheet:
             try:
                 records = worksheet.get_all_records()
+                reviewer_norm = _normalize_string(reviewer_name)
                 for req in records:
-                    if str(req.get('reviewer', '')) == str(reviewer_name):
+                    if _normalize_string(req.get('reviewer', '')) == reviewer_norm:
                         reviewed_norm_set.add(_strip_prefix(str(req.get('study_id', ''))))
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"Error loading records from Google Sheet: {e}")
         else:
-            # Try writable CSV first, then the exported Sheet CSV
+            # Fallback to local CSV files if Google Sheet is not connected
             for csv_path in [CSV_FILE, SHEET_CSV_FILE]:
                 df = read_csv_safe(csv_path)
                 norm_ids = _reviewed_ids_from_df(df, reviewer_name)
@@ -527,16 +532,17 @@ def get_existing_review(study_id, reviewer):
                 if _strip_prefix(record.get('study_id', '')) == study_norm and \
                    _normalize_string(record.get('reviewer', '')) == reviewer_norm:
                     return {k: (v if v != "" else None) for k, v in record.items()}
-        except Exception:
+        except Exception as e:
+            print(f"Error reading record from Google Sheet: {e}")
             pass
 
-    # Try writable CSV first, then the exported Sheet CSV
+    # Fallback to local CSV files if Google Sheet is not connected or record not found
     for csv_path in [CSV_FILE, SHEET_CSV_FILE]:
         df = read_csv_safe(csv_path)
         record = _find_in_df(df, study_id, reviewer)
         if record is not None:
             return record
-            
+
     return None
 
 def save_data(data_dict):
