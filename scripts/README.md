@@ -43,3 +43,41 @@ This document summarizes the structural, schema, and data workflow enhancements 
 - **App & Batch Script Update**: `app.py` and `scripts/batch_extract_llm_reviewer.py` updated to read and write directly to `results/AI_Thoracic_Review_Database - Sheet1.csv`.
 - **Archiving**: Historical database files moved to `archive/` and `_archive/`.
 - **Git Ignore**: Updated `.gitignore` to exclude `archive/`, `_archive/`, `.venv/`, and temporary build artifacts.
+
+---
+
+## 6. Study #13 Naming & Character Accent Normalization
+
+- Renamed PDF file `data/13_Dueñas-Jurado et al...pdf` $\rightarrow$ `data/13_Duenas-Jurado et al...pdf`.
+- Renamed report file `reports/13_FirstAuthor_Dueñas-Jurado` $\rightarrow$ `reports/13_FirstAuthor_Duenas-Jurado`.
+- Updated master CSV `study_id` and BibTeX entry `#13` file path to `13_Duenas-Jurado...` without special accents for 100% cross-platform compatibility.
+
+---
+
+## 7. Two-Digit Study 01-77 Standardization
+
+- Standardized all single-digit PDF filenames in `data/` (`01_` through `09_`) to 2-digit leading zero format.
+- Updated `file = {...}` references in `data/library.bib` for entries 1 to 9.
+- Updated `study_id` in `results/AI_Thoracic_Review_Database - Sheet1.csv` and `results/AI_Thoracic_Review_Database_GoogleSheets_Ready.csv` to 2-digit format (`01_` through `77_`), ensuring clean numerical sorting in Excel/Google Sheets.
+
+---
+
+## 8. Google Sheets Pre-fill & String Normalization (`app.py`)
+
+- Updated `load_pdf_list()` and `get_existing_review()` to use case- and whitespace-insensitive string normalization (`_normalize_string`) and prefix/suffix stripping (`_strip_prefix`).
+- Re-established Google Sheets online connection as the primary live database when available, with automatic fallback to local master CSV files when offline.
+
+---
+
+## 9. CI/CD & Docker Build Optimization
+
+- Added `.dockerignore` to exclude `.git/`, `.venv/`, `archive/`, and large binaries from Docker context.
+- Updated `.github/workflows/deploy.yml` with dynamic repository name downcasing (`REPO_LC=${GITHUB_REPOSITORY,,}`), resolving GitHub Container Registry (GHCR) case-sensitivity requirements.
+
+---
+
+## 10. Google Sheets Compliant Export
+
+- Generated `results/AI_Thoracic_Review_Database_GoogleSheets_Ready.csv`:
+  - Fixed double-encoded UTF-8 / Mojibake artifacts (`‚Äú` $\rightarrow$ `“`, `‚Äù` $\rightarrow$ `”`, `â€“` $\rightarrow$ `–`).
+  - Included full Row 1 headers (73 columns) and 221 complete rows ready for direct cell copy/paste into Google Sheets.
