@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: International Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 1997
 	•	Study Period End (Year): 2018
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Partial Response Network (PRN-Lasso); benchmarked against IHTSA deep learning model, IMPACT, and Explainable Boosting Machine
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
-	•	Comparator / Standard of Care: Linear Risk Score
-	•	Validation Method: External Temporal
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: External Validation (Temporal)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The paper developed a self-explaining neural network, the Partial Response Network, and benchmarked it against the previously published deep learning IHTSA model, IMPACT, and EBM. Inputs were tabular recipient and donor variables. The main study design was a temporal derivation/tuning/validation framework: 1997–2013 for training, 2014–2016 for testing/hyperparameter optimization, and 2017–2018 as blinded external validation. Explainability was intrinsic to the PRN design through explicit partial-response functions rather than SHAP/LIME, but it still meets the user’s category of explainability used.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: Not Reported
 	•	Data Preprocessing / Normalization Described: Yes
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was 1-year mortality after heart transplantation, which maps to 1-year survival in this extraction framework. In the blinded external UNOS 2017–2018 cohort, PRN-Lasso achieved AUROC 0.628 [0.602, 0.654], compared with 0.635 [0.609, 0.662] for IHTSA; calibration for PRN was good with Hosmer–Lemeshow chi-square 15.01, p = 0.135. In the Scandinavian cohort, AUROC was 0.626 with imputed data and 0.634 with observed-only data. Accuracy, PPV, sensitivity, specificity, NPV, F1, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used large registry-based cohorts from UNOS plus an external Scandinavian dataset, with clear temporal separation for derivation, testing, and blinded validation, which reduces major selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor variables commonly used for 1-year mortality prediction, including age, creatinine, ischemic time, ventilator status, diagnosis, infection, and transplant year.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The paper explicitly modeled 1-year mortality after heart transplantation and reported event rates and AUROCs consistently across cohorts.  ￼
-	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal external validation, comparison with multiple benchmarks, calibration assessment, and additional external validation in Scandinavia. Remaining uncertainty is limited compared with many studies in this review.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This study directly addresses explainable AI for prediction of 1-year mortality after heart transplantation and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Low Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort derivation and temporal validation structure; Tables 1 and 2 for recipient baseline characteristics across cohorts; Figure 2 for partial-response functions and selected effects; Table 3 and Figure 3 for discrimination benchmarking against IHTSA, IMPACT, and EBM; and Figure 4 for calibration of PRN versus comparator models. I did not report any metric not explicitly shown in the uploaded article.  ￼

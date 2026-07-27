@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2015
 	•	Study Period End (Year): 2018
@@ -29,16 +29,16 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random Forest (best model); also LR, SVM, XGBoost, AdaBoost, GBM, and ANN
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: Seven machine-learning approaches were trained after LASSO feature selection. The best-performing model was random forest. Inputs were structured recipient and donor variables from electronic medical records. The data were randomly split 70%/30% into training and testing sets, and parameters were tuned using grid search with five-fold cross-validation. SHAP was explicitly used for model interpretation.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was “postoperative 1-year mortality,” which maps to 1-year survival in this extraction framework. Under bootstrap validation, the random forest model achieved the best AUC of 0.801, with accuracy 0.828, sensitivity 0.268, and specificity 0.927. GBM had slightly lower AUC 0.786 but the highest sensitivity 0.271. PPV/NPV were not reported numerically in the shown results tables, and calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center cohort from one Chinese institution, which limits generalizability despite consecutive inclusion.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routinely collected recipient and donor clinical variables available before or at transplantation and were screened systematically.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as postoperative 1-year mortality, including in-hospital and 1-year follow-up mortality.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include 70/30 train-test splitting, LASSO selection, grid-search tuning with five-fold cross-validation, bootstrap validation, and SHAP interpretation. Uncertainty remains because the sample size was modest and sensitivity was poor across models.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of 1-year mortality after heart transplantation and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the study workflow; Figure 2 for ROC curves across the seven machine-learning models; Figure 3 for random-forest feature importance; Figure 4 for SHAP-based feature importance; Figure 5 for individual prediction explanations; Table 1 for baseline recipient characteristics and train/test distribution; and Table 2 for bootstrap-validated model performance. I did not report any value not explicitly shown in the uploaded article.  ￼

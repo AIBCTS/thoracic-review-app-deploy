@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 1990
 	•	Study Period End (Year): 2020
@@ -27,19 +27,19 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: Deep neural network (DNN) with co-training and late-fusion architecture
-	•	Input Variables (Data Modality): Imaging
-	•	Comparator / Standard of Care: Human expert
-	•	Validation Method: Cross-Validation
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo)
+	•	Comparator / Standard of Care: Human expert/Clinician
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The paper states, “We trained a DNN to detect BOS in CT scans,” using a co-training method and late-fusion architecture tailored to low-data settings. Inputs were chest CT scans. The paper compared DNN performance with radiology-report detection in the narrative results, so human expert is the closest comparator. Evaluation used five-fold cross-validation. Visual interpretation techniques were used to reveal disease-relevant image regions, which counts as interpretability, although not specifically SHAP/LIME. I did not find explicit hyperparameter-tuning details in the retrieved text.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
-	•	Class Imbalance Addressed: Yes
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
 	•	Code Availability: Not Reported
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The study excluded scans with large pixel size, too few slices, and scans of patients with extensive infiltrates, which is most consistent with complete-case/exclusion-based handling rather than imputation. Class imbalance was addressed in the design and evaluation by patient-level five-fold splitting and weighted ROC analysis to avoid bias from patients with more scans, but no oversampling was described. Data preprocessing and acquisition details were described in depth, including scan inclusion/exclusion, reconstruction type, and late-fusion slice handling. Because the study used five-fold cross-validation at the patient level, fixed training/test N were not reported. Code availability was not reported in the retrieved text.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: CLAD
+	•	Target Clinical Outcome: Chronic Lung Allograft Dysfunction (CLAD incl. BOS)
 	•	Model AUC / C-Statistic: 0.90
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: BOS is the obstructive phenotype of chronic lung allograft dysfunction, so the closest restricted category is CLAD. The main result was aggregated ROC-AUC 0.90 (95% CI 0.840–0.953) for BOS versus non-BOS. Performance by stage was 0.88, 0.91, and 0.94 for BOS stages I, II, and III, and 0.87 for at-risk patients with FEV1 80–90% of best. The paper did not report accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small single-center cohort of 75 patients, with only 26 BOS cases, and additional scan exclusions were applied, which raises selection concerns.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were chest CT scans processed with a defined DNN pipeline, and CT acquisition/reconstruction details were explicitly described.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: BOS was defined according to “current diagnostic guidelines,” with onset defined when FEV1 consistently fell below 80% of best FEV1.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include patient-level five-fold cross-validation, bootstrapped confidence intervals, stage-specific evaluation, and at-risk detection analysis. Uncertainty remains because this is a low-data, single-center study without external validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI-based BOS detection after lung transplantation using CT imaging and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for scan counts by BOS status, FEV1 range, and reconstruction type; Table 2 for participant characteristics; Figure 1 for CT scan selection protocol; Figure 2 for longitudinal FEV1 decline context; Figure 3 for aggregate BOS detection performance; and Figure 4 for stage-specific ROC-AUC performance. I did not report any metric not explicitly shown in the uploaded article.  ￼

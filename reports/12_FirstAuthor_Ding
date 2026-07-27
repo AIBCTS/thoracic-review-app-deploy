@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 1987
 	•	Study Period End (Year): 2018
 	•	Section 1 Comments/Quotes: The paper used the “United Network for Organ Sharing (UNOS) database,” which includes U.S. transplant data “since October 1, 1987,” and the selected cohort covered “1987-2018.” Funding was “partially supported by NIH [1OT2OD032581-02-999],” and the article states, “There is nothing to declare.”
@@ -27,13 +27,13 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Multi-layer perceptron (MLP)
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: Cross-Validation
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The study describes a retrospective ML workflow using UNOS data and states, “we implement and apply a multi-layer perceptron (MLP).” It compares MLP with logistic regression, GBDT, decision tree, LightGBM, and SVM. The paper reports “5-fold cross-validation.” For explainability it uses “Integrated Gradient CITE” to compute feature attributions and interactions. Feature selection relied on “expert’s domain knowledge” plus exclusion of features with >40% missingness, with additional engineered donor-recipient pair variables. Explicit hyperparameter tuning was not described in the retrieved text.  ￼
 
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: Missing data were handled with “the kNN imputer,” which is best classified as Other. Preprocessing is described: categorical variables were encoded numerically, patients with multiple transplants during the index hospitalization were excluded, features with >40% missingness were filtered, and donor-recipient pair features were generated. The paper notes AUPRC is useful when PGD and non-PGD sizes differ, but no reweighting or resampling method was reported. Code availability was not stated. Exact fold-specific train/test counts were not reported.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: PGD
+	•	Target Clinical Outcome: Primary Graft Dysfunction (PGD)
 	•	Model AUC / C-Statistic: 0.868
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was PGD after heart transplantation. Table 3 reports the best model, MLP, with AUROC 0.868 ± 0.006 and AUPRC 0.794 ± 0.015. Figure 2 shows ROC and PRC curves across 5 folds, with ROC AUCs around 0.86-0.87 and PRC AUCs around 0.76-0.80. The paper does not report accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the national UNOS database and included 8008 heart transplant recipients, reducing single-center bias, although exclusions were applied for multiple transplants during the index hospitalization.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor domains were clearly described in Tables 1-2 and included recipient, donor, operative, pair, and life-support variables available around transplantation; no obvious post-outcome leakage is described in the retrieved text.
-	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The paper states that y indicates “the diagnosis of PGD after a heart transplant,” but the retrieved excerpt does not provide a full operational definition or ascertainment algorithm within the Methods.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include multiple model comparisons, kNN imputation, 5-fold cross-validation, and explainability analyses, but uncertainty remains because hyperparameter tuning, calibration, and exact split sizes were not reported.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This study directly addresses AI/ML for heart transplant PGD prediction using donor-recipient variables and is closely aligned with the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for recipient and donor cohort demographics; Table 2 for feature domains; Table 3 for model performance; Table 4 for top single features and top feature combinations; Figure 1 for the ML workflow; Figure 2 for 5-fold ROC/PRC curves; Figure 3 for single feature importance ranking; Figure 4 for salient-feature scatter plots; and Figure 5 for top feature interaction ranking. I did not report any values not explicitly shown in the uploaded article.

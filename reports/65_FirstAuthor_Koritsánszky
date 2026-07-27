@@ -1,0 +1,72 @@
+First Author: Koritsánszky
+Title: Shifting Determinants of Mortality Risk After Orthotopic Heart Transplantation Identified by Machine Learning
+Source number: 65
+
+Very short summary: This retrospective single-center study included 581 adolescent and adult orthotopic heart transplant recipients treated in Hungary between 2012 and 2024. Random forest models with nested five-fold cross-validation and SHAP interpretation predicted 30-day and 1-year mortality; the model using preoperative and postoperative variables achieved a 1-year AUC of 0.86 (95% CI 0.80–0.92), although the inclusion of postoperative variables with incompletely defined measurement timing creates substantial risk of bias.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2012
+	•	Study Period End (Year): 2024
+	•	Section 1 Comments/Quotes: The study used the institutional database of the Heart and Vascular Center, Semmelweis University, Budapest, Hungary, and included OHT recipients treated from 30 January 2012 to 23 December 2024. Funding was provided through a European Union-supported project, the Hungarian Ministry for Culture and Innovation/National Research, Development and Innovation Fund, and the Hungarian Academy of Sciences. Conflicts were declared for two authors, including compensated work as Chief Medical Officer of Argus Cognitive, Inc. and advisory-board membership at GE Healthcare, both stated to be unrelated to the manuscript.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 581
+	•	Overall Mean Age: 50.7
+	•	Female Sex (%): 26.67
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort comprised 581 adolescent and adult OHT recipients; overall age was 50.7 ± 10.9 years and 155 patients (26.67%) were female. Race or ethnicity was not reported. The dataset included demographics, heart-failure diagnosis, comorbidities, functional status, mechanical circulatory support, right-heart catheterization, laboratory values, donor variables, medications, postoperative organ dysfunction, circulatory support, transfusion, ICU and ventilation duration, and postoperative complications.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Forest
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: Cross-Validation (k-fold)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Random forest models were developed separately for 30-day and 1-year all-cause mortality using either preoperative variables alone or all available preoperative and postoperative variables. A nested cross-validation design used a five-fold inner loop for hyperparameter optimization and a five-fold outer loop for feature selection, model selection, and performance evaluation. Feature selection retained 15–25 predictors. SHAP values quantified the magnitude and direction of predictor contributions, and the final ensemble comprised five classifiers trained on distinct outer folds.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Features with more than 40% missingness were excluded. Remaining continuous values were imputed using the mean, categorical values using the mode, and continuous predictors were standardized with z-score normalization. All preprocessing was fitted only within the training portion of the nested cross-validation. SMOTE was applied exclusively to training data within each fold. Exact outer-fold training and hold-out counts were not explicitly reported, and source code or trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.86
+	•	Model AUC Lower 95% CI: 0.80
+	•	Model AUC Upper 95% CI: 0.92
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: Performance was extracted for the 1-year random forest model using all preoperative and postoperative variables, evaluated across the outer hold-out folds of nested five-fold cross-validation. The model achieved AUC 0.86 (95% CI 0.80–0.92) and Brier score 0.10. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. The preoperative-only 1-year model achieved AUC 0.67 (95% CI 0.56–0.78; Brier score 0.15). Formal calibration plots, calibration intercept or slope, and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for cohort demographics, comorbidities, donor factors, perioperative variables, and mortality-group comparisons; Figure 1 for preoperative-only 30-day and 1-year ROC performance and SHAP plots; Figure 2 for comparison of preoperative feature importance across time horizons; Figure 3 for all-variable ROC performance and SHAP plots; Figure 4 for comparison of postoperative feature importance; Supplementary Tables S1–S4 for ranked feature importance.

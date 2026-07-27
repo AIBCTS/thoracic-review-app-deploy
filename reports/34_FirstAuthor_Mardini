@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2018
 	•	Study Period End (Year): 2022
@@ -27,19 +27,19 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: Gradient Boosting
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
 	•	Algorithm Name: eXtreme Gradient Boosting (XGBoost)
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Cross-Validation
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The authors “used the eXtreme Gradient Boosting (XGBoost) algorithm” and developed one comprehensive model plus region-specific models. Inputs were structured UNOS tabular clinical features. Model interpretation used SHAP. Predictors were chosen from clinically different features between groups and then reduced to 19 inputs after removing highly correlated variables and creating missingness indicators. Validation used 5 × 5 nested cross-validation with grid search.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Algorithm handles natively
-	•	Class Imbalance Addressed: Yes
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
 	•	Code Availability: Not Reported
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was failure to bridge to transplant, defined as “death while on the waiting list, being too sick to transplant, being listed as an inactive patient due to a high risk of transplantation (Status 7) or upgrading to UNOS status 1.” Within the restricted outcome labels, Waitlist mortality is the closest fit, though the actual endpoint is broader than mortality alone. The overall model achieved AUC 0.71 ± 0.03, accuracy 0.72 ± 0.02, sensitivity 0.54 ± 0.04, and specificity 0.75 ± 0.02. PPV, NPV, F1, calibration, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a contemporary UNOS national registry cohort of 4,178 Status 2 candidates with explicit inclusion criteria, which reduces single-center selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant pre-listing/support variables measured near MCS initiation, including hemodynamics, labs, support devices, medications, and demographics.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcome was clearly defined as Status 2 failure, including death, too sick for transplant, Status 7 inactivation due to high transplant risk, or upgrade to Status 1.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested cross-validation, grid search, SHAP-based interpretation, and explicit handling of missingness and imbalance. Uncertainty remains because performance was only moderate and varied substantially across regions.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning prediction in heart transplant candidates awaiting transplantation and is clearly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for cohort characteristics and failure vs non-failure comparisons; Table 2 for model performance across all patients and by UNOS region; Figure 1 for SHAP summary of the top 15 features; and Figure 2 for the heatmap summarizing feature-rank variation across regions. I did not report any value not explicitly shown in the uploaded article.  ￼

@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: SRTR
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2015
 	•	Study Period End (Year): 2020
@@ -29,16 +29,16 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random forest model (RF) alongside Cox donor-factor interaction models
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
-	•	Comparator / Standard of Care: Linear Risk Score
-	•	Validation Method: Cross-Validation
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The paper compared Cox donor-factor models and a “random forest model (RF)” against the “PT-CAS” post-transplant survival model. Predictors were donor and recipient registry variables, with clinically guided staged interaction testing by recipient age, sex, and diagnosis. Ten-fold cross-validation was used for time-dependent AUC estimates. I did not find SHAP/LIME or explicit hyperparameter tuning.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was post-transplant survival, reported at 1, 3, and 5 years. The best-performing combined model, “COX + PT-CAS,” achieved 1-year AUC 0.626 versus PT-CAS 0.609. Figure 3 also showed improved calibration for the combined Cox + PT-CAS model across a broader range of predicted risk. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult primary bilateral lung transplant recipients, minimizing single-center selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient registry variables available around transplant, and interaction testing was prespecified across clinically relevant recipient groups.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly modeled post-transplant survival and reported alive/censored proportions at 1, 3, and 5 years.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include staged interaction modeling, Cox and random forest comparisons, cross-validation, and calibration analysis. Uncertainty remains because improvements were modest and complete-case restriction was required for some model comparisons.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses lung-transplant survival prediction using donor-recipient factors and machine-learning/statistical modeling, which fits the review question well.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort flow; Table 1 for recipient characteristics; Table 2 for donor characteristics; Table 3 for multivariable donor-recipient interaction results; Figure 2 for hazard-ratio forest plot; and Figure 3 for discrimination and calibration comparisons across PT-CAS, Cox, and random forest models. I did not report any value not explicitly shown in the uploaded article.  ￼

@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2011
 	•	Study Period End (Year): 2023
@@ -27,19 +27,19 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: RNN/LSTM
+	•	AI Model Architecture: Recurrent Neural Network (RNN/LSTM)
 	•	Algorithm Name: Multivariate 3-step long short-term memory (LSTM) model
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The paper states that “a multivariate long short-term memory algorithm was applied to forecast subsequent TTLs,” and Figure 2 shows a “multivariate 3-step” LSTM. The input data were tabular clinical variables from routine care. SHAP was used to identify influential features and guide input selection. Within the 117-case study cohort, 80%, 10%, and 10% were randomly assigned to training, validation, and test datasets. The final model did not use an explicit comparator model; rather, different input combinations were compared by MSE. Explicit hyperparameter tuning was not reported in the retrieved text.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
-	•	Class Imbalance Addressed: Not Applicable
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 93
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was next-step tacrolimus trough level forecasting, so the closest category is Other. The final model predicted TTLs “within 30% of the actual values for 88.5% of time points,” and within 20% for 74.3%. Figure 5a showed a positive predicted-vs-actual relationship, with test-set R² = 0.67. Figure 5b showed better accuracy later after transplant, and Figure 5c showed similar performance for intravenous and oral administration routes. Standard classification metrics such as AUC, PPV, sensitivity, specificity, NPV, F1-score, calibration, and DCA were not reported because this was a forecasting/regression-style model.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center study with 117 development cases and 6 later simulation cases, after exclusions for short administration periods, infants <10 kg, and an outlier case.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The final model intentionally used only routine tacrolimus-related time-series factors—dose, route, and previous TTL—which are objective and readily available in practice.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The predicted outcome was clearly defined as the subsequent measured tacrolimus trough level, obtained in routine monitoring using a specified assay method.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include explicit train/validation/test splitting, SHAP-guided feature selection, and separate simulation cases, but the study was small, single-center, and lacked external multicenter validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This paper directly applies AI to a clinically important management problem after lung transplantation, namely tacrolimus dose-to-trough prediction.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort derivation and train/validation/test sizes; Table 1 for the 36 collected clinical factors; Figure 2 for the multivariate 3-step LSTM structure; Figure 3 for the model-development workflow; Figure 4 for SHAP feature importance and summary plots; Figure 5 for predicted-vs-actual relationship and stratified accuracies; Figure 6 for representative time-series prediction examples; and Figure 7 for the 6-case simulation validation. I did not report any value not explicitly present in the uploaded article.  ￼

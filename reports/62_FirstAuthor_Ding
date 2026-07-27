@@ -1,0 +1,72 @@
+First Author: Ding
+Title: Machine learning-based prediction of high hospital charges after lung transplantation in chronic obstructive pulmonary disease patients
+Source number: 62
+
+Very short summary: This retrospective study used 1,159 adult lung-transplant hospitalizations from the US Nationwide Inpatient Sample between 2005 and 2014 to predict whether total hospital charges were in the highest 20% of the cohort. Six machine-learning models were evaluated using a 70:30 internal split and ten-fold cross-validation for training and tuning; the Gradient Boosting Machine was selected as the optimal model, achieving a test-set AUC of 0.8078, accuracy of 81.64%, and F1-score of 0.6773.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2005
+	•	Study Period End (Year): 2014
+	•	Section 1 Comments/Quotes: Data were obtained from the US Nationwide Inpatient Sample, part of the Healthcare Cost and Utilization Project, and covered January 2005 through December 2014. The paper states “Funding: None” and “The authors declare no competing interests.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 1159
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The initial cohort contained 1,177 adult hospital admissions identified using ICD-9-CM lung-transplant procedure codes; 12 admissions with missing charge data were excluded, and 1,159 were included in the final analysis. Overall mean age and female percentage were not explicitly reported. Table 1 provides sex and race distributions by cost group and includes extensive clinical variables such as heart failure, coagulopathy, pulmonary vascular disease, acute kidney injury, sepsis, mechanical ventilation, ECMO, respiratory failure, and transplanted-lung complications.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: Gradient Boosting Machine (GBM)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The primary GBM was compared with logistic regression, random forest, XGBoost, CatBoost, and LightGBM. Patients were divided into training and test cohorts in a 7:3 ratio, and ten-fold cross-validation was used within training to optimize hyperparameters. Feature selection used a two-stage automated process consisting of Pearson-correlation assessment followed by Random-Forest-based Recursive Feature Elimination, leaving 27 predictors. SHAP global and local analyses were used to interpret the selected GBM.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): 348
+	•	Section 4 Comments/Quotes: Missing Race and Zip-Code Income Quartile values were imputed using Multiple Imputation by Chained Equations with a Gradient Boosting Classifier for multiclass categorical imputation. Seven post-discharge or manually coded variables were excluded to reduce information leakage, and feature selection reduced the model to 27 variables. High-cost cases represented approximately 20% of the cohort, but no resampling, class weighting, or other explicit imbalance treatment was reported. The exact training count was not stated; the GBM test confusion matrix contains 348 observations. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Economy/Length of Stay
+	•	Model AUC / C-Statistic: 0.8078
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): 81.64
+	•	PPV / Precision (%): 69.44
+	•	Sensitivity / Recall (%): 66.57
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: 0.6773
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was high-cost hospitalization, defined as total hospital charges at or above the cohort’s 80th percentile ($600,223.40). On the held-out test set, GBM achieved AUC 0.8078, accuracy 0.8164, precision 0.6944, recall 0.6657, and F1-score 0.6773. No AUC confidence interval, explicitly reported specificity, or NPV was provided. Calibration curves were presented, and GBM had a Brier score of 0.1360. Decision-curve analysis was not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for cohort characteristics, sex, race, and comorbidities; Table 2 for test-set model performance; Figure 1 for the high- versus low-charge outcome distribution; Figure 2 for correlation analysis and Recursive Feature Elimination; Figure 3 for ROC, precision-recall, calibration, and the GBM test confusion matrix; Figures 4 and 5 for global and local SHAP interpretation.

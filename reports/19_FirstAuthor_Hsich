@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: National Registry
-	•	Dataset Name: SRTR
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2004
 	•	Study Period End (Year): 2015
@@ -29,9 +29,9 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random Survival Forest (RSF)
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: Cross-Validation
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: No
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: No
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary endpoint was “all-cause mortality assessed as time from listing to death, right censored at time of heart transplantation or end of follow-up.” The paper emphasizes variable importance and partial survival plots rather than standard classification metrics. It reports a median follow-up of 4.3 months and 5,514 deaths, but no AUC, accuracy, PPV, sensitivity, specificity, NPV, or F1-score. Calibration and DCA were not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a national SRTR cohort including all adult active waitlist candidates in the United States over the study period, which minimizes center-level selection bias.
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictor variables were obtained at the time of initial waitlisting from the national registry and included clinically relevant laboratory, hemodynamic, diagnostic, and support-device variables.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as all-cause mortality from listing to death, with censoring at transplant or end of follow-up, and mortality was verified using the Social Security Death Master File.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include RSF, imputation with missForest, out-of-bag validation, and stratification by UNOS status; however, the paper does not report conventional discrimination or calibration metrics for a deployable prediction model.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-based prediction of heart-transplant waitlist mortality using a national transplant registry, which is highly relevant to the review question.
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for waitlist cohort characteristics by UNOS status; Figure 1 for sex-specific survival by eGFR; Figure 2 for the relationship between albumin and survival; Figure 3 for the additive interaction of eGFR and albumin on survival; Figure 4 for ranking strong and weak correlates by variable importance; and Figure 5 for the blood-type/BMI interaction among UNOS 1A candidates. I did not report any metric not explicitly present in the uploaded article.  ￼

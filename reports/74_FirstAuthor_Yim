@@ -1,0 +1,72 @@
+First Author: Yim
+Title: Bridging machine learning and clinical practice: a multicentre nomogram for 90-day graft failure risk stratification in heart transplantation
+Source number: 74
+
+Very short summary: This retrospective multicentre study used 25,200 adult heart transplant recipients from the US UNOS registry for model development and 563 recipients from Wuhan Union Hospital, China, for geographic external validation. XGBoost and Random Forest were used for predictor discovery, and the eight most influential XGBoost/SHAP predictors were translated into a logistic-regression nomogram; the final nomogram achieved an external-validation AUC of 0.671 (95% CI 0.6025–0.7386), with reported calibration and clinical net benefit.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2008
+	•	Study Period End (Year): 2024
+	•	Section 1 Comments/Quotes: The primary derivation cohort came from the US UNOS/OPTN registry between 2008 and 2020, and geographic external validation was performed at Wuhan Union Hospital in China. The main Results section reports the WHUH period as 2015–2024, although the abstract reports 2018–2023 and Figure 1 reports 2015–2020; 2024 was retained as the latest explicitly stated year. Funding was provided by the National Natural Science Foundation of China and the Hubei Provincial Natural Science Foundation. The paper states, “Competing interests None declared.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 25763
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: After inclusion, exclusion, and preprocessing, 25,200 UNOS recipients and 563 WHUH recipients were analysed, for a total of 25,763. Age was reported as median and IQR by outcome or risk group rather than as an overall mean, and an overall female percentage was not explicitly reported. Race mismatch was reported, and the candidate variables included donor and recipient age, sex, BMI, medical history, diagnosis, previous cardiac surgery, HLA mismatch, bilirubin, renal markers, mechanical support, donor medication use, centre volume, and cold ischaemia time.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: XGBoost-derived eight-variable logistic-regression nomogram
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: External Validation (Geographic/Different Hospital)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: XGBoost and Random Forest were developed from 32 pretransplant donor-recipient variables and compared with the IMPACT score. Five-fold cross-validation was used for hyperparameter optimisation. Global SHAP importance automatically selected the eight highest-impact predictors: previous cardiac surgery, recipient age, recipient bilirubin, recipient BMI, donor age, donor sex, donor BMI, and cold ischaemia time. These ML-selected variables were translated into an interpretable logistic-regression nomogram and externally validated in China. SHAP summary plots, force plots, clustering, and the nomogram provided global and patient-level interpretability.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 17640
+	•	Test Size (N): 563
+	•	Section 4 Comments/Quotes: Figure 1 lists missing baseline variables among the exclusions, supporting complete-case analysis, although detailed missing-data procedures were deferred to the online supplement. The main article states that missing-data handling and normalisation were performed but does not describe the exact normalisation method. The UNOS cohort was split 70:30, corresponding to 17,640 training and 7,560 internal test recipients; the final nomogram was additionally evaluated in 563 external-validation recipients. Graft failure occurred in 1,444 of 25,200 UNOS recipients, but no class weighting, resampling, or other explicit imbalance method was reported. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.671
+	•	Model AUC Lower 95% CI: 0.6025
+	•	Model AUC Upper 95% CI: 0.7386
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The target outcome was graft failure within 90 days after heart transplantation; the exact operational definition was deferred to the online supplemental methods and was not stated in the main article. Performance was extracted for the final eight-variable nomogram in the independent WHUH external-validation cohort: AUC 0.671 (95% CI 0.6025–0.7386). Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. Calibration was assessed and the nomogram had a reported Brier score of 0.0472 in development. DCA in the external cohort showed net benefit over treat-all and treat-none strategies across risk thresholds from 0.0 to 0.4.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for UNOS donor-recipient characteristics and outcome counts; Table 2 and Figure 3 for SHAP-derived risk clusters; Figure 1 for cohort selection, 70:30 split, and external validation; Figure 2 for XGBoost and Random Forest ROC curves and SHAP importance; Figure 4 for patient-level SHAP explanations; Figure 5 for the eight-variable nomogram; Figure 6 for external-validation ROC, DCA, risk stratification, and hazard ratios; Tables 3 and 4 for WHUH risk-group characteristics and postoperative adverse events; online supplemental Tables S1–S2 and Figures S1–S2 as referenced for missingness, split characteristics, IMPACT comparison, and nomogram-versus-XGBoost performance.

@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 1984
 	•	Study Period End (Year): 2021
@@ -27,19 +27,19 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: Gradient Boosting
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
 	•	Algorithm Name: Gradient Boosting; additional models included decision trees, logistic regression, neural networks, random forest, LARS, and SVM
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The study developed several supervised models, including decision trees, logistic regression, neural networks, gradient boosting, random forest, and SVM, and reported gradient boosting as best-performing. Inputs came from merged STAR sources including waitlist, transplant, donor, and follow-up datasets, which are tabular recipient/donor variables. The data were split into 70% training and 30% validation/testing. Variable review by lung-transplant experts excluded irrelevant, redundant, and highly missing variables, so Manual/Clinical is the best fit for feature selection. The paper explicitly describes setting/tuning key parameters for gradient boosting and random forest.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Other
-	•	Class Imbalance Addressed: Yes
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 21642
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The paper states that experts excluded variables with “a high percentage of unacceptable missing values (>30%),” rather than using a standard imputation method in the retrieved text, so Other is the best fit. Because of class imbalance, “oversampling was employed to increase the percentage of the minority class by replicating instances from the minority class.” Preprocessing included merging multiple STAR sources, restricting to lung transplants, excluding prior malignancy and loss to follow-up, and removing 173 variables. A 70/30 split on 30,917 cases corresponds to about 21,642 training and 9,275 test/validation cases. No code-release statement was identified.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Adverse Events
+	•	Target Clinical Outcome: Adverse Events/Complications
 	•	Model AUC / C-Statistic: 0.746
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The endpoint was de novo malignancy after lung transplantation, which best fits Adverse Events among the allowed categories. The abstract states that gradient boosting “outperformed all other predictive models… achieving an area under the ROC curve (AUC) of 0.746.” Although the methods discuss accuracy, sensitivity, specificity, precision, and related metrics, the retrieved text snippet does not provide final numeric values for those measures, so I leave them NR. Calibration and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large U.S. national transplant registry dataset and included 30,917 lung-transplant recipients after explicit exclusions, which reduces major center-level selection bias.  ￼
-	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: Predictors included recipient, donor, and follow-up variables, but the retrieved text indicates a mix of pre-, during-, and post-transplant measures, which may complicate interpretation depending on intended clinical use.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study specifically identified individuals “diagnosed with malignant cancers during their respective follow-up periods,” and excluded those with prior malignancy, giving a clear definition of de novo malignancy.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include a large registry-derived cohort, multiple model comparisons, class-imbalance handling, and a held-out validation set. Uncertainty remains because the retrieved text does not show full reporting of calibration or all test metrics, and some predictor timing may affect transportability.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses machine-learning prediction of a clinically important post-lung-transplant outcome and is relevant to thoracic-transplant AI, even though the endpoint is malignancy rather than survival or rejection.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Unclear
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the research framework and train/validation split; Figure 2 for demographic distributions including sex, ethnicity, blood type, and age; Table 1 for theoretic transplantation counts by organ type; and the methods/results text for cohort reduction from 66,590 lung cases to 30,917 final cases, 25% malignancy incidence, model classes, oversampling, 70/30 split, and best-model AUROC. I did not report any value not explicitly shown in the uploaded article.  ￼

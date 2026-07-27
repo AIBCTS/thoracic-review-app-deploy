@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Other
 	•	Funding Source: Not Reported
 	•	Dataset Source: Other
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
@@ -29,7 +29,7 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Other
 	•	AI Model Architecture: Ensemble
 	•	Algorithm Name: MCNN-HELM (modified convolutional neural network–hybrid extreme learning machine) with prairie dog optimizer
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics; Other
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics, Other
 	•	Comparator / Standard of Care: Other
 	•	Validation Method: Not Reported
 	•	Explainability / Interpretability Used: No
@@ -38,8 +38,8 @@ Section 3: Intervention & AI Methods
 	•	Section 3 Comments/Quotes: The paper proposes an “MCNN-HELM based prediction model” and states that a “prairie dog optimizer (PDO)” is used to improve matching-pair performance. It compares the proposed method against MINLP, IGBFS-NB, SVM, and FO, and evaluates policy scenarios such as Real, FCFS, UF, and BF. The retrieved text describes preprocessing and training/testing flowcharts, but it does not clearly state a conventional clinical study design such as retrospective cohort with a well-defined patient cohort, so “Other” is the most accurate label. Hyperparameter configuration is explicitly mentioned in the conclusion.
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
-	•	Class Imbalance Addressed: Not Reported
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The paper states that “missing values and inaccurate data present in real-time datasets are removed via pre-processing,” and separately notes that “some records and attributes are eliminated,” which is most consistent with complete-case style exclusion rather than imputation. Preprocessing is described, but explicit training and test sample counts are not visible in the retrieved text. I found no public code-availability statement. Class-imbalance handling is not described.
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Donor acceptance
+	•	Target Clinical Outcome: Donor acceptance for transplantation
 	•	Model AUC / C-Statistic: NR
 	•	Model Accuracy (%): 97.5
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The paper’s main task is donor-recipient allocation and suitable donor identification with minimized waiting time, so “Donor acceptance” is the closest restricted outcome label. Table 5 reports training accuracy 97.5%, computational time 2.2 s, PEFO 16.3582, PEPO 16.1401, and ABDT 0.6784. For the lung dataset (UNOS-LU), Table 3 shows that the BF policy had death rate 0.13, average benefit 275.43, and average survival 1290.48, compared with Real 0.15, 221.48, and 1175.42. The paper does not report AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA. Because only training accuracy is explicitly reported, I am not inferring a held-out test accuracy.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear | Quote/Reasoning: The paper uses three “real-time datasets” across liver, heart, and lung transplantation, but the retrieved text does not provide a transparent lung-specific cohort derivation or sample description.
-	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: The framework uses donor and recipient transplantation details and geolocation/resource considerations, but the exact lung-specific predictor set is not clearly enumerated in the retrieved text.
-	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The paper targets “suitable donor” selection, minimized waiting time, and high-risk prioritization, but the exact formal outcome definition for the lung subset is not clearly specified in the retrieved excerpts.
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The paper reports strong training accuracy and simulation metrics, but the retrieved text does not show a clear held-out clinical validation framework, standard external validation, or conventional discrimination/calibration metrics for lung transplantation specifically.
-	•	Applicability to Review Question: High Concern | Quote/Reasoning: Although the article includes a lung dataset, it is a broad multi-organ allocation systems paper rather than a lung-only thoracic transplant prediction study with a clearly defined transplant cohort.
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): Unclear
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: High Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the overall architecture of the optimal transplantation system; Figure 2 for the proposed MCNN flowchart; Tables 2–4 for allocation-policy simulation results across PLTSD, UNOS-LU, and UNOS-HR datasets; Table 5 for PEFO, PEPO, ABDT, computational time, and training accuracy; and Figures 7–8 for comparative training accuracy and computational time across methods. The retrieved text did not provide a clear lung-only cohort table, so I left standard demographic items as not reported rather than guessing.

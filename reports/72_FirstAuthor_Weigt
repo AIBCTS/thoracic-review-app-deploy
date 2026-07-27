@@ -1,0 +1,72 @@
+First Author: Weigt
+Title: Development and validation of a bronchoalveolar lavage genomic classifier for acute cellular rejection
+Source number: 72
+
+Very short summary: This prospective multicenter cohort study analysed 806 bronchoalveolar-lavage cell-pellet RNA-sequencing samples from 181 lung transplant recipients in CTOT-20, with independent validation using a UCLA cohort. A 31-gene Random Forest classifier distinguished clinically significant acute cellular rejection from stable controls; in the independent validation subset, it achieved an AUC of 0.90 (95% CI 0.83–0.96), accuracy of 82.1%, sensitivity of 73.3%, and specificity of 87.5%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Multi-center
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2015
+	•	Study Period End (Year): 2018
+	•	Section 1 Comments/Quotes: CTOT-20 was a prospective observational cohort enrolling adult lung transplant recipients at five North American centres: Duke University, UCLA, University of Toronto, Johns Hopkins, and Cleveland Clinic. Participants were transplanted between December 2015 and August 2018; the consecutively sampled study subset was transplanted from August 2016 to April 2017, with follow-up through July 2021. Funding included National Institute of Allergy and Infectious Diseases awards, with additional Cystic Fibrosis Foundation and Saul and Joyce Brandman Foundation support. Multiple author conflicts were declared, including research grants, consulting, honoraria, advisory roles, and a provisional patent related to allograft injury or rejection.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 181
+	•	Overall Mean Age: 55.2
+	•	Female Sex (%): 44.2
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The primary CTOT-20 analytic cohort contained 181 recipients contributing 806 pre-CLAD BAL-cell-pellet samples that passed RNA quality control. Mean age was 55.2 years and 80 of 181 recipients (44.2%) were female. Race and ethnicity, native lung-disease category, transplant type, Lung Allocation Score, HLA mismatch, induction therapy, and grade 3 primary graft dysfunction were reported. The independent UCLA cohort contained 219 recipients, although external diagnostic validation was performed in 78 samples meeting the clinically significant ACR or stable-control phenotype definitions.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Prospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: 31-gene bronchoalveolar-lavage cell-pellet genomic ACR Random Forest classifier
+	•	Input Variables (Data Modality): Multi-omics/Genetics
+	•	Comparator / Standard of Care: Human expert/Clinician
+	•	Validation Method: External Validation (Geographic/Different Hospital)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: RNA-seq-derived gene-expression features were used to classify clinically significant ACR versus stable controls defined by bronchoscopy, microbiology, donor-specific antibodies, and pathologist-assigned transbronchial-biopsy grades. Logistic regression, Elastic-Net, and Random Forest were evaluated; Random Forest was selected. Ten-fold cross-validation tuned mtry from 1–15 and ntree from 100–5000. Boruta automated all-relevant feature selection reduced 62 differentially expressed genes to a locked 31-gene model. Interpretability was provided through individual gene-importance rankings and biologic pathway analysis. Validation included a held-out internal test set and an independent geographically separate UCLA cohort.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Not Reported
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 150
+	•	Test Size (N): 78
+	•	Section 4 Comments/Quotes: RNA quantity and integrity thresholds were prespecified; 185 of 991 pre-CLAD samples failed quality control, predominantly because of insufficient RNA quantity. Sequencing preprocessing included fastp read cleaning, quality metrics, STAR alignment, FeatureCounts quantification, RPKM calculation, low-expression filtering, and LIMMA-voom differential-expression analysis. No missing-predictor imputation was described. Clinically significant ACR was substantially less frequent than stable control in the model-development sample, but no class weighting, over-sampling, under-sampling, or other imbalance method was reported. The development split contained 150 training and 38 internal-test samples; the independent external validation analysis contained 78 samples. Gene-expression and clinical data were deposited in Mendeley Data, but source code or trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Acute Rejection
+	•	Model AUC / C-Statistic: 0.90
+	•	Model AUC Lower 95% CI: 0.83
+	•	Model AUC Upper 95% CI: 0.96
+	•	Model Accuracy (%): 82.1
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 73.3
+	•	Specificity (%): 87.5
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: Performance was extracted from the independent UCLA validation cohort for distinguishing clinically significant ACR from stable controls. The 31-gene Random Forest classifier achieved AUC 0.90 (95% CI 0.83–0.96), accuracy 82.1%, sensitivity 73.3%, and specificity 87.5%. PPV, NPV, and F1-score were not reported for the external cohort. The internal held-out test set contained 38 samples and achieved AUC 0.72 (95% CI 0.53–0.88). Formal probability calibration and decision-curve analysis were not reported. As a secondary prognostic finding, late genomic ACR was associated with subsequent CLAD risk.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): High Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for recipient demographics, race/ethnicity, transplant characteristics, and clinical history; Table 2 and Figure 2 for differentially expressed genes; Table 3 for training, internal-test, centre-specific, and external-validation performance; Figure 1 for participant and sample selection; Figure 3 for pathway enrichment; Figure 4 for genomic-classifier scores across rejection grades; Table 4 and Figure 5 for associations between genomic ACR and CLAD; supplementary Tables S1, S2, S4–S6 and Figures S1–S7 as referenced for phenotype definitions, quality-control exclusions, surveillance-window performance, and longitudinal classifier behaviour.

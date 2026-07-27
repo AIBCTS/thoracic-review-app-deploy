@@ -1,0 +1,72 @@
+First Author: Zadeh
+Title: Predictive analytics for de novo malignancies after lung transplantation
+Source number: 75
+
+Very short summary: This retrospective US national-registry study analysed 30,917 lung transplant recipients without a documented pretransplant malignancy, of whom 25% developed a de novo malignancy during follow-up. Multiple supervised machine-learning methods were compared using a 70:30 internal split and oversampling; Gradient Boosting performed best, with a test-set AUC of 0.746, accuracy of 69.0%, sensitivity of 73.1%, and specificity of 64.9%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 1984
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The study used the Standard Transplant Analysis and Research (STAR) data sources overseen by UNOS/OPTN and containing US transplantation records. The authors state that lung transplant recipient records from 1984 to 2021 were used, although the Methods also describe the STAR source as covering US transplants since 1987. The paper states that the authors received no financial support for the research and declared no potential conflicts of interest.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 30917
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 43
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The investigators identified 66,590 lung transplant records, excluded recipients with a documented pretransplant malignancy, leaving 38,788, and then excluded those lost to follow-up, producing a final cohort of 30,917 recipients. Twenty-five percent developed a post-transplant malignancy. Figure 2 reports 43% female and presents ethnicity and age distributions, but an overall mean age was not reported. The registry variables included demographics, HLA/PRA, serology, donor characteristics, laboratory values, transplantation details, hospital course, rejection, survival, and other complications.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: Gradient Boosting
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Manual/Clinical expertise
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Gradient Boosting was compared with Random Forest, Decision Tree, LARS, Neural Network, logistic regression, rule induction, and SVM. The dataset was divided into 70% training and 30% testing. Medical experts reviewed 544 candidate variables and excluded 173 because of irrelevance, redundancy, excessive missingness above 30%, or excessive correlation. Gradient Boosting variable-importance rankings were used for interpretation. Reported model settings included shrinkage 0.1, 50 iterations, and use of 60% of observations for fitting individual boosted trees.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Variables with more than 30% missing data were removed during expert preprocessing, but the handling of residual missing values was not described; this was therefore classified as Other rather than imputation. Class imbalance was explicitly addressed by oversampling and replicating minority-class observations. Data cleaning, consolidation, variable filtering, and transformation were described, and SAS Enterprise Miner was used. The paper states a 70:30 split but does not report exact integer training and test counts. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.746
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): 69.0
+	•	PPV / Precision (%): 67.6
+	•	Sensitivity / Recall (%): 73.1
+	•	Specificity (%): 64.9
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: The target was occurrence of de novo malignant cancer after lung transplantation among recipients with no prior malignancy. In the held-out test set, Gradient Boosting achieved AUC 0.746, accuracy 0.690, sensitivity 0.731, specificity 0.649, and precision 0.676. No AUC confidence interval, NPV, or F1-score was reported. The study did not report formal calibration assessment or decision-curve analysis.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): High Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for the initial organ-specific STAR record counts; Figure 1 for the data-preparation, training/testing, and model-comparison workflow; Figure 2 for sex, ethnicity, blood group, and age distributions; Table 2 for held-out classification performance; Table 3 for Gradient Boosting variable importance.

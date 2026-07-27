@@ -1,0 +1,72 @@
+First Author: Noh
+Title: Machine Learning for 1-Year Graft Failure Prediction in Lung Transplant Recipients: The Korean Organ Transplantation Registry
+Source number: 68
+
+Very short summary: This prospective multicenter registry study included 240 South Korean lung transplant recipients enrolled between 2015 and 2021. Six machine-learning models were evaluated using stratified 5-fold cross-validation; the nine-variable multilayer perceptron achieved the best performance for 1-year graft failure, with an AUC of 0.780, accuracy of 73.3%, sensitivity of 67.3%, and specificity of 75.1%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2015
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: Data were obtained from the Korean Organ Transplantation Registry, described as a prospective multicenter cohort registry in South Korea, with lung transplant recipients registered from March 2015 through December 2021. Funding was provided by National Institutes of Health research projects and a South Korean government-funded IITP grant. The authors stated, “The authors declare no conflicts of interest.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 240
+	•	Overall Mean Age: 56.1
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Of 303 initially enrolled recipients, patients who withdrew, underwent heart-lung transplantation, were lost to follow-up, or had incomplete data were excluded, leaving 240 recipients. Mean age was 56.1 ± 9.5 years and 65.8% were male; an explicit female percentage was not reported. Clinical variables included transplant indication, diabetes, hypertension, CKD, malignancy, cardiac and cerebrovascular disease, infection, steroid exposure, pulmonary function, mechanical ventilation, ECMO, laboratory values, HLA crossmatch, donor-specific antibodies, and panel-reactive antibodies.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Prospective Cohort
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
+	•	Algorithm Name: Multilayer Perceptron
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation (k-fold)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The primary MLP was compared with logistic regression, SVM, random forest, gradient boosting machine, and balanced random forest. Twenty-five preoperative variables associated with graft failure in univariate analyses were ranked using averaged logistic-regression coefficients across repeated 5-fold cross-validation, and the top nine variables with normalized absolute coefficients above 0.25 were retained. Grid-search hyperparameter optimization was reported. The MLP contained two 60-unit ReLU dense layers with dropout of 0.7 and a sigmoid output. SHAP DeepExplainer was used for interpretation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Only patients with complete data for all selected preoperative variables were analysed, and no imputation was performed. Class imbalance was addressed using balanced class weights for several models and a balanced-random-forest implementation; the exact imbalance method used for the final MLP was not explicitly specified. Stratified 5-fold cross-validation preserved the graft-failure proportion in each fold. Exact fold-specific training and validation counts were not reported. Feature-selection and model-preparation procedures were described, but predictor scaling or normalization before MLP training was not explicitly reported. Source code and model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.780
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): 73.3
+	•	PPV / Precision (%): 44.9
+	•	Sensitivity / Recall (%): 67.3
+	•	Specificity (%): 75.1
+	•	NPV (%): 88.6
+	•	F1-Score: 0.537
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: The outcome was 1-year graft failure, defined as death or retransplantation due to graft failure within 1 year; retransplantation date was treated as equivalent to the date of death. Across stratified 5-fold cross-validation, the MLP achieved AUC 0.780, accuracy 0.733, sensitivity 0.673, specificity 0.751, PPV 0.449, NPV 0.886, and F1-score 0.537. No 95% confidence interval for AUC was reported. Calibration analysis and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for recipient demographics, clinical history, laboratory, and immunologic variables; Table 2 for operative and postoperative outcomes; Table 3 for performance of all six models; Figure 1 for participant inclusion; Figures 2 and 3 for coefficient-based feature selection and number-of-feature assessment; Figure 4 for SHAP interpretation; Figure 5 for Kaplan–Meier outcomes in predicted risk groups.

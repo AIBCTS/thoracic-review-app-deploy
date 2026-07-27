@@ -13,6 +13,8 @@ __pycache__/
 env/
 venv/
 data_llm/
+archive/
+_archive/
 
 # Old data folder (to be deleted, do not track)
 data_/

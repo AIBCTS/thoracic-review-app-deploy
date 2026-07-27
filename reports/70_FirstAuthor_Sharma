@@ -1,0 +1,72 @@
+First Author: Sharma
+Title: Development and Validation of a Hybrid Machine Learning Model to Predict Lung Transplant Outcomes
+Source number: 70
+
+Very short summary: This retrospective US national-registry study included 51,933 adult first-time lung transplant recipients and used a temporal development cohort from 1987–2014 and testing cohort from 2015–2025. The interpretable AutoScore-Survival framework combined random survival forest variable selection with a Cox proportional hazards point score; in the temporal testing cohort, the 1-year time-dependent AUC was 0.61 (95% CI 0.52–0.70), with good reported calibration and positive net benefit on decision-curve analysis.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: Foundation/Non-profit
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 1987
+	•	Study Period End (Year): 2025
+	•	Section 1 Comments/Quotes: The study used the United Network for Organ Sharing–Organ Procurement and Transplantation Network registry and included US lung transplants performed between October 16, 1987, and March 26, 2025. Dr Sharma was supported by three American Heart Association awards. The article states, “Conflict of Interest Disclosures: None reported.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 51933
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 42.4
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort comprised 51,933 adults undergoing their first lung transplant. Age was reported as a median of 59 years rather than a mean; 22,028 recipients (42.4%) were women. Race and ethnicity were reported. Candidate predictors included recipient demographics, functional status, prior cardiac surgery, laboratory measures, donor characteristics, transplant type, ischemic time, inotropic support, hospital length of stay, and posttransplant ventilation support.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Other
+	•	Algorithm Name: AutoScore-Survival
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: External Validation (Temporal)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: AutoScore-Survival is a hybrid framework that used a random survival forest to rank 61 candidate variables and Cox proportional hazards regression to generate an interpretable integer-based score. A parsimony plot in the development validation cohort selected nine predictors. The cohort was temporally split into development and contemporary testing periods; the development cohort was further divided into training and validation sets for model selection and hyperparameter tuning. Interpretability was provided through a nine-variable point score, hazard ratios, risk groups, and a web calculator.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 24014
+	•	Test Size (N): 25251
+	•	Section 4 Comments/Quotes: Missing values were retained as an “unknown” or “not reported” category rather than imputed. Continuous predictors were categorized to generate the point-based score, and the model-development workflow and temporal allocation were described. The development cohort contained 24,014 training recipients and 2,668 validation recipients; the temporal testing cohort contained 25,251 recipients. Class imbalance treatment was not applicable to the time-to-event survival framework, which incorporated censoring and had an overall event rate of 61.4%. Source code or trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.61
+	•	Model AUC Lower 95% CI: 0.52
+	•	Model AUC Upper 95% CI: 0.70
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The outcome was time from lung transplantation to death or retransplantation, evaluated at 1, 5, and 10 years. In the temporal testing cohort, the 1-year time-dependent AUC was 0.61 (95% CI 0.52–0.70). The testing-set integrated AUC was 0.61 (95% CI 0.60–0.63) and C-index was 0.64 (95% CI 0.63–0.64). Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. Calibration was assessed using plots, calibration slope, observed-to-expected ratios, and Brier scores; decision-curve analysis showed net benefit across clinically relevant thresholds.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for the nine-variable risk score and adjusted hazard ratios; Table 2 for testing-set discrimination and calibration metrics; Figure 1 for participant selection and training, validation, and temporal testing cohorts; Figure 2 for Kaplan–Meier risk-group stratification; Figure 3 for 1-, 5-, and 10-year calibration plots and decision-curve analyses; Supplementary eFigure 2 as referenced for the parsimony plot and variable-count selection.

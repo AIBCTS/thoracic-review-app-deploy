@@ -1,0 +1,72 @@
+First Author: Tran-Dinh
+Title: Early identification of high-risk individuals for mortality after lung transplantation: A retrospective cohort study with topological feature engineering
+Source number: 71
+
+Very short summary: This retrospective single-center study included 252 consecutive adult lung transplant recipients treated in Paris, France, between 2015 and 2020. A multilayer perceptron integrating clinical variables with 27 persistent-homology-derived topological features was evaluated using nested stratified cross-validation; the full model achieved an AUC of 0.87 (95% CI 0.81–0.93), with detailed performance tables reporting 90% accuracy, 84% sensitivity, and 90% specificity for 1-year mortality prediction.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2015
+	•	Study Period End (Year): 2020
+	•	Section 1 Comments/Quotes: The study included consecutive lung transplant recipients at Bichat-Claude Bernard Hospital in Paris, France, between January 1, 2015, and December 31, 2020. Funding included the French Agence Nationale de la Recherche and regional Spanish public/FEDER funding, with Institute Mutualiste Montsouris covering article-processing charges. The authors declared that no competing interests existed.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 252
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Of 287 consecutive recipients screened, 24 were excluded for more than 20% missing key variables and 11 for insufficient follow-up without documented death, leaving 252 patients: 189 survivors and 63 non-survivors at 1 year. Overall mean age and female percentage were not explicitly reported in the article text. Clinical variables included diabetes, ischemic heart disease, primary lung disease, pulmonary arterial pressure, BMI, CMV mismatch, preoperative and intraoperative ECMO, transplant type, ICU severity scores, postoperative organ support, infections, primary graft dysfunction, renal failure, and rejection.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
+	•	Algorithm Name: Topological Attention Multilayer Perceptron
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: Cross-Validation (k-fold)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: The primary classifier was a regularized MLP using 49 clinical variables and 27 topological features generated from persistent-homology representations. It was compared with the Lung Transplant Risk Index, Charlson Comorbidity Index, FEV1, clinical-only MLP, random forest, gradient boosting, logistic regression, and other classifiers. Validation used nested stratified cross-validation with five outer folds for performance estimation and three inner folds for hyperparameter tuning. Recursive feature elimination with cross-validation was performed within each training fold, retaining a mean of 34 ± 6 features. SHAP, partial-dependence plots, effect sizes, and an interpretable risk score were used for explanation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Yes
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing data were handled using multiple imputation by chained equations with ten iterations and five imputed datasets, using predictive mean matching for continuous variables and logistic regression for binary variables. Scaling, imputation, topological extraction, and feature selection were fitted exclusively within training folds. Class imbalance was addressed with inverse-frequency class weights of 1 for survivors and 3 for non-survivors; SMOTE was evaluated in sensitivity analysis. Exact per-fold training and test counts were referenced in Supplementary Table S2 but were not stated numerically in the article text. The data, code, and split manifest were made publicly available in the TopoAttention repository.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.87
+	•	Model AUC Lower 95% CI: 0.81
+	•	Model AUC Upper 95% CI: 0.93
+	•	Model Accuracy (%): 90
+	•	PPV / Precision (%): 82
+	•	Sensitivity / Recall (%): 84
+	•	Specificity (%): 90
+	•	NPV (%): 91
+	•	F1-Score: 0.83
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The primary endpoint was all-cause mortality within 365 days after transplantation. Table 2 reports AUC 0.87 (95% CI 0.81–0.93), accuracy 0.90 (95% CI 0.85–0.95), sensitivity 0.84, specificity 0.90, PPV 0.82, NPV 0.91, F1-score 0.83, and PR-AUC 0.71 for the Topological Attention model. The abstract separately reports 87.4% accuracy, 84.1% sensitivity, and 89.6% specificity on the test dataset, indicating minor inconsistency or different rounding/evaluation summaries. Calibration was evaluated with curves, Expected Calibration Error 0.08, Brier score 0.12, calibration slope 0.91, and intercept −0.15. DCA showed positive net benefit across thresholds from 0.1 to 0.5 and benefit relative to treat-all and treat-none strategies above approximately 0.15.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for comparison with alternative learning algorithms; Table 2 for AUC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, and PR-AUC; Tables 3 and 4 for fair-baseline and ablation comparisons; Table 5 for effect sizes and SHAP-ranked predictors; Figure 1 for participant flow and topological trajectories; Figures 2–5 for dimensionality reduction, persistent-homology extraction, model architecture, and trajectory analysis; Figures 6 and 7 for SHAP and partial-dependence interpretation; Figure 8 for ROC and model comparison; Supplementary Figures S5 and S10 for calibration and decision-curve analysis.

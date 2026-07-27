@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Government/Public
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2007
 	•	Study Period End (Year): 2020
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Multilayer perceptron (MLP), support vector machine (SVM), random forest classifier (RFC), and multivariate logistic regression
-	•	Input Variables (Data Modality): Imaging; Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo), Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Cross-Validation
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The paper states that “four ML algorithms were developed,” namely logistic regression, SVM, RFC, and MLP, and the best model was MLP. Inputs combined pre-LTx clinical data with CT-derived features from deep-learning segmentation and donor-recipient size-matching ratios. The models used repeated stratified 5-fold cross-validation with five runs and randomized grid search. Feature reduction included p<0.10 screening, VIF filtering, and lasso-based elimination. No SHAP/LIME-style explainability was reported.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: Not Reported
 	•	Data Preprocessing / Normalization Described: Yes
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: Variables with more than 5% missingness were excluded, and “the remaining missing data was imputed using the feature mean for continuous variables and the feature mode for categorical variables,” which is simple imputation. Continuous features were z-score standardized, categorical variables one-hot encoded, and repeated stratified 5-fold cross-validation was used instead of a fixed train/test split. I did not find any explicit class-imbalance method or code-release statement.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: PGD
+	•	Target Clinical Outcome: Primary Graft Dysfunction (PGD)
 	•	Model AUC / C-Statistic: 0.85
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was explicitly “grade 3 PGD at 72 h post-LTx,” which maps directly to PGD. The abstract reports that “the MLP model achieved a maximum AUROC of 0.85 (95% CI: 0.81–0.88)” using four features. The methods state that AUPRC was also used for evaluation, but specific final AUPRC and other classification metrics were not visible in the retrieved text, so I left them NR rather than guessing. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small single-center cohort of only 92 systemic sclerosis recipients, which limits generalizability and increases selection risk.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant preoperative variables plus detailed CT-derived cardiopulmonary and body-composition features extracted with previously validated deep-learning algorithms.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: PGD was explicitly defined using ISHLT criteria as pulmonary edema on chest X-ray plus PaO2/FiO2 < 200 at 72 hours.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include repeated stratified cross-validation, randomized hyperparameter search, multiple model classes, and multimodal feature integration. Uncertainty remains because of the small sample size and lack of external validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses machine-learning prediction of PGD after lung transplantation and is highly relevant, even though it focuses on the specific systemic sclerosis subgroup.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort inclusion; the ROC/AUROC performance figure for the final prediction model; Table 1 for recipient and donor characteristics by PGD status; Table 2 for significant clinical associations with PGD; and Table 3/results text for CT-derived predictors and the final model inputs. I did not report any value not explicitly shown in the uploaded article.  ￼

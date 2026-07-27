@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: Multi-center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 1999
 	•	Study Period End (Year): 2021
@@ -27,20 +27,20 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: Self-supervised learning attention-based multiple instance learning pipeline using RetCCL encoder and Marugoto; comparator CRANE
-	•	Input Variables (Data Modality): Pathology
-	•	Comparator / Standard of Care: Human expert
-	•	Validation Method: External Geographic
+	•	Input Variables (Data Modality): Pathology slides
+	•	Comparator / Standard of Care: Human expert/Clinician
+	•	Validation Method: External Validation (Geographic/Different Hospital)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The authors trained “our own deep learning pipeline using an SSL-based feature extractor combined with attention-based MIL” on H&E whole-slide pathology images and compared it against the CRANE method. The ground truth came from “two expert pathologists… grading the degree of rejection in consensus,” so human expert is the best comparator. Validation included hold-out and separate cohorts from other German centers, so external geographic is the strongest label. Interpretability came from attention maps and Grad-CAM visualizations. The paper reports optimizer choice, learning-rate finding, early stopping, and training settings, which count as hyperparameter/training-procedure reporting.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
-	•	Code Availability: Yes, Algorithm weights available
+	•	Code Availability: Algorithm/Model weights available
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 393
 	•	Test Size (N): 686
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was cellular cardiac allograft rejection on endomyocardial biopsy, which fits Acute Rejection. In cross-validation, the binary rejection yes/no AUROC was 0.849. External AUROCs were 0.734, 0.729, and 0.716. For multiclass ISHLT grades, the cross-validated AUROCs were 0.835 for 0R, 0.633 for 1R, and 0.905 for 2/3R. Although the methods mention calculation of accuracy, precision, recall, and F1-score, I did not see explicit numeric values for these in the retrieved text, so I leave them NR. Calibration and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicentre retrospective series with external validation, which is a strength, but cohort sizes were still modest and selected from archived biopsies with available ISHLT grading.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were routine H&E pathology whole-slide images from endomyocardial biopsies, processed in a standardized digital workflow.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Ground truth labels were assigned by “two expert pathologists… in consensus, following the 2004 revision of the ISHLT grading system.”  ￼
-	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include repeated three-fold cross-validation, three external validation cohorts, comparison with CRANE, bootstrapped confidence intervals, and code availability. Remaining limitations are mainly sample size and reduced external performance, not major analytic flaws.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI-based detection of heart-transplant rejection from pathology and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Low Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study design, slide preprocessing, feature extraction, and internal/external validation workflow; Figure 2 for ROC results across cross-validation and validation cohorts; and Table 1 for cohort sizes, centers, years, age medians, sex distribution, and ISHLT rejection distribution. I did not report any metric not explicitly shown in the uploaded article.  ￼

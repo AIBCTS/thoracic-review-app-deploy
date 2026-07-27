@@ -1,0 +1,72 @@
+First Author: Kim
+Title: An integrated clinical-histopathologic prediction model for cardiac allograft rejection: Translating machine learning into clinical risk frameworks
+Source number: 64
+
+Very short summary: This retrospective single-center study included 484 adult heart transplant recipients contributing 1,188 outpatient endomyocardial-biopsy encounters during the first 6 months after transplantation. An XGBoost model integrating longitudinal clinical data with quantitative biopsy morphologic features achieved a held-out test AUROC of 0.86 and AUPRC of 0.74 for future cardiac allograft rejection within 6 weeks; the authors subsequently translated influential predictors into the interpretable Integrated Rejection Risk Index.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): NR
+	•	Study Period End (Year): NR
+	•	Section 1 Comments/Quotes: The cohort was derived from adult heart transplant recipients at the University of Pennsylvania using four previously published digitized-biopsy datasets. Calendar years for patient inclusion were not reported. The study was supported by National Heart, Lung, and Blood Institute grants K08HL159344, R01HL170152, and R01HL158071. The disclosure statement reads, “None to state.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 484
+	•	Overall Mean Age: 52.6
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final cohort comprised 484 recipients and 1,188 outpatient EMB-associated encounters. Mean recipient age was 52.6 years; 77.1% were male, but female percentage was not explicitly reported. Race was reported as White 70.7%, Black 19.2%, and Other 10.1%. Clinical history included BMI, retransplantation, CMV status, renal function, LVAD history, coronary disease, ischemic cardiomyopathy, diabetes, pulmonary hypertension, hypertension, hyperlipidemia, CKD, cPRA, medications, laboratory trends, and donor characteristics.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: eXtreme Gradient Boosting (XGBoost)
+	•	Input Variables (Data Modality): Other
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The primary model integrated structured EHR variables with quantitative pathology features extracted from digitized H&E-stained EMB slides. Data were split 80:20 by patient identifier, with 10-fold cross-validation during training and performance assessed exclusively on the held-out test set. Cross-sectional, longitudinal, clinical-only, morphology-only, and integrated configurations were compared. SHAP rankings were used to identify influential features and derive the Integrated Rejection Risk Index; no explicit hyperparameter-search or tuning procedure was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Multiple Imputation
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 954
+	•	Test Size (N): 234
+	•	Section 4 Comments/Quotes: Patients were required to have at least 90% completeness of routinely collected clinical variables, and residual missingness was handled using multiple imputation by chained equations. The cohort was deliberately enriched for future-rejection patients, 26.9% versus a 15.1% institutional incidence, “to mitigate class imbalance.” Longitudinal predictors were constructed using time bins, change-from-baseline, change-from-prior-encounter, and rate-of-change features. Figure 2 reports 954 training encounters and 234 held-out test encounters; all splitting was performed at patient level. Code availability was not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Acute Rejection
+	•	Model AUC / C-Statistic: 0.86
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 74
+	•	Sensitivity / Recall (%): 72
+	•	Specificity (%): 94
+	•	NPV (%): 94
+	•	F1-Score: 0.83
+	•	Calibration Reported: No
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary feasibility outcome was future cardiac allograft rejection occurring more than 7 days and no more than 42 days after a CAR-free outpatient encounter. CAR included ISHLT cellular rejection greater than 1R, pAMR greater than 0, or clinically evident rejection. On the held-out test set of 234 encounters, the integrated longitudinal clinical-morphologic XGBoost model achieved AUROC 0.86, AUPRC 0.74, macro F1 0.83, sensitivity 0.72, specificity 0.94, PPV 0.74, and NPV 0.94. Numeric 95% confidence bounds for AUROC and accuracy were not reported. Formal calibration analysis and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for recipient and donor characteristics; Table 2 for held-out test performance; Figure 1 for quantitative pathology feature extraction; Figure 2 for cohort flow and patient-level training/test counts; Figures 3 and 4 for ROC, precision-recall, confusion matrices, and SHAP feature contributions; Figure 5 for IRRI criteria; Figure 6 for rejection-risk trajectories and hazard ratios; Supplemental Tables S2-S7 as referenced for feature definitions, model parameters, IRRI morphology criteria, and sensitivity analyses.

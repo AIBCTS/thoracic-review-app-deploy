@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
@@ -27,9 +27,9 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Taelcore (topological autoencoder with best linear combination for optimal reduction of embeddings)
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: Other
 	•	Validation Method: Other
 	•	Explainability / Interpretability Used: No
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was ACR within 1 year after lung transplantation. Table 1 reports percentage success before and after topological improvement: RF 50%→80%, MLP 80%→90%, KNN 50%→50%, and GNB 90%→90%. The discussion explicitly states “an accuracy achieved of 90%” for Taelcore in predicting ACR after lung transplantation. No AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported. Because the paper presents “percentage of success” rather than a richer held-out metric set, I report 90% as the model accuracy figure and leave the others NR.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The clinical lung-transplant dataset included only 40 patients, with 7 ACR cases, which creates substantial risk of selection instability and limited generalisability.
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clearly defined early post-transplant clinical measurements collected at 24, 48, and 72 hours, including sCD31, PaO2/FiO2, and SOFA respiratory scores.  ￼
-	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The paper clearly targets “acute cellular rejection,” but the retrieved excerpts do not provide the operational diagnostic definition or biopsy/grading criteria used to label ACR.
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study is methodologically innovative, but it relies on a very small dataset, reports “percentage of success” rather than a full clinical validation framework, and does not provide exact train/test sizes or standard clinical performance metrics such as AUC and calibration.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses AI-based prediction of acute rejection after lung transplantation, which is strongly aligned with the review question.
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for preprocessing, outlier handling, Rips filtration, and persistence-diagram construction; Figure 2 for vectorisation, distance calculation, and classifier integration; Table 1 for classifier success percentages before and after topological improvement; Figure 3 for the Taelcore topology-preserving autoencoder framework; and Figure 4 for the latent-space comparison showing clearer ACR/non-ACR separation in the lung-transplant dataset. I did not report any metric not explicitly present in the uploaded article.

@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 1997
 	•	Study Period End (Year): 2011
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: International Heart Transplantation Survival Algorithm (IHTSA); comparator IMPACT
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
-	•	Comparator / Standard of Care: Linear Risk Score
-	•	Validation Method: External Temporal
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: External Validation (Temporal)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Not Reported
 	•	Section 3 Comments/Quotes: The paper compared the deep-learning IHTSA model with the logistic-regression-based IMPACT score. IHTSA used recipient and donor tabular registry variables, whereas IMPACT used recipient variables only. The study split cohorts into pre-2009 derivation and 2009–2011 temporal test cohorts, which is best classified as external temporal validation relative to the derivation era. The text mentions CART was used by IHTSA developers to assess relative feature importance, but not as a main explainability framework in this paper. Hyperparameter tuning was not described in the retrieved text.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: Other
 	•	Data Preprocessing / Normalization Described: No
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: In the 2009–2011 test cohort, recalibrated IHTSA achieved AUROC 0.65 (95% CI 0.63–0.68) for 1-year mortality, compared with 0.61 (0.58–0.63) for IMPACT. For long-term survival, recalibrated IHTSA had C-index 0.63 (0.61–0.65) versus 0.58 (0.56–0.61) for IMPACT. Calibration was reported through predicted versus actual mortality and Hosmer–Lemeshow statistics, with IHTSA closer to observed 1-year mortality than IMPACT. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large UNOS national registry cohort of adult heart transplant recipients with explicit temporal separation into derivation and test eras.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant recipient and donor variables available in UNOS, and the models compared recipient-only versus recipient-plus-donor approaches.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The study explicitly modeled one-year mortality and long-term survival after heart transplantation, with follow-up summarized over 165,206 patient-years.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include large scale, temporal test validation, comparison with an established score, ROC/C-index evaluation, and calibration analysis. Uncertainty remains because missing-data handling and full modeling details were not extensively described in the retrieved text.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI/deep-learning prediction of post-heart-transplant survival and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for recipient features and baseline characteristics; Table 2 for donor features; Table 3 for AUROC comparison for 1-year mortality; Table 4 for C-index comparison for long-term survival; Figures 1–2 for ROC and sensitivity/correctly classified-patient comparisons; and Figure 3 plus accompanying text for calibration versus observed 1-year mortality. I did not report any value not explicitly shown in the uploaded article.  ￼

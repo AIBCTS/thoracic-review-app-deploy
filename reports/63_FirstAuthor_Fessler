@@ -1,0 +1,72 @@
+First Author: Fessler
+Title: Machine Learning for Predicting Pulmonary Graft Dysfunction After Double-Lung Transplantation: A Single-Center Study Using Donor, Recipient, and Intraoperative Variables
+Source number: 63
+
+Very short summary: This retrospective single-center cohort study analysed prospectively collected perioperative data from 477 double-lung transplant recipients in France between 2012 and 2019. XGBoost models were developed at nine sequential perioperative time points to predict grade 3 primary graft dysfunction at 72 hours; the optimal six-feature model at second graft implantation achieved an AUROC of 0.84, sensitivity of 0.81, and specificity of 0.68, although feature selection was not nested and no external validation was performed.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Europe
+	•	Organ Focus: Lung
+	•	Funding Source: Foundation/Non-profit
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2012
+	•	Study Period End (Year): 2019
+	•	Section 1 Comments/Quotes: The study included all eligible double-lung transplant recipients treated at Hôpital Foch, France, from January 2012 through December 2019. Funding was provided by Hôpital Foch, with additional support acknowledged from the association “Vaincre la Mucoviscidose.” The authors declared that the research was conducted “in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 477
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Of 510 double-lung transplant recipients, 477 met the inclusion criteria; 83 developed PGD3-T72 and 394 did not. Age was reported as median and interquartile range rather than an overall mean, and an overall female percentage was not explicitly stated. Clinical variables included primary lung disease, BMI, pulmonary hypertension, diabetes, prior thoracic surgery, waiting-list and ICU status, mechanical ventilation, vasopressors, laboratory values, Lung Allocation Score, donor characteristics, ECMO, and sequential intraoperative measurements.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: eXtreme Gradient Boosting (XGBoost)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: XGBoost was compared with a baseline logistic-regression model. Models were developed at nine chronological stages using recipient, donor, and intraoperative variables. Hyperparameters were optimized through three-stage grid search with five-fold cross-validation. Automated feature selection used XGBoost Gain rankings and recursive addition of the highest-ranked predictors across 500 random train/test splits. SHAP dependence plots and a simplified logistic-regression score were used for interpretation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Algorithm handles natively
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Yes
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Numerical variables were not transformed, categorical variables were one-hot encoded, and missing values were not imputed because “XGBoost treats missing data as a specific modality.” PGD3-T72 occurred in 83 of 477 recipients, but no class weighting, over-sampling, under-sampling, or other explicit imbalance method was reported. The primary XGBoost train/test split proportion and corresponding counts were not stated. The authors report that their “full codebase has been made publicly available.”
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Primary Graft Dysfunction (PGD)
+	•	Model AUC / C-Statistic: 0.84
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 81
+	•	Specificity (%): 68
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Other
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The primary outcome was grade 3 primary graft dysfunction at 72 hours according to the 2016 ISHLT definition. The optimal six-feature XGBoost model was evaluated at step 8, immediately after second graft implantation, and achieved a median AUROC of 0.84 with an IQR of 0.065; the abstract reports sensitivity 0.81 and specificity 0.68. Although bootstrap confidence intervals were said to have been generated, numeric lower and upper 95% CI limits were not reported. Accuracy, PPV, NPV, and F1-score were not provided in the main paper. The authors qualitatively described superior or well-calibrated risk estimates, but no calibration intercept, slope, Brier score, or calibration plot was reported. DCA was not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for recipient, donor, and sequential intraoperative predictors; Table 2 for postoperative complications; Table 3 for the simplified PGD3-T72 risk score; Figure 1 for participant inclusion; Figure 2 for ECMO timing; Figure 3 for XGBoost performance across nine clinical stages; Figure 4 for XGBoost versus logistic-regression AUROC by number of features; Figure 5 for feature importance; Figure 6 for SHAP dependence plots; Figure 7 for risk-score strata; Supplementary Table 1 as referenced for detailed model performance.

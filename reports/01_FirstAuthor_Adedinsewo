@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: Multi-center
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 1988
 	•	Study Period End (Year): 2021
 	•	Section 1 Comments/Quotes: The study included heart transplant recipients “at three Mayo Clinic US sites” and retrospectively identified patients “between January 1988 and April 2021.” The paper states support from NIH in the article end matter and includes an explicit disclosures/conflict statement section, so COI declaration was present. The data source was three Mayo Clinic sites rather than a registry.  ￼
@@ -27,11 +27,11 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: AI-ECG deep-learning model
-	•	Input Variables (Data Modality): Waveforms (ECG)
+	•	Input Variables (Data Modality): Waveforms/Signals (ECG)
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: Yes
@@ -39,7 +39,7 @@ Section 3: Intervention & AI Methods
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Not Reported
-	•	Class Imbalance Addressed: Yes
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 6074
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: Allograft rejection was defined as “moderate or severe acute cellular rejection (ACR).” On the held-out test set, the AI-ECG achieved “AUC of 0.84 (95% CI: 0.78–0.90),” sensitivity 95%, specificity 52.6%, PPV 5.1%, and NPV 99.7% using threshold 0.4. The prospective proof-of-concept study showed AUC 0.78 and sensitivity 100%, but the prompt asks for held-out test/validation-set metrics, so the primary extracted model performance is from the retrospective test set. Figure 3 shows the ROC curve, and Figure 4 shows subgroup AUC performance; performance was better within 7 days of biopsy (0.87) than >7 days (0.77). Calibration and DCA were not reported.  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective study from “three Mayo Clinic US sites,” and patients were restricted to those with digital ECGs and EMBs within 30 days, which may limit representativeness and introduce selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized 12-lead ECG waveforms acquired at 500 Hz and recorded before EMB, so the predictor measurement process was objective and clinically plausible.  ￼  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: ACR was defined using ISHLT criteria, and the final classification groups were “reviewed and approved by a cardiovascular pathologist and transplant cardiologist.”  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include patient-level partitioning, held-out testing, and hyperparameter search, but uncertainty remains because missing-data handling for clinical variables was not described, clustering was simplified by assuming repeated EMB independence, and no calibration analysis was reported.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI-based detection of heart transplant rejection using a non-invasive model in transplant recipients, which is closely aligned with the review question.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures used in this extraction:
 Table 1 for demographics/comorbidities; Table 2 for ECG characteristics; Figure 1 for study flow; Figure 2 for CNN model architecture; Figure 3 for ROC performance; and Figure 4 for subgroup performance.  ￼  ￼  ￼

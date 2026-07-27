@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: None
 	•	Dataset Source: International Registry
-	•	Dataset Name: ISHLT
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: ISHLT Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 2005
 	•	Study Period End (Year): 2009
 	•	Section 1 Comments/Quotes: The data source was the “ISHLT Registry,” described as including “223 centers in 18 countries,” making this an international registry study. The modeling cohort was restricted to OHTs “outside the window 2005–2009” being excluded, and the paper states, “Funding No funding was available” and “The authors have no conflict of interest to declare.”  ￼  ￼
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: Gradient Boosting
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
 	•	Algorithm Name: Gradient-boosted machine (GBM)
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The paper describes a retrospective registry cohort and states that endpoints were evaluated “using the gradient-boosted machine (GBM) algorithm.” The dataset was split into “training cohort” 80% and “validation cohort” 20%, with “tenfold cross-validation repeated 5 times” used within training to tune hyperparameters. Feature selection was automated by removing variables with >50% missingness and near-zero variance, with recoding of sparse categories, resulting in 87 variables for modeling. No explicit clinical-rule comparator was tested in the main analysis.  ￼  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
@@ -60,10 +60,10 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The two primary endpoints were “all cause mortality and graft failure at 5 years after OHT.” Figure 1 and the Results report AUC 0.717 (95% CI 0.696–0.737) for 5-year mortality and 0.716 (95% CI 0.696–0.736) for graft failure. The user asked for tables and figures, and Figure 2 shows subgroup ROC analyses: graft-failure prediction was significantly better when recipient age was >60 years, and mortality prediction trended better when ischemic time was >4 hours. Although the methods say sensitivity, specificity, PPV, and NPV were provided, these numerical values were not present in the retrieved main-article text, so they are NR. Calibration and DCA were not reported.  ￼  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The cohort came from the ISHLT international registry with “223 centers in 18 countries,” which reduces single-center selection bias, although eligibility restrictions were applied.  ￼
-	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The model included both pre- and post-transplant variables, including “hospital length of stay,” “graft function at discharge,” and discharge immunosuppression, which limits interpretability for purely pre-transplant risk prediction and creates predictor-timing concerns.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The primary outcomes were explicitly defined as “all cause mortality and graft failure at 5 years after OHT,” and graft failure was further defined using the ISHLT reporting definition.  ￼  ￼
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The analysis treated each endpoint as a binary outcome and “time-to-event was not taken into account,” and patients lost to follow-up before year 5 were treated as not having had the event, which is a substantial risk of bias.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly studies machine learning for heart transplant outcomes using donor-recipient and transplant variables, which is closely aligned with the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction: Figure 1 for the ROC/AUC values for 5-year mortality and graft failure, and Figure 2 for subgroup analyses by recipient age, ischemic time, length of stay, and donor age. The main retrieved text did not include a main-paper demographic table with overall mean age or female proportion, so those fields were left as not reported.  ￼  ￼

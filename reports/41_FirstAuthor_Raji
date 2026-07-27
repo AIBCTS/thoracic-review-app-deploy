@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Other
 	•	Funding Source: None
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
@@ -27,13 +27,13 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Multilayer Perceptron (MLP) with back-propagation; Radial Basis Function (RBF) network
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: Other
 	•	Validation Method: Other
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The paper’s main proposed model is the “multi-layer perceptron algorithm,” and it also implemented “the Radial Basis Function Network model to prove the accuracy of proposed model.” Inputs were donor, recipient, and transplantation tabular variables selected from UNOS using InfoGain Attribute Eval with ranker search. The comparison was against an earlier published computational system rather than a clinical guideline or human reader. The paper discusses “validation” but the retrieved text does not clearly describe a standard split or CV protocol, so I classify validation as Other rather than guessing. No SHAP/LIME-style interpretability or explicit hyperparameter tuning was reported.
 
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The study outcome was graft/survival status after thoracic transplantation, represented by GRF_STAT, but the exact clinical horizon was not clearly specified in the retrieved text, so the safest category is Other. The paper reports “accuracy of 97.1%” for the MLP and “92.37%” for the RBF model. Table 6 reports sensitivity 0.966 and specificity 0.984 for the proposed MLP. AUC/C-statistic, PPV, NPV, F1, calibration, and DCA were not reported in the retrieved text.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Although the source was UNOS, the final analytic sample was reduced from a very large registry to only 485 records after multiple filtering and validation steps, and the paper does not clearly describe cohort assembly in a clinically transparent way.  ￼
-	•	Predictors (Input Variable Bias): Unclear | Quote/Reasoning: The included predictors are clinically plausible donor, recipient, and transplant variables, but several choices are not well justified clinically and one top-ranked variable was recipient sex, suggesting possible dataset-driven instability.  ￼
-	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: The outcome variable was GRF_STAT, with “N” indicating graft failure and “Y” success, but the paper does not clearly define the exact time horizon for this success/failure endpoint in the retrieved text.  ￼
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The reported accuracy is very high, but the retrieved text does not clearly document dataset split strategy, external validation, calibration, or robust modern reporting standards, which creates substantial risk of optimistic performance estimation.
-	•	Applicability to Review Question: Unclear | Quote/Reasoning: The study is directly about computational prediction after thoracic transplantation and uses UNOS data, but it mixes broad “thoracic transplantation” terminology with heart-focused background and does not clearly define a heart-only or lung-only clinically interpretable cohort.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Unclear
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Unclear
 
 Tables and figures explicitly used in extraction:
 Table 1 for the final donor, recipient, and transplantation input variables; Table 2 for InfoGain-based ranking of the 24 selected attributes; Figure 1 for the basic ANN structure; Figure 2 for the multilayer perceptron architecture; Figure 3 for the radial basis function network structure; Figure 6 for performance comparison with the existing system; and Table 6 for the proposed MLP accuracy, sensitivity, and specificity versus prior systems. I did not report any metric not explicitly shown in the uploaded article.

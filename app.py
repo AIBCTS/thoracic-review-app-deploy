@@ -17,16 +17,16 @@ DATA_DIR = BASE_DIR / "data"
 BIB_FILE = DATA_DIR / "library.bib"
 REPORTS_DIR = BASE_DIR / "reports"
 # Exported Google Sheet CSV (read-only fallback when GSheets is unavailable)
-SHEET_CSV_FILE = BASE_DIR / "AI_Thoracic_Review_Database - Sheet1.csv"
+SHEET_CSV_FILE = BASE_DIR / "results" / "AI_Thoracic_Review_Database - Sheet1.csv"
 
 # Define a writable results directory
 def get_writable_csv_path():
     """Finds a writable path for the fallback CSV file."""
     potential_paths = [
+        BASE_DIR / "results" / "AI_Thoracic_Review_Database - Sheet1.csv",
         BASE_DIR / "results" / "manual_review_results.csv",
-        Path("/home/results/manual_review_results.csv"),
-        Path("/srv/results/manual_review_results.csv"),
-        Path("/tmp/manual_review_results.csv")
+        Path("/home/results/AI_Thoracic_Review_Database - Sheet1.csv"),
+        Path("/tmp/AI_Thoracic_Review_Database - Sheet1.csv")
     ]
     for p in potential_paths:
         try:
@@ -212,7 +212,7 @@ _FIELD_ALIASES = {
     "Target Population":             "target_population",
     "Total Sample Size (N)":         "total_sample_size",
     "Overall Mean Age":              "mean_age",
-    "Female Sex (%)": "female_sex_pct",
+    "Female Sex (%)":                "female_sex_pct",
     "Race/Ethnicity Reported":       "race_ethnicity_reported",
     "Comorbidities / Clinical History Included": "comorbidities_included",
     "Section 2 Comments/Quotes":     "section2_comments",
@@ -239,6 +239,17 @@ _FIELD_ALIASES = {
     # Section 5
     "Target Clinical Outcome":       "target_outcome",
     "Model AUC / C-Statistic":       "model_auc",
+    "Model AUC Lower 95% CI":        "model_auc_lower_ci",
+    "Model AUC (Lower 95% CI)":      "model_auc_lower_ci",
+    "Model AUC Upper 95% CI":        "model_auc_upper_ci",
+    "Model AUC (Upper 95% CI)":      "model_auc_upper_ci",
+    "Model AUC SE":                  "model_auc_se",
+    "Model AUC (SE)":                "model_auc_se",
+    "Linear Model AUC":              "linear_model_auc",
+    "Linear Model AUC / C-Statistic": "linear_model_auc",
+    "Linear Model AUC Lower 95% CI": "linear_model_auc_lower_ci",
+    "Linear Model AUC Upper 95% CI": "linear_model_auc_upper_ci",
+    "Linear Model AUC SE":           "linear_model_auc_se",
     "Model Accuracy (%)": "model_accuracy",
     "PPV / Precision (%)":           "model_ppv",
     "Sensitivity / Recall (%)": "model_sensitivity",
@@ -284,24 +295,37 @@ _VALUE_NORMALISE = {
     "Text": "Text / Clinical Notes (NLP)",
     "NLP": "Text / Clinical Notes (NLP)",
     # Comparator
+    "Linear Risk Score": "Linear Risk Score (e.g., LAS, EuroSCORE)",
+    "Linear Risk Score (e.g., LAS, EuroSCORE)": "Linear Risk Score (e.g., LAS, EuroSCORE)",
+    "Human expert": "Human expert/Clinician",
+    "Human expert/Clinician": "Human expert/Clinician",
+    "Standard Clinical Guidelines": "Standard Clinical Guidelines",
     "None": "None",
     "Other": "Other",
     # Validation
     "Internal Split": "Internal Split (Train/Test)",
     "Cross-Validation": "Cross-Validation (k-fold)",
-    "External Validation (Temporal)": "External Validation (Temporal)",
-    "External Validation (Geographic/Different Hospital)": "External Validation (Geographic/Different Hospital)",
+    "External Temporal": "External Validation (Temporal)",
+    "External Geographic": "External Validation (Geographic/Different Hospital)",
+    # Feature Selection
+    "Automated": "Automated (e.g., LASSO, Stepwise)",
+    "Manual/Clinical": "Manual/Clinical expertise",
     # Missing data
     "Complete Case Analysis": "Complete Case Analysis (Excluded)",
     "Simple Imputation": "Simple Imputation (Mean/Median)",
-    "Multiple Imputation": "Multiple Imputation",
-    # Class imbalance
-    "Not Applicable": "Not Applicable / Not Reported",
-    "Not Applicable/Not Reported": "Not Applicable / Not Reported",
+    # Dataset Name
+    "ISHLT": "ISHLT Registry",
+    "SRTR": "SRTR (Scientific Registry of Transplant Recipients)",
+    "Eurotransplant": "Eurotransplant Registry",
+    "Scandiatransplant": "Scandiatransplant Registry",
+    "UK Transplant": "UK Transplant Registry (NHSBT)",
+    # Target Population
+    "Donors": "Donors",
+    "Organ (ex-vivo perfusion)": "Organ (ex-vivo perfusion)",
+    # Class imbalance / missing
+    "Not Applicable": "Not Applicable/Not Reported",
     # Outcomes
-    "Acute Rejection": "Acute Rejection",
     "Donor acceptance": "Donor acceptance for transplantation",
-    "Donor acceptance for transplantation": "Donor acceptance for transplantation",
 }
 
 def normalise_report_value(val):
@@ -311,10 +335,6 @@ def normalise_report_value(val):
     # Direct lookup
     if val in _VALUE_NORMALISE:
         return _VALUE_NORMALISE[val]
-    # Partial prefix match
-    for k, v in _VALUE_NORMALISE.items():
-        if val.lower().startswith(k.lower()):
-            return v
     return val
 
 def report_to_review_dict(report_path):
@@ -701,8 +721,20 @@ if reviewer_name and selected_pdf:
         
     def get_index(key, options):
         val = get_val(key, None)
+        if key == 'coi_declared' and isinstance(val, str):
+            coi_map = {
+                'Yes': 'Yes (Declared COI)',
+                'No': 'No (Declared no COI)',
+                'NR': 'Not Reported',
+                'Not reported': 'Not Reported',
+                'not reported': 'Not Reported'
+            }
+            val = coi_map.get(val, val)
         if val in options:
             return options.index(val)
+        norm_val = normalise_report_value(val)
+        if norm_val in options:
+            return options.index(norm_val)
         return None
         
     def get_multiselect(key, options):
@@ -841,7 +873,7 @@ if reviewer_name and selected_pdf:
 
                 # --- Section 2: Population (PICO - P) ---
                 with st.expander("Section 2: Population (PICO - P)", expanded=False):
-                    target_opts = ["Transplant Candidates (Waitlist)", "Transplant Recipients (Post-op)", "Donors", "Organ (ex-vivo perfusion)", "Other", "Not Reported"]
+                    target_opts = ["Transplant Candidates (Waitlist)", "Transplant Recipients (Post-op)", "Combined (Candidates & Recipients)", "Donors", "Organ (ex-vivo perfusion)", "Other", "Not Reported"]
                     target_pop = st.selectbox("Target Population", target_opts, index=get_index('target_population', target_opts), help="TRIPOD: Specify key elements of the study setting and population (e.g., clinical stage, disease status).")
 
                     col2_1, col2_2, col2_3 = st.columns(3)
@@ -926,9 +958,31 @@ if reviewer_name and selected_pdf:
                     outcome_opts = ["1-year survival", "5-year survival", "30-day survival", "6-month survival", "Survival (duration not specified)", "Waitlist mortality", "Acute Rejection", "Chronic Lung Allograft Dysfunction (CLAD incl. BOS)", "Cardiac Allograft Vasculopathy (CAV)", "Primary Graft Dysfunction (PGD)", "Economy/Length of Stay", "Hospital/ICU Readmission", "Adverse Events/Complications", "Donor acceptance for transplantation", "Other", "Not Reported"]
                     target_outcome = st.selectbox("Target Clinical Outcome", outcome_opts, index=get_index_with_migration('target_outcome', outcome_opts), help="TRIPOD: Clearly define the primary outcome that is predicted by the model.")
 
+                    col5_auc1, col5_auc2, col5_auc3, col5_auc4 = st.columns(4)
+                    with col5_auc1:
+                        model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=get_num_val('model_auc', float), step=0.01, format="%.2f", help="TRIPOD: Report performance measures for discrimination (e.g., AUC/c-statistic).")
+                    with col5_auc2:
+                        model_auc_lower_ci = st.number_input("Model AUC Lower 95% CI", min_value=0.0, max_value=1.0, value=get_num_val('model_auc_lower_ci', float), step=0.01, format="%.2f", help="TRIPOD: Report lower bound of 95% confidence interval for AUC.")
+                    with col5_auc3:
+                        model_auc_upper_ci = st.number_input("Model AUC Upper 95% CI", min_value=0.0, max_value=1.0, value=get_num_val('model_auc_upper_ci', float), step=0.01, format="%.2f", help="TRIPOD: Report upper bound of 95% confidence interval for AUC.")
+                    with col5_auc4:
+                        model_auc_se = st.number_input("Model AUC SE", min_value=0.0, max_value=1.0, value=get_num_val('model_auc_se', float), step=0.001, format="%.3f", help="TRIPOD: Report standard error (SE) for AUC.")
+
+                    st.markdown("---")
+                    st.markdown("**Linear Model Comparator Performance**")
+                    st.caption("TRIPOD / PRISMA: Note: Only fill in these fields if a linear model comparator (e.g., LAS, EuroSCORE) was evaluated in the study.")
+                    col5_lauc1, col5_lauc2, col5_lauc3, col5_lauc4 = st.columns(4)
+                    with col5_lauc1:
+                        linear_model_auc = st.number_input("Linear Model AUC", min_value=0.0, max_value=1.0, value=get_num_val('linear_model_auc', float), step=0.01, format="%.2f", help="TRIPOD: Report AUC/c-statistic for the linear comparator model.")
+                    with col5_lauc2:
+                        linear_model_auc_lower_ci = st.number_input("Linear Lower 95% CI", min_value=0.0, max_value=1.0, value=get_num_val('linear_model_auc_lower_ci', float), step=0.01, format="%.2f", help="TRIPOD: Report lower bound of 95% CI for linear comparator AUC.")
+                    with col5_lauc3:
+                        linear_model_auc_upper_ci = st.number_input("Linear Upper 95% CI", min_value=0.0, max_value=1.0, value=get_num_val('linear_model_auc_upper_ci', float), step=0.01, format="%.2f", help="TRIPOD: Report upper bound of 95% CI for linear comparator AUC.")
+                    with col5_lauc4:
+                        linear_model_auc_se = st.number_input("Linear Model AUC SE", min_value=0.0, max_value=1.0, value=get_num_val('linear_model_auc_se', float), step=0.001, format="%.3f", help="TRIPOD: Report standard error (SE) for linear comparator AUC.")
+
                     col5_1, col5_2 = st.columns(2)
                     with col5_1:
-                        model_auc = st.number_input("Model AUC / C-Statistic", min_value=0.0, max_value=1.0, value=get_num_val('model_auc', float), step=0.01, format="%.2f", help="TRIPOD: Report performance measures for discrimination (e.g., AUC/c-statistic).")
                         model_acc = st.number_input("Model Accuracy (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_accuracy', float), step=0.1, format="%.1f", help="TRIPOD: Report accuracy as an overall performance measure, where applicable.")
                         model_ppv = st.number_input("PPV / Precision (%)", min_value=0.0, max_value=100.0, value=get_num_val('model_ppv', float), step=0.1, format="%.1f", help="TRIPOD: Report performance measures for clinical utility and predictive values (PPV/Precision).")
                     with col5_2:
@@ -993,25 +1047,18 @@ if reviewer_name and selected_pdf:
 
                     review_data = {
                         "date_reviewed": end_time.strftime("%Y-%m-%d %H:%M:%S"),
-                        "review_duration_seconds": duration_seconds,
                         "reviewer": reviewer_name,
                         "study_id": study_id,
                         "study_metadata": study_meta,
                         "country_origin": country_origin,
                         "organ_focus": organ_focus,
-                        "funding_source": funding_source,
                         "dataset_source": dataset_source,
-                        "DatasetName": dataset_name,
-                        "DatasetOther": dataset_other if dataset_name == "Other Registry" else "",
-                        "coi_declared": coi_declared,
                         "study_start_year": study_start if study_start is not None else "NR",
                         "study_end_year": study_end if study_end is not None else "NR",
                         "target_population": target_pop,
                         "total_sample_size": sample_size if sample_size is not None else "NR",
                         "mean_age": mean_age if mean_age is not None else "NR",
                         "female_sex_pct": female_sex_pct if female_sex_pct is not None else "NR",
-                        "race_ethnicity_reported": race_ethnicity_reported,
-                        "comorbidities_included": comorbidities_included,
                         "primary_ml_component": primary_ml,
                         "study_design": study_design,
                         "ai_architecture": ai_architecture,
@@ -1019,25 +1066,18 @@ if reviewer_name and selected_pdf:
                         "input_modalities": ", ".join(input_modalities) if input_modalities else "NR",
                         "comparator": comparator,
                         "validation_method": validation_method,
-                        "explainability_used": explainability_used,
-                        "feature_selection": feature_selection,
-                        "hyperparameter_tuning": hyperparameter_tuning,
                         "missing_data_handling": missing_data,
-                        "class_imbalance": class_imbalance,
                         "code_availability": code_avail,
-                        "preprocessing_described": preprocessing_described,
                         "training_size": train_size if train_size is not None else "NR",
                         "test_size": test_size if test_size is not None else "NR",
                         "target_outcome": target_outcome,
                         "model_auc": model_auc if model_auc is not None else "NR",
                         "model_accuracy": model_acc if model_acc is not None else "NR",
-                        "model_ppv": model_ppv if model_ppv is not None else "NR",
                         "model_sensitivity": model_sens if model_sens is not None else "NR",
                         "model_specificity": model_spec if model_spec is not None else "NR",
-                        "model_npv": model_npv if model_npv is not None else "NR",
-                        "model_f1": model_f1 if model_f1 is not None else "NR",
                         "calibration_reported": calib_reported,
-                        "dca_reported": dca_reported,
+                        "DatasetName": dataset_name,
+                        "DatasetOther": dataset_other if dataset_name == "Other Registry" else "",
                         "section1_comments": section1_comments,
                         "section2_comments": section2_comments,
                         "section3_comments": section3_comments,
@@ -1057,7 +1097,28 @@ if reviewer_name and selected_pdf:
                         "qa_analysis_comments": qa_analysis_comments,
                         "qa_applicability": qa_applicability,
                         "qa_applicability_quotes": qa_applicability_quotes,
-                        "qa_applicability_comments": qa_applicability_comments
+                        "qa_applicability_comments": qa_applicability_comments,
+                        "funding_source": funding_source,
+                        "coi_declared": coi_declared,
+                        "race_ethnicity_reported": race_ethnicity_reported,
+                        "comorbidities_included": comorbidities_included,
+                        "explainability_used": explainability_used,
+                        "feature_selection": feature_selection,
+                        "hyperparameter_tuning": hyperparameter_tuning,
+                        "class_imbalance": class_imbalance,
+                        "preprocessing_described": preprocessing_described,
+                        "model_ppv": model_ppv if model_ppv is not None else "NR",
+                        "model_npv": model_npv if model_npv is not None else "NR",
+                        "model_f1": model_f1 if model_f1 is not None else "NR",
+                        "dca_reported": dca_reported,
+                        "review_duration_seconds": duration_seconds,
+                        "model_auc_lower_ci": model_auc_lower_ci if model_auc_lower_ci is not None else "NR",
+                        "model_auc_upper_ci": model_auc_upper_ci if model_auc_upper_ci is not None else "NR",
+                        "model_auc_se": model_auc_se if model_auc_se is not None else "NR",
+                        "linear_model_auc": linear_model_auc if linear_model_auc is not None else "NR",
+                        "linear_model_auc_lower_ci": linear_model_auc_lower_ci if linear_model_auc_lower_ci is not None else "NR",
+                        "linear_model_auc_upper_ci": linear_model_auc_upper_ci if linear_model_auc_upper_ci is not None else "NR",
+                        "linear_model_auc_se": linear_model_auc_se if linear_model_auc_se is not None else "NR"
                     }
 
                     # Cleanup: ensure any remaining `None` inputs are converted securely to "NR" or ""

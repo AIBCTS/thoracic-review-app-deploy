@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
+	•	Dataset Name: Other Registry
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2005
 	•	Study Period End (Year): 2023
@@ -29,17 +29,17 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random forest regressor (best model); also multiple linear regression, SVM regressor, XGBoost regressor, multilayer perceptron, and deep learning model
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The paper compares six regression models, with the RF regressor identified as best. It used preprocessing, feature engineering, feature selection, and hyperparameter tuning via random search. The target was a continuous “priority score,” so regression models were used. SHAP was used for explainability and ranking feature importance. The dataset was split 80:20 for training and testing, with k-fold cross-validation additionally used to confirm robustness.
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
-	•	Class Imbalance Addressed: Not Applicable
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 26372
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target was the continuous waiting-list “priority” or “allocation score,” so the closest category is Other. The paper evaluated models using regression metrics including “R-squared (R2) and other error rate metrics,” and states that the RF model achieved the highest R2 and lowest error values. However, the exact numeric R2, MAE, and RMSE values were not visible in the retrieved excerpts, so I have not guessed them. No classification metrics, calibration analysis, or decision-curve analysis were reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large UNOS national registry dataset of adult lung-transplant candidates, which reduces single-center selection bias, though exclusions were applied during preprocessing.
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinical and demographic waiting-list variables derived from UNOS and selected through a structured, expert-guided preprocessing and feature-engineering workflow.
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as the candidate “priority” or “allocation score,” treated as a continuous numerical variable for regression modeling.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include preprocessing, feature engineering, random-search hyperparameter tuning, cross-validation, and SHAP explainability, but the model was validated only on UNOS data and the paper explicitly states that external validation is still needed.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly addresses AI/ML for lung-transplant allocation prioritization using transplant registry data, which is well aligned with the review scope.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the end-to-end ML workflow; Table 3 for the top 11 SHAP-ranked features; and Figure 3 for the Streamlit-based web interface. The retrieved excerpts also describe preprocessing, splitting, tuning, and evaluation methods, but I did not invent exact regression metric values because they were not visible in the provided text.

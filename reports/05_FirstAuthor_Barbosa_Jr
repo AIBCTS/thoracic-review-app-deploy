@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: SVM
+	•	AI Model Architecture: Support Vector Machine (SVM)
 	•	Algorithm Name: Support vector machine with radial basis function kernel
-	•	Input Variables (Data Modality): Imaging
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo)
 	•	Comparator / Standard of Care: Other
 	•	Validation Method: Other
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The article explicitly says the scans were analyzed retrospectively and that “supervised ML with support vector machines (SVMs) was used.” The model used significant qCT features derived from Student t tests, and a “radial basis functional kernel with default tuning parameters was used.” Inputs were qCT/FRI imaging features from paired inspiratory-expiratory CT scans. The main comparator was not another clinical model but rather baseline clinical/PFT variables, which the paper states could not significantly distinguish BOS from non-BOS at baseline. Validation used repeated random train-test partitions (90/10 for 1D and 2D, 80/20 for 3D), so “Other” is the most exact category.  ￼  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: For the baseline prediction cohort, “patients with missing values for certain regional parameters… were not included,” which is best classified as complete case analysis. Class imbalance handling such as weighting, oversampling, or SMOTE was not reported. Data preprocessing was described extensively: CT segmentation, central/distal airway definitions, lung/lobar volume extraction, and computational fluid dynamics-based resistance calculation. The paper reports train-test ratios, but because the absolute sample counts vary across repeated random partitions and dimensions, exact training and test N are NR. Code availability was not reported.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: CLAD
+	•	Target Clinical Outcome: Chronic Lung Allograft Dysfunction (CLAD incl. BOS)
 	•	Model AUC / C-Statistic: NR
 	•	Model Accuracy (%): 85
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The clinical outcome was eventual BOS after lung transplant, which is the obstructive phenotype of chronic lung allograft dysfunction, so the closest restricted category is CLAD. Table 5 reports the best 3-feature SVM classification accuracy as 85%, using RML lobe volume at TLC, RUL airway resistance at FRC, and central airway surface at FRC. One-feature accuracy reached 76%, and the best two-feature model reached 83%. The paper did not report AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA. Figure 7 summarized significant baseline qCT predictors, and Figure 8 showed that baseline FEV1 and FEV1 percent predicted were not significant predictors of future BOS.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small retrospective cohort of 71 patients selected using several imaging and data-availability criteria, and only 41 patients were eligible for the baseline prediction analysis because incomplete datasets were excluded.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were objective qCT/FRI imaging biomarkers extracted from paired inspiratory-expiratory CT scans with standardized segmentation and computational methods.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: BOS was defined using standard clinical criteria requiring a sustained decline of at least 10% in FEV1 from best baseline postoperative measurement, and BOS status was reviewed clinically by a board-certified pulmonologist.  ￼
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study used a very small baseline prediction sample, selected features using univariate testing before SVM modeling, used default SVM tuning parameters, and reported repeated random split accuracies without an external validation cohort.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses AI/ML prediction in thoracic transplantation, specifically lung transplant recipients and later BOS/CLAD development using imaging biomarkers.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for cohort characteristics; Table 2 for BOS onset timing; Table 3 for qCT changes associated with FEV1 decline; Table 5 for machine-learning accuracies and best feature combinations; Figure 2 for BOS vs non-BOS correlation of FRC lung volume with FEV1; Figure 3 for increasing FRC lung volume over time in BOS; Figures 4 and 5 for distinct airway-volume behavior in BOS vs non-BOS; Figure 7 for significant baseline qCT predictors; and Figure 8 for the non-significance of baseline FEV1 and FEV1pp. Table 4 was referenced by the article as listing significant baseline predictors, but the retrieved excerpts exposed its role mainly through the surrounding text and Figure 7 rather than a full table rendering, so I did not invent any additional values beyond what was explicitly visible.

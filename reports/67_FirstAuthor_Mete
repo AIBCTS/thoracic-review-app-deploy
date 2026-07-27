@@ -1,0 +1,72 @@
+First Author: Mete
+Title: Predicting Simultaneous Heart Kidney Allocation and Posttransplant Adverse Kidney Outcomes
+Source number: 67
+
+Very short summary: This retrospective US national-registry study developed a random forest model using 6,579 adult heart transplant recipients and evaluated it in two temporal external-validation cohorts containing 1,567 and 1,853 recipients. The model predicted a composite of simultaneous heart-kidney transplantation or adverse kidney outcomes within 1 year; in the first external-validation cohort it achieved a c-statistic of 0.899, sensitivity of 68.0%, specificity of 94.1%, PPV of 68.0%, and NPV of 94.1%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2018
+	•	Study Period End (Year): 2024
+	•	Section 1 Comments/Quotes: The study used United Network for Organ Sharing Standard Transplant Analysis and Research files from the OPTN national registry. Model development used transplants from 18 October 2018 through 31 December 2020; temporal external validation used January–June 2021 and September 2023–March 2024 cohorts. The work was supported in part by a Health Resources and Services Administration contract. The disclosure states, “All authors declared no competing interests.”
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Candidates (Waitlist)
+	•	Total Sample Size (N): 9999
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The model was developed in 6,579 adult heart transplant recipients and evaluated in two external cohorts of 1,567 and 1,853 recipients, giving 9,999 participants across development and validation. The intended use was decision support at heart-transplant waitlisting. Age was reported as a median of 57 years rather than a mean, and 72.5% were male; an explicit female percentage was not reported. Race and clinical history were reported, including diabetes, heart-failure diagnosis, previous transplantation, dialysis, mechanical support, renal function, biomarkers, and right-heart catheterization measurements.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Forest
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: None
+	•	Validation Method: External Validation (Temporal)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: An expert panel initially selected 44 clinically relevant variables from 531 registry variables. Random-forest Gini importance was then used to select the final 15 predictors. Hyperparameters were exhaustively searched across numbers of trees, maximum depth, maximum features, positive-class weights, and random seeds. Internal five-fold cross-validation was followed by validation in two later temporal cohorts. Interpretability was provided through feature-importance distributions and a patient-level web calculator.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 6579
+	•	Test Size (N): 1567
+	•	Section 4 Comments/Quotes: Missing predictor values were imputed with a K-nearest-neighbors imputer using K = 50, primarily for right-heart catheterization measurements, BNP, and blood urea nitrogen. Class imbalance was addressed through positive-sample class-weight tuning from 3 to 10, and precision-recall performance was reported for the 13.4% adverse-outcome prevalence. The primary temporal external test cohort contained 1,567 recipients; a second external cohort contained 1,853. Study code or trained model weights were not reported, although the model was implemented as an online calculator.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.899
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 68.0
+	•	Sensitivity / Recall (%): 68.0
+	•	Specificity (%): 94.1
+	•	NPV (%): 94.1
+	•	F1-Score: 0.680
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: The composite adverse outcome comprised receipt of simultaneous heart-kidney transplantation or, after heart transplantation alone, chronic dialysis, eGFR below 20 ml/min per 1.73 m², or kidney-transplant listing/transplantation within 1 year. In the first temporal external-validation cohort of 1,567 recipients, the random forest achieved c-statistic 0.899, sensitivity 0.680, specificity 0.941, PPV 0.680, NPV 0.941, and F1-score 0.680. A 95% confidence interval for the c-statistic and model accuracy were not reported. Calibration and DCA were not reported. The second postpolicy validation cohort achieved a c-statistic of 0.874.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): High Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for cohort demographics, race, comorbidities, renal function, and clinical variables; Table 2 for internal and external-validation performance; Table 3 for patient-level prediction examples; Figure 1 for national heart-alone and SHKT trends; Figure 2 for random-forest feature importance; Figure 3 for the web-based patient-level decision tool; Supplementary Figure S1 for the precision-recall curve.

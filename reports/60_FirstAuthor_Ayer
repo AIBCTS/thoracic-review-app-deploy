@@ -1,0 +1,72 @@
+First Author: Ayer
+Title: A Novel Model to Predict Progression to Death After Withdrawal of Care in Potential Donation-After-Circulatory-Death Heart Donors
+Source number: 60
+
+Very short summary: This retrospective US study developed prediction models using 234 consecutive potential donation-after-circulatory-death heart-donor offers and externally validated the selected model in 53 offers from a distant centre. Four supervised machine-learning algorithms were compared with multivariate logistic regression; logistic regression was selected as the final model and achieved an external-validation AUC of 0.88, sensitivity of 100%, specificity of 50%, PPV of 64%, and NPV of 100%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2023
+	•	Study Period End (Year): 2025
+	•	Section 1 Comments/Quotes: Development data comprised consecutive DCD heart offers made to adult patients at the University of California San Diego from January 1 to June 30, 2023; donor data were obtained from the United Network for Organ Sharing (UNOS). External validation used consecutive offers at New York University from April 2023 to October 2025. The paper states, “There are no funding sources for this work.” A disclosure section reports industry relationships for one author, while all other authors reported no industry relationships.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Donors
+	•	Total Sample Size (N): 287
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The primary complete-case analysis included 234 potential DCD heart-donor offers in the development cohort and 53 in the external-validation cohort. A pooled overall age and female percentage were not reported; development-cohort mean age was 37.4 years and 31.6% were female, while validation-cohort mean age was 34.8 years and 71.7% were male. Race was reported, and clinical-history variables included previous cardiac arrest, cause of neurological injury, neurological examination findings, brain imaging, haemodynamic and ventilator variables, laboratory values, and sedative/analgesic use.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Other
+	•	Algorithm Name: Multivariate logistic regression
+	•	Input Variables (Data Modality): Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: External Validation (Geographic/Different Hospital)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The study compared multivariate logistic regression with random forest, decision tree, radial-basis-function SVM, and Gaussian naïve Bayes. Candidate predictors were first identified by significant univariate logistic-regression associations, followed by backward elimination for the multivariable logistic model. Five-fold stratified cross-validation was used for candidate-model comparison, after which the selected logistic-regression model was trained on the full development cohort and externally validated at New York University. Interpretability was explicit: the authors preferred logistic regression partly because of its “greater interpretability,” and Table 4 provides model coefficients. No hyperparameter-search procedure was reported for the four machine-learning algorithms.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Algorithm/Model weights available
+	•	Data Preprocessing / Normalization Described: No
+	•	Training Size (N): 234
+	•	Test Size (N): 53
+	•	Section 4 Comments/Quotes: Regression imputation was used for missing development data. The primary external validation excluded offers with unavailable model inputs, while a sensitivity analysis used fivefold multiple imputation in an expanded validation cohort of 86 offers; therefore, missing-data handling was mixed. Outcome proportions were preserved using five-fold stratified cross-validation, although no resampling or class weighting was reported. Source code was not reported, but the full logistic-regression coefficients and intercept are provided in Table 4 and an online calculator is available. No predictor normalization or standardization procedure was described.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.88
+	•	Model AUC Lower 95% CI: 0.78
+	•	Model AUC Upper 95% CI: 0.97
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 64
+	•	Sensitivity / Recall (%): 100
+	•	Specificity (%): 50
+	•	NPV (%): 100
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was progression to circulatory death after withdrawal of care among potential DCD heart donors. In the primary external-validation cohort of 53 offers, the final multivariate logistic-regression model achieved AUC 0.88 (95% CI 0.78–0.97), sensitivity 1.00, specificity 0.50, PPV 64%, and NPV 100%. Accuracy and F1-score were not explicitly reported. Calibration was evaluated using intercept, slope, and Brier score; external validation showed an intercept of −1.55, slope of 1.51, and Brier score of 0.19, indicating systematic overprediction. Decision-curve analysis was not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Unclear
+	•	Outcome (Definition Bias): High Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for development-cohort demographics; Table 2 and Figure 2 for candidate clinical predictors; Table 3 and Figure 3 for five-fold cross-validated comparison of logistic regression and four machine-learning models; Table 4 for final-model predictors, coefficients, and threshold-specific sensitivity/specificity; Figure 4 for development and external-validation ROC curves; Figure 5 for calibration; Central Illustration and Figure 1 for cohort sizes and study flow.

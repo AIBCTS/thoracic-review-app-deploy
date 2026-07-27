@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Government/Public
 	•	Dataset Source: Single Center
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 1993
 	•	Study Period End (Year): 2016
 	•	Section 1 Comments/Quotes: The paper states that it analyzed “404 lung transplants carried out at the Reina Sofía University Hospital (Córdoba, Spain) over 23 years,” and the database covered “October 1993, up until January 2016.” Funding came from the “Spanish Ministry of Economy and Competitiveness (MINECO), and FEDER funds (EU),” and the authors declared “no competing interests exist.”
@@ -29,11 +29,11 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Other
 	•	Algorithm Name: LRIPU (logistic regression using initial covariates and product units); EPUNN (evolutionary product unit neural network)
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: Other
 	•	Validation Method: Not Reported
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: No
 	•	Section 3 Comments/Quotes: The authors describe “a retrospective analysis,” combining “logistic regression (LR) with a special type of neural network,” specifically EPUNN, yielding the hybrid LRIPU model. Inputs were donor, recipient, intraoperative, and postoperative clinical variables listed in Table 1. The paper states the model exceeded “classical statistical methods,” but it does not report a clear external or internal validation framework or explicit hyperparameter tuning procedure.
 
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The dependent variable was “graft survival, when considering the end-point at six months,” and Table 1 defines y as “Survival of the graft after six months: 1 (YES), 0 (NO).” The paper presents the final LRIPU equation and discusses coefficient directions, but it does not report AUROC, accuracy, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA. I did not infer any unreported performance metric.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center cohort of 404 transplants from one hospital, with pediatric and some combined/multi-organ recipients excluded, which limits representativeness.  ￼
-	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: Table 1 includes post-transplant variables such as “fvc_prp” and “fev1_prp,” which would not be available for donor-recipient allocation at the time of transplant decision-making.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “Survival of the graft after six months: 1 (YES), 0 (NO).”  ￼
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: Although the paper provides the final model equation and coefficient interpretation, it does not report standard validation metrics or a clear validation design, and it does not describe missing-data handling.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI/statistical modeling for lung donor-recipient matching and short-term graft survival in lung transplantation.
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 was used for the variable list, cohort framing, and definition of the 6-month survival endpoint. Table 2 was used for the final LRIPU model structure and coefficients. In the retrieved content, no separate figures with extractable performance metrics were visible, so I did not invent figure-based results.  ￼

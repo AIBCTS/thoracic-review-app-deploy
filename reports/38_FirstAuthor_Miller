@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 1987
 	•	Study Period End (Year): 2014
 	•	Section 1 Comments/Quotes: The study queried the “UNOS database… since its inception in 1987 through 2014” for adult cardiac transplant recipients, making this a U.S. national registry study. Disclosures were explicitly reported, and one author was “supported by grant K12 HS023000-04 from the Agency for Healthcare Research and Quality,” which fits government/public funding.  ￼
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: ANN/MLP/NN
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
 	•	Algorithm Name: Neural networks, naïve-Bayes, tree-augmented naïve-Bayes, support vector machines, random forest, stochastic gradient boosting; compared with logistic regression, ridge regression, and LASSO
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Not Reported
 	•	Section 3 Comments/Quotes: The study explicitly compared traditional statistical methods with machine-learning methodologies and identified neural networks as the best-performing advanced model. Inputs were structured UNOS clinical variables, including donor and recipient factors. The data were “trained on 80% of the data and then tested on the remaining 20%,” so the validation method is internal split. No SHAP/LIME-style explainability or hyperparameter-tuning strategy was described in the retrieved text.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: No
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “1-year survival.” The neural network had the highest C-statistic at 0.66, while logistic regression, ridge regression, and LASSO each had C-statistic 0.65. Calibration was evaluated using calibration curves, Hosmer–Lemeshow testing, and Brier scores; traditional models plus random forest and stochastic gradient boosting showed good calibration, whereas some other advanced models were inferior. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported in the retrieved text. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national UNOS cohort of adult first single-organ heart transplant recipients across multiple eras, which reduces single-center bias, though exclusions for missingness were applied.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant donor and recipient variables from UNOS, including renal function, BMI, liver function, hemodynamics, donor blood pH, and diagnosis.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as 1-year survival after heart transplantation.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include comparison across multiple traditional and advanced models, train/test splitting, bootstrapping, ROC/C-statistics, and calibration assessment. Uncertainty remains because the paper provides limited detail on preprocessing and tuning, and all models showed only modest discrimination.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly evaluates machine learning for outcome prediction after heart transplantation using a national transplant registry and is clearly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for discrimination across traditional and advanced models; Table 1 for neural-network C-statistics across UNOS regions and eras; and Figure 2 for major predictors of 1-year mortality and how AUC changed with increasing number of variables. I did not report any value not explicitly shown in the uploaded article.  ￼

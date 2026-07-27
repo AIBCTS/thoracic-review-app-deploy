@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Other
 	•	Funding Source: Not Reported
 	•	Dataset Source: Multi-center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2000
 	•	Study Period End (Year): 2021
@@ -29,18 +29,18 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random forest variable-importance model with time-dependent multivariable Cox proportional hazards analysis
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: None
 	•	Validation Method: Not Reported
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The primary study aim was epidemiologic risk assessment using time-dependent Cox models, with ML used as a complementary variable-importance analysis, so Primary ML Component is best classified as Other. The authors state that “a random forest model was used to assess variable importance in predicting post-transplant malignancy.” Categorical variables under 10% frequency were grouped, variables were one-hot encoded or normalized, and the model was “fit across a variety of hyperparameters within a Latin hypercube of size 25.” No human comparator or guideline comparator was used. Validation specifics for prediction performance were not reported.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Not Reported
 	•	Class Imbalance Addressed: Other
-	•	Code Availability: Yes, Algorithm weights available
+	•	Code Availability: Algorithm/Model weights available
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
 	•	Test Size (N): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The study outcome was post-transplant malignancy, which is not one of the preset transplant endpoints, so the best category is Other. The paper reports hazard ratios rather than standard predictive discrimination metrics: sirolimus HR 1.41, azathioprine HR 2.1, cyclosporine HR 1.59, and tacrolimus HR 0.59 for post-transplant malignancy. No AUC, accuracy, PPV, sensitivity, specificity, NPV, F1, calibration, or DCA were reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Unclear | Quote/Reasoning: This was a multicenter cohort, which improves representativeness, but it was limited to three hospitals in the greater Chicago area and relied on retrospective ICD/EHR ascertainment.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clearly defined EHR-derived exposures and demographics, especially time-dependent immunosuppressive medication use, age, sex, race, and organ type.  ￼
-	•	Outcome (Definition Bias): Unclear | Quote/Reasoning: Malignancies were identified using ICD-9/10 codes, which is practical but introduces some risk of misclassification compared with adjudicated cancer registries.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include time-dependent Cox modeling, competing-risk analysis, and complementary random forest variable-importance assessment. Limitations acknowledged by the authors include retrospective design, potential under-ascertainment outside the hospital system, modest sample size relative to national databases, and lack of dose/plasma-level adjustment for immunosuppressants.  ￼
-	•	Applicability to Review Question: High Concern | Quote/Reasoning: Although the paper includes heart and lung recipients, it is a broad solid-organ oncology/immunosuppression study rather than a thoracic-transplant-specific AI prediction study, so applicability to the thoracic AI review question is limited.  ￼
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: High Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for transplant cohort size and organ-type distribution; Figure 2 for malignancy distribution, latency, race-stratified malignancy proportions, and immunosuppressive use by organ; and Figure 3 for random forest variable importance, cumulative incidence by organ and medication, heatmap of malignancy by immunosuppression, and multivariable Cox hazard ratios. I did not report any metric not explicitly shown in the uploaded article.  ￼

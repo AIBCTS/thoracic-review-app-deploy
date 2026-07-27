@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Government/Public
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2007
 	•	Study Period End (Year): 2020
@@ -27,18 +27,18 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Other
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: 3-D U-Net–based CT segmentation with multivariate logistic regression for DCC prediction
-	•	Input Variables (Data Modality): Imaging; Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo), Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Cross-Validation
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The paper used “in-house three-dimensional (3-D) convolutional neural networks (CNN) algorithms” based on U-Net to segment recipient lungs and chest cavity from CT. The actual DCC prediction model was a multivariate logistic regression using preoperative features, with backward stepwise elimination and stratified 5-fold cross-validation. Because ML/CNN was used mainly for imaging-derived measurement extraction rather than the primary predictive model, Primary ML Component is best classified as Other. No SHAP/LIME-style interpretability was reported.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: Not Reported
 	•	Data Preprocessing / Normalization Described: Yes
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The methods state that variables with “less than 5% missing data were imputed using mean or mode imputation,” while variables with more than 5% missingness were excluded. Continuous features were z-score standardized, categorical variables were one-hot encoded, and VIF filtering plus backward elimination were applied. The model used stratified 5-fold cross-validation rather than a single explicit train/test split, so fixed training/test counts are NR. No class-imbalance method or code-release statement was reported.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Adverse Events
+	•	Target Clinical Outcome: Adverse Events/Complications
 	•	Model AUC / C-Statistic: 0.82
 	•	Model Accuracy (%): 73
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The modeled outcome was DCC occurrence, which is best categorized as Adverse Events within the restricted list. The multivariate logistic regression model achieved “a mean accuracy of 0.73 (0.60, 0.86) and a mean AUC of 0.82 (95% CI: 0.70, 0.94) in predicting DCC occurrence pre-LTx.” The paper also reports no significant difference in survival between DCC and PCC at 30 days, 90 days, 1 year, and 5 years. PPV, sensitivity, specificity, NPV, F1, calibration, and DCA were not reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small, highly selected single-center cohort of only 92 systemic sclerosis recipients, which limits generalizability.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clinically relevant preoperative variables plus objectively derived CT volumetric measures from validated CNN algorithms.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome, DCC vs PCC, was clearly defined intraoperatively, and survival outcomes were assessed with Kaplan–Meier analysis at prespecified time points.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include CT-derived quantitative metrics, cross-validation, hyperparameter tuning, and multivariable modeling; uncertainty remains because of the small sample size, single-center design, and lack of external validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The paper directly concerns lung transplantation, uses deep-learning-derived CT measurements, and addresses a clinically meaningful perioperative transplant outcome.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for cohort inclusion; Figure 2 for Kaplan–Meier survival comparison between DCC and PCC; Figure 3 for ROC performance of the preoperative DCC prediction model; Table 1 for recipient and donor demographics; Table 2 for CT-based lung-size matching and univariate associations with DCC; and Table 3/results text for the final multivariate logistic regression features and coefficients. I did not report any value not explicitly shown in the uploaded article.  ￼

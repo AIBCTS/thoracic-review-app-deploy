@@ -1,70 +1,72 @@
 First Author: Peyster
 Title: An automated computational image analysis pipeline for histological grading of cardiac allograft rejection
-Source number: 58  ￼
+Source number: 58
 
-Very short summary: This multi-center US study developed an automated computational image analysis pipeline (CACHE-Grader) using support vector machines (SVM) and 154 hand-crafted quantitative histological features from endomyocardial biopsy slides to grade cardiac allograft rejection. Five key findings were: (1) 2,472 biopsy slides from 546 heart transplant recipients across 3 major US centers were included; (2) statistical feature selection identified optimal SVM models using 2 features for binary (M1) and 15 features for four-grade (M2) rejection grading; (3) CACHE-Grader achieved 65.9% overall agreement with the grade of record, meeting non-inferiority to expert human pathologists (60.7%); (4) performance was nearly identical across internal (66.1%) and external validation sets (65.8%); and (5) CACHE-Grader demonstrated superior sensitivity for high-grade rejection compared to human pathologists (74.4% vs 39.5%). Figures 1–6 and Tables 1–4 were directly used for this extraction.  ￼
+Very short summary: This retrospective multicentre diagnostic study included 2472 cardiac transplant endomyocardial-biopsy slides from 546 recipients at three US centres. The interpretable CACHE-Grader used hand-crafted histological features and support vector machines to classify cellular rejection; on 1447 held-out validation slides, the binary model achieved an AUC of 0.92, 84.5% agreement, 85% sensitivity, and 84% specificity, while the four-grade model achieved 65.9% agreement.
 
 Section 1: Study Identification & Metadata
-	•	Country of Data Origin: USA
-	•	Organ Focus: Heart
-	•	Funding Source: Government/Public
-	•	Dataset Source: Multi-center
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
-	•	Study Period Start (Year): 2005
-	•	Study Period End (Year): 2018
-	•	Section 1 Comments/Quotes: The study used archived endomyocardial-biopsy slides from the University of Pennsylvania, Ohio State University, and University Hospitals Cleveland Medical Center. Biopsies were collected during routine care between 2005 and 2018. ehab241.pdf Funding was predominantly from several US federal agencies, including the NIH, NHLBI, NCI, and Department of Veterans Affairs, with additional support from the Gund Family Fund. ehab241.pdf Multiple authors declared patents, consultancies, equity holdings, licensing arrangements, advisory roles, or sponsored research relationships. ehab241.pdf  ￼
+• Country of Data Origin: USA
+• Organ Focus: Heart
+• Funding Source: Government/Public
+• Dataset Source: Multi-center
+• Dataset Name: Other Registry
+• Conflict of Interest (COI) Declared: Yes (Declared COI)
+• Study Period Start (Year): 2005
+• Study Period End (Year): 2018
+• Section 1 Comments/Quotes: Archived biopsy slides were obtained from the University of Pennsylvania, University Hospitals Cleveland Medical Center, and Ohio State University Wexner Medical Center during usual care between 2005 and 2018. Funding was predominantly from US public agencies, including the NIH, Department of Veterans Affairs, and Department of Defense, with additional foundation and institutional support. Multiple authors declared consultancy, equity, patent, licensing, advisory-board, or sponsored-research interests.
 
 Section 2: Population (PICO - P)
-	•	Target Population: Transplant Recipients (Post-op)
-	•	Total Sample Size (N): 546
-	•	Overall Mean Age: NR
-	•	Female Sex (%): NR
-	•	Race/Ethnicity Reported: Not Reported
-	•	Comorbidities / Clinical History Included: No
-	•	Section 2 Comments/Quotes: The clinical population comprised 546 heart-transplant recipients, contributing 2,472 archived biopsy slides; 2,358 slides passed quality control and entered model development or validation. The paper does not report recipient-level age, sex, race/ethnicity, or comorbidity distributions. The biopsies were obtained 7–6,415 days after transplantation during surveillance or for-cause assessment. ehab241.pdf Major uncertainty: For patient-level extraction, Total Sample Size = 546; for an image-level ML dataset field, the corresponding sample size is 2,472 slides before QC and 2,358 analysable slides after QC.  ￼
+• Target Population: Transplant Recipients (Post-op)
+• Total Sample Size (N): 2472
+• Overall Mean Age: NR
+• Female Sex (%): NR
+• Race/Ethnicity Reported: Not Reported
+• Comorbidities / Clinical History Included: Not Reported
+• Section 2 Comments/Quotes: The analytic units were 2472 archived H&E-stained endomyocardial-biopsy slides originating from 546 heart-transplant recipients. Biopsies were obtained 7–6415 days after transplantation during scheduled surveillance or for-cause assessment. Recipient-level age, sex, race/ethnicity, and comorbidity distributions were not reported.
 
 Section 3: Intervention & AI Methods
-	•	Primary ML Component: Yes
-	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: SVM
-	•	Algorithm Name: Computer-Assisted Cardiac Histologic Evaluation Grader (CACHE-Grader)
-	•	Input Variables (Data Modality): Pathology
-	•	Comparator / Standard of Care: Human expert
-	•	Validation Method: External Geographic
-	•	Explainability / Interpretability Used: Yes
-	•	Feature Selection Method: Automated
-	•	Hyperparameter Tuning Reported: Not Reported
-	•	Section 3 Comments/Quotes: CACHE-Grader applied interpretable, biologically inspired, hand-crafted feature extraction to digitized H&E-stained endomyocardial-biopsy slides. From 154 quantitative histological features, the authors used outcome-based statistical ranking: Wilcoxon rank-sum selection for the binary model and t-test ranking for the four-grade model; final SVMs used 2 and 15 features, respectively. ehab241.pdf The models were locked after training and tested at two geographically separate external centres, with grades assigned by pathologists serving as the reference standard and independent pathologists used for comparative re-grading. ehab241.pdf Major uncertainty: The authors compared several linear classifiers and optimized the number of selected features, but conventional SVM hyperparameter tuning—such as kernel, C, or class-weight optimization—is not described; therefore, hyperparameter tuning is coded Not Reported rather than Yes.  ￼
+• Primary ML Component: Yes
+• Study Design: Retrospective Cohort
+• AI Model Architecture: Support Vector Machine (SVM)
+• Algorithm Name: Computer-Assisted Cardiac Histologic Evaluation-Grader (CACHE-Grader)
+• Input Variables (Data Modality): Pathology slides
+• Comparator / Standard of Care: Human expert/Clinician
+• Validation Method: External Validation (Geographic/Different Hospital)
+• Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+• Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+• Hyperparameter Tuning Reported: Not Reported
+• Section 3 Comments/Quotes: The pipeline extracted 154 biologically inspired, hand-crafted histological features describing lymphocyte foci, tissue compartments, densities, and spatial interactions. SVM classifiers were selected for both binary low- versus high-grade rejection (M1) and four-grade rejection classification (M2). Features were ranked using a Wilcoxon rank-sum test for M1 and a t-test for M2, resulting in models with 2 and 15 features, respectively. Validation included 395 held-out slides from the development centre and 1052 geographically external slides from two other centres; no explicit SVM hyperparameter-search procedure was reported.
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Not Reported
-	•	Class Imbalance Addressed: Yes
-	•	Code Availability: Yes
-	•	Data Preprocessing / Normalization Described: Yes
-	•	Training Size (N): 911
-	•	Test Size (N): 1447
-	•	Section 4 Comments/Quotes: The training cohort consisted of 911 slides randomly selected from UPenn. The complete held-out validation cohort contained 1,447 slides, comprising 395 internal-validation slides and 1,052 external-validation slides from OSU and UH. ehab241.pdf The investigators deliberately enriched the cohort with 2R/3R biopsies—approximately 20% versus 8% in routine practice—to provide adequate representation of clinically important high-grade rejection. ehab241.pdf Preprocessing included stain deconvolution, K-means tissue segmentation, focus detection, automated HistoQC assessment, and normalization of some features by tissue-compartment size. Source code was made publicly available. ehab241.pdf Major uncertainties: Class imbalance was addressed through dataset-level enrichment, not through reported SMOTE, weighted loss, cost-sensitive SVM training, or resampling within the training algorithm. The paper does not describe conventional missing-value imputation. Slides failing technical quality control were excluded, which is a QC-exclusion procedure rather than missing-data imputation. Test Size = 1447 refers to the composite held-out validation set. The strictly geographically external subset was 1,052 slides.  ￼
+• Missing Data Handling: Not Reported
+• Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+• Code Availability: Yes
+• Data Preprocessing / Normalization Described: Yes
+• Training Size (N): 911
+• Test Size (N): 1447
+• Section 4 Comments/Quotes: Slides underwent automated HistoQC assessment, stain deconvolution, tiling, K-means tissue segmentation, lymphocyte-cluster detection, and feature normalization relative to tissue-compartment size. The authors deliberately enriched the cohort for grades 2R/3R to approximately 20%, compared with approximately 8% in routine practice, to ensure sufficient high-grade cases; this addressed imbalance through cohort construction rather than algorithmic weighting or resampling. The training set contained 911 slides, and the composite validation set contained 1447 slides: 395 internal and 1052 external. Missing-feature imputation was not described. Source code was made publicly available through the CACHE-Grader repository.
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Acute Rejection
-	•	Model AUC / C-Statistic: 0.92
-	•	Model Accuracy (%): 84.5
-	•	PPV / Precision (%): NR
-	•	Sensitivity / Recall (%): 85
-	•	Specificity (%): 84
-	•	NPV (%): NR
-	•	F1-Score: NR
-	•	Calibration Reported: Not Reported
-	•	Decision Curve Analysis (DCA) Reported: Not Reported
-	•	Section 5 Comments/Quotes: For the binary M1 classifier distinguishing low-grade rejection, 0R/1R, from high-grade rejection, 2R/3R, the composite held-out validation set produced an AUC of 0.92, accuracy/agreement of 84.5%, sensitivity of 85%, and specificity of 84%. ehab241.pdf The four-grade M2 classifier achieved 65.9% agreement overall, including 65.8% in the geographically external centres. ehab241.pdf Major uncertainties: The target is histological acute cellular rejection grade, not a patient-level future rejection event. PPV and NPV can be calculated from the published confusion matrix, but they were not explicitly reported as performance metrics and are therefore entered as NR. “Iterative calibration” in the methods describes iterative model/pipeline development; it is not evidence of statistical calibration assessment. No calibration curve, calibration slope/intercept, Brier score, or DCA was reported.  ￼
+• Target Clinical Outcome: Acute Rejection
+• Model AUC / C-Statistic: 0.92
+• Model AUC Lower 95% CI: NR
+• Model AUC Upper 95% CI: NR
+• Model Accuracy (%): 84.5
+• PPV / Precision (%): NR
+• Sensitivity / Recall (%): 85
+• Specificity (%): 84
+• NPV (%): NR
+• F1-Score: NR
+• Calibration Reported: Not Reported
+• Decision Curve Analysis (DCA) Reported: Not Reported
+• Section 5 Comments/Quotes: Values above refer to the binary M1 classifier for low-grade 0R/1R versus high-grade 2R/3R rejection in the composite held-out validation set. It achieved 84.5% agreement with the grade of record, AUC 0.92, sensitivity 0.85, and specificity 0.84; no AUC confidence interval was reported. The four-grade M2 classifier achieved 65.9% agreement (95% CI 63.4–68.3%), with similar internal and external agreement of 66.1% and 65.8%. Numeric PPV, NPV, F1-score, formal probabilistic calibration metrics, and DCA were not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Only biopsies considered gradable and already assigned an ISHLT grade were included, and the cohort was deliberately enriched with 2R/3R rejection beyond routine prevalence. This creates a selected spectrum that differs from unfiltered clinical practice.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were biologically motivated, quantitatively defined image features available from the biopsy at the time of grading. Although feature ranking was outcome-driven in the training set, the selected features and final models were locked before independent internal and geographic external validation.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined according to the established ISHLT cellular-rejection grading system, and a random validation subset was blindly re-graded by independent study pathologists. ehab241.pdf The reference grade was nevertheless imperfect because the grade of record reflects substantial inter-pathologist variability. ehab241.pdf  ￼
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study had large held-out internal and external validation sets, but the analysis unit was the biopsy slide while 2,472 slides originated from only 546 recipients. The paper does not state that training and internal validation were separated at recipient level or that repeated biopsies were handled with clustered analysis, creating potential patient-level leakage and underestimated uncertainty. Statistical calibration was also not evaluated. ehab241.pdf  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly examined a clinical AI model applied to routine post-operative heart-transplant biopsies from three transplant centres, including both surveillance and for-cause biopsies. ehab241.pdf Applicability is reduced somewhat by deliberate high-grade enrichment, exclusion of technically inadequate slides, and restriction to cellular rather than antibody-mediated rejection.  ￼
+• Participants (Selection Bias): High Risk
+• Predictors (Input Variable Bias): Low Risk
+• Outcome (Definition Bias): High Risk
+• Analysis (Modeling Bias): High Risk
+• Applicability to Review Question: Low Concern
 
-Tables and figures explicitly used in extraction:
-Figures 1–6 for study overview, pipeline architecture, morphological feature distributions, ROC/agreement curves, inter-observer comparisons, and external validation consistency; Tables 1–4 for slide/patient breakdowns, feature ranking and performance metrics, agreement matrices, and sensitivity/specificity comparisons. Derived overall risk of bias: High Risk, because at least one domain (Participants and Analysis) is rated High Risk. I did not report any value not explicitly shown in the uploaded article.  ￼
+Tables and figures used in this extraction:
+Table 1 for internal, external, and combined validation-set agreement; Table 2 for four-grade performance by ISHLT grade; Table 3 for comparison with independent study pathologists; Table 4 for overall pathologist-versus-CACHE agreement statistics; Figure 1 for cohort exclusions and training/validation allocation; Figure 2 for the image-analysis, feature-selection, and model-development pipeline; Figure 3 for tissue segmentation and lymphocyte-focus extraction; Figure 5 for confusion matrices and ROC curves.

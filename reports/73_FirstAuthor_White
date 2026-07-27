@@ -1,0 +1,72 @@
+First Author: White
+Title: Predicting expiration among potential donation after circulatory death donors at 30- and 120-min post extubation
+Source number: 73
+
+Very short summary: This retrospective multicenter US study included 4,464 potential donation-after-circulatory-death donors from three organ procurement organizations between 2014 and 2025. XGBoost models predicted circulatory death within 30 and 120 minutes after extubation; the best held-out test performance was achieved by the 61-variable model for 120-minute expiration, with ROC-AUC 0.89 and PR-AUC 0.97.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Combined (Heart-Lung)
+	•	Funding Source: Foundation/Non-profit
+	•	Dataset Source: Multi-center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2014
+	•	Study Period End (Year): 2025
+	•	Section 1 Comments/Quotes: Data were collected from three geographically distinct US organ procurement organizations: HonorBridge, Gift of Life Donor Program, and OneLegacy, covering January 2014 through June 2025. The study was supported by the Sam Malik Foundation. The authors included a conflict-of-interest declaration stating that they had no conflicts of interest.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Donors
+	•	Total Sample Size (N): 4464
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 37
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The overall cohort contained 4,464 potential DCD donors for whom withdrawal of life-sustaining therapy was initiated with intent for organ donation. Median age was 46 years rather than a reported mean, and 37% were female. Race was reported, and clinical history included diabetes, hypertension, cause and mechanism of death, neurologic reflexes, ventilatory variables, hemodynamics, laboratory values, and whether a lung offer had been made.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
+	•	Algorithm Name: Extreme Gradient Boosting (XGBoost), max variable model
+	•	Input Variables (Data Modality): Donor metrics
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: Separate XGBoost models were developed for 30- and 120-minute expiration using a 14-variable max-sample cohort and a 61-variable max-variable cohort. Each dataset was randomly divided 80:20 into training and held-out test sets. Multivariable logistic regression served as the baseline comparator. Predictors contributing less than 5% of the importance of the highest-ranked variable were removed and the model was rerun. Feature-importance analysis and an interactive probability calculator supported interpretation, but a specific hyperparameter-search procedure was not reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Variables were required to have at least 85% completeness. Missing numerical values were imputed using medians and categorical values using the mode. The max-variable model used 2,092 donors and 61 predictors; the exact integer training and test counts resulting from the reported 80:20 random split were not stated. Expiration occurred in 59% and 82% of the max-variable cohort at 30 and 120 minutes, respectively, but no class weighting, resampling, or other explicit class-imbalance method was reported. A web application was provided, but source code or model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.89
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: Performance was extracted for the best held-out test model: the 61-variable XGBoost model predicting circulatory death within 120 minutes after extubation. It achieved ROC-AUC 0.89 and PR-AUC 0.97; no 95% confidence interval, accuracy, PPV, sensitivity, specificity, NPV, or F1-score was reported. The corresponding 30-minute max-variable test model achieved ROC-AUC 0.76 and PR-AUC 0.80. Calibration curves and Brier scores were reported in supplementary figures, but decision-curve analysis was not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for donor demographics, comorbidities, clinical variables, and endpoint prevalence; Tables 2–4 for univariable and multivariable regression comparators; Table 5 for training and held-out test ROC-AUC and PR-AUC; Table 6 for XGBoost feature importance; Figures 1 and 2 for ROC and precision-recall curves; Supplementary Figures 3 and 4 as referenced for calibration curves and Brier scores.

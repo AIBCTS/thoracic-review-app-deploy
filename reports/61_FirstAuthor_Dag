@@ -1,0 +1,72 @@
+First Author: Dag
+Title: A data-guided analytical framework for assessing the value of additional variables in heart transplant decision making
+Source number: 61
+
+Very short summary: This retrospective national-registry study analysed 25,512 UNOS heart transplant cases from the post-2004 era and assessed whether variables added to the registry in 2004 improved 1-month, 1-year, and 5-year graft-survival prediction. Five classification algorithms were evaluated using five-fold cross-validation with nested feature selection and class-imbalance handling; SVM produced the best balanced 1-year performance (AUC 0.6342), but the additional variables did not meaningfully improve discrimination.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2004
+	•	Study Period End (Year): 2012
+	•	Section 1 Comments/Quotes: The study used the United Network for Organ Sharing (UNOS) heart transplant database. The source dataset covered October 1, 1987 to December 31, 2012, but transplantations before June 30, 2004 were excluded, giving an analysed period from 2004 through 2012. The authors declared no relevant competing interests. The work was supported in part by Health Resources and Services Administration contract 234-2005-370011C.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 25512
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: After data cleaning, the dataset contained 25,512 heart transplant cases and 161 variables. For the 1-year analysis, 19,704 observations were classified as survival, 2,693 as failure, and 3,115 were censored, resulting in 22,397 evaluable observations. Overall mean age, female proportion, and cohort race/ethnicity distributions were not reported. The predictor set included donor and recipient demographics, clinical history, haemodynamic and laboratory variables, life support, prior cardiac surgery, functional status, and procedural characteristics.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Support Vector Machine (SVM)
+	•	Algorithm Name: Support Vector Machine with Random Under-Sampling (SVM_RUS; old-variable model)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation (k-fold)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: The authors compared Tree-Augmented Naïve Bayes, logistic regression, SVM, decision tree, and random forest models using five-fold cross-validation. SVM models were reported to outperform the other algorithms across the three time horizons; the selected balanced 1-year model was SVM_RUS using 33 old variables. Automated feature selection combined information-gain fast feature selection, LASSO, and Cox regression, supplemented by predictors identified from the literature. Feature selection was repeated within each training fold to reduce leakage. Interpretability was addressed through normalized sensitivity analysis, ranked variable-importance plots, and a TAN-derived directed acyclic graph. No explicit hyperparameter-tuning procedure was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Missing numerical values were imputed using the median, while missing categorical observations were assigned an “UNKNOWN” category. Invariant variables, outliers, identifiers, and variables considered unrelated to survival were checked and removed. Class imbalance was addressed using random under-sampling and cost-sensitive models; RUS was applied only to each training fold, leaving the corresponding test fold at its natural class distribution. Exact per-fold training and test counts were not reported, and neither source code nor trained model weights were reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.6342
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): 61.67
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 62.63
+	•	Specificity (%): 54.90
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: Performance was extracted for the highest-AUC balanced 1-year model presented in Table 6: SVM_RUS using the old-variable set. Across five-fold cross-validation, this model achieved AUC 0.6342, sensitivity 0.6263, specificity 0.5490, and accuracy 0.6167. The corresponding combined-variable SVM_RUS model achieved AUC 0.6285, indicating no improvement after adding the six selected post-2004 variables. AUC confidence intervals, PPV, NPV, F1-score, formal calibration assessment, and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): High Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for variables added after 2004; Table 2 for survival, failure, and censoring counts; Table 3 for selected-feature counts; Table 4 for newly selected variables; Table 5 for model definitions; Table 6 and Appendix Table A.1 for cross-validated performance; Figure 1 for the analytical workflow; Figures 2–5 for sensitivity-based feature importance; Figure 4 and Figure 6 for TAN-derived conditional relationships.

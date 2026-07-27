@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: SRTR
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2010
 	•	Study Period End (Year): 2020
@@ -29,11 +29,11 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Random survival forest (RSF); comparator Cox proportional hazards (CPH)
-	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: External Temporal
+	•	Validation Method: External Validation (Temporal)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Not Reported
 	•	Section 3 Comments/Quotes: The study compared therapy-based “6-status” ranking with two multivariable methods: “Cox proportional hazards models and random survival forest models.” Predictors were clinically chosen listing-time variables including age, diagnosis, laboratory measurements, hemodynamics, and supportive treatment. Models were trained on prepolicy data and evaluated on a later postpolicy cohort, which is best classified as external temporal validation. No SHAP/LIME-style interpretability or hyperparameter-tuning details were reported in the retrieved text.  ￼
 
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “death before receipt of a heart transplant,” which maps to waitlist mortality. In the postpolicy test set, the best-performing model was the Cox model with treatment variables, C-index 0.76, followed by the random survival forest with treatment variables, C-index 0.74; the 6-status system had C-index 0.67. Calibration was assessed with Kaplan–Meier survival by predicted 90-day risk groups and Brier scores. Accuracy, PPV, sensitivity, specificity, NPV, and F1-score were not reported. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult heart-transplant candidates, which minimizes single-center selection bias, although some candidates with data errors were excluded.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were listing-time physiologic measures, treatments, diagnoses, blood type, and medical history variables that are clinically relevant to urgency ranking.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “death without receiving a heart transplant,” including death while waitlisted and after delisting, with transplant treated as censoring.  ￼
-	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include temporal train-test separation, multiple imputation, comparison of CPH and RSF, bootstrap CIs, calibration assessment, and variable-importance analysis.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses ML-based urgency ranking among heart-transplant candidates and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Low Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for prepolicy and postpolicy candidate characteristics; Table 2 for C-indices of the 6-status system and the Cox/RSF models; Figure 1 for individual and joint variable importance in the RSF models; and the Kaplan–Meier/calibration figures described in the Results for survival separation across status categories and model-predicted 90-day risk groups. I did not report any value not explicitly shown in the uploaded article.  ￼

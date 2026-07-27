@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: National Registry
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 1987
 	•	Study Period End (Year): 2016
 	•	Section 1 Comments/Quotes: The paper states, “Our UNOS dataset covered 103,570 heart transplant events up to and including September 30, 2016,” and the registry/process described are explicitly U.S.-based through UNOS. Funding was supported “in part by the Ohio Supercomputer Center” and the “National Science Foundation,” and the paper declares “Declaration of Competing Interest None.”  ￼  ￼
@@ -29,17 +29,17 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Other
 	•	Algorithm Name: Two-stage framework with Stage I ML models and Stage II isotonic regression; selected implementation reported in main results: UP-LASSO-logistic regression
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: Stage I examined seven algorithms: “LR, LDA, ANN, CART, SVM, RF and XGB,” along with variable selection methods including “fast feature selection, LASSO, and random forests,” and the paper reports holdout performance for the “UP-LASSO-logistic regression implementation.” Stage II applied isotonic regression to calibrate survival probabilities over month 1 and years 1–10 so they are monotonically decreasing. Figure 3 summarizes this workflow. The framework used internal training/holdout evaluation plus 5-fold cross-validation for model selection.  ￼  ￼  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Other
-	•	Class Imbalance Addressed: Yes
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
 	•	Code Availability: Other
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The target outcome was multi-period post-transplant survival probability at month 1 and years 1–10 rather than a single fixed endpoint. Table 4 reports holdout performance for the selected UP-LASSO-logistic regression model: AUC rose from 0.608 at month 1 to 0.702 at year 10; year-10 accuracy was 0.627, sensitivity 0.752, and specificity 0.533. Figure 7 presents observed-versus-forecast survival probabilities after isotonic regression, so calibration was reported graphically. Table 5 shows isotonic regression slightly improved AUC at all time points. No PPV, NPV, F1-score, or DCA were reported. Since the prompt asks for the test/validation set, I used the holdout results from Table 4; the single numeric AUC field here is the year-10 holdout AUC of 0.702, while the article reports a range across time points.  ￼  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large national UNOS registry with 103,570 heart transplant events, which lowers single-center selection bias, although censoring varied by time point.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The authors intentionally removed intra- and post-transplant variables in the main prediction framework, keeping a pre-operative decision-support orientation, and also engineered clinically motivated donor-recipient features.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The survival outcome at each time point was explicitly coded using G-TIME and G-STATUS, with censoring rules clearly described for whether the recipient was alive or dead at the time point of interest.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include extensive preprocessing, class-imbalance handling, multiple algorithms, cross-validation, holdout testing, and post hoc monotonic calibration; however, the very large analytic design space and time-point-specific censoring introduce complexity and possible instability, and exact final training/test sample sizes per horizon were not clearly reported in the retrieved text.  ￼  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly concerns AI/ML for heart transplant outcome prediction using donor-recipient pre-operative variables and is highly aligned with the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 (illustration of isotonic regression concept), Figure 2 (overview of transplantation decisions), Figure 3 (two-stage framework), Figure 4 (ROC plots for years 1–9), Figure 6 (sample patient probability curves before/after isotonic regression), Figure 7 (observed vs forecast survival probabilities after isotonic regression), Table 4 (holdout performance across month 1 and years 1–10), and Table 5 (differences after isotonic regression). No demographic baseline table with age/sex/race summary was visible in the retrieved main-article content, so those items were left as not reported.  ￼  ￼  ￼

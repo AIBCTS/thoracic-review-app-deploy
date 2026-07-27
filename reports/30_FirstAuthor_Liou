@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: None
 	•	Dataset Source: National Registry
-	•	Dataset Name: SRTR
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): 2018
 	•	Study Period End (Year): 2021
 	•	Section 1 Comments/Quotes: The analysis used the “Scientific Registry of Transplant Recipients (SRTR)” in the U.S. and included recipients transplanted “on or after October 18, 2018,” with follow-up to “June 3, 2021.” The paper states “The author(s) received no specific funding for this work” and “The authors have declared that no competing interests exist.”  ￼
@@ -29,11 +29,11 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Random Forest
 	•	Algorithm Name: Lasso, Ridge, Elastic Net, Cox Gradient Boost, XGBoost Linear, XGBoost Tree, and Random Survival Forests
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: Other
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The study benchmarked seven survival ML/statistical models plus Cox PH using SRTR tabular recipient, donor, waitlist, clinical, and procedural variables. Predictors were chosen “based on expert opinion and literature review.” The data were split 90% training and 10% holdout, with nested repeated cross-validation within the derivation set and random-search hyperparameter tuning. There was no SHAP/LIME-style explainability.  ￼
 
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The outcome was “one-year all-cause mortality,” so the closest extraction label is 1-year survival. In the post-policy holdout set, Random Survival Forests had the highest C-index at 0.628, followed by Cox Boost at 0.627. Table 2 shows the other post-policy holdout C-indices: CoxPH 0.585, Ridge 0.586, Lasso 0.613, Elastic Net 0.613, XGBoost Linear 0.600, and XGBoost Tree 0.612. Calibration plots were not described for this paper in the retrieved text, and DCA was not reported.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: This was a large national SRTR cohort of adult first-time heart-only transplant recipients after clear exclusions, which reduces single-center selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were registry variables available around transplantation, and preprocessing excluded variables with excessive missingness, supporting appropriate predictor selection.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcome was clearly defined as “one-year all-cause mortality assessed from the time of heart transplantation to death or end of the one-year follow-up.”  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include nested repeated cross-validation, a holdout test set, multiple imputation, and comparison across several model classes. Uncertainty remains because discrimination was only modest and the retrieved text did not document calibration results for the final models.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly studies machine-learning-based mortality prediction after heart transplantation in a contemporary registry cohort and is closely aligned with the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the benchmarking workflow and derivation/holdout split; Table 1 for post-policy cohort characteristics; Table 2 for holdout C-indices across models; and Figure 2 for cross-validation performance distributions. I did not report any metric not explicitly shown in the uploaded article.

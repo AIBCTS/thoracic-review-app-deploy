@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2010
 	•	Study Period End (Year): 2019
@@ -29,8 +29,8 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Other
 	•	Algorithm Name: CALIPER-based Lung Texture Analysis tool (Imbio)
-	•	Input Variables (Data Modality): Imaging
-	•	Comparator / Standard of Care: Human expert
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo)
+	•	Comparator / Standard of Care: Human expert/Clinician
 	•	Validation Method: Other
 	•	Explainability / Interpretability Used: No
 	•	Feature Selection Method: None/All features
@@ -38,7 +38,7 @@ Section 3: Intervention & AI Methods
 	•	Section 3 Comments/Quotes: The study used the “Lung Texture Analysis tool (Imbio, Minneapolis, MN, USA) based on CALIPER,” previously trained outside the transplant cohort, to quantify CT textures and PVV. This was compared with independent scoring by two fellowship-trained thoracic radiologists. The work is best characterized as imaging biomarker evaluation rather than conventional train/test ML development on this cohort, so validation is “Other.” No SHAP/LIME or hyperparameter-tuning process was reported.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: Patients were required to have a qualifying thin-section inspiratory CT near CLAD diagnosis, and cases with failed segmentation were excluded, which is most consistent with complete-case/exclusion-based handling. Preprocessing was described in detail: lung segmentation, removal of large airways/central vasculature, voxel texture assignment, radiologist review of overlays, and normalization of ML variables by CT total lung capacity. No class-imbalance method, code release, or train/test split was reported because this was not a new model-training study in this cohort.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: CLAD
+	•	Target Clinical Outcome: Chronic Lung Allograft Dysfunction (CLAD incl. BOS)
 	•	Model AUC / C-Statistic: 0.85
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The main diagnostic outcome was CLAD phenotyping. ROC analysis showed that GGOML, RETML, and especially PVVML identified the RAS/mixed phenotype, with PVV having the strongest AUC of 0.85. Using a 3% cut-point, PVV had sensitivity 90.0% and specificity 70.1% for RAS/mixed phenotyping. Machine-learning hyperlucent lung identified BOS on inspiratory CT alone with AUC 0.76. Prognostically, PVV was the strongest independent CT predictor of graft failure in multivariable Cox analysis (HR 1.23, 95% CI 1.05–1.44; p = 0.01). Accuracy, PPV, NPV, F1, calibration, and DCA were not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a single-center retrospective CLAD cohort, and from 211 CLAD patients only 88 were included after CT availability/quality and segmentation exclusions, which creates substantial selection risk.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were clearly defined CT-derived machine-learning texture variables and blinded radiologist scores obtained near CLAD diagnosis.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: CLAD phenotype assignment was based on previously described methodology and considered the “gold standard,” and graft failure was explicitly defined as death or retransplantation.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include blinded radiologist comparison, ROC analysis, interrater reliability assessment, and multivariable Cox models adjusted for key confounders. Uncertainty remains because this was a relatively small retrospective cohort without external validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly addresses AI-assisted CT phenotyping and prognosis in CLAD after lung transplantation and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for representative inspiratory CT and machine-learning texture overlays in BOS and mixed CLAD; Figure 2 for cohort flow and exclusions; Table 1 for patient characteristics by CLAD phenotype; Table 2 for radiologist and machine-learning CT features across BOS, RAS/mixed, and undefined/unclassified phenotypes; Table 3 for ROC-based phenotyping performance including PVV and hyperlucent lung; and Table 4/results text for graft-failure associations in Cox models. I did not report any value not explicitly shown in the uploaded article.  ￼

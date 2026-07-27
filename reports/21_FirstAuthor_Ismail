@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Government/Public
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
 	•	Section 1 Comments/Quotes: The validation cohort came from “lung transplant recipients at the University of Pennsylvania,” making this a single-center U.S. study. Funding was “supported by National Institutes of Health grants HL155821.” The paper includes a disclosure section listing conflicts for two authors and stating all others had none. Study years for the recipient cohort were not reported.  ￼
@@ -27,11 +27,11 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: PSPNet-based 2-step framework for automated lung sizing
-	•	Input Variables (Data Modality): Imaging
-	•	Comparator / Standard of Care: Human expert
-	•	Validation Method: Internal Split
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo)
+	•	Comparator / Standard of Care: Human expert/Clinician
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: No
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: No
@@ -39,7 +39,7 @@ Section 3: Intervention & AI Methods
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Not Reported
-	•	Class Imbalance Addressed: Not Applicable
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: Other
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): 6500
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The segmentation model was trained on the “Darwin data set, comprising 6500 CXRs and lung masks,” and validated on 50 recipient CXRs. Preprocessing was described, including data augmentation and contrast-limited adaptive histogram equalization. Missing-data handling was not discussed. Class imbalance is not applicable for this measurement task. Code was made publicly available, but algorithm weights were not mentioned, so “Other” is the best fit.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Donor acceptance
+	•	Target Clinical Outcome: Donor acceptance for transplantation
 	•	Model AUC / C-Statistic: NR
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The task was automated lung sizing to support donor-recipient size matching, so the closest allowed outcome category is Donor acceptance. The reported metrics were measurement-agreement metrics rather than classification metrics: average error <2.5% (<7.0 mm), Pearson correlation 0.97, and intraclass correlations mostly above 0.90. No AUC, sensitivity, specificity, PPV, NPV, F1-score, calibration, or DCA were reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a small pilot validation cohort of 50 lung transplant recipients from a single center, which limits representativeness.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized portable chest radiographs processed through a clearly described segmentation and feature-point extraction pipeline.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The measured outcome was explicit and objective: 6 predefined lung size measurements validated against two radiologists’ independent measurements.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include blinded radiologist comparison, quantitative agreement analysis, and public code availability; limitations include small sample size, single-center validation, and lack of larger external validation.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly applies AI to lung transplant donor-recipient size matching, which is clearly relevant to thoracic transplantation AI.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the 2-step framework and defined measurement points; Table 1 for cohort demographics; Figure 2 for representative CXRs including technical challenges and abnormalities; Figure 3 for measurement error plots; and Table 2 for intraclass correlation coefficients between AI and radiologists. I did not report any value not explicitly shown in the uploaded article.  ￼

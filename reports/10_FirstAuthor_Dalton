@@ -9,15 +9,15 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: National Registry
-	•	Dataset Name: SRTR
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2010
 	•	Study Period End (Year): 2020
 	•	Section 1 Comments/Quotes: The paper used “Scientific Registry for Transplant Recipients (SRTR) data from 2015-2020” for waitlist models and “data from 2010-2020” for post-transplant models. Because SRTR is the U.S. national transplant registry, this is a U.S. national registry study. I did not identify an explicit funding or conflict-of-interest statement in the retrieved text.
 
 Section 2: Population (PICO - P)
-	•	Target Population: Transplant Candidates (Waitlist); Transplant Recipients (Post-op)
-	•	Total Sample Size (N): 13204 waitlist candidates; 20763 transplant recipients
+	•	Target Population: Combined (Candidates & Recipients)
+	•	Total Sample Size (N): 13204
 	•	Overall Mean Age: NR
 	•	Female Sex (%): 41
 	•	Race/Ethnicity Reported: Yes
@@ -27,19 +27,19 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: Gradient Boosting
+	•	AI Model Architecture: Gradient Boosting (XGBoost/LightGBM)
 	•	Algorithm Name: WL-LAS/CAS, PT-CAS, re-estimated Cox models, cubic-spline Cox model, random survival forest, logistic model, linear discriminant analysis, gradient-boosted tree
-	•	Input Variables (Data Modality): Tabular (EMR)
-	•	Comparator / Standard of Care: Linear Risk Score
-	•	Validation Method: Cross-Validation
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: Cross-Validation (k-fold)
 	•	Explainability / Interpretability Used: No
-	•	Feature Selection Method: Manual/Clinical
+	•	Feature Selection Method: Manual/Clinical expertise
 	•	Hyperparameter Tuning Reported: Not Reported
 	•	Section 3 Comments/Quotes: The study compared seven models for each outcome: current LAS/CAS Cox models, updated Cox models, nonlinear spline-enhanced Cox models, random survival forests, logistic models, linear discriminant analysis, and gradient-boosted trees. The main comparators were the current LAS/CAS survival models, which are linear risk-score models. The data were “randomly partitioned into 10 training and test samples for cross-validation.” Predictors came from SRTR candidate/recipient tabular data available at allocation. The retrieved text did not report SHAP/LIME-style interpretability or explicit hyperparameter tuning.
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Missing Data Handling: Multiple Imputation
-	•	Class Imbalance Addressed: Not Reported
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The Methods state that the authors used “multiple imputation to account for missing predictor data,” and inverse probability-of-censoring weighting to address informative censoring due to transplant. They also describe reconciliation of relisted patients and construction of residual cohorts. The study used repeated cross-validation folds rather than one fixed train/test split, so exact training and test counts are NR. Code availability was not reported in the retrieved text. Class-imbalance handling was not described.
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Waitlist mortality; 5-year survival
+	•	Target Clinical Outcome: Waitlist mortality
 	•	Model AUC / C-Statistic: NR
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcomes were waitlist death or removal as too sick, and post-transplant death or retransplantation. For waitlist models, discrimination was strongest in the baseline cohort, with AUC about 0.92-0.93 at 1 month, declining to about 0.87-0.89 at 3 months and 0.84-0.85 at 6 months. For post-transplant models, discrimination remained poor across models, generally “0.58-0.61,” including at 1, 3, and 5 years. Figure 1 shows subgroup AUC patterns, especially worse variability among Medicaid patients. Because the paper centers on AUC/C-statistic-style discrimination across many models and time horizons rather than a single deployed model, and because the prompt asks for held-out test/validation metrics, I leave the single numeric AUC field as NR rather than choose one arbitrary value. Calibration and DCA were not reported in the retrieved text.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used large national SRTR cohorts of waitlist candidates and transplant recipients in the United States, which reduces center-level selection bias, although exclusions for missing key variables were applied.
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were derived from SRTR variables available at allocation or cohort time points, consistent with the clinical use case for LAS/CAS modeling.
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The outcomes were clearly defined as time from waitlist placement to death or removal as too sick, and time from transplant to death or retransplantation.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include TRIPOD-aligned internal validation, 10-fold cross-validation, multiple imputation, inverse probability-of-censoring weighting, and comparison of several model classes; however, only internal validation was performed and post-transplant discrimination remained poor across all models.
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: This article directly evaluates machine-learning and alternative modeling approaches for lung transplant allocation-related prediction, making it highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Table 1 for waitlist baseline and residual-cohort characteristics; Table 2 for waitlist-model AUCs across models and time horizons; Table 3 for post-transplant cohort counts; Table 4 for post-transplant model AUCs; and Figure 1A/1B for subgroup discrimination performance by socioeconomic and clinical factors. I did not report any metric not explicitly present in the article text or visible table excerpts.

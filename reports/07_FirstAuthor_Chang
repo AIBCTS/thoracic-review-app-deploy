@@ -9,8 +9,8 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Government/Public
 	•	Dataset Source: Multi-center
-	•	Dataset Name: Other
-	•	Conflict of Interest (COI) Declared: Yes
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
 	•	Study Period Start (Year): NR
 	•	Study Period End (Year): NR
 	•	Section 1 Comments/Quotes: The study was the “Donor Heart Study,” coordinated at Stanford and “conducted at 8 organ procurement organizations across the United States,” so the data origin was U.S. multicenter rather than a registry. Funding was from the “National Institutes of Health (NIH)/National Heart, Lung, and Blood Institute (R01 HL125303),” and the authors stated that they had “no relationships relevant to the contents of this paper to disclose.” Specific calendar start and end years for donor enrollment were not reported in the retrieved text.
@@ -29,7 +29,7 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Prospective Cohort
 	•	AI Model Architecture: Unsupervised Learning (Clustering)
 	•	Algorithm Name: k-means clustering
-	•	Input Variables (Data Modality): Imaging
+	•	Input Variables (Data Modality): Imaging (CT/CXR/Echo)
 	•	Comparator / Standard of Care: None
 	•	Validation Method: Not Reported
 	•	Explainability / Interpretability Used: No
@@ -38,8 +38,8 @@ Section 3: Intervention & AI Methods
 	•	Section 3 Comments/Quotes: The paper states that the Donor Heart Study was a “5-year multicenter observational prospective cohort study.” The machine-learning method was unsupervised “k-means clustering,” using all 17 segment-level wall motion scores from transthoracic echocardiography to identify RWMA phenotypes. The number of clusters was chosen using the cubic clustering criterion, but no held-out validation, SHAP/LIME-style interpretability method, or hyperparameter-tuning procedure was reported.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Complete Case Analysis
-	•	Class Imbalance Addressed: Not Applicable
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: Not Applicable/Not Reported
 	•	Code Availability: No
 	•	Data Preprocessing / Normalization Described: Yes
 	•	Training Size (N): NR
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The analysis excluded donors without adequate initial TTE quality and then excluded 70 outliers after cluster analysis, which is most consistent with complete case analysis plus exclusions rather than imputation. Class imbalance handling was not relevant because this was unsupervised phenotyping rather than a binary classifier. Data preprocessing was described: only donors with RWMA on initial TTE entered clustering, 17 segment-specific WMS values were used, 8 preliminary clusters were generated and then consolidated into 4 clinically plausible phenotypes, and 70 outliers were excluded. Code availability was not reported.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: Donor acceptance
+	•	Target Clinical Outcome: Donor acceptance for transplantation
 	•	Model AUC / C-Statistic: NR
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,10 +60,10 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: This was not a supervised prediction model with held-out discrimination metrics. Instead, the clinically relevant outcomes associated with the RWMA phenotypes were donor-heart acceptance, changes in LVEF/WMSI on follow-up TTE, and recipient survival after transplantation. Table 1 reports donor-heart acceptance was highest in FBS (68.2%), and recipient 2-year survival among transplanted hearts was similar across phenotypes. Figure 3 shows all phenotypes improved in LVEF on second echocardiogram. Because no AUC, accuracy, PPV, sensitivity, specificity, NPV, F1-score, calibration, or DCA were reported for a predictive model, those fields are NR/No.
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The final analysis was restricted from 4,333 enrolled donors to 913 initial TTEs with RWMA and complete pre- and post-transplant data, and 70 outliers were additionally excluded after clustering, which may introduce selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The clustering inputs were standardized echocardiographic wall motion scores for all 17 LV segments, interpreted by a blinded expert core reviewer, which supports objective predictor assessment.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: The key clinical outcomes were clearly defined, including donor-heart acceptance, serial LVEF/WMSI changes, and recipient 2-year survival, and TTE interpretation was core-lab based.
-	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The analysis used unsupervised clustering followed by investigator consolidation into 4 clinically plausible phenotypes and exclusion of outliers, without external validation or a separate test set, which raises concern about stability and reproducibility of the phenotypes.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly involves machine learning in the cardiac transplant donor setting and evaluates clinically important transplantation outcomes, so it is relevant to a thoracic organ transplantation AI review.
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction: Figure 1 for cohort derivation and exclusions; Figure 2 for the four RWMA phenotypes; Figure 3 for serial LVEF improvement; Table 1 for donor characteristics, donor-heart acceptance, and recipient 2-year survival; and Table 2 for initial LV function by phenotype. I did not report any metric that was not explicitly shown in the retrieved article content.  ￼

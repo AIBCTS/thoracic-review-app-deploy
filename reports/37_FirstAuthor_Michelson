@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Lung
 	•	Funding Source: Not Reported
 	•	Dataset Source: Single Center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2010
 	•	Study Period End (Year): 2019
@@ -29,16 +29,16 @@ Section 3: Intervention & AI Methods
 	•	Study Design: Retrospective Cohort
 	•	AI Model Architecture: Other
 	•	Algorithm Name: K-nearest neighbors (KNN), logistic regression (LR), extreme gradient boosting (XGB), and support vector classifier (SVC); final selected model = KNN
-	•	Input Variables (Data Modality): Tabular (EMR); Donor metrics
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data), Donor metrics
 	•	Comparator / Standard of Care: None
-	•	Validation Method: Internal Split
+	•	Validation Method: Internal Split (Train/Test)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
-	•	Feature Selection Method: Automated
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
 	•	Hyperparameter Tuning Reported: Yes
 	•	Section 3 Comments/Quotes: The study used donor and recipient pretransplant structured data from UNOS, UNet, and the local EHR. Four prediction algorithms were trained: LR, KNN, XGB, and SVC. Feature reduction was done with lasso regression, and hyperparameters were optimized using 5-fold cross-validation with random grid search. Feature importance was assessed using SHAP. The cohort was split 75%/25% into train/test sets.  ￼
 
 Section 4: AI Quality & Reproducibility (CONVINCE Standards)
-	•	Missing Data Handling: Simple Imputation
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
 	•	Class Imbalance Addressed: No
 	•	Code Availability: Other
 	•	Data Preprocessing / Normalization Described: Yes
@@ -47,7 +47,7 @@ Section 4: AI Quality & Reproducibility (CONVINCE Standards)
 	•	Section 4 Comments/Quotes: The paper states that “missing data were median imputed for continuous data and mode imputed for binary data,” which is simple imputation. Preprocessing included binary encoding of categorical variables and MinMax scaling fit on the training data and applied to the test data. The population was divided into a 75%/25% train-test split, which corresponds to about 432 training and 144 test patients from 576 total. I did not see explicit class-imbalance mitigation. The model was deployed on a secure website, but no source-code release was stated, so code availability is best classified as Other.  ￼
 
 Section 5: Outcomes & Performance (PICO - O)
-	•	Target Clinical Outcome: PGD
+	•	Target Clinical Outcome: Primary Graft Dysfunction (PGD)
 	•	Model AUC / C-Statistic: 0.65
 	•	Model Accuracy (%): NR
 	•	PPV / Precision (%): NR
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: The primary outcome was “PGD grade 3 at any time within 72 hours of transplantation,” which maps to PGD. The abstract states that the final selected KNN model had “an area under the receiver operating characteristics curve of 0.65.” Table 3 shows KNN among the better-performing models, and Table 4/Figure 4 show explicit calibration assessment using Cox intercepts, slopes, and calibration curves before and after sigmoid calibration. The retrieved text does not provide clear final held-out PPV, sensitivity, specificity, NPV, or F1 values for the selected final KNN model, so I leave those as NR. DCA was not reported.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): High Risk | Quote/Reasoning: This was a retrospective single-center study of 576 recipients from one institution, which limits representativeness despite a decent sample size.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were donor and recipient variables “known at the time of donor offer acceptance,” making them appropriately timed and clinically relevant for prediction.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: PGD grade 3 was defined according to International Society for Heart and Lung Transplant criteria and graded by two board-certified pulmonologists.  ￼
-	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: Strengths include lasso feature reduction, train/test splitting, 5-fold CV with random grid search, 50 bootstrap iterations, and formal calibration assessment. Uncertainty remains because discrimination was only modest and no external validation was reported.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly addresses AI/ML prediction of PGD after lung transplantation using donor-recipient clinical data and is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Unclear
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for the modeling workflow; Figure 2 for PGD grade distribution over 0, 24, 48, and 72 hours; Table 1 for donor and recipient baseline characteristics; Table 2 for the 11 lasso-selected features; Table 3 for performance comparisons across LR, KNN, XGB, and SVC; Table 4 and Figure 4 for calibration assessment; Figure 5 for feature importance of the selected KNN model; and Figure 6 for website deployment of the final calculator. I did not report any value not explicitly shown in the uploaded article.  ￼

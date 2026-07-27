@@ -1,0 +1,72 @@
+First Author: Zhou
+Title: Predicting heart transplant outcomes using explainable artificial intelligence: a multicenter study
+Source number: 76
+
+Very short summary: This retrospective multinational registry study developed the Generalizable Interpretable Neural Network (GINN) using 45,927 UNOS heart transplant recipients and evaluated it in later UNOS cohorts and three geographically external cohorts. In the 15,200-recipient out-of-time UNOS validation cohort, GINN achieved an AUROC of 0.827 (95% CI 0.821–0.833), accuracy of 80%, reported precision of 82%, recall of 80%, and F1-score of 0.81, with good reported calibration; however, important inconsistencies exist between the text, figures, tables, and confusion matrices.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Multi-national
+	•	Organ Focus: Heart
+	•	Funding Source: None
+	•	Dataset Source: International Registry
+	•	Dataset Name: Other Registry
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 1994
+	•	Study Period End (Year): 2024
+	•	Section 1 Comments/Quotes: The primary dataset was the US UNOS registry from 1994–2024. Geographic external validation used Eurotransplant, Scandiatransplant, and a 14-patient Chinese cohort from Jiangxi Provincial People’s Hospital; the abstract reports Scandiatransplant data from 1997–2018, while study periods for Eurotransplant and External-CN were not explicitly stated. The authors declared that no financial support was received and that no commercial or financial conflicts of interest existed.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 85948
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The analytic cohorts comprised 81,327 eligible UNOS recipients, 3,061 Eurotransplant recipients, 1,546 Scandiatransplant recipients, and 14 External-CN recipients, totalling 85,948. The UNOS cohort was divided into derivation (n=45,927), temporal test (n=20,200), and out-of-time validation (n=15,200) cohorts. Age and female sex were reported separately by UNOS era rather than as pooled overall values. Race and extensive donor-recipient clinical characteristics were reported, including diagnoses, prior surgery and transplantation, mechanical support, dialysis, donor hypertension and diabetes, creatinine, and ischemic time.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Artificial Neural Networks (ANN, MLP, NN)
+	•	Algorithm Name: Generalizable Interpretable Neural Network (GINN)
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: External Validation (Geographic/Different Hospital)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Manual/Clinical expertise
+	•	Hyperparameter Tuning Reported: Not Reported
+	•	Section 3 Comments/Quotes: GINN used an additive Risk Response Network in which each of nine structured clinical variables was processed by a separate lightweight MLP and combined into a mortality-risk logit. The nine inputs were specified a priori from clinical relevance and established heart-transplant risk models; an embedded Lasso-style regularizer promoted sparsity but was not used as preliminary feature screening. Comparators included IMPACT, IHTSA, recalibrated IHTSA, and EBM. Interpretability was intrinsic through feature-specific partial-response curves and additive patient-level risk contributions. Temporal UNOS evaluation and geographic validation in Eurotransplant, Scandiatransplant, and External-CN were performed, but no explicit hyperparameter-search or tuning procedure was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 45927
+	•	Test Size (N): 15200
+	•	Section 4 Comments/Quotes: Continuous variables were median-imputed, categorical variables were mode-imputed, and numerical variables were standardized using z-score normalization. Variable coding was harmonized across centers, and SMOTE was applied to the minority mortality class in the training set. The derivation cohort contained 45,927 recipients, an intermediate temporal test cohort contained 20,200, and the primary out-of-time validation cohort contained 15,200. The pipeline was implemented in Python/PyTorch using a fixed random seed. Data access procedures were described, but source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.827
+	•	Model AUC Lower 95% CI: 0.821
+	•	Model AUC Upper 95% CI: 0.833
+	•	Model Accuracy (%): 80
+	•	PPV / Precision (%): 82
+	•	Sensitivity / Recall (%): 80
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: 0.81
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: Performance was extracted for GINN in the 15,200-recipient out-of-time UNOS validation cohort: AUROC 0.827 (95% CI 0.821–0.833), accuracy 0.80, reported precision 0.82, recall 0.80, and F1-score 0.81. Specificity and NPV were not explicitly reported. Calibration was assessed using calibration plots, slope, calibration-in-the-large, Brier score, and expected-to-observed ratio; Table 4 reports slope 1.02, CITL 0.02, Brier score 0.115, and E/O 1.01. DCA was not reported. The reported precision of 0.82 is not reconcilable with the death-class PPV implied by the displayed confusion matrix, and external-cohort AUROCs differ between the narrative/Figure 6 and Table 4.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for UNOS recipient characteristics by temporal cohort; Table 2 for donor characteristics; Table 3 for ablation analyses; Table 4 for discrimination, classification, and calibration metrics; Figure 1 for the GINN architecture; Figure 2 for UNOS participant flow and temporal cohort sizes; Figure 3 for model ROC comparison; Figure 4 for feature-specific partial-response curves; Figure 5 for calibration; Figure 6 for internal and external ROC and classification metrics; Figure 7 for confusion matrices; Figure 8 for risk-factor effects; Figure 9 for individual-level explanations.

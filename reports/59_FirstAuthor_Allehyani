@@ -1,0 +1,72 @@
+First Author: Allehyani
+Title: Machine learning approach to predict 1-year mortality after heart transplantation: a single-centre study
+Source number: 59
+
+Very short summary: This retrospective single-centre study included 419 heart transplant recipients treated in Saudi Arabia between 2007 and 2022. Support vector machine (SVM) and logistic regression (LR) models were evaluated for predicting 1-year mortality; the SVM achieved a held-out test AUC of 0.868, accuracy of 95.24%, precision of 90%, and recall of 75%, while LR performed slightly better overall.
+
+Section 1: Study Identification & Metadata
+• Country of Data Origin: Asia
+• Organ Focus: Heart
+• Funding Source: None
+• Dataset Source: Single Center
+• Dataset Name: Not Applicable / Not Reported
+• Conflict of Interest (COI) Declared: Yes (Declared COI)
+• Study Period Start (Year): 2007
+• Study Period End (Year): 2022
+• Section 1 Comments/Quotes: The study used data from King Faisal Specialist Hospital & Research Centre in Saudi Arabia and included all heart transplant cases recorded between January 2007 and December 2022. The authors stated, “Conflict of interest: None declared” and “No funding received for this research.”
+
+Section 2: Population (PICO - P)
+• Target Population: Transplant Recipients (Post-op)
+• Total Sample Size (N): 419
+• Overall Mean Age: 33.61
+• Female Sex (%): NR
+• Race/Ethnicity Reported: No
+• Comorbidities / Clinical History Included: Yes
+• Section 2 Comments/Quotes: The cohort included 419 heart transplant recipients with a mean age of 33.61 ± 18.94 years; 305 patients, or 72.7%, were male, but an exact female percentage was not explicitly reported. Clinical variables included cardiomyopathy type, diabetes, blood type, mechanical-support devices, LVEF, immunosuppressive therapy, BMI, and ischaemia time. Race/ethnicity was not reported for the current cohort; references to race/ethnicity in Tables 1 and 2 concerned variables used in previous studies.
+
+Section 3: Intervention & AI Methods
+• Primary ML Component: Yes
+• Study Design: Retrospective Cohort
+• AI Model Architecture: Support Vector Machine (SVM)
+• Algorithm Name: Support Vector Machine
+• Input Variables (Data Modality): Tabular (EMR/Clinical data)
+• Comparator / Standard of Care: Other
+• Validation Method: Internal Split (Train/Test)
+• Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+• Feature Selection Method: Not Reported
+• Hyperparameter Tuning Reported: Not Reported
+• Section 3 Comments/Quotes: SVM was treated as the primary ML model and was compared with logistic regression. Random forest, gradient boosting, and deep-learning models were initially evaluated but rejected because of apparent overfitting. The authors used a separate split-sample validation set and additionally reported k-fold cross-validation, although the number of folds and implementation details were not provided. Feature-importance/local-explanation plots were presented, but no explicit feature-selection procedure or hyperparameter-search strategy was described.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+• Missing Data Handling: Complete Case Analysis (Excluded)
+• Class Imbalance Addressed: No
+• Code Availability: Not Reported
+• Data Preprocessing / Normalization Described: Yes
+• Training Size (N): NR
+• Test Size (N): 84
+• Section 4 Comments/Quotes: Preprocessing included “cleaning the data to remove any inconsistencies or missing values, normalizing the data for uniformity, and encoding categorical variables.” No imputation was described, so removal of records or observations with missing data was classified as complete-case analysis. No oversampling, undersampling, class weighting, SMOTE, or other class-imbalance method was reported. The training-set count was not explicitly stated; the test confusion matrices contain 84 observations. Code availability was not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+• Target Clinical Outcome: 1-year survival
+• Model AUC / C-Statistic: 0.868056
+• Model AUC Lower 95% CI: NR
+• Model AUC Upper 95% CI: NR
+• Model Accuracy (%): 95.2381
+• PPV / Precision (%): 90.0
+• Sensitivity / Recall (%): 75.0
+• Specificity (%): NR
+• NPV (%): NR
+• F1-Score: 0.818182
+• Calibration Reported: Not Reported
+• Decision Curve Analysis (DCA) Reported: Not Reported
+• Section 5 Comments/Quotes: The extracted performance corresponds to the SVM on the held-out test set. The paper reports accuracy 0.952381, precision 0.90, recall 0.75, F1 score 0.818182, and ROC-AUC 0.868056; no 95% confidence interval for AUC was provided. Specificity, NPV, calibration assessment, and DCA were not reported. The LR comparator achieved an AUC of 0.875 and accuracy of 96.43%. The orientation or labels of the displayed confusion matrices appear inconsistent with the reported precision and recall values, so the explicitly tabulated performance values were extracted.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+• Participants (Selection Bias): Low Risk
+• Predictors (Input Variable Bias): High Risk
+• Outcome (Definition Bias): Unclear
+• Analysis (Modeling Bias): High Risk
+• Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 3 for cohort demographics, clinical characteristics, and survival status; the model-performance table on page 7 for accuracy, precision, recall, F1 score, AUC, and training accuracy; Figure 1 for the logistic-regression test confusion matrix; Figure 2 for LR feature importance; Figure 3 for the SVM test confusion matrix; Figure 4 for SVM feature importance.

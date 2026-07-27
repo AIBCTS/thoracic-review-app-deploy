@@ -9,7 +9,7 @@ Section 1: Study Identification & Metadata
 	•	Organ Focus: Heart
 	•	Funding Source: Not Reported
 	•	Dataset Source: Multi-center
-	•	Dataset Name: Not Applicable
+	•	Dataset Name: Not Applicable / Not Reported
 	•	Conflict of Interest (COI) Declared: Not Reported
 	•	Study Period Start (Year): 2002
 	•	Study Period End (Year): 2021
@@ -27,11 +27,11 @@ Section 2: Population (PICO - P)
 Section 3: Intervention & AI Methods
 	•	Primary ML Component: Yes
 	•	Study Design: Retrospective Cohort
-	•	AI Model Architecture: CNN
+	•	AI Model Architecture: Convolutional Neural Network (CNN)
 	•	Algorithm Name: CRANE (Cardiac Rejection Assessment Neural Estimator)
-	•	Input Variables (Data Modality): Pathology
-	•	Comparator / Standard of Care: Human expert
-	•	Validation Method: External Geographic
+	•	Input Variables (Data Modality): Pathology slides
+	•	Comparator / Standard of Care: Human expert/Clinician
+	•	Validation Method: External Validation (Geographic/Different Hospital)
 	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
 	•	Feature Selection Method: None/All features
 	•	Hyperparameter Tuning Reported: Yes
@@ -60,11 +60,11 @@ Section 5: Outcomes & Performance (PICO - O)
 	•	Section 5 Comments/Quotes: On the U.S. hold-out set, the model detected overall rejection with AUC 0.962 and accuracy 0.899. It detected cellular rejection with AUC 0.958 and accuracy 0.893, antibody-mediated rejection with AUC 0.874 and accuracy 0.899, Quilty B lesions with AUC 0.939 and accuracy 0.920, and low-grade versus high-grade rejection with AUC 0.833 and accuracy 0.818. No PPV, sensitivity, specificity, NPV, F1, calibration, or DCA were reported in the retrieved text.  ￼
 
 Section 6: Quality Assessment (Risk of Bias / PROBAST)
-	•	Participants (Selection Bias): Low Risk | Quote/Reasoning: The study used a large internal U.S. dataset plus two independent external international cohorts from Turkey and Switzerland, reducing single-center selection bias.  ￼
-	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were standardized H&E whole-slide biopsy images, and the workflow for segmentation, patching, and model inference was clearly defined.  ￼
-	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: EMB labels included rejection presence, subtype, grade, and Quilty B lesions, and all AMR cases were confirmed with C4d immunohistochemistry.  ￼
-	•	Analysis (Modeling Bias): Low Risk | Quote/Reasoning: Strengths include a large internal development set, hold-out testing, two external geographic validation cohorts, multiple tasks, interpretability heatmaps, and a reader study. Remaining uncertainty is minor compared with most studies in this review.  ￼
-	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The article directly addresses AI-based assessment of rejection after heart transplantation using biopsy pathology, which is highly relevant to the review question.  ￼
+	•	Participants (Selection Bias): Low Risk
+	•	Predictors (Input Variable Bias): Low Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): Low Risk
+	•	Applicability to Review Question: Low Concern
 
 Tables and figures explicitly used in extraction:
 Figure 1 for study design, cohort sizes, scanners, and internal/external split; Figure 2 for ROC/AUC performance across the U.S., Turkish, and Swiss cohorts; Figure 3 and Figure 4 for attention heatmaps and interpretability across internal and external cohorts; Figure 5 for analysis of failure cases; and the main results paragraphs for the exact U.S. hold-out AUC and accuracy values for overall rejection, ACR, AMR, Quilty B, and grade classification. I did not report any metric not explicitly stated in the uploaded article.  ￼

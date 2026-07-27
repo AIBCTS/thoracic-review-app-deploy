@@ -1,0 +1,72 @@
+First Author: Zhu
+Title: Construction and validation of a machine learning-based prediction model for venous thromboembolism in lung transplant recipients supported by ECMO
+Source number: 77
+
+Very short summary: This retrospective single-center study included 189 adult lung transplant recipients receiving postoperative ECMO at a Chinese hospital between May 2023 and November 2024. Six machine-learning algorithms were developed using six RFE-selected predictors; the Random Forest model was selected for temporal validation and achieved an AUC of 0.895 (95% CI 0.788–1.000), accuracy of 89.7%, sensitivity of 89.7%, and specificity of 89.5%.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable / Not Reported
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 2023
+	•	Study Period End (Year): 2024
+	•	Section 1 Comments/Quotes: The study used electronic medical records from the Second Affiliated Hospital of Zhejiang University School of Medicine, China. The internal cohort covered May 2023–May 2024 and the temporal validation cohort covered June–November 2024. Funding was provided by the Health Commission of Zhejiang Province, China (No. 2025KY865). The authors declared no commercial or financial conflicts of interest.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 189
+	•	Overall Mean Age: NR
+	•	Female Sex (%): 19.58
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The cohort included 189 elective lung transplant recipients receiving postoperative ECMO, comprising 117 patients with postoperative DVT and 72 without DVT. Age was reported only in categories of ≤60 and >60 years, so an overall mean was unavailable. There were 37 women (19.58%). Clinical variables included diagnosis, hypertension, diabetes, prior tumour, coronary disease, prior thrombosis, respiratory support, BMI, anticoagulant use, laboratory values, respiratory failure, and pulmonary-function measures.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Forest
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Linear Risk Score (e.g., LAS, EuroSCORE)
+	•	Validation Method: External Validation (Temporal)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Random Forest was compared with logistic regression, SVM, KNN, XGBoost, and AdaBoost, as well as the clinical Caprini risk score. Recursive Feature Elimination reduced 22 candidate variables to six predictors: anticoagulant therapy, BMI, history of thrombosis, procalcitonin, concomitant respiratory failure, and white-blood-cell count. Grid search with five-fold cross-validation selected hyperparameters using mean cross-validated AUC. SHAP summary, importance, and patient-level waterfall plots were used for interpretation. The validation cohort came from a later period at the same institution and was therefore classified as external temporal validation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Complete Case Analysis (Excluded)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Patients with incomplete case data were excluded, variables with more than 10% missingness were removed, and the remaining variables contained no missing values; no imputation was performed. Categorical variables were one-hot encoded. SMOTE oversampling was applied to the minority class in the training dataset. The article and Figure 1 refer to a 70:30 training-validation division, while the Methods describe calendar-based internal and temporal cohorts; exact integer split counts were not reported. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Adverse Events/Complications
+	•	Model AUC / C-Statistic: 0.895
+	•	Model AUC Lower 95% CI: 0.788
+	•	Model AUC Upper 95% CI: 1.000
+	•	Model Accuracy (%): 89.7
+	•	PPV / Precision (%): 94.6
+	•	Sensitivity / Recall (%): 89.7
+	•	Specificity (%): 89.5
+	•	NPV (%): 81.0
+	•	F1-Score: 0.921
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The target outcome was postoperative venous thrombosis, operationally assessed as lower-extremity DVT using serial colour Doppler ultrasonography. In the temporal validation set, the Random Forest model achieved AUC 0.895 (95% CI 0.788–1.000), accuracy 0.897, sensitivity 0.897, specificity 0.895, PPV 0.946, NPV 0.810, and F1-score 0.921. The abstract writes “PPV 0.946%,” but Table 3 reports 0.946, corresponding to 94.6%. Calibration curves were presented, and DCA indicated net clinical benefit over relevant threshold probabilities.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Unclear
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for demographics, comorbidities, and clinical characteristics; Table 2 for training performance; Table 3 for temporal validation performance; Table 4 for comparison with the Caprini risk score; Figure 1 for the machine-learning workflow and reported 70:30 split; Figures 2 and 3 for ROC, calibration, and decision curves; Figures 4 and 5 for global SHAP interpretation; Figures 6 and 7 for patient-level SHAP explanations; Supplementary Table 1 for RFE-selected variables and Supplementary materials S1–S2 for hyperparameter grids and metric definitions.

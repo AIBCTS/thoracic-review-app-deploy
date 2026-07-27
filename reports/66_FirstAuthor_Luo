@@ -1,0 +1,72 @@
+First Author: Luo
+Title: In silico perturbations provide multivariate interpretability in predicting post-lung transplant outcomes
+Source number: 66
+
+Very short summary: This retrospective US national-registry study analysed adult first-time lung transplant recipients from 1987 to 2022 and compared XGBoost with EHRFormer, a tabular BERT model, for predicting post-transplant outcomes. The best all-years model for 1-year mortality was EHRFormer, with a held-out test AUC of 0.64 (95% CI 0.61–0.66), accuracy of 60%, and F1-score of 0.64; both models showed limited discrimination despite identifying established risk factors.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: SRTR (Scientific Registry of Transplant Recipients)
+	•	Conflict of Interest (COI) Declared: Yes (Declared COI)
+	•	Study Period Start (Year): 1987
+	•	Study Period End (Year): 2022
+	•	Section 1 Comments/Quotes: The study used de-identified United Network for Organ Sharing Standard Transplant Analysis and Research File data, described as SRTR/OPTN data, from US lung transplant recipients. Transplants before 8 November 2022 were included, and the abstract describes the period as 1987–2022. The authors stated, “This research received no funding” and declared no competing interests.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 43869
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The abstract reports 43,869 first-time lung transplant recipients, although the Results also describe an exploratory cohort of 47,864 recipients and Figure 1 reports 37,369 observations in the all-years modeling dataset. The study was restricted to first-time recipients older than 18 years. Overall mean age and female percentage were not reported. Recipient and donor ethnicity, transplant indication, functional status, infection, mechanical ventilation, ECMO, renal function, hemodynamics, lung function, and other clinical-history variables were included.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Transformer/LLM
+	•	Algorithm Name: EHRFormer
+	•	Input Variables (Data Modality): Tabular (EMR/Clinical data)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split (Train/Test)
+	•	Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+	•	Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: EHRFormer was a tabular BERT model with three transformer layers, 64-dimensional embeddings, an intermediate layer size of 128, and four attention heads. It was compared with XGBoost. Features were automatically filtered to those with less than 10% missingness within each era, producing 140–152 variables. The models used an 80:20 train/test split, five-fold cross-validation within training, and held-out test evaluation. EHRFormer hyperparameters were optimized with Optuna, while XGBoost used Bayesian optimization. Interpretability included SHAP for XGBoost and single- or multivariable in silico perturbations for EHRFormer.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation (Mean/Median)
+	•	Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+	•	Code Availability: Yes
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Numerical variables were mean-imputed and categorical variables were mode-imputed. Categorical predictors were ordinal- or one-hot encoded, and EHRFormer numerical inputs were quantile-binned. The majority class was randomly downsampled to a 1:1 ratio separately in both training and test sets. Exact post-downsampling training and test counts were not explicitly reported. The authors provided a GitHub repository containing the underlying code; the UNOS-derived training and validation datasets were not publicly available.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: 1-year survival
+	•	Model AUC / C-Statistic: 0.64
+	•	Model AUC Lower 95% CI: 0.61
+	•	Model AUC Upper 95% CI: 0.66
+	•	Model Accuracy (%): 60
+	•	PPV / Precision (%): 58
+	•	Sensitivity / Recall (%): 70
+	•	Specificity (%): 49
+	•	NPV (%): NR
+	•	F1-Score: 0.64
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: Values were extracted for the best all-years held-out test model for 1-year mortality, EHRFormer. It achieved AUC 0.64 (95% CI 0.61–0.66), accuracy 0.60, F1-score 0.64, precision 0.58, recall 0.70, and specificity 0.49. NPV was not reported. The XGBoost comparator achieved AUC 0.63 (95% CI 0.60–0.67). Calibration assessment and DCA were not reported. Patients who died during or within 90 days of the index hospitalization were excluded from the mortality-prediction task.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk
+	•	Predictors (Input Variable Bias): High Risk
+	•	Outcome (Definition Bias): Low Risk
+	•	Analysis (Modeling Bias): High Risk
+	•	Applicability to Review Question: Low Concern
+
+Tables and figures used in this extraction:
+Table 1 for era-specific 1-year mortality AUCs; Table 2 for 1-, 3-, and 5-year mortality AUCs; Tables 4 and 5 for comparisons using all, pre-transplant, LAS, and transplant-type feature sets; Figure 1 for cohort eras and dataset structure; Figure 2 for class counts, held-out mortality performance, and test metrics; Figure 4 for SHAP importance and feature-set comparisons; Figure 5 for EHRFormer perturbation interpretability; Figure 6 for index-stay mortality, life-support, and frailty features.
