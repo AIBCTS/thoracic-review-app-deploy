@@ -1,0 +1,72 @@
+First Author: Zhang
+Title: Predictive accuracy of a perioperative hemodynamic indices-based prediction model for moderate-to-severe acute kidney injury after orthotopic heart transplantation
+Source number: 79
+
+Very short summary: This retrospective single-center cohort study included 114 adult orthotopic heart transplant recipients treated in China between 2011 and 2023, of whom 25 developed KDIGO stage 2–3 acute kidney injury within 7 days. Five machine-learning models were evaluated using five-fold cross-validation after univariate and LASSO feature selection; Light Gradient Boosting Machine performed best, with an AUC of 0.898, precision of 79.3%, F1-score of 0.722, AUPRC of 0.802, and Brier score of 0.106.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Heart
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2011
+	•	Study Period End (Year): 2023
+	•	Section 1 Comments/Quotes: The cohort originated from Nanjing First Hospital, China, and included adult OHT recipients treated between October 2011 and September 2023. Funding was provided by the National Natural Science Foundation of China, Natural Science Foundation of Jiangsu Province, Nanjing Medical Science and Technical Development Foundation, Jiangsu Pharmaceutical Association, and the Postgraduate Research and Practice Innovation Program of Jiangsu Province. The authors stated that they had no competing interests.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 114
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: No
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: Of 135 screened patients, 114 met the eligibility criteria; 25 developed stage 2–3 AKI and 89 did not. Age was reported as a median of 52 years (IQR 45–60), not as a mean. The paper reported that 81.6% were male but did not explicitly state the female percentage. Clinical variables included diabetes, hypertension, chronic liver and kidney disease, coronary disease, previous stroke or TIA, prior cardiac surgery, laboratory measures, echocardiography, intraoperative hemodynamics, transfusions, vasoactive support, and postoperative laboratory values.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Light Gradient Boosting Machine (LGBM)
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Cross-Validation
+	•	Explainability / Interpretability Used: Yes
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: LGBM was compared with logistic regression, XGBoost, random forest, and Gaussian naïve Bayes. Candidate variables were first screened by univariate analysis and then by LASSO, leaving eight predictors: preoperative hemoglobin, PASP, left atrial dimension, aortic cross-clamp duration, intraoperative urine output, cumulative MAP below 65 mm Hg, post-CPB MAP area below 65 mm Hg, and post-CPB CVP above 20 mm Hg. Grid search with five-fold cross-validation was used for hyperparameter optimisation. SHAP summary and dependence plots were used for global and individual-level interpretation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Simple Imputation
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Variables with more than 20% missingness were excluded, while remaining missing values were imputed using K-nearest-neighbour interpolation. Continuous variables underwent z-score normalization and categorical variables were one-hot encoded. Stage 2–3 AKI occurred in 25 of 114 recipients, but no class weighting, over-sampling, under-sampling, or other explicit imbalance strategy was reported. Five-fold cross-validation used four folds for training and one for validation, but exact fold-specific sample counts were not reported. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Adverse Events/Complications
+	•	Model AUC / C-Statistic: 0.898
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): 79.3
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: 0.722
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: No
+	•	Section 5 Comments/Quotes: The outcome was postoperative KDIGO stage 2–3 AKI, defined as at least a twofold increase in serum creatinine within 7 days after transplantation. Mean five-fold cross-validated performance for LGBM was AUC 0.898, AUPRC 0.802, precision 0.793, F1-score 0.722, and Brier score 0.106. A numeric 95% confidence interval, accuracy, sensitivity, specificity, and NPV were not reported. Calibration curves and the Brier score were reported, but DCA was not performed.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: The study was a small retrospective single-center cohort. Patients lacking perioperative creatinine data and those who died within 48 hours after surgery were excluded; excluding early deaths may remove the sickest recipients before complete AKI ascertainment, and the numbers excluded for each criterion were not reported.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The final predictors were routinely measured preoperative or intraoperative variables available before the 7-day outcome window. Hemodynamic measurements were collected objectively through invasive arterial and Swan-Ganz monitoring, with MAP and CVP recorded every 5 minutes and transformed using prespecified thresholds.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: Stage 2–3 AKI was defined using an objective KDIGO-based serum-creatinine criterion—at least a twofold rise within 7 days—with baseline creatinine taken from the most recent measurement within 48 hours before surgery.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: Only 25 outcome events were available for an eight-predictor final model. Univariate screening, LASSO selection, KNN imputation, and normalization were not explicitly nested within the cross-validation folds, creating potential information leakage. Hyperparameter tuning and performance estimation used the same five-fold cross-validation framework, with no independent test set, external validation, or AUC confidence interval.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates explainable machine-learning models for predicting an important early complication after heart transplantation using perioperative recipient and hemodynamic data. It is directly applicable to AI research in thoracic organ transplantation.
+
+Tables and figures used in this extraction:
+Table I for cohort demographics, comorbidities, clinical variables, and univariate associations; Table II for the eight LASSO-selected predictors and collinearity assessment; Table III for cross-validated model performance; Figure 1 for cohort flow, outcome counts, feature selection, and model workflow; Figure 2 for ROC, precision-recall, and calibration curves; Figure 3 for SHAP feature importance and dependence plots; Supplementary Tables S1–S2 as referenced for hyperparameters and fold-specific performance.

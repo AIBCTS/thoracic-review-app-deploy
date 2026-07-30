@@ -1,0 +1,72 @@
+First Author: Xia
+Title: Machine Learning for Predicting Primary Graft Dysfunction After Lung Transplantation: An Interpretable Model Study
+Source number: 80
+
+Very short summary: This retrospective single-center study included 802 adult lung transplant recipients treated in China between July 2018 and October 2023, comprising a 640-patient derivation cohort and a later 162-patient temporal external-validation cohort. Nine machine-learning algorithms were compared after logistic-regression and LASSO feature selection; Random Forest performed best, achieving an external-validation AUC of 0.8214, accuracy of 76.54%, sensitivity of 82.35%, specificity of 66.67%, and F1-score of 0.8155 for grade 3 primary graft dysfunction within 72 hours.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: Asia
+	•	Organ Focus: Lung
+	•	Funding Source: Government/Public
+	•	Dataset Source: Single Center
+	•	Dataset Name: Not Applicable
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 2018
+	•	Study Period End (Year): 2023
+	•	Section 1 Comments/Quotes: The study was conducted at the Affiliated Wuxi People’s Hospital of Nanjing Medical University, China. The derivation period was July 2018 through March 2022, and the later external-validation period was April 2022 through October 2023. Support was reported from the Bethune Medical Science Research Funding Program, the Wuxi Health Commission Top Talent Support Program, and the Wuxi Government Taihu Talent Project. The authors stated that they had no conflicts of interest.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 802
+	•	Overall Mean Age: NR
+	•	Female Sex (%): NR
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: The final analysis included 640 recipients in the derivation cohort and 162 in the temporal external-validation cohort. The derivation cohort had a mean age of 53.53 years and 24.1% were female; the external cohort had a mean age of 53.64 years and 17.9% were female, but pooled overall values were not explicitly reported. Eligibility required patients to be Chinese adults. Clinical variables included primary pulmonary diagnosis, smoking, alcohol use, diabetes, coronary disease, hypertension, pulmonary hypertension, cardiac insufficiency, prior lung surgery or transplantation, tuberculosis, steroid exposure, infection, pulmonary function, ECMO, ischemic and operative times, blood loss, and transfusions.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Random Forest
+	•	Algorithm Name: Random Forest
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: External Temporal
+	•	Explainability / Interpretability Used: Yes
+	•	Feature Selection Method: Automated
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Random Forest was compared with decision tree, elastic net, K-nearest neighbours, LightGBM, logistic regression, multilayer perceptron, radial SVM, and XGBoost. Univariate logistic regression and ten-fold cross-validated LASSO were used to select nine concordant predictors: ECMO type, chronic steroid use, prior lung transplantation, hypertension, allogeneic transfusion, red-blood-cell transfusion, operative time, cold ischemic time, and blood-loss volume. Each algorithm underwent internal five-fold cross-validation for hyperparameter tuning. SHAP plots and Random Forest permutation/Gini importance were used for global and local interpretation.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: No
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): 448
+	•	Test Size (N): 162
+	•	Section 4 Comments/Quotes: Patients with severe missingness were excluded, defined as missing any key variable or more than 20% of other variables. Remaining missing data were filled using K-nearest-neighbour imputation. The 640-patient derivation cohort was split 7:3 into 448 training and 192 internal-validation patients, and the independent later temporal cohort contained 162 patients. PGD3 prevalence was 36.4% in derivation and 37.0% externally, but no class weighting, over-sampling, under-sampling, or other explicit imbalance method was reported. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Primary Graft Dysfunction (PGD)
+	•	Model AUC / C-Statistic: 0.8214
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): 76.54
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): 82.35
+	•	Specificity (%): 66.67
+	•	NPV (%): NR
+	•	F1-Score: 0.8155
+	•	Calibration Reported: Yes
+	•	Decision Curve Analysis (DCA) Reported: Yes
+	•	Section 5 Comments/Quotes: The primary outcome was grade 3 primary graft dysfunction within 72 hours after lung transplantation, defined according to the ISHLT consensus criteria using PaO2/FiO2 below 200, chest-radiograph infiltrates, and/or ECMO at 72 hours. In the independent temporal external-validation cohort, Random Forest achieved AUC 0.8214, accuracy 0.7654, sensitivity 0.8235, specificity 0.6667, and F1-score 0.8155. AUC confidence intervals, PPV, and NPV were not reported. Calibration curves and decision-curve analysis were presented and described as supporting calibration and clinical usefulness.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): Unclear | Quote/Reasoning: The study enrolled lung transplant recipients from a defined single-center period, but excluded 56 of 710 derivation-period patients and 16 of 183 validation-period patients for severe missing data, without comparing included and excluded patients. The effect of these exclusions on cohort representativeness is therefore unclear.
+	•	Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: The nine final predictors were routinely collected recipient and perioperative variables available by completion of transplantation and before the 72-hour PGD3 endpoint. Definitions and measurement categories were reported, and feature selection was performed using the training cohort.
+	•	Outcome (Definition Bias): Low Risk | Quote/Reasoning: PGD3 was defined and graded according to the latest ISHLT consensus criteria at prespecified T0, T24, T48, and T72 time points using oxygenation, radiographic infiltrates, and ECMO support.
+	•	Analysis (Modeling Bias): Unclear | Quote/Reasoning: The study used a separate training cohort, internal validation, later temporal external validation, cross-validated hyperparameter tuning, calibration assessment, DCA, and explainability analyses. However, it was not explicitly stated that K-nearest-neighbour imputation was fitted only within training data, no AUC confidence intervals were reported, and external validation was temporal but from the same center.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates interpretable machine-learning models for predicting grade 3 primary graft dysfunction after lung transplantation using routinely collected clinical and perioperative variables. It is directly applicable to AI research in thoracic organ transplantation.
+
+Tables and figures used in this extraction:
+Table 1 for derivation and external-validation demographics, comorbidities, operative variables, and outcome prevalence; Table 2 for postoperative risk-stratification outcomes; Figure 1 for cohort selection and training/internal/external-validation sample sizes; Figure 2 for logistic-regression and LASSO feature selection; Figure 3 for ROC curves, model metrics, calibration, and DCA; Figure 4 for Random Forest error and feature-importance analyses; Figure 5 for SHAP dependence plots; Supplementary Tables S1–S4 as referenced for cohort comparisons, LASSO variables, multicollinearity, and detailed model performance.
