@@ -1,0 +1,72 @@
+First Author: Nosoudi
+Title: Leveraging machine learning to predict de novo skin malignancy following lung transplantation
+Source number: 78
+
+Very short summary: This retrospective US national-registry study analysed 30,917 lung transplant recipients without a documented pretransplant malignancy using pre-, peri-, and post-transplant variables. Multiple supervised machine-learning algorithms were evaluated with a 70:30 internal split and SMOTE; Gradient Boosting performed best for overall de novo malignancy prediction, with a held-out test AUC of 0.746, and also achieved the highest AUC for skin versus non-skin malignancy classification.
+
+Section 1: Study Identification & Metadata
+	•	Country of Data Origin: USA
+	•	Organ Focus: Lung
+	•	Funding Source: None
+	•	Dataset Source: National Registry
+	•	Dataset Name: Other
+	•	Conflict of Interest (COI) Declared: Yes
+	•	Study Period Start (Year): 1984
+	•	Study Period End (Year): 2021
+	•	Section 1 Comments/Quotes: The study used Standard Transplant Analysis and Research (STAR) data administered by UNOS/OPTN and incorporating waiting-list, recipient, donor, HLA, registration, and malignancy follow-up files. The authors state that lung transplant records from 1984–2021 were used, although the Methods also describe STAR as containing nationwide transplant data from 1987 onward. The paper states, “This paper was not funded,” and reports no potential conflicts of interest.
+
+Section 2: Population (PICO - P)
+	•	Target Population: Transplant Recipients (Post-op)
+	•	Total Sample Size (N): 30917
+	•	Overall Mean Age: 52.82
+	•	Female Sex (%): 43.1
+	•	Race/Ethnicity Reported: Yes
+	•	Comorbidities / Clinical History Included: Yes
+	•	Section 2 Comments/Quotes: After excluding simultaneous heart-lung transplantation, the source cohort contained 66,590 lung transplant recipients. Excluding recipients with pretransplant malignancy produced 38,788 cases; after linkage to malignancy follow-up data and exclusion of patients lost to follow-up, 30,917 remained, including 7,566 with de novo malignancy. Mean age was 52.82 ± 15.00 years and 43.1% were reported as female. Race/ethnicity and extensive clinical history were reported, including smoking, primary diagnosis, viral serostatus, BMI, HLA/PRA, donor variables, cardiac measures, rejection treatment, and hospital length of stay.
+
+Section 3: Intervention & AI Methods
+	•	Primary ML Component: Yes
+	•	Study Design: Retrospective Cohort
+	•	AI Model Architecture: Gradient Boosting
+	•	Algorithm Name: Gradient Boosting
+	•	Input Variables (Data Modality): Tabular (EMR)
+	•	Comparator / Standard of Care: Other
+	•	Validation Method: Internal Split
+	•	Explainability / Interpretability Used: Yes
+	•	Feature Selection Method: Manual/Clinical
+	•	Hyperparameter Tuning Reported: Yes
+	•	Section 3 Comments/Quotes: Gradient Boosting was compared with Random Forest, decision-tree variants, logistic-regression variants, LARS, neural networks, and SVM. The dataset was randomly divided into 70% training and 30% testing subsets. Variables were screened using clinical relevance, redundancy, missingness above 30%, association with the outcome, and intervariable correlation, reducing 580 variables to 407. Gradient Boosting parameters including iterations, sampling proportion, and shrinkage were tuned. Interpretation was provided through ranked validation-importance scores for individual predictors.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+	•	Missing Data Handling: Other
+	•	Class Imbalance Addressed: Yes
+	•	Code Availability: Not Reported
+	•	Data Preprocessing / Normalization Described: Yes
+	•	Training Size (N): NR
+	•	Test Size (N): NR
+	•	Section 4 Comments/Quotes: Variables with more than 30% missingness were excluded, but handling of residual missing predictor values was not explicitly described. Data integration, cleaning, redundancy and correlation screening, and transformation in SAS Enterprise Miner were described. SMOTE was applied to the training data to address class imbalance. The paper reports a 70:30 training-test split but does not provide exact integer split counts. Source code and trained model weights were not reported.
+
+Section 5: Outcomes & Performance (PICO - O)
+	•	Target Clinical Outcome: Other
+	•	Model AUC / C-Statistic: 0.746
+	•	Model AUC Lower 95% CI: NR
+	•	Model AUC Upper 95% CI: NR
+	•	Model Accuracy (%): NR
+	•	PPV / Precision (%): NR
+	•	Sensitivity / Recall (%): NR
+	•	Specificity (%): NR
+	•	NPV (%): NR
+	•	F1-Score: NR
+	•	Calibration Reported: Not Reported
+	•	Decision Curve Analysis (DCA) Reported: Not Reported
+	•	Section 5 Comments/Quotes: The primary outcome was development of any de novo malignancy after lung transplantation among recipients without a documented pretransplant cancer history. Gradient Boosting achieved the highest held-out test AUC of 0.746 for overall malignancy prediction. Confidence intervals and exact test-set accuracy, precision, sensitivity, specificity, NPV, and F1-score were not reported in the main article. Secondary models achieved AUC 0.642 for skin versus non-skin malignancy using Gradient Boosting and AUC 0.726 with 82.6% accuracy for BCC versus SCC using Random Forest. Formal calibration analysis and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+	•	Participants (Selection Bias): High Risk | Quote/Reasoning: Of 38,788 recipients without a prior malignancy, only 30,917 remained after linkage to malignancy follow-up data and exclusion of individuals lost to follow-up. The number and characteristics of excluded patients were not reported, creating risk of informative selection, particularly because adequate follow-up is directly related to malignancy ascertainment.
+	•	Predictors (Input Variable Bias): High Risk | Quote/Reasoning: The models included post-transplant variables such as hospital length of stay, ECMO_72HOURS, and treatment for rejection within 1 year. The authors acknowledge that these predictors “may introduce temporal misalignment” and limit use for early or pretransplant prediction, creating temporal leakage and reverse-causation risk.
+	•	Outcome (Definition Bias): High Risk | Quote/Reasoning: De novo malignancy was identified from longitudinal malignancy follow-up records, but no fixed prediction horizon or minimum follow-up duration was defined. Follow-up time differed substantially between patients with and without malignancy, and the analysis treated malignancy as a binary outcome without accounting for censoring or competing mortality, creating potential outcome misclassification.
+	•	Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study used a random internal split without external or temporal validation. It is not stated that variable screening, correlation assessment, and all preprocessing were restricted to the training subset. Confidence intervals, calibration, and decision-curve analysis were absent, and high-dimensional screening involved hundreds of candidate predictors. The authors explicitly acknowledge that generalizability is limited by the lack of external validation.
+	•	Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly evaluates machine-learning prediction of post-transplant malignancy and skin-cancer subtypes in lung transplant recipients using a national thoracic-transplant registry. It is directly applicable to AI research in thoracic organ transplantation, although the inclusion of postoperative predictors limits applicability to early risk prediction.
+
+Tables and figures used in this extraction:
+Table 1 for cohort demographics, sex, ethnicity, clinical variables, and follow-up; Table 2 and Figure 2 for malignancy and skin-cancer subtype distributions; Table 3 for Gradient Boosting predictors of overall de novo malignancy; Table 4 for predictors of skin versus non-skin malignancy; Table 5 for Random Forest predictors of BCC versus SCC; Figure 1 for data sources, preprocessing, 70:30 split, and model workflow; Figure 3 for skin-cancer demographics; Supplementary Appendices B–D as referenced for model-performance comparisons.

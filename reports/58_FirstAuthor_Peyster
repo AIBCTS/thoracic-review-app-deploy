@@ -1,0 +1,72 @@
+First Author: Peyster
+Title: An automated computational image analysis pipeline for histological grading of cardiac allograft rejection
+Source number: 58
+
+Very short summary: This retrospective multicentre diagnostic study included 2472 cardiac transplant endomyocardial-biopsy slides from 546 recipients at three US centres. The interpretable CACHE-Grader used hand-crafted histological features and support vector machines to classify cellular rejection; on 1447 held-out validation slides, the binary model achieved an AUC of 0.92, 84.5% agreement, 85% sensitivity, and 84% specificity, while the four-grade model achieved 65.9% agreement.
+
+Section 1: Study Identification & Metadata
+• Country of Data Origin: USA
+• Organ Focus: Heart
+• Funding Source: Government/Public
+• Dataset Source: Multi-center
+• Dataset Name: Other Registry
+• Conflict of Interest (COI) Declared: Yes (Declared COI)
+• Study Period Start (Year): 2005
+• Study Period End (Year): 2018
+• Section 1 Comments/Quotes: Archived biopsy slides were obtained from the University of Pennsylvania, University Hospitals Cleveland Medical Center, and Ohio State University Wexner Medical Center during usual care between 2005 and 2018. Funding was predominantly from US public agencies, including the NIH, Department of Veterans Affairs, and Department of Defense, with additional foundation and institutional support. Multiple authors declared consultancy, equity, patent, licensing, advisory-board, or sponsored-research interests.
+
+Section 2: Population (PICO - P)
+• Target Population: Transplant Recipients (Post-op)
+• Total Sample Size (N): 2472
+• Overall Mean Age: NR
+• Female Sex (%): NR
+• Race/Ethnicity Reported: Not Reported
+• Comorbidities / Clinical History Included: Not Reported
+• Section 2 Comments/Quotes: The analytic units were 2472 archived H&E-stained endomyocardial-biopsy slides originating from 546 heart-transplant recipients. Biopsies were obtained 7–6415 days after transplantation during scheduled surveillance or for-cause assessment. Recipient-level age, sex, race/ethnicity, and comorbidity distributions were not reported.
+
+Section 3: Intervention & AI Methods
+• Primary ML Component: Yes
+• Study Design: Retrospective Cohort
+• AI Model Architecture: Support Vector Machine (SVM)
+• Algorithm Name: Computer-Assisted Cardiac Histologic Evaluation-Grader (CACHE-Grader)
+• Input Variables (Data Modality): Pathology slides
+• Comparator / Standard of Care: Human expert/Clinician
+• Validation Method: External Validation (Geographic/Different Hospital)
+• Explainability / Interpretability Used: Yes (e.g., SHAP, LIME)
+• Feature Selection Method: Automated (e.g., LASSO, Stepwise)
+• Hyperparameter Tuning Reported: Not Reported
+• Section 3 Comments/Quotes: The pipeline extracted 154 biologically inspired, hand-crafted histological features describing lymphocyte foci, tissue compartments, densities, and spatial interactions. SVM classifiers were selected for both binary low- versus high-grade rejection (M1) and four-grade rejection classification (M2). Features were ranked using a Wilcoxon rank-sum test for M1 and a t-test for M2, resulting in models with 2 and 15 features, respectively. Validation included 395 held-out slides from the development centre and 1052 geographically external slides from two other centres; no explicit SVM hyperparameter-search procedure was reported.
+
+Section 4: AI Quality & Reproducibility (CONVINCE Standards)
+• Missing Data Handling: Not Reported
+• Class Imbalance Addressed: Yes (e.g., SMOTE, weighted loss)
+• Code Availability: Yes
+• Data Preprocessing / Normalization Described: Yes
+• Training Size (N): 911
+• Test Size (N): 1447
+• Section 4 Comments/Quotes: Slides underwent automated HistoQC assessment, stain deconvolution, tiling, K-means tissue segmentation, lymphocyte-cluster detection, and feature normalization relative to tissue-compartment size. The authors deliberately enriched the cohort for grades 2R/3R to approximately 20%, compared with approximately 8% in routine practice, to ensure sufficient high-grade cases; this addressed imbalance through cohort construction rather than algorithmic weighting or resampling. The training set contained 911 slides, and the composite validation set contained 1447 slides: 395 internal and 1052 external. Missing-feature imputation was not described. Source code was made publicly available through the CACHE-Grader repository.
+
+Section 5: Outcomes & Performance (PICO - O)
+• Target Clinical Outcome: Acute Rejection
+• Model AUC / C-Statistic: 0.92
+• Model AUC Lower 95% CI: NR
+• Model AUC Upper 95% CI: NR
+• Model Accuracy (%): 84.5
+• PPV / Precision (%): NR
+• Sensitivity / Recall (%): 85
+• Specificity (%): 84
+• NPV (%): NR
+• F1-Score: NR
+• Calibration Reported: Not Reported
+• Decision Curve Analysis (DCA) Reported: Not Reported
+• Section 5 Comments/Quotes: Values above refer to the binary M1 classifier for low-grade 0R/1R versus high-grade 2R/3R rejection in the composite held-out validation set. It achieved 84.5% agreement with the grade of record, AUC 0.92, sensitivity 0.85, and specificity 0.84; no AUC confidence interval was reported. The four-grade M2 classifier achieved 65.9% agreement (95% CI 63.4–68.3%), with similar internal and external agreement of 66.1% and 65.8%. Numeric PPV, NPV, F1-score, formal probabilistic calibration metrics, and DCA were not reported.
+
+Section 6: Quality Assessment (Risk of Bias / PROBAST)
+• Participants (Selection Bias): High Risk | Quote/Reasoning: Only biopsies considered gradable and already assigned an ISHLT grade were included, and the cohort was deliberately enriched with 2R/3R rejection beyond routine prevalence. This creates a selected spectrum that differs from unfiltered clinical practice.  ￼
+• Predictors (Input Variable Bias): Low Risk | Quote/Reasoning: Predictors were biologically motivated, quantitatively defined image features available from the biopsy at the time of grading. Although feature ranking was outcome-driven in the training set, the selected features and final models were locked before independent internal and geographic external validation.  ￼
+• Outcome (Definition Bias): High Risk | Quote/Reasoning: The outcome was clearly defined according to the established ISHLT cellular-rejection grading system, and a random validation subset was blindly re-graded by independent study pathologists. ehab241.pdf The reference grade was nevertheless imperfect because the grade of record reflects substantial inter-pathologist variability. ehab241.pdf  ￼
+• Analysis (Modeling Bias): High Risk | Quote/Reasoning: The study had large held-out internal and external validation sets, but the analysis unit was the biopsy slide while 2,472 slides originated from only 546 recipients. The paper does not state that training and internal validation were separated at recipient level or that repeated biopsies were handled with clustered analysis, creating potential patient-level leakage and underestimated uncertainty. Statistical calibration was also not evaluated. ehab241.pdf  ￼
+• Applicability to Review Question: Low Concern | Quote/Reasoning: The study directly examined a clinical AI model applied to routine post-operative heart-transplant biopsies from three transplant centres, including both surveillance and for-cause biopsies. ehab241.pdf Applicability is reduced somewhat by deliberate high-grade enrichment, exclusion of technically inadequate slides, and restriction to cellular rather than antibody-mediated rejection.  ￼
+
+Tables and figures used in this extraction:
+Table 1 for internal, external, and combined validation-set agreement; Table 2 for four-grade performance by ISHLT grade; Table 3 for comparison with independent study pathologists; Table 4 for overall pathologist-versus-CACHE agreement statistics; Figure 1 for cohort exclusions and training/validation allocation; Figure 2 for the image-analysis, feature-selection, and model-development pipeline; Figure 3 for tissue segmentation and lymphocyte-focus extraction; Figure 5 for confusion matrices and ROC curves.

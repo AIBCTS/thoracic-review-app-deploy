@@ -1,0 +1,30 @@
+Copyright (c) 2026 AIBCTS (Artificial Intelligence and Bioinformatics in Cardiothoracic Sciences), Lund University.
+All rights reserved.
+
+This repository contains the source code of the data-extraction and review application
+used in the associated systematic review and meta-analysis. It is made publicly visible
+solely so that the extraction workflow can be inspected.
+
+Permission is granted to view the contents of this repository and to download and run
+the unmodified code for the sole purpose of inspecting the workflow described in the
+associated article.
+
+No other rights are granted. Without the prior written permission of the copyright
+holder, you may not:
+  1. modify, adapt, translate, or create derivative works from the code;
+  2. copy, redistribute, publish, sublicense, or otherwise make available the code,
+     or any part of it, in original or modified form;
+  3. use the code, in whole or in part, in any other work, product, service, or
+     publication;
+  4. use the code for any commercial purpose.
+
+Third-party articles: the PDF files in data/ are not covered by this licence. They are
+open-access articles published under Creative Commons licences and are included under
+those licences; each file, its DOI, and its licence are listed in data/PDF_LICENCES.csv.
+
+Requests for permission: open an issue at
+https://github.com/AIBCTS/thoracic-review-app-deploy/issues
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO
+EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY
+ARISING FROM THE USE OF THE SOFTWARE.
