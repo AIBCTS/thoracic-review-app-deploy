@@ -7,7 +7,7 @@ import bibtexparser
 import unicodedata
 
 # --- Configuration ---
-st.set_page_config(layout="wide", page_title="Artificial Intelligence in Thoracic Transplantation: Current State and Future Directions")
+st.set_page_config(layout="wide", page_title="Machine learning and the donor–recipient dual-risk problem in heart and lung transplantation")
 
 # Define paths
 BASE_DIR = Path(__file__).parent.resolve()
@@ -442,7 +442,7 @@ def delete_data(study_id, reviewer):
     return False
 
 # --- Main App Execution ---
-st.title("📄 Artificial Intelligence in Thoracic Transplantation: Current State and Future Directions")
+st.title("📄 Machine learning and the donor–recipient dual-risk problem in heart and lung transplantation")
 
 # Load BibTeX database
 bib_db = load_bibtex()
